@@ -1,12 +1,12 @@
 import {Text, View} from 'react-native';
 import styles from '../styles';
 
-const Home = () => {
+const SignIn = () => {
   return (
     <View style={styles.centered}>
-      <Text>Home Under construction!</Text>
+      <Text>SignIn Under construction!</Text>
     </View>
   );
 };
 
-export default Home;
+export default SignIn;

@@ -1,13 +1,12 @@
-import React from 'react';
 import {View, Text} from 'react-native';
 import styles from '../styles';
 
-function Doves() {
+const Doves = () => {
   return (
     <View style={styles.centered}>
-      <Text>Under construction!</Text>
+      <Text>Doves Under construction!</Text>
     </View>
   );
-}
+};
 
 export default Doves;

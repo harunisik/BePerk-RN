@@ -1,13 +1,12 @@
-import React from 'react';
 import {View, Text} from 'react-native';
 import styles from '../styles';
 
-function Profile() {
+const Profile = () => {
   return (
     <View style={styles.centered}>
-      <Text>Under construction!</Text>
+      <Text>Profile Under construction!</Text>
     </View>
   );
-}
+};
 
 export default Profile;
