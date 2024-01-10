@@ -1,9 +1,9 @@
 import {View, Text} from 'react-native';
-import styles from '../styles';
+import common from '../styles/sharedStyles';
 
 const Doves = () => {
   return (
-    <View style={styles.centered}>
+    <View style={common.centered}>
       <Text>Doves Under construction!</Text>
     </View>
   );

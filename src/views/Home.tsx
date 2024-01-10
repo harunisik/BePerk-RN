@@ -1,9 +1,9 @@
 import {Text, View} from 'react-native';
-import styles from '../styles';
+import common from '../styles/sharedStyles';
 
 const Home = () => {
   return (
-    <View style={styles.centered}>
+    <View style={common.centered}>
       <Text>Home Under construction!</Text>
     </View>
   );

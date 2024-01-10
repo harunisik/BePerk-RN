@@ -50,7 +50,7 @@ const NavigationLayout = () => {
     <PaperProvider>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{headerShown: false}}>
-          {store.token ? (
+          {!store.authResult ? (
             <Stack.Screen name="Signin" component={SignIn} />
           ) : (
             <Stack.Screen name="BottomTabGroup" component={BottomTabGroup} />

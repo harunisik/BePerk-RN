@@ -1,35 +1,35 @@
 import {createContext, Dispatch, useContext, useReducer} from 'react';
-import AuthAction, {AuthResult} from './AuthAction';
+import AuthAction, {AuthActionType, AuthResult} from './AuthAction';
 
 interface StoreData {
   authResult?: AuthResult;
 }
 
-const initialState: StoreData = {
-  authResult: {
-    token: null,
-  },
-};
+const initialState: StoreData = {};
+
+enum ResetActionType {
+  'RESET',
+}
 
 interface ResetAction {
-  type: 'RESET';
+  type: ResetActionType;
 }
 
 type StoreAction = ResetAction | AuthAction;
 
 const updateStore = (store: StoreData, action: StoreAction) => {
   switch (action.type) {
-    case 'RESET':
+    case ResetActionType.RESET:
       return initialState;
-    case 'SIGN_IN':
+    case AuthActionType.SIGN_IN:
       return {
         ...store,
         authResult: action.authResult,
       };
-    case 'SIGN_OUT':
+    case AuthActionType.SIGN_OUT:
       return {
         ...store,
-        authResult: {token: null},
+        authResult: undefined,
       };
     default:
       return store;
