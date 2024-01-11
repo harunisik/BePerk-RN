@@ -8,13 +8,22 @@ import {
 import common from '../styles/sharedStyles';
 import {useState} from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useQueryClient} from 'react-query';
 
 const SignIn = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const queryClient = useQueryClient();
 
   const handleLogin = () => {
-    console.log(username, password);
+    queryClient
+      .fetchQuery({
+        queryKey: ['signin'],
+        queryFn: () => {
+          fetch('https://18.224.243.58/user?login=harun&password=z7e6Z2Z2');
+        },
+      })
+      .then(response => console.log(response));
   };
 
   return (
