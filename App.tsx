@@ -2,8 +2,9 @@ import * as React from 'react';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import common from './src/styles/sharedStyles';
 import {StoreContainer} from './src/containers/StoreContainer';
-import NavigationLayout from './src/views/NavigationLayout';
+import MainNavigator from './src/navigators/MainNavigator';
 import {QueryClient, QueryClientProvider} from 'react-query';
+import FlashMessage from 'react-native-flash-message';
 
 const queryClient = new QueryClient();
 
@@ -18,7 +19,8 @@ function App(): React.JSX.Element {
     <QueryClientProvider client={queryClient}>
       <StoreContainer>
         <GestureHandlerRootView style={common.flex1}>
-          <NavigationLayout />
+          <MainNavigator />
+          <FlashMessage position="top" />
         </GestureHandlerRootView>
       </StoreContainer>
     </QueryClientProvider>

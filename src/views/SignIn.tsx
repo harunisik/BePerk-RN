@@ -1,29 +1,29 @@
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Text, TextInput, TouchableOpacity, View} from 'react-native';
 import common from '../styles/sharedStyles';
 import {useState} from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useQueryClient} from 'react-query';
+import {signIn} from '../services/UserService';
+import {showMessage} from 'react-native-flash-message';
+import {useStore} from '../containers/StoreContainer';
+import {AuthActionType} from '../containers/AuthAction';
 
 const SignIn = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const queryClient = useQueryClient();
+  const {dispatch} = useStore();
 
   const handleLogin = () => {
     queryClient
       .fetchQuery({
         queryKey: ['signin'],
-        queryFn: () => {
-          fetch('https://18.224.243.58/user?login=harun&password=z7e6Z2Z2');
-        },
+        queryFn: () => signIn(username, password),
       })
-      .then(response => console.log(response));
+      .then(data => {
+        dispatch({type: AuthActionType.SIGN_IN, authResult: data});
+      })
+      .catch(message => showMessage({message, type: 'danger'}));
   };
 
   return (

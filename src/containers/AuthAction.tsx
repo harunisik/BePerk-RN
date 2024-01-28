@@ -1,10 +1,11 @@
 export enum AuthActionType {
-  'SIGN_IN',
-  'SIGN_OUT',
+  SIGN_IN = 'signin',
+  SIGN_OUT = 'signout',
 }
 
 export interface AuthResult {
   token: string;
+  username: string;
 }
 
 interface AuthAction {

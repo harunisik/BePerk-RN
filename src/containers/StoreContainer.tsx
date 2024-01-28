@@ -8,7 +8,7 @@ interface StoreData {
 const initialState: StoreData = {};
 
 enum ResetActionType {
-  'RESET',
+  RESET = 'reset',
 }
 
 interface ResetAction {
