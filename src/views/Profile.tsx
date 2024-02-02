@@ -1,8 +1,8 @@
 import {View, Text} from 'react-native';
 import common from '../styles/sharedStyles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Settings from './Settings';
 import {useStore} from '../containers/StoreContainer';
+import Settings from './Settings';
 
 export const ProfileOptions = ({navigation}) => {
   const {store} = useStore();
@@ -22,7 +22,7 @@ export const ProfileOptions = ({navigation}) => {
 const Profile = () => {
   return (
     <View style={common.centered}>
-      <Text>Stories Under construction!</Text>
+      <Text>Profile Under construction!</Text>
     </View>
   );
 };

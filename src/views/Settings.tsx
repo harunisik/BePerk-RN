@@ -1,4 +1,6 @@
-import {View, Text, SafeAreaView, SectionList} from 'react-native';
+import {Text, SafeAreaView, SectionList} from 'react-native';
+import {SwitchAccountListItem} from './SwitchAccount';
+import LogOut from '../components/LogOut';
 
 const MENU = [
   {
@@ -32,17 +34,22 @@ const MENU = [
   },
 ];
 
-const Settings = () => {
+const MENU3 = {
+  'About 1': [SwitchAccountListItem, LogOut],
+};
+
+const MENU4 = Object.entries(MENU3).map(([key, value]) => ({
+  title: key,
+  data: value.map(item => ({Comp: item})),
+}));
+
+const Settings = ({navigation}) => {
   return (
     <SafeAreaView>
       <SectionList
-        sections={MENU}
-        keyExtractor={(item, index) => item + index}
-        renderItem={({item}) => (
-          <View>
-            <Text>{item}</Text>
-          </View>
-        )}
+        sections={MENU4}
+        keyExtractor={(item, index) => index}
+        renderItem={({item: {Comp}}) => <Comp navigation={navigation} />}
         renderSectionHeader={({section: {title}}) => <Text>{title}</Text>}
       />
     </SafeAreaView>
