@@ -24,6 +24,12 @@ const common = StyleSheet.create({
   row: {
     flexDirection: 'row',
   },
+  spaceBetween: {
+    justifyContent: 'space-between',
+  },
+  center: {
+    alignItems: 'center',
+  },
 });
 
 export default common;

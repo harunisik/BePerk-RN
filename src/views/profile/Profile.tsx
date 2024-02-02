@@ -1,7 +1,7 @@
 import {View, Text} from 'react-native';
-import common from '../styles/sharedStyles';
+import common from '../../styles/sharedStyles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useStore} from '../containers/StoreContainer';
+import {useStore} from '../../containers/StoreContainer';
 import Settings from './Settings';
 
 export const ProfileOptions = ({navigation}) => {

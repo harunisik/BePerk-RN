@@ -1,10 +1,13 @@
 import {View, Text, TouchableOpacity} from 'react-native';
-import common from '../styles/sharedStyles';
+import common from '../../styles/sharedStyles';
 
 export const SwitchAccountListItem = ({navigation}) => {
+  const title = 'Switch account';
+
   return (
-    <TouchableOpacity onPress={() => navigation.navigate(SwitchAccount.name)}>
-      <Text>Switch Account</Text>
+    <TouchableOpacity
+      onPress={() => navigation.navigate(SwitchAccount.name, {title})}>
+      <Text>{title}</Text>
     </TouchableOpacity>
   );
 };
@@ -12,7 +15,7 @@ export const SwitchAccountListItem = ({navigation}) => {
 const SwitchAccount = () => {
   return (
     <View style={common.centered}>
-      <Text>Switch Account Under construction!</Text>
+      <Text>SwitchAccount Under construction!</Text>
     </View>
   );
 };

@@ -1,8 +1,8 @@
 import {createMaterialBottomTabNavigator} from 'react-native-paper/react-navigation';
-import Home from '../views/Home';
-import Stories from '../views/Stories';
-import Doves from '../views/Doves';
-import ProfileNavigator from './ProfileNavigator';
+import Home from './Home';
+import Stories from './Stories';
+import Doves from './Doves';
+import ProfileStack from './profile/ProfileStack';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MyBottomSheet from '../components/MyBottomSheet';
 
@@ -11,7 +11,7 @@ const routeIcons = {
   [Stories.name]: 'account-multiple',
   [MyBottomSheet.name]: 'plus',
   [Doves.name]: 'bird',
-  [ProfileNavigator.name]: 'account',
+  [ProfileStack.name]: 'account',
 };
 
 const screenOptions = ({route}) => ({
@@ -22,7 +22,7 @@ const screenOptions = ({route}) => ({
   },
 });
 
-const BottomTabNavigator = () => {
+const BottomTab = () => {
   const Tab = createMaterialBottomTabNavigator();
 
   return (
@@ -36,12 +36,12 @@ const BottomTabNavigator = () => {
       />
       <Tab.Screen name={Doves.name} component={Doves} />
       <Tab.Screen
-        name={ProfileNavigator.name}
-        component={ProfileNavigator}
+        name={ProfileStack.name}
+        component={ProfileStack}
         options={{tabBarLabel: 'Profile'}}
       />
     </Tab.Navigator>
   );
 };
 
-export default BottomTabNavigator;
+export default BottomTab;

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, TouchableOpacity} from 'react-native';
-import {useStore} from '../containers/StoreContainer';
-import {AuthActionType} from '../containers/AuthAction';
+import {useStore} from '../../containers/StoreContainer';
+import {AuthActionType} from '../../containers/AuthAction';
 
 const LogOut = () => {
   const {dispatch} = useStore();
