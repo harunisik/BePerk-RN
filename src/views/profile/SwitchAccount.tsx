@@ -5,8 +5,7 @@ export const SwitchAccountListItem = ({navigation}) => {
   const title = 'Switch account';
 
   return (
-    <TouchableOpacity
-      onPress={() => navigation.navigate(SwitchAccount.name, {title})}>
+    <TouchableOpacity onPress={() => navigation.navigate(SwitchAccount.name)}>
       <Text>{title}</Text>
     </TouchableOpacity>
   );

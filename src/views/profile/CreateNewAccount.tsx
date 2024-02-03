@@ -6,7 +6,7 @@ export const CreateNewAccountListItem = ({navigation}) => {
 
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate(CreateNewAccount.name, {title})}>
+      onPress={() => navigation.navigate(CreateNewAccount.name)}>
       <Text>{title}</Text>
     </TouchableOpacity>
   );

@@ -5,8 +5,7 @@ export const DeleteAccountListItem = ({navigation}) => {
   const title = 'Delete account';
 
   return (
-    <TouchableOpacity
-      onPress={() => navigation.navigate(DeleteAccount.name, {title})}>
+    <TouchableOpacity onPress={() => navigation.navigate(DeleteAccount.name)}>
       <Text>{title}</Text>
     </TouchableOpacity>
   );

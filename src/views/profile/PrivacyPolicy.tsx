@@ -5,8 +5,7 @@ export const PrivacyPolicyListItem = ({navigation}) => {
   const title = 'Privacy policy';
 
   return (
-    <TouchableOpacity
-      onPress={() => navigation.navigate(PrivacyPolicy.name, {title})}>
+    <TouchableOpacity onPress={() => navigation.navigate(PrivacyPolicy.name)}>
       <Text>{title}</Text>
     </TouchableOpacity>
   );

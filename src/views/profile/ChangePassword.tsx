@@ -5,8 +5,7 @@ export const ChangePasswordListItem = ({navigation}) => {
   const title = 'Change password';
 
   return (
-    <TouchableOpacity
-      onPress={() => navigation.navigate(ChangePassword.name, {title})}>
+    <TouchableOpacity onPress={() => navigation.navigate(ChangePassword.name)}>
       <Text>{title}</Text>
     </TouchableOpacity>
   );

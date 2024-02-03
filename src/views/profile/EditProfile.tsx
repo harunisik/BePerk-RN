@@ -5,14 +5,13 @@ export const EditProfileListItem = ({navigation}) => {
   const title = 'Edit profile';
 
   return (
-    <TouchableOpacity
-      onPress={() => navigation.navigate(EditProfile.name, {title})}>
+    <TouchableOpacity onPress={() => navigation.navigate(EditProfile.name)}>
       <Text>{title}</Text>
     </TouchableOpacity>
   );
 };
 
-const EditProfile = () => {
+const EditProfile = ({navigation}) => {
   return (
     <View style={common.centered}>
       <Text>EditProfile Under construction!</Text>

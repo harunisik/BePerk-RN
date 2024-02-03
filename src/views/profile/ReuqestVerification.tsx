@@ -6,7 +6,7 @@ export const RequestVerificationListItem = ({navigation}) => {
 
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate(RequestVerification.name, {title})}>
+      onPress={() => navigation.navigate(RequestVerification.name)}>
       <Text>{title}</Text>
     </TouchableOpacity>
   );

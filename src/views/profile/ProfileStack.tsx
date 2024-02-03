@@ -25,39 +25,39 @@ const ProfileStack = () => {
       <Stack.Screen
         name={EditProfile.name}
         component={EditProfile}
-        options={({route}) => ({title: route.params.title})}
+        options={{title: 'Edit profile'}}
       />
       <Stack.Screen
         name={ChangePassword.name}
         component={ChangePassword}
-        options={({route}) => ({title: route.params.title})}
+        options={{title: 'Change password'}}
       />
       <Stack.Screen name={Invite.name} component={Invite} />
       <Stack.Screen
         name={CreateNewAccount.name}
         component={CreateNewAccount}
-        options={({route}) => ({title: route.params.title})}
+        options={{title: 'Create a new account'}}
       />
       <Stack.Screen
         name={RequestVerification.name}
         component={RequestVerification}
-        options={({route}) => ({title: route.params.title})}
+        options={{title: 'Request verification'}}
       />
       <Stack.Screen
         name={DeleteAccount.name}
         component={DeleteAccount}
-        options={({route}) => ({title: route.params.title})}
+        options={{title: 'Delete account'}}
       />
       <Stack.Screen
         name={PrivacyPolicy.name}
         component={PrivacyPolicy}
-        options={({route}) => ({title: route.params.title})}
+        options={{title: 'Privacy policy'}}
       />
       <Stack.Screen name={Terms.name} component={Terms} />
       <Stack.Screen
         name={SwitchAccount.name}
         component={SwitchAccount}
-        options={({route}) => ({title: route.params.title})}
+        options={{title: 'Switch account'}}
       />
     </Stack.Navigator>
   );
