@@ -1,5 +1,5 @@
 import {View, Text, Switch} from 'react-native';
-import common from '../../styles/sharedStyles';
+import common from '../../../styles/sharedStyles';
 import {useState} from 'react';
 
 const NewFollowers = () => {

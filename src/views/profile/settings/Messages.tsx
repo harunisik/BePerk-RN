@@ -1,18 +1,18 @@
 import {View, Text, Switch} from 'react-native';
-import common from '../../styles/sharedStyles';
+import common from '../../../styles/sharedStyles';
 import {useState} from 'react';
 
-const DarkMode = () => {
+const Messages = () => {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   const {row, spaceBetween, center} = common;
 
   return (
     <View style={[row, spaceBetween, center]}>
-      <Text>Dark-Mode</Text>
+      <Text>Messages</Text>
       <Switch onValueChange={toggleSwitch} value={isEnabled} />
     </View>
   );
 };
 
-export default DarkMode;
+export default Messages;

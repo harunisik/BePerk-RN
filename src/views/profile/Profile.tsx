@@ -1,8 +1,13 @@
 import {View, Text, StyleSheet, Button, Alert} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useStore} from '../../containers/StoreContainer';
-import Settings from './Settings';
-import EditProfile from './EditProfile';
+import Settings from './settings/Settings';
+import EditProfile from './settings/EditProfile';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import SwitchAccount from './settings/SwitchAccount';
+import Posts from './Posts';
+import Doves from './Doves';
+import Stories from './Stories';
 
 export const ProfileOptions = ({navigation}) => {
   const {store} = useStore();
@@ -32,8 +37,10 @@ export const ProfileOptions = ({navigation}) => {
 };
 
 const Profile = ({navigation}) => {
+  const Tab = createMaterialTopTabNavigator();
+
   return (
-    <View>
+    <View style={{flex: 1}}>
       <View style={styles.container3}>
         <MaterialCommunityIcons
           name="account"
@@ -63,9 +70,16 @@ const Profile = ({navigation}) => {
           title="Edit Profile"
         />
         <Button
-          onPress={() => navigation.navigate(EditProfile.name)}
+          onPress={() => Alert.alert('Under construction!')}
           title="Messages"
         />
+      </View>
+      <View style={styles.container4}>
+        <Tab.Navigator>
+          <Tab.Screen name={Posts.name} component={Posts} />
+          <Tab.Screen name={Stories.name} component={Stories} />
+          <Tab.Screen name={Doves.name} component={Doves} />
+        </Tab.Navigator>
       </View>
     </View>
   );
@@ -86,6 +100,13 @@ const styles = StyleSheet.create({
   },
   container3: {
     alignItems: 'center',
+    borderStyle: 'dashed',
+    borderWidth: 1,
+  },
+  container4: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    flex: 1,
     borderStyle: 'dashed',
     borderWidth: 1,
   },

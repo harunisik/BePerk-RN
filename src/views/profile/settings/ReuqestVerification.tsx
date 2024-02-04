@@ -1,5 +1,5 @@
 import {View, Text, TouchableOpacity} from 'react-native';
-import common from '../../styles/sharedStyles';
+import common from '../../../styles/sharedStyles';
 
 export const RequestVerificationListItem = ({navigation}) => {
   const title = 'Request verification';

@@ -42,6 +42,7 @@ const SignIn = () => {
         value={password}
         style={common.textInput}
         secureTextEntry
+        onSubmitEditing={() => handleLogin()}
       />
       <TouchableOpacity style={common.button} onPress={handleLogin}>
         <Text>Log In</Text>
