@@ -13,8 +13,9 @@ export const CreateNewAccountListItem = ({navigation}) => {
 };
 
 const CreateNewAccount = () => {
+  const {flex1, aiCenter, jcCenter} = common;
   return (
-    <View style={common.centered}>
+    <View style={[flex1, aiCenter, jcCenter]}>
       <Text>CreateNewAccount Under construction!</Text>
     </View>
   );

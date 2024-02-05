@@ -12,8 +12,9 @@ export const SwitchAccountListItem = ({navigation}) => {
 };
 
 const SwitchAccount = () => {
+  const {flex1, aiCenter, jcCenter} = common;
   return (
-    <View style={common.centered}>
+    <View style={[flex1, aiCenter, jcCenter]}>
       <Text>SwitchAccount Under construction!</Text>
     </View>
   );

@@ -12,8 +12,9 @@ export const EditProfileListItem = ({navigation}) => {
 };
 
 const EditProfile = ({navigation}) => {
+  const {flex1, aiCenter, jcCenter} = common;
   return (
-    <View style={common.centered}>
+    <View style={[flex1, aiCenter, jcCenter]}>
       <Text>EditProfile Under construction!</Text>
     </View>
   );

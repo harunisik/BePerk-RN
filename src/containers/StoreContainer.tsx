@@ -1,5 +1,6 @@
 import {createContext, Dispatch, useContext, useReducer} from 'react';
 import AuthAction, {AuthActionType, AuthResult} from './AuthAction';
+import axios from 'axios';
 
 interface StoreData {
   authResult?: AuthResult;
@@ -22,11 +23,14 @@ const updateStore = (store: StoreData, action: StoreAction) => {
     case ResetActionType.RESET:
       return initialState;
     case AuthActionType.SIGN_IN:
+      axios.defaults.headers.common['X-BEPERK-TOKEN'] =
+        action.authResult?.token;
       return {
         ...store,
         authResult: action.authResult,
       };
     case AuthActionType.SIGN_OUT:
+      delete axios.defaults.headers.common['X-BEPERK-TOKEN'];
       return {
         ...store,
         authResult: undefined,

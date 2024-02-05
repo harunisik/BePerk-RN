@@ -10,8 +10,9 @@ export const InviteListItem = ({navigation}) => {
 };
 
 const Invite = () => {
+  const {flex1, aiCenter, jcCenter} = common;
   return (
-    <View style={common.centered}>
+    <View style={[flex1, aiCenter, jcCenter]}>
       <Text>Invite Under construction!</Text>
     </View>
   );

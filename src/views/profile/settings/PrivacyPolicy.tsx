@@ -12,8 +12,9 @@ export const PrivacyPolicyListItem = ({navigation}) => {
 };
 
 const PrivacyPolicy = () => {
+  const {flex1, aiCenter, jcCenter} = common;
   return (
-    <View style={common.centered}>
+    <View style={[flex1, aiCenter, jcCenter]}>
       <Text>PrivacyPolicy Under construction!</Text>
     </View>
   );

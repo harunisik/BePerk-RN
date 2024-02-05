@@ -1,4 +1,10 @@
-import {Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import common from '../styles/sharedStyles';
 import {useState} from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -13,6 +19,7 @@ const SignIn = () => {
   const [password, setPassword] = useState('');
   const queryClient = useQueryClient();
   const {dispatch} = useStore();
+  const {flex1, aiCenter, jcCenter, row} = common;
 
   const handleLogin = () => {
     queryClient
@@ -23,32 +30,32 @@ const SignIn = () => {
       .then(data => {
         dispatch({type: AuthActionType.SIGN_IN, authResult: data});
       })
-      .catch(message => showMessage({message, type: 'danger'}));
+      .catch(({message}) => showMessage({message, type: 'danger'}));
   };
 
   return (
-    <View style={common.centered}>
+    <View style={[flex1, aiCenter, jcCenter]}>
       <Text>Username</Text>
       <TextInput
         placeholder="Tap to enter username"
         onChangeText={setUsername}
         value={username}
-        style={common.textInput}
+        style={styles.textInput}
       />
       <Text>Password</Text>
       <TextInput
         placeholder="Tap to enter password"
         onChangeText={setPassword}
         value={password}
-        style={common.textInput}
+        style={styles.textInput}
         secureTextEntry
         onSubmitEditing={() => handleLogin()}
       />
-      <TouchableOpacity style={common.button} onPress={handleLogin}>
+      <TouchableOpacity style={[styles.button, aiCenter]} onPress={handleLogin}>
         <Text>Log In</Text>
       </TouchableOpacity>
       <Text>Or</Text>
-      <View style={common.row}>
+      <View style={row}>
         <MaterialCommunityIcons name="apple" size={26} />
         <MaterialCommunityIcons name="facebook" size={26} />
         <MaterialCommunityIcons name="twitter" size={26} />
@@ -58,5 +65,19 @@ const SignIn = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  textInput: {
+    height: 40,
+    width: 200,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
+  button: {
+    backgroundColor: '#DDDDDD',
+    padding: 10,
+  },
+});
 
 export default SignIn;

@@ -12,8 +12,9 @@ export const DeleteAccountListItem = ({navigation}) => {
 };
 
 const DeleteAccount = () => {
+  const {flex1, aiCenter, jcCenter} = common;
   return (
-    <View style={common.centered}>
+    <View style={[flex1, aiCenter, jcCenter]}>
       <Text>DeleteAccount Under construction!</Text>
     </View>
   );

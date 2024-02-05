@@ -4,31 +4,42 @@ const common = StyleSheet.create({
   flex1: {
     flex: 1,
   },
-  centered: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  textInput: {
-    height: 40,
-    width: 200,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-  },
-  button: {
-    alignItems: 'center',
-    backgroundColor: '#DDDDDD',
-    padding: 10,
-  },
   row: {
     flexDirection: 'row',
   },
-  spaceBetween: {
+  aiCenter: {
+    alignItems: 'center',
+  },
+  jcCenter: {
+    justifyContent: 'center',
+  },
+  jcSpaceBetween: {
     justifyContent: 'space-between',
   },
-  center: {
-    alignItems: 'center',
+  jcSpaceAround: {
+    justifyContent: 'space-around',
+  },
+  dashed: {
+    borderStyle: 'dashed',
+    borderWidth: 1,
+  },
+  rGap15: {
+    rowGap: 15,
+  },
+  cGap3: {
+    columnGap: 3,
+  },
+  cGap10: {
+    columnGap: 10,
+  },
+  font11: {
+    fontSize: 11,
+  },
+  font12: {
+    fontSize: 12,
+  },
+  white: {
+    color: 'white',
   },
 });
 

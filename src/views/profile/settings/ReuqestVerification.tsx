@@ -13,8 +13,9 @@ export const RequestVerificationListItem = ({navigation}) => {
 };
 
 const RequestVerification = () => {
+  const {flex1, aiCenter, jcCenter} = common;
   return (
-    <View style={common.centered}>
+    <View style={[flex1, aiCenter, jcCenter]}>
       <Text>RequestVerification Under construction!</Text>
     </View>
   );

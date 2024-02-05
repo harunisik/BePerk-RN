@@ -5,10 +5,10 @@ import {useState} from 'react';
 const PushNotifications = () => {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-  const {row, spaceBetween, center} = common;
+  const {row, jcSpaceBetween, aiCenter} = common;
 
   return (
-    <View style={[row, spaceBetween, center]}>
+    <View style={[row, jcSpaceBetween, aiCenter]}>
       <Text>Enable push-notifications</Text>
       <Switch onValueChange={toggleSwitch} value={isEnabled} />
     </View>

@@ -1,12 +1,9 @@
 export function handleResponse(response: any) {
-  if (response.ok) {
-    return response.json();
-  }
-
-  return Promise.reject(response);
+  return response.data;
 }
 
 export function handleError(error: any) {
+  console.log(error);
   if (error.response?.data?.error) {
     throw new Error(error.response.data.error.message);
   }

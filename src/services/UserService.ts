@@ -1,7 +1,9 @@
+import axios from 'axios';
 import {handleError, handleResponse} from './ApiUtils';
 
 export const signIn = (login: String, password: String) =>
-  fetch(`${process.env.API_URL}/user?login=${login}&password=${password}`)
+  axios
+    .get(`/user?login=${login}&password=${password}`)
     .then(handleResponse)
     .catch(response => {
       if (response.status === 401) {
@@ -9,3 +11,19 @@ export const signIn = (login: String, password: String) =>
       }
       return handleError(response);
     });
+
+export const getUserProfile = ({queryKey}) => {
+  const {id} = queryKey[1];
+  return axios
+    .get(`/user/profile?id=${id}`)
+    .then(handleResponse)
+    .catch(handleError);
+};
+
+export const getUserPerks = ({queryKey}) => {
+  const {id} = queryKey[1];
+  return axios
+    .get(`/user/getPerks?id=${id}`)
+    .then(handleResponse)
+    .catch(handleError);
+};

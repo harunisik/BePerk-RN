@@ -1,8 +1,11 @@
 import React, {useCallback, useMemo, useRef} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import BottomSheet from '@gorhom/bottom-sheet';
+import common from '../styles/sharedStyles';
 
 const MyBottomSheet = () => {
+  const {flex1, aiCenter} = common;
+
   // ref
   const bottomSheetRef = useRef<BottomSheet>(null);
 
@@ -16,13 +19,13 @@ const MyBottomSheet = () => {
 
   // renders
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, flex1]}>
       <BottomSheet
         ref={bottomSheetRef}
         index={1}
         snapPoints={snapPoints}
         onChange={handleSheetChanges}>
-        <View style={styles.contentContainer}>
+        <View style={[flex1, aiCenter]}>
           <Text>Awesome 🎉</Text>
         </View>
       </BottomSheet>
@@ -32,13 +35,8 @@ const MyBottomSheet = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     padding: 24,
     backgroundColor: 'grey',
-  },
-  contentContainer: {
-    flex: 1,
-    alignItems: 'center',
   },
 });
 
