@@ -10,6 +10,8 @@ import {Platform} from 'react-native';
 
 const queryClient = new QueryClient();
 axios.defaults.baseURL = process.env.API_URL;
+axios.defaults.headers.post['Content-Type'] =
+  'application/x-www-form-urlencoded';
 
 if (process.env.APP_DEBUG === 'true') {
   if (Platform.OS === 'android') {
@@ -20,10 +22,10 @@ if (process.env.APP_DEBUG === 'true') {
   console.log(axios.defaults.baseURL);
 
   axios.interceptors.request.use(request => {
-    const {headers, baseURL, method, url} = request;
+    const {headers, baseURL, method, url, data} = request;
     console.log(
       'Starting Request',
-      JSON.stringify({headers, baseURL, method, url}, null, 2),
+      JSON.stringify({headers, baseURL, method, url, data}, null, 2),
     );
     return request;
   });

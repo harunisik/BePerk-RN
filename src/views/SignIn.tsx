@@ -41,6 +41,7 @@ const SignIn = () => {
         onChangeText={setUsername}
         value={username}
         style={styles.textInput}
+        autoFocus
       />
       <Text>Password</Text>
       <TextInput

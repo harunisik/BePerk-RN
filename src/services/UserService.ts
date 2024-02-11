@@ -27,3 +27,18 @@ export const getUserPerks = ({queryKey}) => {
     .then(handleResponse)
     .catch(handleError);
 };
+
+export const updateUser = newLike => {
+  return axios
+    .post('/user/update', {...newLike})
+    .then(handleResponse)
+    .catch(handleError);
+};
+
+export const getUserComments = ({queryKey}) => {
+  const {id, type} = queryKey[1];
+  return axios
+    .get(`/user/comment?id=${id}&type=${type}`)
+    .then(handleResponse)
+    .catch(handleError);
+};

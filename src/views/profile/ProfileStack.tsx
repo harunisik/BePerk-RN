@@ -10,6 +10,7 @@ import RequestVerification from './settings/ReuqestVerification';
 import DeleteAccount from './settings/DeleteAccount';
 import PrivacyPolicy from './settings/PrivacyPolicy';
 import Terms from './settings/Terms';
+import Comment from '../doves/Comment';
 
 const ProfileStack = () => {
   const Stack = createNativeStackNavigator();
@@ -59,6 +60,7 @@ const ProfileStack = () => {
         component={SwitchAccount}
         options={{title: 'Switch account'}}
       />
+      <Stack.Screen name={Comment.name} component={Comment} />
     </Stack.Navigator>
   );
 };

@@ -3,9 +3,9 @@ export function handleResponse(response: any) {
 }
 
 export function handleError(error: any) {
-  console.log(error);
+  console.error('handleError:' + JSON.stringify(error.response));
   if (error.response?.data?.error) {
-    throw new Error(error.response.data.error.message);
+    throw new Error(error.response.data.error);
   }
 
   throw new Error(

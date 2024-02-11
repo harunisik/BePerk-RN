@@ -1,10 +1,13 @@
 import {View, Text, StyleSheet, FlatList} from 'react-native';
-import {getUserPerks} from '../../services/UserService';
-import {useQuery} from 'react-query';
+import {getUserPerks, updateUser} from '../../services/UserService';
+import {useMutation, useQuery} from 'react-query';
 import {useStore} from '../../containers/StoreContainer';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {dateDiff} from '../../utils/DateUtil';
 import common from '../../styles/sharedStyles';
+import {showMessage} from 'react-native-flash-message';
+import {useState} from 'react';
+import Comment from '../doves/Comment';
 
 enum DoveType {
   Dove,
@@ -18,7 +21,48 @@ const DoveTypes = {
   [DoveType.Prayer]: {label: 'Prayer request', color: 'darkorchid'},
 };
 
-const DovesItem = ({item}) => {
+export const CommentLike = ({
+  id,
+  type,
+  isLiked,
+  likes_count,
+  setCommentsCount,
+}) => {
+  const [liked, setLiked] = useState(isLiked);
+  const [likesCount, setLikesCount] = useState(likes_count);
+
+  const {font12, cGap3, row, aiCenter} = common;
+
+  const handleLike = useMutation({
+    mutationFn: newLike => updateUser(newLike),
+    onSuccess: ([{likes, comments}]) => {
+      setLiked(liked ? 0 : 1);
+      setLikesCount(likes);
+      if (setCommentsCount) {
+        setCommentsCount(comments);
+      }
+    },
+    onError: ({message}) => {
+      showMessage({message, type: 'danger'});
+    },
+  });
+
+  return (
+    <View style={[cGap3, row, aiCenter]}>
+      <MaterialCommunityIcons
+        name="heart"
+        size={18}
+        color={liked ? 'blue' : 'gray'}
+        onPress={() => handleLike.mutate({id, type, like: liked ? -1 : 1})}
+      />
+      <Text style={font12}>{likesCount}</Text>
+    </View>
+  );
+};
+
+const DovesItem = ({item, navigation}) => {
+  const [commentsCount, setCommentsCount] = useState(item.comments_count);
+
   const {
     jcSpaceBetween,
     aiCenter,
@@ -32,7 +76,7 @@ const DovesItem = ({item}) => {
   } = common;
 
   return (
-    <View style={[styles.container2, rGap15]}>
+    <View style={[styles.itemContainer, rGap15]}>
       <View style={[aiCenter, row, jcSpaceBetween]}>
         <View style={[cGap10, row, aiCenter]}>
           <MaterialCommunityIcons name="account" size={26} />
@@ -40,7 +84,7 @@ const DovesItem = ({item}) => {
         </View>
         <View
           style={[
-            styles.container6,
+            styles.subTypeContainer,
             {backgroundColor: DoveTypes[item.subtype].color},
           ]}>
           <Text style={[white, font11]}>{DoveTypes[item.subtype].label}</Text>
@@ -52,21 +96,23 @@ const DovesItem = ({item}) => {
       <View>
         <View style={[aiCenter, row, jcSpaceBetween]}>
           <View style={[cGap10, row, aiCenter]}>
-            <View style={[cGap3, row, aiCenter]}>
-              <MaterialCommunityIcons
-                name="heart-outline"
-                size={18}
-                color="gray"
-              />
-              <Text style={font12}>{item.likes_count}</Text>
-            </View>
+            <CommentLike
+              id={item.id}
+              type={item.type}
+              isLiked={item.liked}
+              likes_count={item.likes_count}
+              setCommentsCount={setCommentsCount}
+            />
             <View style={[cGap3, row, aiCenter]}>
               <MaterialCommunityIcons
                 name="comment-processing-outline"
                 size={18}
                 color="gray"
+                onPress={() =>
+                  navigation.navigate(Comment.name, {comment: item})
+                }
               />
-              <Text style={font12}>{item.comments_count}</Text>
+              <Text style={font12}>{commentsCount}</Text>
             </View>
             <MaterialCommunityIcons
               name="share-outline"
@@ -85,16 +131,16 @@ const DovesItem = ({item}) => {
   );
 };
 
-const Doves = () => {
+const Doves = ({navigation}) => {
   const {flex1, jcCenter, aiCenter, dashed} = common;
 
-  //  "GET /user/getPerks?id=170763&limit=35&offset=0 HTTP/1.1" 200 587
   const {
     store: {
       authResult: {id},
     },
   } = useStore();
-  const {data} = useQuery({
+
+  const {data, refetch, isFetching} = useQuery({
     queryKey: ['getUserPerks', {id}],
     queryFn: getUserPerks,
   });
@@ -103,20 +149,24 @@ const Doves = () => {
     <View style={[flex1, jcCenter, aiCenter, dashed]}>
       <FlatList
         data={data}
-        renderItem={({item}) => <DovesItem item={item} />}
+        renderItem={({item}) => (
+          <DovesItem item={item} navigation={navigation} />
+        )}
         keyExtractor={item => item.id}
+        onRefresh={refetch}
+        refreshing={isFetching}
       />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container2: {
+  itemContainer: {
     padding: 15,
     borderTopColor: 'lightgray',
     borderTopWidth: 1,
   },
-  container6: {
+  subTypeContainer: {
     borderRadius: 6,
     padding: 5,
   },
