@@ -42,3 +42,17 @@ export const getUserComments = ({queryKey}) => {
     .then(handleResponse)
     .catch(handleError);
 };
+
+export const postComment = newComment => {
+  return axios
+    .post('/user/comment', {...newComment})
+    .then(handleResponse)
+    .catch(handleError);
+};
+
+export const deleteComment = comment => {
+  return axios
+    .post('/user/deleteComment', {...comment})
+    .then(handleResponse)
+    .catch(handleError);
+};

@@ -62,8 +62,14 @@ const common = StyleSheet.create({
   gray: {
     color: 'gray',
   },
+  p10: {
+    padding: 10,
+  },
   p15: {
     padding: 15,
+  },
+  pb5: {
+    paddingBottom: 5,
   },
   pr10: {
     paddingRight: 10,
