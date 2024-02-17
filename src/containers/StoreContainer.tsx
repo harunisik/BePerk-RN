@@ -1,9 +1,11 @@
 import {createContext, Dispatch, useContext, useReducer} from 'react';
 import AuthAction, {AuthActionType, AuthResult} from './AuthAction';
 import axios from 'axios';
+import {FollowersAction, FollowersActionType, User} from './FollowersAction';
 
 interface StoreData {
   authResult?: AuthResult;
+  selectedUsers?: User[];
 }
 
 const initialState: StoreData = {};
@@ -16,7 +18,7 @@ interface ResetAction {
   type: ResetActionType;
 }
 
-type StoreAction = ResetAction | AuthAction;
+type StoreAction = ResetAction | AuthAction | FollowersAction;
 
 const updateStore = (store: StoreData, action: StoreAction) => {
   switch (action.type) {
@@ -35,6 +37,27 @@ const updateStore = (store: StoreData, action: StoreAction) => {
         ...store,
         authResult: undefined,
       };
+    case FollowersActionType.ADD_USER:
+      return {
+        ...store,
+        selectedUsers: [
+          ...(store.selectedUsers ? store.selectedUsers : []),
+          action.user,
+        ],
+      };
+    case FollowersActionType.DELETE_USER:
+      return {
+        ...store,
+        selectedUsers: store.selectedUsers?.filter(
+          ({user_id}) => user_id !== action.user.user_id,
+        ),
+      };
+    case FollowersActionType.CLEAR_LIST:
+      return {
+        ...store,
+        selectedUsers: undefined,
+      };
+
     default:
       return store;
   }

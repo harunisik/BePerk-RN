@@ -56,3 +56,10 @@ export const deleteComment = comment => {
     .then(handleResponse)
     .catch(handleError);
 };
+
+export const getUserFollowings = () => {
+  return axios
+    .get('/user/listFollowing')
+    .then(handleResponse)
+    .catch(handleError);
+};

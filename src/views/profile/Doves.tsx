@@ -8,6 +8,7 @@ import common from '../../styles/sharedStyles';
 import {showMessage} from 'react-native-flash-message';
 import {useState} from 'react';
 import Comment from '../doves/Comment';
+import Followers from './Followers';
 
 enum DoveType {
   Dove,
@@ -26,7 +27,7 @@ export const CommentLike = ({
   type,
   isLiked,
   likes_count,
-  setCommentsCount,
+  onLike = (count: number) => {},
 }) => {
   const [liked, setLiked] = useState(isLiked);
   const [likesCount, setLikesCount] = useState(likes_count);
@@ -38,9 +39,7 @@ export const CommentLike = ({
     onSuccess: ([{likes, comments}]) => {
       setLiked(liked ? 0 : 1);
       setLikesCount(likes);
-      if (setCommentsCount) {
-        setCommentsCount(comments);
-      }
+      onLike(comments);
     },
     onError: ({message}) => {
       showMessage({message, type: 'danger'});
@@ -73,10 +72,13 @@ const DovesItem = ({item, navigation}) => {
     font11,
     font12,
     white,
+    p5,
+    p15,
+    radius6,
   } = common;
 
   return (
-    <View style={[styles.itemContainer, rGap15]}>
+    <View style={[styles.itemContainer, rGap15, p15]}>
       <View style={[aiCenter, row, jcSpaceBetween]}>
         <View style={[cGap10, row, aiCenter]}>
           <MaterialCommunityIcons name="account" size={26} />
@@ -84,7 +86,8 @@ const DovesItem = ({item, navigation}) => {
         </View>
         <View
           style={[
-            styles.subTypeContainer,
+            radius6,
+            p5,
             {backgroundColor: DoveTypes[item.subtype].color},
           ]}>
           <Text style={[white, font11]}>{DoveTypes[item.subtype].label}</Text>
@@ -101,7 +104,7 @@ const DovesItem = ({item, navigation}) => {
               type={item.type}
               isLiked={item.liked}
               likes_count={item.likes_count}
-              setCommentsCount={setCommentsCount}
+              onLike={setCommentsCount}
             />
             <View style={[cGap3, row, aiCenter]}>
               <MaterialCommunityIcons
@@ -118,6 +121,9 @@ const DovesItem = ({item, navigation}) => {
               name="share-outline"
               size={22}
               color="gray"
+              onPress={() =>
+                navigation.navigate(Followers.name, {comment: item})
+              }
             />
           </View>
           <MaterialCommunityIcons
@@ -162,13 +168,8 @@ const Doves = ({navigation}) => {
 
 const styles = StyleSheet.create({
   itemContainer: {
-    padding: 15,
     borderTopColor: 'lightgray',
     borderTopWidth: 1,
-  },
-  subTypeContainer: {
-    borderRadius: 6,
-    padding: 5,
   },
 });
 

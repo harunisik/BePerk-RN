@@ -11,6 +11,7 @@ import DeleteAccount from './settings/DeleteAccount';
 import PrivacyPolicy from './settings/PrivacyPolicy';
 import Terms from './settings/Terms';
 import Comment from '../doves/Comment';
+import Followers, {FollowersOptions} from './Followers';
 
 const ProfileStack = () => {
   const Stack = createNativeStackNavigator();
@@ -61,6 +62,11 @@ const ProfileStack = () => {
         options={{title: 'Switch account'}}
       />
       <Stack.Screen name={Comment.name} component={Comment} />
+      <Stack.Screen
+        name={Followers.name}
+        component={Followers}
+        options={FollowersOptions}
+      />
     </Stack.Navigator>
   );
 };

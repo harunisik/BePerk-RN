@@ -18,15 +18,16 @@ import {
 } from '../../services/UserService';
 import {dateDiff} from '../../utils/DateUtil';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useMemo, useState} from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import {CommentLike} from '../profile/Doves';
 import {Swipeable} from 'react-native-gesture-handler';
+import {showMessage} from 'react-native-flash-message';
 
 const CommentItem = ({
   item,
   isChild = false,
-  refetch = undefined,
-  reply = undefined,
+  onDeleteComment,
+  onPressReply,
 }) => {
   const {
     row,
@@ -54,9 +55,7 @@ const CommentItem = ({
   const handleDeleteComment = useMutation({
     mutationFn: comment => deleteComment(comment),
     onSuccess: () => {
-      if (refetch !== undefined) {
-        refetch();
-      }
+      onDeleteComment();
     },
     onError: ({message}) => {
       showMessage({message, type: 'danger'});
@@ -87,7 +86,7 @@ const CommentItem = ({
               <View style={[rGap5]}>
                 <Text style={pr10}>
                   <Text style={bold}>{item.fullname + ' '}</Text>
-                  <Text>{item.comment + ' ' + item.id}</Text>
+                  <Text>{item.comment}</Text>
                 </Text>
                 <View style={[row, cGap5]}>
                   <Text style={[font11, gray]}>
@@ -96,9 +95,7 @@ const CommentItem = ({
                   <Text
                     style={[font11, gray]}
                     onPress={() => {
-                      if (reply !== undefined) {
-                        reply(`@${item.username}`, item.id);
-                      }
+                      onPressReply(`@${item.username}`, item.id);
                     }}>
                     Reply
                   </Text>
@@ -129,7 +126,12 @@ const CommentItem = ({
         <FlatList
           data={item.childList}
           renderItem={({item: item2}) => (
-            <CommentItem item={item2} refetch={refetch} reply={reply} isChild />
+            <CommentItem
+              item={item2}
+              onDeleteComment={onDeleteComment}
+              onPressReply={onPressReply}
+              isChild
+            />
           )}
           keyExtractor={item2 => item2.id}
         />
@@ -166,46 +168,26 @@ const findTopParent = (id, data) => {
   return findTopParent(parent.comment_id, data);
 };
 
-const Emoji = ({emoji, onPress = undefined}) => {
+const Emoji = ({emoji, onPress}) => {
   const {font20} = common;
   return (
     <Text
       style={font20}
       onPress={() => {
-        if (onPress !== undefined) {
-          onPress(prev => prev + emoji);
-        }
+        onPress(prev => prev + emoji);
       }}>
       {emoji}
     </Text>
   );
 };
 
-const Comment = ({
-  route: {
-    params: {comment},
-  },
+const CommentList = ({
+  headerComment,
+  onPressReply,
+  data,
+  isFetching,
+  onRefresh,
 }) => {
-  const [message, setMessage] = useState('');
-  const [selectedCommentId, setSelectedCommentId] = useState(comment.id);
-
-  const {data, refetch, isFetching} = useQuery({
-    queryKey: ['getUserComments', {id: comment.id, type: comment.type}],
-    queryFn: getUserComments,
-  });
-
-  const handleSendComment = useMutation({
-    mutationFn: newComment => postComment(newComment),
-    onSuccess: () => {
-      setMessage('');
-      setSelectedCommentId(comment.id);
-      refetch();
-    },
-    onError: ({message}) => {
-      showMessage({message, type: 'danger'});
-    },
-  });
-
   const result = useMemo(
     () =>
       data?.comment.reduce((acc, item) => {
@@ -226,77 +208,147 @@ const Comment = ({
     [data],
   );
 
-  const {row, jcSpaceBetween, p10, flex1, aiCenter} = common;
+  return (
+    <FlatList
+      data={result}
+      ListHeaderComponent={<CommentHeaderItem item={headerComment} />}
+      renderItem={({item}) => (
+        <CommentItem
+          item={item}
+          onDeleteComment={onRefresh}
+          onPressReply={onPressReply}
+        />
+      )}
+      keyExtractor={item => item.id}
+      onRefresh={onRefresh}
+      refreshing={isFetching}
+    />
+  );
+};
+
+const CommentSender = ({
+  selectedComment,
+  selectedCommentId,
+  id,
+  type,
+  onSendComment,
+  onClearText,
+}) => {
+  const [comment, setComment] = useState(selectedComment);
+  const {row, jcSpaceBetween, p10, aiCenter} = common;
+
+  const handleSendComment = useMutation({
+    mutationFn: newComment => postComment(newComment),
+    onSuccess: () => {
+      setComment('');
+      onSendComment();
+    },
+    onError: ({message}) => {
+      showMessage({message, type: 'danger'});
+    },
+  });
+
+  const sendComment = () => {
+    if (comment) {
+      handleSendComment.mutate({
+        comment,
+        id,
+        type,
+        ...(id !== selectedCommentId && {comment_id: selectedCommentId}),
+      });
+    }
+  };
+
+  useEffect(() => {
+    setComment(selectedComment);
+  }, [selectedComment]);
+
+  return (
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={100}>
+      <View style={[p10, styles.shadowProp]}>
+        <View style={[row, jcSpaceBetween]}>
+          {['😌', '🤣', '❤️', '😍', '😱', '✝️', '🙏', '🔥', '😥'].map(item => {
+            return <Emoji emoji={item} onPress={setComment} />;
+          })}
+        </View>
+        <View style={[row, jcSpaceBetween, aiCenter]}>
+          <MaterialCommunityIcons name="account" size={26} />
+          <TextInput
+            placeholder="Message..."
+            onChangeText={text => {
+              setComment(text);
+              if (!text) {
+                onClearText();
+              }
+            }}
+            value={comment}
+            style={styles.textInput}
+            onSubmitEditing={sendComment}
+          />
+          <MaterialCommunityIcons
+            name="share"
+            size={26}
+            color={comment ? 'blue' : 'gray'}
+            onPress={sendComment}
+            disabled={!comment}
+          />
+        </View>
+      </View>
+    </KeyboardAvoidingView>
+  );
+};
+
+const Comment = ({
+  route: {
+    params: {comment: headerComment},
+  },
+}) => {
+  const [selectedComment, setSelectedComment] = useState('');
+  const [selectedCommentId, setSelectedCommentId] = useState(headerComment.id);
+  const {flex1} = common;
+
+  const {data, refetch, isFetching} = useQuery({
+    queryKey: [
+      'getUserComments',
+      {id: headerComment.id, type: headerComment.type},
+    ],
+    queryFn: getUserComments,
+  });
+
+  const clearSelectedComment = () => {
+    setSelectedComment('');
+    setSelectedCommentId(headerComment.id);
+  };
 
   return (
     <View style={flex1}>
-      <FlatList
-        data={result}
-        ListHeaderComponent={<CommentHeaderItem item={comment} />}
-        renderItem={({item}) => (
-          <CommentItem
-            item={item}
-            refetch={refetch}
-            reply={(message, commentId) => {
-              setMessage(message);
-              setSelectedCommentId(commentId);
-            }}
-          />
-        )}
-        keyExtractor={item => item.id}
-        onRefresh={refetch}
-        refreshing={isFetching}
+      <CommentList
+        headerComment={headerComment}
+        onPressReply={(message, commentId) => {
+          setSelectedComment(message);
+          setSelectedCommentId(commentId);
+        }}
+        data={data}
+        isFetching={isFetching}
+        onRefresh={() => {
+          refetch();
+          clearSelectedComment();
+        }}
       />
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={100}>
-        <View style={[p10, styles.shadowProp]}>
-          <View style={[row, jcSpaceBetween]}>
-            {['😌', '🤣', '❤️', '😍', '😱', '✝️', '🙏', '🔥', '😥'].map(
-              item => {
-                return <Emoji emoji={item} onPress={setMessage} />;
-              },
-            )}
-          </View>
-          <View style={[row, jcSpaceBetween, aiCenter]}>
-            <MaterialCommunityIcons name="account" size={26} />
-            <TextInput
-              placeholder="Message..."
-              onChangeText={setMessage}
-              value={message}
-              style={styles.textInput}
-              onSubmitEditing={() => {
-                if (message) {
-                  handleSendComment.mutate({
-                    comment: message,
-                    id: comment.id,
-                    type: comment.type,
-                    ...(comment.id !== selectedCommentId && {
-                      comment_id: selectedCommentId,
-                    }),
-                  });
-                }
-              }}
-            />
-            <MaterialCommunityIcons
-              name="share"
-              size={26}
-              color={message ? 'blue' : 'gray'}
-              onPress={() =>
-                handleSendComment.mutate({
-                  comment: message,
-                  id: comment.id,
-                  type: comment.type,
-                  ...(comment.id !== selectedCommentId && {
-                    comment_id: selectedCommentId,
-                  }),
-                })
-              }
-              disabled={!message}
-            />
-          </View>
-        </View>
-      </KeyboardAvoidingView>
+
+      <CommentSender
+        selectedComment={selectedComment}
+        selectedCommentId={selectedCommentId}
+        id={headerComment.id}
+        type={headerComment.type}
+        onSendComment={() => {
+          clearSelectedComment();
+          refetch();
+        }}
+        onClearText={clearSelectedComment}
+      />
     </View>
   );
 };

@@ -50,6 +50,9 @@ const common = StyleSheet.create({
   font12: {
     fontSize: 12,
   },
+  font16: {
+    fontSize: 16,
+  },
   font20: {
     fontSize: 20,
   },
@@ -65,20 +68,38 @@ const common = StyleSheet.create({
   p10: {
     padding: 10,
   },
+  p5: {
+    padding: 5,
+  },
   p15: {
     padding: 15,
   },
   pb5: {
     paddingBottom: 5,
   },
+  pb10: {
+    paddingBottom: 10,
+  },
+  pt10: {
+    paddingTop: 10,
+  },
+  pl15: {
+    paddingLeft: 15,
+  },
   pr10: {
     paddingRight: 10,
+  },
+  pr15: {
+    paddingRight: 15,
   },
   mr10: {
     marginRight: 10,
   },
   ml30: {
     marginLeft: 30,
+  },
+  radius6: {
+    borderRadius: 6,
   },
 });
 
