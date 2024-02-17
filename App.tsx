@@ -14,6 +14,7 @@ const queryClient = new QueryClient();
 axios.defaults.baseURL = process.env.API_URL;
 axios.defaults.headers.post['Content-Type'] =
   'application/x-www-form-urlencoded';
+axios.defaults.headers.post['ACCEPT-VERSION'] = 3;
 
 if (process.env.APP_DEBUG === 'true') {
   if (Platform.OS === 'android') {
@@ -21,7 +22,7 @@ if (process.env.APP_DEBUG === 'true') {
     axios.defaults.baseURL = process.env.API_URL_ANDROID;
   }
 
-  console.log(axios.defaults.baseURL);
+  console.log(`baseUrl: ${axios.defaults.baseURL}`);
 
   axios.interceptors.request.use(request => {
     const {headers, baseURL, method, url, data} = request;

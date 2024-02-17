@@ -63,3 +63,10 @@ export const getUserFollowings = () => {
     .then(handleResponse)
     .catch(handleError);
 };
+
+export const deletePost = posts => {
+  return axios
+    .post('/user/deletePost', {...posts})
+    .then(handleResponse)
+    .catch(handleError);
+};

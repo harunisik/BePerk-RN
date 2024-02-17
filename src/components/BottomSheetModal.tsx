@@ -5,10 +5,16 @@ import {
   BottomSheetBackdropProps,
   BottomSheetModal as GorhomBottomSheetModal,
 } from '@gorhom/bottom-sheet';
+import {useStore} from '../containers/StoreContainer';
+import {ModalActionType} from '../containers/ModalAction';
 
-const BottomSheetModal = ({children, isOpen, setIsOpen}) => {
+const BottomSheetModal = ({children}) => {
   const bottomSheetModalRef = useRef<GorhomBottomSheetModal>(null);
   const [snapPoints, setSnapPoints] = useState(['25%']);
+  const {
+    dispatch,
+    store: {isModalOpen},
+  } = useStore();
 
   const onContentLayout = useCallback(
     ({
@@ -32,16 +38,20 @@ const BottomSheetModal = ({children, isOpen, setIsOpen}) => {
   );
 
   useEffect(() => {
-    if (isOpen) {
+    if (isModalOpen) {
       bottomSheetModalRef.current?.present();
+    } else {
+      bottomSheetModalRef.current?.close();
     }
-  }, [isOpen]);
+  }, [isModalOpen]);
 
   return (
     <GorhomBottomSheetModal
       ref={bottomSheetModalRef}
       snapPoints={snapPoints}
-      onDismiss={() => setIsOpen(false)}
+      onDismiss={() =>
+        dispatch({type: ModalActionType.SET_MODAL, isModalOpen: false})
+      }
       backdropComponent={renderBackdrop}>
       <View onLayout={onContentLayout}>{children}</View>
     </GorhomBottomSheetModal>

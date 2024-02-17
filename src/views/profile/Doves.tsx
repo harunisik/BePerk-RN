@@ -1,12 +1,5 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  TouchableOpacity,
-  Alert,
-} from 'react-native';
-import {getUserPerks, updateUser} from '../../services/UserService';
+import {View, Text, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
+import {deletePost, getUserPerks, updateUser} from '../../services/UserService';
 import {useMutation, useQuery} from 'react-query';
 import {useStore} from '../../containers/StoreContainer';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -17,6 +10,8 @@ import {useState} from 'react';
 import Comment from '../doves/Comment';
 import Followers from './Followers';
 import BottomSheetModal from '../../components/BottomSheetModal';
+import {ModalActionType} from '../../containers/ModalAction';
+import Clipboard from '@react-native-clipboard/clipboard';
 
 enum DoveType {
   Dove,
@@ -69,6 +64,7 @@ export const CommentLike = ({
 
 const DovesItem = ({item, navigation, onPressMore}) => {
   const [commentsCount, setCommentsCount] = useState(item.comments_count);
+  const {dispatch} = useStore();
 
   const {
     jcSpaceBetween,
@@ -138,7 +134,10 @@ const DovesItem = ({item, navigation, onPressMore}) => {
             name="dots-horizontal"
             size={22}
             color="gray"
-            onPress={onPressMore}
+            onPress={() => {
+              onPressMore(item);
+              dispatch({type: ModalActionType.SET_MODAL, isModalOpen: true});
+            }}
           />
         </View>
       </View>
@@ -146,8 +145,58 @@ const DovesItem = ({item, navigation, onPressMore}) => {
   );
 };
 
+const DovesItemOptions = ({item, onDeleteItem}) => {
+  const {aiCenter, jcCenter, row} = common;
+  const {dispatch} = useStore();
+
+  const handleDeletePost = useMutation({
+    mutationFn: posts => deletePost(posts),
+    onSuccess: () => {
+      onDeleteItem();
+      dispatch({
+        type: ModalActionType.SET_MODAL,
+        isModalOpen: false,
+      });
+      showMessage({message: 'Message deleted'});
+    },
+    onError: ({message}) => {
+      showMessage({message, type: 'danger'});
+    },
+  });
+
+  return (
+    <BottomSheetModal>
+      <View>
+        <TouchableOpacity
+          style={[styles.button, aiCenter, jcCenter, row]}
+          onPress={() => {
+            dispatch({
+              type: ModalActionType.SET_MODAL,
+              isModalOpen: false,
+            });
+            showMessage({message: 'Link copied'});
+            Clipboard.setString(`beperk://dove?id=${item.id}`);
+          }}>
+          <MaterialCommunityIcons name="content-copy" size={26} color="blue" />
+          <Text>Copy Link</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.button, aiCenter, jcCenter, row]}
+          onPress={() =>
+            handleDeletePost.mutate({
+              items: JSON.stringify([{id: item.id, type: item.type}]),
+            })
+          }>
+          <MaterialCommunityIcons name="delete" size={26} color="red" />
+          <Text>Delete</Text>
+        </TouchableOpacity>
+      </View>
+    </BottomSheetModal>
+  );
+};
+
 const Doves = ({navigation}) => {
-  const [openModal, setOpenModal] = useState(false);
+  const [selectedItem, setSelectedItem] = useState();
   const {flex1, jcCenter, aiCenter, dashed} = common;
 
   const {
@@ -169,27 +218,14 @@ const Doves = ({navigation}) => {
           <DovesItem
             item={item}
             navigation={navigation}
-            onPressMore={() => setOpenModal(true)}
+            onPressMore={setSelectedItem}
           />
         )}
         keyExtractor={item => item.id}
         onRefresh={refetch}
         refreshing={isFetching}
       />
-      <BottomSheetModal isOpen={openModal} setIsOpen={setOpenModal}>
-        <View>
-          <TouchableOpacity
-            style={[styles.button, aiCenter]}
-            onPress={() => Alert.alert('under construction!')}>
-            <Text>Copy Link</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.button, aiCenter]}
-            onPress={() => Alert.alert('under construction!')}>
-            <Text>Delete</Text>
-          </TouchableOpacity>
-        </View>
-      </BottomSheetModal>
+      <DovesItemOptions item={selectedItem} onDeleteItem={refetch} />
     </View>
   );
 };

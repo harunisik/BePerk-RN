@@ -2,13 +2,18 @@ import {createContext, Dispatch, useContext, useReducer} from 'react';
 import AuthAction, {AuthActionType, AuthResult} from './AuthAction';
 import axios from 'axios';
 import {FollowersAction, FollowersActionType, User} from './FollowersAction';
+import ModalAction, {ModalActionType, ModalInfo} from './ModalAction';
 
 interface StoreData {
   authResult?: AuthResult;
   selectedUsers?: User[];
+  // modalInfo?: ModalInfo;
+  isModalOpen?: boolean;
 }
 
-const initialState: StoreData = {};
+const initialState: StoreData = {
+  isModalOpen: false,
+};
 
 enum ResetActionType {
   RESET = 'reset',
@@ -18,7 +23,7 @@ interface ResetAction {
   type: ResetActionType;
 }
 
-type StoreAction = ResetAction | AuthAction | FollowersAction;
+type StoreAction = ResetAction | AuthAction | FollowersAction | ModalAction;
 
 const updateStore = (store: StoreData, action: StoreAction) => {
   switch (action.type) {
@@ -56,6 +61,11 @@ const updateStore = (store: StoreData, action: StoreAction) => {
       return {
         ...store,
         selectedUsers: undefined,
+      };
+    case ModalActionType.SET_MODAL:
+      return {
+        ...store,
+        isModalOpen: action.isModalOpen,
       };
 
     default:
