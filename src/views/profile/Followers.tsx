@@ -28,6 +28,7 @@ const HeaderRight = ({comment, onShare}) => {
     mutationFn: share => chatShare(share),
     onSuccess: () => {
       onShare();
+      showMessage({message: 'Message sent', type: 'info'});
     },
     onError: ({message}) => {
       showMessage({message, type: 'danger'});

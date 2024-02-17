@@ -1,4 +1,11 @@
-import {View, Text, StyleSheet, FlatList} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 import {getUserPerks, updateUser} from '../../services/UserService';
 import {useMutation, useQuery} from 'react-query';
 import {useStore} from '../../containers/StoreContainer';
@@ -9,6 +16,7 @@ import {showMessage} from 'react-native-flash-message';
 import {useState} from 'react';
 import Comment from '../doves/Comment';
 import Followers from './Followers';
+import BottomSheetModal from '../../components/BottomSheetModal';
 
 enum DoveType {
   Dove,
@@ -59,7 +67,7 @@ export const CommentLike = ({
   );
 };
 
-const DovesItem = ({item, navigation}) => {
+const DovesItem = ({item, navigation, onPressMore}) => {
   const [commentsCount, setCommentsCount] = useState(item.comments_count);
 
   const {
@@ -130,6 +138,7 @@ const DovesItem = ({item, navigation}) => {
             name="dots-horizontal"
             size={22}
             color="gray"
+            onPress={onPressMore}
           />
         </View>
       </View>
@@ -138,6 +147,7 @@ const DovesItem = ({item, navigation}) => {
 };
 
 const Doves = ({navigation}) => {
+  const [openModal, setOpenModal] = useState(false);
   const {flex1, jcCenter, aiCenter, dashed} = common;
 
   const {
@@ -156,12 +166,30 @@ const Doves = ({navigation}) => {
       <FlatList
         data={data}
         renderItem={({item}) => (
-          <DovesItem item={item} navigation={navigation} />
+          <DovesItem
+            item={item}
+            navigation={navigation}
+            onPressMore={() => setOpenModal(true)}
+          />
         )}
         keyExtractor={item => item.id}
         onRefresh={refetch}
         refreshing={isFetching}
       />
+      <BottomSheetModal isOpen={openModal} setIsOpen={setOpenModal}>
+        <View>
+          <TouchableOpacity
+            style={[styles.button, aiCenter]}
+            onPress={() => Alert.alert('under construction!')}>
+            <Text>Copy Link</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.button, aiCenter]}
+            onPress={() => Alert.alert('under construction!')}>
+            <Text>Delete</Text>
+          </TouchableOpacity>
+        </View>
+      </BottomSheetModal>
     </View>
   );
 };
@@ -170,6 +198,11 @@ const styles = StyleSheet.create({
   itemContainer: {
     borderTopColor: 'lightgray',
     borderTopWidth: 1,
+  },
+  button: {
+    backgroundColor: '#DDDDDD',
+    padding: 10,
+    margin: 10,
   },
 });
 

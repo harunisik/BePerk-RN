@@ -7,6 +7,8 @@ import {QueryClient, QueryClientProvider} from 'react-query';
 import FlashMessage from 'react-native-flash-message';
 import axios from 'axios';
 import {Platform} from 'react-native';
+import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
+import {PaperProvider} from 'react-native-paper';
 
 const queryClient = new QueryClient();
 axios.defaults.baseURL = process.env.API_URL;
@@ -57,7 +59,11 @@ function App(): React.JSX.Element {
     <QueryClientProvider client={queryClient}>
       <StoreContainer>
         <GestureHandlerRootView style={flex1}>
-          <MainStack />
+          <PaperProvider>
+            <BottomSheetModalProvider>
+              <MainStack />
+            </BottomSheetModalProvider>
+          </PaperProvider>
           <FlashMessage position="top" />
         </GestureHandlerRootView>
       </StoreContainer>
