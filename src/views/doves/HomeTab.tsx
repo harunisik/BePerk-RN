@@ -35,7 +35,7 @@ const ListHeaderItem = ({item, navigation}) => {
   );
 };
 
-const Home = ({navigation}) => {
+const HomeTab = ({navigation}) => {
   const [selectedItem, setSelectedItem] = useState();
   const {flex1, jcCenter, aiCenter} = common;
 
@@ -87,4 +87,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default HomeTab;

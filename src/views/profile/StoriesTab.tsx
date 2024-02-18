@@ -1,7 +1,7 @@
 import {View, Text} from 'react-native';
 import common from '../../styles/sharedStyles';
 
-const Stories = () => {
+const StoriesTab = () => {
   const {flex1, jcCenter, aiCenter, dashed} = common;
 
   //   /my24?id=170763 HTTP/1.1" 200 11
@@ -12,4 +12,4 @@ const Stories = () => {
   );
 };
 
-export default Stories;
+export default StoriesTab;

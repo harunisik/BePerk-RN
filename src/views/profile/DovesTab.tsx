@@ -7,7 +7,7 @@ import {useState} from 'react';
 import DovesItem from '../doves/DovesItem';
 import DovesItemModal from '../doves/DovesItemModal';
 
-const Doves = ({navigation}) => {
+const DovesTab = ({navigation}) => {
   const [selectedItem, setSelectedItem] = useState();
   const {flex1, jcCenter, aiCenter, dashed} = common;
 
@@ -23,7 +23,7 @@ const Doves = ({navigation}) => {
   });
 
   return (
-    <View style={[flex1, jcCenter, aiCenter, dashed]}>
+    <View>
       <FlatList
         data={data}
         renderItem={({item}) => (
@@ -43,4 +43,4 @@ const Doves = ({navigation}) => {
   );
 };
 
-export default Doves;
+export default DovesTab;

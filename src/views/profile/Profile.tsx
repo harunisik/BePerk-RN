@@ -4,9 +4,9 @@ import {useStore} from '../../containers/StoreContainer';
 import Settings from './settings/Settings';
 import EditProfile from './settings/EditProfile';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import Posts from './Posts';
-import Doves from './Doves';
-import Stories from './Stories';
+import PostsTab from './PostsTab';
+import DovesTab from './DovesTab';
+import StoriesTab from './StoriesTab';
 import {useQuery} from 'react-query';
 import {getUserProfile} from '../../services/UserService';
 import common from '../../styles/sharedStyles';
@@ -91,10 +91,26 @@ const Profile = ({navigation}) => {
         />
       </View>
       <View style={[flex1]}>
-        <Tab.Navigator screenOptions={{lazy: true}}>
-          <Tab.Screen name={Posts.name} component={Posts} />
-          <Tab.Screen name={Stories.name} component={Stories} />
-          <Tab.Screen name={Doves.name} component={Doves} />
+        <Tab.Navigator
+          screenOptions={{
+            lazy: true,
+            tabBarLabelStyle: {textTransform: 'none'},
+          }}>
+          <Tab.Screen
+            name={PostsTab.name}
+            component={PostsTab}
+            options={{tabBarLabel: 'Posts'}}
+          />
+          <Tab.Screen
+            name={StoriesTab.name}
+            component={StoriesTab}
+            options={{tabBarLabel: 'Stories'}}
+          />
+          <Tab.Screen
+            name={DovesTab.name}
+            component={DovesTab}
+            options={{tabBarLabel: 'Doves'}}
+          />
         </Tab.Navigator>
       </View>
     </View>
