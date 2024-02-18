@@ -19,9 +19,9 @@ import {
 import {dateDiff} from '../../utils/DateUtil';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useEffect, useMemo, useState} from 'react';
-import {CommentLike} from '../profile/Doves';
 import {Swipeable} from 'react-native-gesture-handler';
 import {showMessage} from 'react-native-flash-message';
+import UserLike from './UserLike';
 
 const CommentItem = ({
   item,
@@ -112,11 +112,12 @@ const CommentItem = ({
               )}
             </View>
             <View>
-              <CommentLike
-                id={item.id}
+              <UserLike
+                item={item}
                 type={4}
-                isLiked={item.liked}
-                likes_count={item.likes_count}
+                // id={item.id}
+                // isLiked={item.liked}
+                // likes_count={item.likes_count}
               />
             </View>
           </View>
@@ -188,25 +189,21 @@ const CommentList = ({
   isFetching,
   onRefresh,
 }) => {
-  const result = useMemo(
-    () =>
-      data?.comment.reduce((acc, item) => {
-        const {comment_id} = item;
+  const result = data?.comment.reduce((acc, item) => {
+    const {comment_id} = item;
 
-        if (comment_id === 0) {
-          acc.push(item);
-        } else {
-          const topParent = findTopParent(comment_id, data.comment);
-          if (!topParent.childList) {
-            topParent.childList = [];
-          }
-          topParent.childList.push(item);
-        }
+    if (comment_id === 0) {
+      acc.push(item);
+    } else {
+      const topParent = findTopParent(comment_id, data.comment);
+      if (!topParent.childList) {
+        topParent.childList = [];
+      }
+      topParent.childList.push(item);
+    }
 
-        return acc;
-      }, []),
-    [data],
-  );
+    return acc;
+  }, []);
 
   return (
     <FlatList

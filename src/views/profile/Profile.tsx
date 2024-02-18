@@ -90,7 +90,7 @@ const Profile = ({navigation}) => {
           title="Messages"
         />
       </View>
-      <View style={[aiCenter, row, flex1, dashed]}>
+      <View style={[flex1]}>
         <Tab.Navigator screenOptions={{lazy: true}}>
           <Tab.Screen name={Posts.name} component={Posts} />
           <Tab.Screen name={Stories.name} component={Stories} />

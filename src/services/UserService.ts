@@ -21,9 +21,19 @@ export const getUserProfile = ({queryKey}) => {
 };
 
 export const getUserPerks = ({queryKey}) => {
-  const {id} = queryKey[1];
+  const {id, limit, offset} = queryKey[1];
   return axios
-    .get(`/user/getPerks?id=${id}`)
+    .get(`/user/getPerks?id=${id}&limit=${limit}&offset=${offset}`)
+    .then(handleResponse)
+    .catch(handleError);
+};
+
+export const getUserFeed = ({queryKey}) => {
+  const {filter, limit, offset} = queryKey[1];
+  return axios
+    .get(`/user/getFeed?filter=${filter}&limit=${limit}&offset=${offset}`, {
+      headers: {'ACCEPT-VERSION': 3},
+    })
     .then(handleResponse)
     .catch(handleError);
 };
@@ -66,7 +76,7 @@ export const getUserFollowings = () => {
 
 export const deletePost = posts => {
   return axios
-    .post('/user/deletePost', {...posts})
+    .post('/user/deletePost', {...posts}, {headers: {'ACCEPT-VERSION': 3}})
     .then(handleResponse)
     .catch(handleError);
 };

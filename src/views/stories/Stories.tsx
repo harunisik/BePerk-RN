@@ -1,5 +1,5 @@
 import {View, Text} from 'react-native';
-import common from '../styles/sharedStyles';
+import common from '../../styles/sharedStyles';
 
 const Stories = () => {
   const {flex1, aiCenter, jcCenter} = common;

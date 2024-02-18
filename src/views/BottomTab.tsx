@@ -1,16 +1,17 @@
 import {createMaterialBottomTabNavigator} from 'react-native-paper/react-navigation';
-import Home from './Home';
-import Stories from './Stories';
+import Home from './home/Home';
+import Stories from './stories/Stories';
 import Doves from './doves/Doves';
 import ProfileStack from './profile/ProfileStack';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import BottomSheetModal from '../components/BottomSheetModal';
+import DovesStack from './doves/DovesStack';
 
 const routeIcons = {
   [Home.name]: 'home',
   [Stories.name]: 'account-multiple',
   [BottomSheetModal.name]: 'plus',
-  [Doves.name]: 'bird',
+  [DovesStack.name]: 'bird',
   [ProfileStack.name]: 'account',
 };
 
@@ -34,7 +35,11 @@ const BottomTab = () => {
         component={BottomSheetModal}
         options={{tabBarLabel: 'Add'}}
       />
-      <Tab.Screen name={Doves.name} component={Doves} />
+      <Tab.Screen
+        name={DovesStack.name}
+        component={DovesStack}
+        options={{tabBarLabel: 'Doves'}}
+      />
       <Tab.Screen
         name={ProfileStack.name}
         component={ProfileStack}
