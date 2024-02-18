@@ -6,14 +6,7 @@ import common from '../../styles/sharedStyles';
 import {showMessage} from 'react-native-flash-message';
 import {useEffect, useState} from 'react';
 
-export const UserLike = ({
-  item,
-  type,
-  // id,
-  // isLiked,
-  // likes_count,
-  onLike = (count: number) => {},
-}) => {
+export const UserLike = ({item, type, onLike = (count: number) => {}}) => {
   const [liked, setLiked] = useState(item.liked);
   const [likesCount, setLikesCount] = useState(item.likes_count);
 

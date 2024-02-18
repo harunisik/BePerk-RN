@@ -6,6 +6,7 @@ import common from '../../styles/sharedStyles';
 import {ModalActionType} from '../../containers/ModalAction';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import DovesItemOptions from './DovesItemOptions';
+import DovesItemModal from './DovesItemModal';
 
 enum DoveType {
   Dove,
@@ -22,7 +23,7 @@ const DoveTypes = {
 export const DovesItem = ({
   item,
   navigation,
-  onPressMore,
+  onDeleteItem = () => {},
   displayUsername = true,
 }) => {
   const {dispatch} = useStore();
@@ -82,8 +83,14 @@ export const DovesItem = ({
           size={22}
           color="gray"
           onPress={() => {
-            onPressMore(item);
-            dispatch({type: ModalActionType.SET_MODAL, isModalOpen: true});
+            dispatch({
+              type: ModalActionType.OPEN,
+              modalInfo: {
+                component: (
+                  <DovesItemModal item={item} onDeleteItem={onDeleteItem} />
+                ),
+              },
+            });
           }}
         />
       </View>

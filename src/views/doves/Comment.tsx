@@ -112,13 +112,7 @@ const CommentItem = ({
               )}
             </View>
             <View>
-              <UserLike
-                item={item}
-                type={4}
-                // id={item.id}
-                // isLiked={item.liked}
-                // likes_count={item.likes_count}
-              />
+              <UserLike item={item} type={4} />
             </View>
           </View>
         </View>

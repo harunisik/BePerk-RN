@@ -1,27 +1,22 @@
-import {createContext, Dispatch, useContext, useReducer} from 'react';
+import {createContext, Dispatch, Fragment, useContext, useReducer} from 'react';
 import AuthAction, {AuthActionType, AuthResult} from './AuthAction';
 import axios from 'axios';
 import {FollowersAction, FollowersActionType, User} from './FollowersAction';
 import ModalAction, {ModalActionType, ModalInfo} from './ModalAction';
+import ResetAction, {ResetActionType} from './ResetAction';
 
 interface StoreData {
   authResult?: AuthResult;
   selectedUsers?: User[];
-  // modalInfo?: ModalInfo;
-  isModalOpen?: boolean;
+  modalInfo?: ModalInfo;
 }
 
 const initialState: StoreData = {
-  isModalOpen: false,
+  modalInfo: {
+    isOpen: false,
+    component: Fragment,
+  },
 };
-
-enum ResetActionType {
-  RESET = 'reset',
-}
-
-interface ResetAction {
-  type: ResetActionType;
-}
 
 type StoreAction = ResetAction | AuthAction | FollowersAction | ModalAction;
 
@@ -54,7 +49,7 @@ const updateStore = (store: StoreData, action: StoreAction) => {
       return {
         ...store,
         selectedUsers: store.selectedUsers?.filter(
-          ({user_id}) => user_id !== action.user.user_id,
+          ({user_id}) => user_id !== action.user?.user_id,
         ),
       };
     case FollowersActionType.CLEAR_LIST:
@@ -62,12 +57,16 @@ const updateStore = (store: StoreData, action: StoreAction) => {
         ...store,
         selectedUsers: undefined,
       };
-    case ModalActionType.SET_MODAL:
+    case ModalActionType.OPEN:
       return {
         ...store,
-        isModalOpen: action.isModalOpen,
+        modalInfo: {isOpen: true, component: action.modalInfo?.component},
       };
-
+    case ModalActionType.CLOSE:
+      return {
+        ...store,
+        modalInfo: {isOpen: false, component: Fragment},
+      };
     default:
       return store;
   }

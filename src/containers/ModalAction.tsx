@@ -1,15 +1,20 @@
+import {Fragment, ReactElement} from 'react';
+
 export enum ModalActionType {
-  SET_MODAL = 'set-modal',
+  OPEN = 'open-modal',
+  CLOSE = 'close-modal',
 }
 
+type FragmentType = typeof Fragment;
+
 export interface ModalInfo {
-  isOpen: boolean;
+  isOpen?: boolean;
+  component?: ReactElement | FragmentType;
 }
 
 interface ModalAction {
   type: ModalActionType;
-  isModalOpen?: boolean;
-  // modalInfo?: ModalInfo;
+  modalInfo?: ModalInfo;
 }
 
 export default ModalAction;

@@ -80,3 +80,13 @@ export const deletePost = posts => {
     .then(handleResponse)
     .catch(handleError);
 };
+
+export const getUserExploring = ({queryKey}) => {
+  const {filter, limit, offset, subtype} = queryKey[1];
+  return axios
+    .get(
+      `/user/exploring?filter=${filter}&limit=${limit}&offset=${offset}&subtype=${subtype}`,
+    )
+    .then(handleResponse)
+    .catch(handleError);
+};

@@ -10,13 +10,7 @@ export const DovesItemOptions = ({item, navigation}) => {
 
   return (
     <View style={[cGap15, row, aiCenter]}>
-      <UserLike
-        item={item}
-        type={item.type}
-        // id={item.id}
-        // isLiked={item.liked}
-        // likes_count={item.likes_count}
-      />
+      <UserLike item={item} type={item.type} />
       <UserComment navigation={navigation} item={item} />
       <MaterialCommunityIcons
         name="share-outline"

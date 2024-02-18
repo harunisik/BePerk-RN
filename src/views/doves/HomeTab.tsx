@@ -1,11 +1,9 @@
 import {View, FlatList, Text, StyleSheet} from 'react-native';
-import {useState} from 'react';
 import common from '../../styles/sharedStyles';
 import {useQuery} from 'react-query';
 import {getUserFeed, getUserPerks} from '../../services/UserService';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import DovesItem from './DovesItem';
-import DovesItemModal from './DovesItemModal';
 import DovesItemOptions from './DovesItemOptions';
 
 const ListHeaderItem = ({item, navigation}) => {
@@ -36,7 +34,6 @@ const ListHeaderItem = ({item, navigation}) => {
 };
 
 const HomeTab = ({navigation}) => {
-  const [selectedItem, setSelectedItem] = useState();
   const {flex1, jcCenter, aiCenter} = common;
 
   const {data: beperkDove} = useQuery({
@@ -57,7 +54,7 @@ const HomeTab = ({navigation}) => {
           <DovesItem
             item={item}
             navigation={navigation}
-            onPressMore={setSelectedItem}
+            onDeleteItem={refetch}
           />
         )}
         keyExtractor={item => item.id}
@@ -69,7 +66,6 @@ const HomeTab = ({navigation}) => {
           )
         }
       />
-      <DovesItemModal item={selectedItem} onDeleteItem={refetch} />
     </View>
   );
 };

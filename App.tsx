@@ -9,6 +9,7 @@ import axios from 'axios';
 import {Platform} from 'react-native';
 import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import {PaperProvider} from 'react-native-paper';
+import BottomSheetModal from './src/components/BottomSheetModal';
 
 const queryClient = new QueryClient();
 axios.defaults.baseURL = process.env.API_URL;
@@ -62,6 +63,7 @@ function App(): React.JSX.Element {
           <PaperProvider>
             <BottomSheetModalProvider>
               <MainStack />
+              <BottomSheetModal />
             </BottomSheetModalProvider>
           </PaperProvider>
           <FlashMessage position="top" />

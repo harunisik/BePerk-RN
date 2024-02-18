@@ -3,8 +3,6 @@ import common from '../../styles/sharedStyles';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import HomeTab from './HomeTab';
 import DoveTab from './DoveTab';
-import TestimonyTab from './TestimonyTab';
-import PrayerTab from './PrayerTab';
 
 const Doves = () => {
   const Tab = createMaterialTopTabNavigator();
@@ -23,16 +21,19 @@ const Doves = () => {
           name={DoveTab.name}
           component={DoveTab}
           options={{tabBarLabel: 'Dove'}}
+          initialParams={{subtype: 0}}
         />
         <Tab.Screen
-          name={TestimonyTab.name}
-          component={TestimonyTab}
+          name="TestimonyTab"
+          component={DoveTab}
           options={{tabBarLabel: 'Testimony'}}
+          initialParams={{subtype: 1}}
         />
         <Tab.Screen
-          name={PrayerTab.name}
-          component={PrayerTab}
+          name="PrayerTab"
+          component={DoveTab}
           options={{tabBarLabel: 'Prayer'}}
+          initialParams={{subtype: 2}}
         />
       </Tab.Navigator>
     </View>
