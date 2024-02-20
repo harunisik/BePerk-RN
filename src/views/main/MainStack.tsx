@@ -1,7 +1,7 @@
 import {NavigationContainer} from '@react-navigation/native';
-import {useStore} from '../containers/StoreContainer';
+import {useStore} from '../../containers/StoreContainer';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import SignIn from './SignIn';
+import SignIn from '../auth/SignIn';
 import BottomTab from './BottomTab';
 
 const MainStack = () => {

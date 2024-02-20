@@ -11,7 +11,7 @@ import {dateDiff} from '../../utils/DateUtil';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useState} from 'react';
 import {Swipeable} from 'react-native-gesture-handler';
-import UserLike from './UserLike';
+import UserLike from '../common/UserLike';
 
 const RenderRightActions = ({item, onPress}) => {
   return (

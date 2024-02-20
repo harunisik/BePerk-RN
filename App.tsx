@@ -2,14 +2,14 @@ import * as React from 'react';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import common from './src/styles/sharedStyles';
 import {StoreContainer} from './src/containers/StoreContainer';
-import MainStack from './src/views/MainStack';
+import MainStack from './src/views/main/MainStack';
 import {QueryClient, QueryClientProvider} from 'react-query';
 import FlashMessage from 'react-native-flash-message';
 import axios from 'axios';
 import {Platform} from 'react-native';
 import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import {PaperProvider} from 'react-native-paper';
-import BottomSheetModal from './src/components/BottomSheetModal';
+import BottomSheetModal from './src/components/common/BottomSheetModal';
 
 const queryClient = new QueryClient();
 axios.defaults.baseURL = process.env.API_URL;

@@ -5,14 +5,14 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import common from '../styles/sharedStyles';
+import common from '../../styles/sharedStyles';
 import {useState} from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useQueryClient} from 'react-query';
-import {signIn} from '../services/UserService';
+import {signIn} from '../../services/UserService';
 import {showMessage} from 'react-native-flash-message';
-import {useStore} from '../containers/StoreContainer';
-import {AuthActionType} from '../containers/AuthAction';
+import {useStore} from '../../containers/StoreContainer';
+import {AuthActionType} from '../../containers/AuthAction';
 
 const SignIn = () => {
   const [username, setUsername] = useState('');

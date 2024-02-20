@@ -1,7 +1,8 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Doves from './Doves';
 import Comment from './Comment';
-import Followers, {FollowersOptions} from '../profile/Followers';
+import FollowersOptions from '../profile/FollowerOptions';
+import Followers from '../profile/Followers';
 
 const DovesStack = () => {
   const Stack = createNativeStackNavigator();

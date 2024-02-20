@@ -3,8 +3,8 @@ import common from '../../styles/sharedStyles';
 import {useQuery} from 'react-query';
 import {getUserFeed, getUserPerks} from '../../services/UserService';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import DovesItem from './DovesItem';
-import DovesItemOptions from './DovesItemOptions';
+import DovesItem from '../../components/doves/DovesItem';
+import DovesItemOptions from '../../components/doves/DovesItemOptions';
 
 const ListHeaderItem = ({item, navigation}) => {
   const {jcSpaceBetween, aiCenter, row, rGap15, pt20, p15, bold, white} =

@@ -9,7 +9,7 @@ import {
 import common from '../../styles/sharedStyles';
 import {getUserExploring} from '../../services/UserService';
 import {useQuery} from 'react-query';
-import DovesItem from './DovesItem';
+import DovesItem from '../../components/doves/DovesItem';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const ListHeaderComponent = ({navigation, route}) => {

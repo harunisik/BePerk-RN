@@ -1,9 +1,9 @@
 import {View} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import common from '../../styles/sharedStyles';
-import Followers from '../profile/Followers';
-import UserLike from './UserLike';
-import UserComment from './UserComment';
+import Followers from '../../views/profile/Followers';
+import UserLike from '../common/UserLike';
+import UserComment from '../common/UserComment';
 
 export const DovesItemOptions = ({item, navigation}) => {
   const {aiCenter, row, cGap15} = common;

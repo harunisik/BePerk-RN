@@ -2,7 +2,7 @@ import {View, FlatList} from 'react-native';
 import {getUserPerks} from '../../services/UserService';
 import {useQuery} from 'react-query';
 import {useStore} from '../../containers/StoreContainer';
-import DovesItem from '../doves/DovesItem';
+import DovesItem from '../../components/doves/DovesItem';
 
 const DovesTab = ({navigation}) => {
   const {

@@ -1,7 +1,7 @@
 import {View, Text} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import common from '../../styles/sharedStyles';
-import Comment from './Comment';
+import Comment from '../../views/doves/Comment';
 
 export const UserComment = ({navigation, item}) => {
   const {font12, cGap3, row, aiCenter} = common;

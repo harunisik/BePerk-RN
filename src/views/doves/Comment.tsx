@@ -7,8 +7,8 @@ import {
   postComment,
 } from '../../services/UserService';
 import {useState} from 'react';
-import MessageBox from './MessageBox';
-import CommentList from './CommentList';
+import MessageBox from '../../components/common/MessageBox';
+import CommentList from '../../components/doves/CommentList';
 import {showMessage} from 'react-native-flash-message';
 
 const Comment = ({

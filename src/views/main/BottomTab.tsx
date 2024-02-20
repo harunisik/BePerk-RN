@@ -1,11 +1,11 @@
 import {createMaterialBottomTabNavigator} from 'react-native-paper/react-navigation';
-import Home from './home/Home';
-import Stories from './stories/Stories';
-import Doves from './doves/Doves';
-import ProfileStack from './profile/ProfileStack';
+import Home from '../home/Home';
+import Stories from '../stories/Stories';
+import Doves from '../doves/Doves';
+import ProfileStack from '../profile/ProfileStack';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import BottomSheetModal from '../components/BottomSheetModal';
-import DovesStack from './doves/DovesStack';
+import BottomSheetModal from '../../components/common/BottomSheetModal';
+import DovesStack from '../doves/DovesStack';
 
 const routeIcons = {
   [Home.name]: 'home',

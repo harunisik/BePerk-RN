@@ -1,5 +1,4 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Profile, {ProfileOptions} from './Profile';
 import Settings from './settings/Settings';
 import SwitchAccount from './settings/SwitchAccount';
 import EditProfile from './settings/EditProfile';
@@ -11,7 +10,10 @@ import DeleteAccount from './settings/DeleteAccount';
 import PrivacyPolicy from './settings/PrivacyPolicy';
 import Terms from './settings/Terms';
 import Comment from '../doves/Comment';
-import Followers, {FollowersOptions} from './Followers';
+import FollowersOptions from './FollowerOptions';
+import Followers from './Followers';
+import Profile from './Profile';
+import ProfileOptions from './ProfileOptions';
 
 const ProfileStack = () => {
   const Stack = createNativeStackNavigator();

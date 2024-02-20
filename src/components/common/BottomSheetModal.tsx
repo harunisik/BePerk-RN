@@ -5,8 +5,8 @@ import {
   BottomSheetBackdropProps,
   BottomSheetModal as GorhomBottomSheetModal,
 } from '@gorhom/bottom-sheet';
-import {useStore} from '../containers/StoreContainer';
-import {ModalActionType} from '../containers/ModalAction';
+import {useStore} from '../../containers/StoreContainer';
+import {ModalActionType} from '../../containers/ModalAction';
 
 const BottomSheetModal = () => {
   const bottomSheetModalRef = useRef<GorhomBottomSheetModal>(null);

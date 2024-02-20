@@ -1,114 +1,14 @@
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  FlatList,
-  TouchableWithoutFeedback,
-  ScrollView,
-} from 'react-native';
+import {View, Text, TextInput, StyleSheet, FlatList} from 'react-native';
 import common from '../../styles/sharedStyles';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {getUserFollowings} from '../../services/UserService';
 import {useEffect, useState} from 'react';
 import {useMutation, useQuery} from 'react-query';
 import {useStore} from '../../containers/StoreContainer';
 import {FollowersActionType} from '../../containers/FollowersAction';
-import {chatShare} from '../../services/ChatService';
 import {showMessage} from 'react-native-flash-message';
 import {searchUsers} from '../../services/SearchService';
-
-const HeaderRight = ({comment, onShare}) => {
-  const {
-    store: {selectedUsers},
-  } = useStore();
-
-  const handleShareChat = useMutation({
-    mutationFn: share => chatShare(share),
-    onSuccess: () => {
-      onShare();
-      showMessage({message: 'Message sent', type: 'info'});
-    },
-    onError: ({message}) => {
-      showMessage({message, type: 'danger'});
-    },
-  });
-
-  return (
-    <Text
-      onPress={() => {
-        if (!selectedUsers || selectedUsers.length === 0) {
-          showMessage({message: 'Please select users', type: 'warning'});
-        } else {
-          handleShareChat.mutate({
-            id: comment.id,
-            share_to: JSON.stringify(selectedUsers.map(({user_id}) => user_id)),
-            type: comment.type,
-          });
-        }
-      }}>
-      Sent
-    </Text>
-  );
-};
-
-export const FollowersOptions = ({
-  navigation,
-  route: {
-    params: {comment},
-  },
-}) => {
-  return {
-    animation: 'slide_from_bottom',
-    headerLeft: () => (
-      <MaterialCommunityIcons
-        name="close"
-        onPress={() => navigation.goBack()}
-        size={26}
-      />
-    ),
-    headerRight: () => (
-      <HeaderRight comment={comment} onShare={() => navigation.goBack()} />
-    ),
-  };
-};
-
-const UserItem = ({item}) => {
-  const [selected, setSelected] = useState(false);
-  const {dispatch} = useStore();
-
-  const handlePress = () => {
-    setSelected(!selected);
-    dispatch({
-      type: !selected
-        ? FollowersActionType.ADD_USER
-        : FollowersActionType.DELETE_USER,
-      user: item,
-    });
-  };
-
-  const {flex1, aiCenter, row, jcSpaceBetween, pt10, pb10, cGap10} = common;
-
-  return (
-    <TouchableWithoutFeedback onPress={handlePress}>
-      <View style={[row, flex1, jcSpaceBetween, aiCenter, pb10, pt10]}>
-        <View style={[row, aiCenter, cGap10]}>
-          <MaterialCommunityIcons name="account" size={26} />
-          <Text>{item.fullname}</Text>
-          {item.isVerified === 1 && (
-            <MaterialIcons name="verified" size={16} color="blue" />
-          )}
-        </View>
-        <MaterialCommunityIcons
-          name={selected ? 'check-circle' : 'circle-outline'}
-          size={22}
-          color={selected ? 'blue' : 'gray'}
-        />
-      </View>
-    </TouchableWithoutFeedback>
-  );
-};
+import UserItem from '../../components/profile/UserItem';
+import SelectedUsers from '../../components/profile/SelectedUsers';
 
 const Followers = () => {
   const [searchText, setSearchText] = useState('');
@@ -119,20 +19,7 @@ const Followers = () => {
     store: {selectedUsers},
   } = useStore();
 
-  const {
-    bold,
-    font16,
-    pl15,
-    pr15,
-    pb10,
-    pt10,
-    p10,
-    radius6,
-    white,
-    font11,
-    row,
-    cGap5,
-  } = common;
+  const {bold, font16, pl15, pr15, pb10, pt10} = common;
 
   const {data, refetch, isFetching} = useQuery({
     queryKey: ['getUserFollowing'],
@@ -182,19 +69,7 @@ const Followers = () => {
         style={styles.textInput}
       />
 
-      <ScrollView>
-        <View style={[row, cGap5]}>
-          {selectedUsers?.map(item => {
-            return (
-              <View
-                key={item.user_id}
-                style={[radius6, p10, {backgroundColor: 'blue'}]}>
-                <Text style={[white, font11]}>{item.fullname}</Text>
-              </View>
-            );
-          })}
-        </View>
-      </ScrollView>
+      <SelectedUsers data={selectedUsers} />
 
       {searchText ? (
         <FlatList

@@ -1,47 +1,13 @@
-import {View, Text, Button, Alert} from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {View, Button, Alert} from 'react-native';
 import {useStore} from '../../containers/StoreContainer';
-import Settings from './settings/Settings';
 import EditProfile from './settings/EditProfile';
-import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import PostsTab from './PostsTab';
-import DovesTab from './DovesTab';
-import StoriesTab from './StoriesTab';
 import {useQuery} from 'react-query';
 import {getUserProfile} from '../../services/UserService';
 import common from '../../styles/sharedStyles';
-
-export const ProfileOptions = ({navigation}) => {
-  const {store} = useStore();
-  const {aiCenter, row, dashed, jcSpaceAround} = common;
-
-  return {
-    title: store.authResult?.username,
-    headerRight: () => (
-      <View style={[aiCenter, row, dashed, jcSpaceAround]}>
-        <MaterialCommunityIcons
-          name="share-variant"
-          onPress={() => Alert.alert('Under construction')}
-          size={26}
-        />
-        <MaterialCommunityIcons
-          name="bookmark"
-          onPress={() => Alert.alert('Under construction')}
-          size={26}
-        />
-        <MaterialCommunityIcons
-          name="cog"
-          onPress={() => navigation.navigate(Settings.name)}
-          size={26}
-        />
-      </View>
-    ),
-  };
-};
+import ProfileTabGroup from '../../components/profile/ProfileTabGroup';
+import UserInfo from '../../components/profile/UserInfo';
 
 const Profile = ({navigation}) => {
-  const Tab = createMaterialTopTabNavigator();
-
   const {
     store: {
       authResult: {id},
@@ -53,34 +19,12 @@ const Profile = ({navigation}) => {
     queryFn: getUserProfile,
   });
 
-  const {aiCenter, row, flex1, dashed, jcSpaceAround} = common;
+  const {aiCenter, row, flex1, jcSpaceAround} = common;
 
   return (
-    <View style={[flex1, dashed]}>
-      <View style={[aiCenter, dashed]}>
-        <MaterialCommunityIcons
-          name="account"
-          onPress={() => navigation.navigate(Settings.name)}
-          size={56}
-        />
-        <Text>{data?.fullname}</Text>
-      </View>
-
-      <View style={[aiCenter, row, dashed, jcSpaceAround]}>
-        <View style={[aiCenter, dashed]}>
-          <Text>{data?.posts}</Text>
-          <Text>Posts</Text>
-        </View>
-        <View style={[aiCenter, dashed]}>
-          <Text>{data?.followers}</Text>
-          <Text>Followers</Text>
-        </View>
-        <View style={[aiCenter, dashed]}>
-          <Text>{data?.following}</Text>
-          <Text>Following</Text>
-        </View>
-      </View>
-      <View style={[aiCenter, row, dashed, jcSpaceAround]}>
+    <View style={[flex1]}>
+      <UserInfo data={data} />
+      <View style={[aiCenter, row, jcSpaceAround]}>
         <Button
           onPress={() => navigation.navigate(EditProfile.name)}
           title="Edit Profile"
@@ -90,29 +34,7 @@ const Profile = ({navigation}) => {
           title="Messages"
         />
       </View>
-      <View style={[flex1]}>
-        <Tab.Navigator
-          screenOptions={{
-            lazy: true,
-            tabBarLabelStyle: {textTransform: 'none'},
-          }}>
-          <Tab.Screen
-            name={PostsTab.name}
-            component={PostsTab}
-            options={{tabBarLabel: 'Posts'}}
-          />
-          <Tab.Screen
-            name={StoriesTab.name}
-            component={StoriesTab}
-            options={{tabBarLabel: 'Stories'}}
-          />
-          <Tab.Screen
-            name={DovesTab.name}
-            component={DovesTab}
-            options={{tabBarLabel: 'Doves'}}
-          />
-        </Tab.Navigator>
-      </View>
+      <ProfileTabGroup />
     </View>
   );
 };
