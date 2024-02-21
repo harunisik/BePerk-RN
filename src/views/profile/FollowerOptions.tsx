@@ -2,7 +2,7 @@ import {Text} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useStore} from '../../containers/StoreContainer';
 import {showMessage} from 'react-native-flash-message';
-import useChatShare from '../../hooks/useChatShare';
+import {useChatShare} from '../../hooks/chatHooks';
 
 const HeaderRight = ({navigation, comment}) => {
   const {

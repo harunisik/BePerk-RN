@@ -1,27 +1,18 @@
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import {deletePost} from '../../services/UserService';
-import {useMutation} from 'react-query';
 import {useStore} from '../../containers/StoreContainer';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import common from '../../styles/sharedStyles';
 import {showMessage} from 'react-native-flash-message';
 import {ModalActionType} from '../../containers/ModalAction';
 import Clipboard from '@react-native-clipboard/clipboard';
+import {useDeletePost} from '../../hooks/userHooks';
 
 export const DovesItemModal = ({item, onDeleteItem = () => {}}) => {
   const {aiCenter, jcCenter, row} = common;
   const {dispatch} = useStore();
 
-  const handleDeletePost = useMutation({
-    mutationFn: posts => deletePost(posts),
-    onSuccess: () => {
-      onDeleteItem();
-      dispatch({type: ModalActionType.CLOSE});
-      showMessage({message: 'Message deleted'});
-    },
-    onError: ({message}) => {
-      showMessage({message, type: 'danger'});
-    },
+  const handleDeletePost = useDeletePost(() => {
+    onDeleteItem();
   });
 
   return (

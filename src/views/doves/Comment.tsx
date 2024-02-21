@@ -1,15 +1,15 @@
 import {View} from 'react-native';
 import common from '../../styles/sharedStyles';
-import {useMutation, useQuery} from 'react-query';
-import {
-  deleteComment,
-  getUserComments,
-  postComment,
-} from '../../services/UserService';
+import {useQuery} from 'react-query';
+import {getUserComments} from '../../services/UserService';
 import {useState} from 'react';
 import MessageBox from '../../components/common/MessageBox';
 import CommentList from '../../components/doves/CommentList';
-import {showMessage} from 'react-native-flash-message';
+import {
+  useDeleteComment,
+  useGetUserComments,
+  usePostComment,
+} from '../../hooks/userHooks';
 
 const Comment = ({
   route: {
@@ -20,31 +20,12 @@ const Comment = ({
   const [selectedCommentId, setSelectedCommentId] = useState(headerComment.id);
   const {flex1} = common;
 
-  const {data, refetch, isFetching} = useQuery({
-    queryKey: [
-      'getUserComments',
-      {id: headerComment.id, type: headerComment.type},
-    ],
-    queryFn: getUserComments,
+  const {data, refetch, isFetching} = useGetUserComments({
+    id: headerComment.id,
+    type: headerComment.type,
   });
-
-  const handleSendComment = useMutation({
-    mutationFn: newComment => postComment(newComment),
-    onSuccess: () => handleRefresh(),
-    onError: ({message}) => {
-      showMessage({message, type: 'danger'});
-    },
-  });
-
-  const handleDeleteComment = useMutation({
-    mutationFn: comment => deleteComment(comment),
-    onSuccess: () => {
-      handleRefresh();
-    },
-    onError: ({message}) => {
-      showMessage({message, type: 'danger'});
-    },
-  });
+  const handleSendComment = usePostComment(() => handleRefresh());
+  const handleDeleteComment = useDeleteComment(() => handleRefresh());
 
   const handleRefresh = () => {
     clearSelectedComment();

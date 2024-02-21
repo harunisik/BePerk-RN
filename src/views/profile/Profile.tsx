@@ -1,11 +1,10 @@
 import {View, Button, Alert} from 'react-native';
 import {useStore} from '../../containers/StoreContainer';
 import EditProfile from './settings/EditProfile';
-import {useQuery} from 'react-query';
-import {getUserProfile} from '../../services/UserService';
 import common from '../../styles/sharedStyles';
 import ProfileTabGroup from '../../components/profile/ProfileTabGroup';
 import UserInfo from '../../components/profile/UserInfo';
+import {useGetUserProfile} from '../../hooks/userHooks';
 
 const Profile = ({navigation}) => {
   const {
@@ -14,10 +13,7 @@ const Profile = ({navigation}) => {
     },
   } = useStore();
 
-  const {data} = useQuery({
-    queryKey: ['getUserProfile', {id}],
-    queryFn: getUserProfile,
-  });
+  const {data} = useGetUserProfile({id});
 
   const {aiCenter, row, flex1, jcSpaceAround} = common;
 

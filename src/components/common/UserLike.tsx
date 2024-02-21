@@ -1,10 +1,8 @@
 import {View, Text} from 'react-native';
-import {updateUser} from '../../services/UserService';
-import {useMutation} from 'react-query';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import common from '../../styles/sharedStyles';
-import {showMessage} from 'react-native-flash-message';
 import {useEffect, useState} from 'react';
+import {useUpdateUser} from '../../hooks/userHooks';
 
 export const UserLike = ({item, type, onLike = (count: number) => {}}) => {
   const [liked, setLiked] = useState(item.liked);
@@ -12,16 +10,10 @@ export const UserLike = ({item, type, onLike = (count: number) => {}}) => {
 
   const {font12, cGap3, row, aiCenter, gray} = common;
 
-  const handleLike = useMutation({
-    mutationFn: newLike => updateUser(newLike),
-    onSuccess: ([{likes, comments}]) => {
-      setLiked(liked ? 0 : 1);
-      setLikesCount(likes);
-      onLike(comments);
-    },
-    onError: ({message}) => {
-      showMessage({message, type: 'danger'});
-    },
+  const handleLike = useUpdateUser((likes, comments) => {
+    setLiked(liked ? 0 : 1);
+    setLikesCount(likes);
+    onLike(comments);
   });
 
   useEffect(() => {

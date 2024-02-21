@@ -1,9 +1,9 @@
 import axios from 'axios';
 import {handleError, handleResponse} from './ApiUtils';
 
-export const signIn = (login: String, password: String) =>
+export const signIn = ({username, password}) =>
   axios
-    .get(`/user?login=${login}&password=${password}`)
+    .get(`/user?login=${username}&password=${password}`)
     .then(handleResponse)
     .catch(response => {
       if (response.status === 401) {

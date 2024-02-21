@@ -11,6 +11,7 @@ import {getUserExploring} from '../../services/UserService';
 import {useQuery} from 'react-query';
 import DovesItem from '../../components/doves/DovesItem';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useGetUserExploring} from '../../hooks/userHooks';
 
 const ListHeaderComponent = ({navigation, route}) => {
   const {row, jcCenter, aiCenter, cGap10} = common;
@@ -48,12 +49,11 @@ const DoveTab = ({navigation, route}) => {
     params: {subtype},
   } = route;
 
-  const {data, refetch, isFetching} = useQuery({
-    queryKey: [
-      'getUserExploring',
-      {filter: 2, limit: 35, offset: 0, subtype: subtype},
-    ],
-    queryFn: getUserExploring,
+  const {data, refetch, isFetching} = useGetUserExploring({
+    filter: 2,
+    limit: 35,
+    offset: 0,
+    subtype: subtype,
   });
 
   return (

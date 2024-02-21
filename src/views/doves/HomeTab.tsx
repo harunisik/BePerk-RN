@@ -5,6 +5,7 @@ import {getUserFeed, getUserPerks} from '../../services/UserService';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import DovesItem from '../../components/doves/DovesItem';
 import DovesItemOptions from '../../components/doves/DovesItemOptions';
+import {useGetUserFeed, useGetUserPerks} from '../../hooks/userHooks';
 
 const ListHeaderItem = ({item, navigation}) => {
   const {jcSpaceBetween, aiCenter, row, rGap15, pt20, p15, bold, white} =
@@ -36,14 +37,11 @@ const ListHeaderItem = ({item, navigation}) => {
 const HomeTab = ({navigation}) => {
   const {flex1, jcCenter, aiCenter} = common;
 
-  const {data: beperkDove} = useQuery({
-    queryKey: ['getUserPerks', {id: 2565, limit: 1, offset: 0}],
-    queryFn: getUserPerks,
-  });
-
-  const {data, refetch, isFetching} = useQuery({
-    queryKey: ['getUserFeed', {filter: 2, limit: 35, offset: 0}],
-    queryFn: getUserFeed,
+  const {data: beperkDove} = useGetUserPerks({id: 2565, limit: 1, offset: 0});
+  const {data, refetch, isFetching} = useGetUserFeed({
+    filter: 2,
+    limit: 35,
+    offset: 0,
   });
 
   return (

@@ -2,13 +2,13 @@ import {View, Text, TextInput, StyleSheet, FlatList} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {getUserFollowings} from '../../services/UserService';
 import {useEffect, useState} from 'react';
-import {useMutation, useQuery} from 'react-query';
+import {useQuery} from 'react-query';
 import {useStore} from '../../containers/StoreContainer';
 import {FollowersActionType} from '../../containers/FollowersAction';
-import {showMessage} from 'react-native-flash-message';
-import {searchUsers} from '../../services/SearchService';
 import UserItem from '../../components/profile/UserItem';
 import SelectedUsers from '../../components/profile/SelectedUsers';
+import {useSearchUsers} from '../../hooks/searchHooks';
+import {useGetUserFollowings} from '../../hooks/userHooks';
 
 const Followers = () => {
   const [searchText, setSearchText] = useState('');
@@ -21,23 +21,13 @@ const Followers = () => {
 
   const {bold, font16, pl15, pr15, pb10, pt10} = common;
 
-  const {data, refetch, isFetching} = useQuery({
-    queryKey: ['getUserFollowing'],
-    queryFn: getUserFollowings,
-  });
+  const {data, refetch, isFetching} = useGetUserFollowings();
 
-  const handleSearchUsers = useMutation({
-    mutationFn: search => searchUsers(search),
-    onSuccess: ({profiles}) => {
-      setSearchResult(
-        profiles.map(profile => ({...profile, user_id: profile.id})),
-      );
-      console.log(JSON.stringify(searchResult));
-    },
-    onError: ({message}) => {
-      showMessage({message, type: 'danger'});
-    },
-  });
+  const handleSearchUsers = useSearchUsers(profiles =>
+    setSearchResult(
+      profiles?.map(profile => ({...profile, user_id: profile.id})),
+    ),
+  );
 
   useEffect(() => {
     const timer = setTimeout(() => {

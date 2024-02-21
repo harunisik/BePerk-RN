@@ -1,8 +1,7 @@
 import {View, FlatList} from 'react-native';
-import {getUserPerks} from '../../services/UserService';
-import {useQuery} from 'react-query';
 import {useStore} from '../../containers/StoreContainer';
 import DovesItem from '../../components/doves/DovesItem';
+import {useGetUserPerks} from '../../hooks/userHooks';
 
 const DovesTab = ({navigation}) => {
   const {
@@ -11,9 +10,10 @@ const DovesTab = ({navigation}) => {
     },
   } = useStore();
 
-  const {data, refetch, isFetching} = useQuery({
-    queryKey: ['getUserPerks', {id, limit: 35, offset: 0}],
-    queryFn: getUserPerks,
+  const {data, refetch, isFetching} = useGetUserPerks({
+    id,
+    limit: 35,
+    offset: 0,
   });
 
   return (
