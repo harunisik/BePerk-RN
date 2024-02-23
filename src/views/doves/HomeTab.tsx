@@ -1,7 +1,5 @@
 import {View, FlatList, Text, StyleSheet} from 'react-native';
 import common from '../../styles/sharedStyles';
-import {useQuery} from 'react-query';
-import {getUserFeed, getUserPerks} from '../../services/UserService';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import DovesItem from '../../components/doves/DovesItem';
 import DovesItemOptions from '../../components/doves/DovesItemOptions';

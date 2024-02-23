@@ -1,44 +1,34 @@
-import {
-  View,
-  FlatList,
-  TouchableOpacity,
-  StyleSheet,
-  Alert,
-  Text,
-} from 'react-native';
+import {View, FlatList, TouchableOpacity, StyleSheet, Text} from 'react-native';
 import common from '../../styles/sharedStyles';
-import {getUserExploring} from '../../services/UserService';
-import {useQuery} from 'react-query';
 import DovesItem from '../../components/doves/DovesItem';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useGetUserExploring} from '../../hooks/userHooks';
+import PostDove from './PostDove';
+import {useEffect} from 'react';
 
 const ListHeaderComponent = ({navigation, route}) => {
   const {row, jcCenter, aiCenter, cGap10} = common;
   const {
-    params: {subtype},
+    params: {subtype, buttonText, inputTextPlaceHolder, title, navigateTo},
   } = route;
 
   return (
     <TouchableOpacity
       style={[styles.button, aiCenter, jcCenter, row, cGap10]}
-      onPress={() => {
-        Alert.alert('clicked');
-      }}>
+      onPress={() =>
+        navigation.navigate(PostDove.name, {
+          subtype,
+          inputTextPlaceHolder,
+          title,
+          navigateTo,
+        })
+      }>
       <MaterialCommunityIcons
         name="file-document-edit-outline"
         size={26}
         color="blue"
       />
-      <Text>
-        {subtype === 0
-          ? "Post what's on your mind"
-          : subtype === 1
-          ? 'Write what God has done for you!'
-          : subtype === 2
-          ? 'Share a prayer request!'
-          : 'Unknow label'}
-      </Text>
+      <Text>{buttonText}</Text>
     </TouchableOpacity>
   );
 };
@@ -46,15 +36,22 @@ const ListHeaderComponent = ({navigation, route}) => {
 const DoveTab = ({navigation, route}) => {
   const {flex1, jcCenter, aiCenter} = common;
   const {
-    params: {subtype},
+    params: {subtype, doRefresh},
   } = route;
 
   const {data, refetch, isFetching} = useGetUserExploring({
     filter: 2,
     limit: 35,
     offset: 0,
-    subtype: subtype,
+    subtype,
   });
+
+  useEffect(() => {
+    if (doRefresh) {
+      navigation.setParams({doRefresh: false});
+      refetch();
+    }
+  }, [doRefresh]);
 
   return (
     <View style={[flex1, jcCenter, aiCenter]}>

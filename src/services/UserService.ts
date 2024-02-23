@@ -90,3 +90,10 @@ export const getUserExploring = ({queryKey}) => {
     .then(handleResponse)
     .catch(handleError);
 };
+
+export const addPerk = newPerk => {
+  return axios
+    .post('/user/add_perk', {...newPerk}, {headers: {'ACCEPT-VERSION': 3}})
+    .then(handleResponse)
+    .catch(handleError);
+};

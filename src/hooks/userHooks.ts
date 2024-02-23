@@ -1,6 +1,7 @@
 import {showMessage} from 'react-native-flash-message';
 import {useMutation, useQuery, useQueryClient} from 'react-query';
 import {
+  addPerk,
   deleteComment,
   deletePost,
   getUserComments,
@@ -65,6 +66,16 @@ export function useDeleteComment(onSuccessCallback) {
   });
 }
 
+export function useAddPerk(onSuccessCallback) {
+  return useMutation({
+    mutationFn: newPerk => addPerk(newPerk),
+    onSuccess: () => onSuccessCallback(),
+    onError: ({message}) => {
+      showMessage({message, type: 'danger'});
+    },
+  });
+}
+
 export function useGetUserComments(data) {
   return useQuery({
     queryKey: ['getUserComments', data],
@@ -93,7 +104,7 @@ export function useGetUserFeed(data) {
   });
 }
 
-export function useGetUserFollowings(data) {
+export function useGetUserFollowings() {
   return useQuery({
     queryKey: ['getUserFollowings'],
     queryFn: getUserFollowings,

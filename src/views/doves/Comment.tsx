@@ -1,7 +1,5 @@
 import {View} from 'react-native';
 import common from '../../styles/sharedStyles';
-import {useQuery} from 'react-query';
-import {getUserComments} from '../../services/UserService';
 import {useState} from 'react';
 import MessageBox from '../../components/common/MessageBox';
 import CommentList from '../../components/doves/CommentList';

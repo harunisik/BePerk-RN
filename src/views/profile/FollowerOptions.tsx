@@ -26,7 +26,7 @@ const HeaderRight = ({navigation, comment}) => {
   return <Text onPress={handlePressSent}>Sent</Text>;
 };
 
-export const FollowersOptions = ({
+const FollowersOptions = ({
   navigation,
   route: {
     params: {comment},

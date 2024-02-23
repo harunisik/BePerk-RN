@@ -20,7 +20,7 @@ const DoveTypes = {
   [DoveType.Prayer]: {label: 'Prayer request', color: 'darkorchid'},
 };
 
-export const DovesItem = ({
+const DovesItem = ({
   item,
   navigation,
   onDeleteItem = () => {},

@@ -11,11 +11,13 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {useSignIn} from '../../hooks/userHooks';
 
 const SignIn = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('Harun-local');
+  const [password, setPassword] = useState('123');
   const {flex1, aiCenter, jcCenter, row} = common;
 
   const handleLogin = useSignIn({username, password});
+
+  handleLogin();
 
   return (
     <View style={[flex1, aiCenter, jcCenter]}>

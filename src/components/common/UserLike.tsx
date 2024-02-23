@@ -4,7 +4,7 @@ import common from '../../styles/sharedStyles';
 import {useEffect, useState} from 'react';
 import {useUpdateUser} from '../../hooks/userHooks';
 
-export const UserLike = ({item, type, onLike = (count: number) => {}}) => {
+const UserLike = ({item, type, onLike = (count: number) => {}}) => {
   const [liked, setLiked] = useState(item.liked);
   const [likesCount, setLikesCount] = useState(item.likes_count);
 

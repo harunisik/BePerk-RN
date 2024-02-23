@@ -5,7 +5,7 @@ import Followers from '../../views/profile/Followers';
 import UserLike from '../common/UserLike';
 import UserComment from '../common/UserComment';
 
-export const DovesItemOptions = ({item, navigation}) => {
+const DovesItemOptions = ({item, navigation}) => {
   const {aiCenter, row, cGap15} = common;
 
   return (

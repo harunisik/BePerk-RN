@@ -1,8 +1,6 @@
 import {View, Text, TextInput, StyleSheet, FlatList} from 'react-native';
 import common from '../../styles/sharedStyles';
-import {getUserFollowings} from '../../services/UserService';
 import {useEffect, useState} from 'react';
-import {useQuery} from 'react-query';
 import {useStore} from '../../containers/StoreContainer';
 import {FollowersActionType} from '../../containers/FollowersAction';
 import UserItem from '../../components/profile/UserItem';
@@ -86,7 +84,6 @@ const Followers = () => {
 const styles = StyleSheet.create({
   textInput: {
     height: 40,
-    width: 200,
     marginTop: 12,
     marginBottom: 12,
     borderWidth: 1,

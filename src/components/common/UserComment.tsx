@@ -3,7 +3,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import common from '../../styles/sharedStyles';
 import Comment from '../../views/doves/Comment';
 
-export const UserComment = ({navigation, item}) => {
+const UserComment = ({navigation, item}) => {
   const {font12, cGap3, row, aiCenter} = common;
 
   return (
