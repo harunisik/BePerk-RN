@@ -8,6 +8,7 @@ import {
   getUserExploring,
   getUserFeed,
   getUserFollowings,
+  getUserHistory,
   getUserPerks,
   getUserProfile,
   postComment,
@@ -115,6 +116,13 @@ export function useGetUserProfile(data) {
   return useQuery({
     queryKey: ['getUserProfile', data],
     queryFn: getUserProfile,
+  });
+}
+
+export function useGetUserHistory(data) {
+  return useQuery({
+    queryKey: ['getUserHistory', data],
+    queryFn: getUserHistory,
   });
 }
 

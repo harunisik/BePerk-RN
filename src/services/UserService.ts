@@ -97,3 +97,14 @@ export const addPerk = newPerk => {
     .then(handleResponse)
     .catch(handleError);
 };
+
+export const getUserHistory = ({queryKey}) => {
+  const {filter, limit, offset, onlyNew} = queryKey[1];
+  return axios
+    .get(
+      `/user/getHistory?filter=${filter}&limit=${limit}&offset=${offset}&only_new=${onlyNew}`,
+      {headers: {'ACCEPT-VERSION': 3}},
+    )
+    .then(handleResponse)
+    .catch(handleError);
+};

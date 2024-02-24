@@ -5,6 +5,7 @@ import common from '../../styles/sharedStyles';
 import {useStore} from '../../containers/StoreContainer';
 import {ModalActionType} from '../../containers/ModalAction';
 import AddDoveModal from '../../components/doves/AddDoveModal';
+import Activity from './Activity';
 
 const HeaderRight = ({navigation}) => {
   const {dispatch} = useStore();
@@ -27,7 +28,7 @@ const HeaderRight = ({navigation}) => {
       />
       <MaterialCommunityIcons
         name="bell"
-        onPress={() => Alert.alert('Under construction')}
+        onPress={() => navigation.navigate(Activity.name)}
         size={26}
         color="blue"
       />
