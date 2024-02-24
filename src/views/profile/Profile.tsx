@@ -1,17 +1,14 @@
 import {View, Button, Alert} from 'react-native';
-import {useStore} from '../../containers/StoreContainer';
 import EditProfile from './settings/EditProfile';
 import common from '../../styles/sharedStyles';
 import ProfileTabGroup from '../../components/profile/ProfileTabGroup';
 import UserInfo from '../../components/profile/UserInfo';
 import {useGetUserProfile} from '../../hooks/userHooks';
 
-const Profile = ({navigation}) => {
+const Profile = ({navigation, route}) => {
   const {
-    store: {
-      authResult: {id},
-    },
-  } = useStore();
+    params: {userId: id},
+  } = route;
 
   const {data} = useGetUserProfile({id});
 
@@ -30,7 +27,7 @@ const Profile = ({navigation}) => {
           title="Messages"
         />
       </View>
-      <ProfileTabGroup />
+      <ProfileTabGroup userId={id} />
     </View>
   );
 };

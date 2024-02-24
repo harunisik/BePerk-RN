@@ -7,6 +7,7 @@ import {ModalActionType} from '../../containers/ModalAction';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import DovesItemOptions from './DovesItemOptions';
 import DovesItemModal from './DovesItemModal';
+import Profile from '../../views/profile/Profile';
 
 enum DoveType {
   Dove,
@@ -55,7 +56,16 @@ const DovesItem = ({
           <View style={[jcCenter]}>
             {displayUsername && (
               <View style={[cGap10, row, aiCenter]}>
-                <Text style={bold}>{item.username}</Text>
+                <Text
+                  style={bold}
+                  onPress={() =>
+                    navigation.navigate(Profile.name, {
+                      userId: item.user_id,
+                      username: item.username,
+                    })
+                  }>
+                  {item.username}
+                </Text>
                 {item.isVerified === 1 && (
                   <MaterialIcons name="verified" size={16} color="blue" />
                 )}

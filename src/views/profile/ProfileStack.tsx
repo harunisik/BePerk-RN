@@ -14,9 +14,15 @@ import FollowersOptions from './FollowerOptions';
 import Followers from './Followers';
 import Profile from './Profile';
 import ProfileOptions from './ProfileOptions';
+import {useStore} from '../../containers/StoreContainer';
 
 const ProfileStack = () => {
   const Stack = createNativeStackNavigator();
+  const {
+    store: {
+      authResult: {id, username},
+    },
+  } = useStore();
 
   return (
     <Stack.Navigator>
@@ -24,6 +30,10 @@ const ProfileStack = () => {
         name={Profile.name}
         component={Profile}
         options={ProfileOptions}
+        initialParams={{
+          userId: id,
+          username,
+        }}
       />
       <Stack.Screen name={Settings.name} component={Settings} />
       <Stack.Screen

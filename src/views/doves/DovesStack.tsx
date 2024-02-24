@@ -7,6 +7,8 @@ import PostDove from './PostDove';
 import PostDoveOptions from './PostDoveOptions';
 import DovesOptions from './DovesOptions';
 import Activity from './Activity';
+import Profile from '../profile/Profile';
+import ProfileOptions from '../profile/ProfileOptions';
 
 const DovesStack = () => {
   const Stack = createNativeStackNavigator();
@@ -30,6 +32,11 @@ const DovesStack = () => {
         options={PostDoveOptions}
       />
       <Stack.Screen name={Activity.name} component={Activity} />
+      <Stack.Screen
+        name={Profile.name}
+        component={Profile}
+        options={ProfileOptions}
+      />
     </Stack.Navigator>
   );
 };

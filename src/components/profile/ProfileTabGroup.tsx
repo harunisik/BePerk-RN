@@ -5,7 +5,7 @@ import DovesTab from '../../views/profile/DovesTab';
 import StoriesTab from '../../views/profile/StoriesTab';
 import common from '../../styles/sharedStyles';
 
-const ProfileTabGroup = () => {
+const ProfileTabGroup = ({userId}) => {
   const Tab = createMaterialTopTabNavigator();
 
   const {flex1} = common;
@@ -31,6 +31,7 @@ const ProfileTabGroup = () => {
           name={DovesTab.name}
           component={DovesTab}
           options={{tabBarLabel: 'Doves'}}
+          initialParams={{userId}}
         />
       </Tab.Navigator>
     </View>

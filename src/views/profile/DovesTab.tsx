@@ -1,14 +1,11 @@
 import {View, FlatList} from 'react-native';
-import {useStore} from '../../containers/StoreContainer';
 import DovesItem from '../../components/doves/DovesItem';
 import {useGetUserPerks} from '../../hooks/userHooks';
 
-const DovesTab = ({navigation}) => {
+const DovesTab = ({navigation, route}) => {
   const {
-    store: {
-      authResult: {id},
-    },
-  } = useStore();
+    params: {userId: id},
+  } = route;
 
   const {data, refetch, isFetching} = useGetUserPerks({
     id,

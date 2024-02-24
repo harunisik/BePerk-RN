@@ -1,15 +1,16 @@
 import {View, Alert} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useStore} from '../../containers/StoreContainer';
 import Settings from './settings/Settings';
 import common from '../../styles/sharedStyles';
 
-const ProfileOptions = ({navigation}) => {
-  const {store} = useStore();
+const ProfileOptions = ({navigation, route}) => {
+  const {
+    params: {username},
+  } = route;
   const {aiCenter, row, dashed, jcSpaceAround} = common;
 
   return {
-    title: store.authResult?.username,
+    title: username,
     headerRight: () => (
       <View style={[aiCenter, row, dashed, jcSpaceAround]}>
         <MaterialCommunityIcons
