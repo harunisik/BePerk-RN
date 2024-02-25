@@ -6,7 +6,7 @@ import DovesItemOptions from '../../components/doves/DovesItemOptions';
 import {useGetUserFeed, useGetUserPerks} from '../../hooks/userHooks';
 import ItemSeperator from '../../components/common/ItemSpearator';
 
-const ListHeaderItem = ({item, navigation}) => {
+const ListHeaderItem = ({item}) => {
   const {jcSpaceBetween, aiCenter, row, rGap15, pt20, p15, bold, white} =
     common;
 
@@ -29,7 +29,7 @@ const ListHeaderItem = ({item, navigation}) => {
         </View>
         <View>
           <View style={[aiCenter, row, jcSpaceBetween]}>
-            <DovesItemOptions navigation={navigation} item={item} />
+            <DovesItemOptions item={item} />
             <MaterialCommunityIcons name="heart" size={22} color="white" />
           </View>
         </View>
@@ -41,7 +41,7 @@ const ListHeaderItem = ({item, navigation}) => {
   );
 };
 
-const HomeTab = ({navigation}) => {
+const HomeTab = () => {
   const {flex1, jcCenter, aiCenter} = common;
 
   const {data: beperkDove} = useGetUserPerks({id: 2565, limit: 1, offset: 0});
@@ -56,19 +56,13 @@ const HomeTab = ({navigation}) => {
       <FlatList
         data={data?.feed}
         renderItem={({item}) => (
-          <DovesItem
-            item={item}
-            navigation={navigation}
-            onDeleteItem={refetch}
-          />
+          <DovesItem item={item} onDeleteItem={refetch} />
         )}
         keyExtractor={item => item.id}
         onRefresh={refetch}
         refreshing={isFetching}
         ListHeaderComponent={
-          beperkDove && (
-            <ListHeaderItem item={beperkDove[0]} navigation={navigation} />
-          )
+          beperkDove && <ListHeaderItem item={beperkDove[0]} />
         }
         ItemSeparatorComponent={<ItemSeperator lineVisible large />}
       />

@@ -1,9 +1,7 @@
 import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import common from '../../styles/sharedStyles';
-import PostDove from '../../views/doves/PostDove';
 import {useStore} from '../../containers/StoreContainer';
 import {ModalActionType} from '../../containers/ModalAction';
 import {showMessage} from 'react-native-flash-message';

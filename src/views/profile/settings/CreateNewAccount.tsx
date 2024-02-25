@@ -1,7 +1,9 @@
 import {View, Text, TouchableOpacity} from 'react-native';
 import common from '../../../styles/sharedStyles';
+import {useNavigation} from '@react-navigation/native';
 
-export const CreateNewAccountListItem = ({navigation}) => {
+export const CreateNewAccountListItem = () => {
+  const navigation = useNavigation();
   const title = 'Create a new account';
 
   return (

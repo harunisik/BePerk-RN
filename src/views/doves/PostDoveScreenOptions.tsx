@@ -32,7 +32,7 @@ const HeaderRight = ({navigation, route}) => {
   return <Text onPress={handlePressPost}>Post</Text>;
 };
 
-const PostDoveOptions = ({navigation, route}) => {
+const PostDoveScreenOptions = ({navigation, route}) => {
   return {
     title: route.params.title,
     animation: 'slide_from_bottom',
@@ -47,4 +47,4 @@ const PostDoveOptions = ({navigation, route}) => {
   };
 };
 
-export default PostDoveOptions;
+export default PostDoveScreenOptions;

@@ -4,14 +4,16 @@ import common from '../../styles/sharedStyles';
 import Followers from '../../views/profile/Followers';
 import UserLike from '../common/UserLike';
 import UserComment from '../common/UserComment';
+import {useNavigation} from '@react-navigation/native';
 
-const DovesItemOptions = ({item, navigation}) => {
+const DovesItemOptions = ({item}) => {
+  const navigation = useNavigation();
   const {aiCenter, row, cGap15} = common;
 
   return (
     <View style={[cGap15, row, aiCenter]}>
       <UserLike item={item} type={item.type} />
-      <UserComment navigation={navigation} item={item} />
+      <UserComment item={item} />
       <MaterialCommunityIcons
         name="share-outline"
         size={22}

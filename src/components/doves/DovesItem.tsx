@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text} from 'react-native';
 import {useStore} from '../../containers/StoreContainer';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -8,6 +8,7 @@ import {ModalActionType} from '../../containers/ModalAction';
 import DovesItemOptions from './DovesItemOptions';
 import DovesItemModal from './DovesItemModal';
 import Profile from '../../views/profile/Profile';
+import {useNavigation} from '@react-navigation/native';
 
 enum DoveType {
   Dove,
@@ -21,12 +22,8 @@ const DoveTypes = {
   [DoveType.Prayer]: {label: 'Prayer request', color: 'darkorchid'},
 };
 
-const DovesItem = ({
-  item,
-  navigation,
-  onDeleteItem = () => {},
-  displayUsername = true,
-}) => {
+const DovesItem = ({item, onDeleteItem = () => {}, displayUsername = true}) => {
+  const navigation = useNavigation();
   const {dispatch} = useStore();
 
   const {
@@ -88,7 +85,7 @@ const DovesItem = ({
       </View>
       <Text>{item.caption}</Text>
       <View style={[aiCenter, row, jcSpaceBetween]}>
-        <DovesItemOptions navigation={navigation} item={item} />
+        <DovesItemOptions item={item} />
         <MaterialCommunityIcons
           name="dots-horizontal"
           size={22}

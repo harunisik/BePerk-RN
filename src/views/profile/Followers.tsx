@@ -6,11 +6,13 @@ import SelectedUsers from '../../components/profile/SelectedUsers';
 import {useSearchUsers} from '../../hooks/searchHooks';
 import {useGetUserFollowings} from '../../hooks/userHooks';
 import ItemSeperator from '../../components/common/ItemSpearator';
+import {useNavigation} from '@react-navigation/native';
 
-const Followers = ({navigation}) => {
+const Followers = () => {
   const [searchText, setSearchText] = useState('');
   const [searchResult, setSearchResult] = useState([]);
   const [selectedUsers, setSelectedUsers] = useState([]);
+  const navigation = useNavigation();
 
   const {bold, font16, pl15, pr15, pb10, pt10} = common;
 

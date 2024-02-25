@@ -1,7 +1,9 @@
 import {View, Text, TouchableOpacity} from 'react-native';
 import common from '../../../styles/sharedStyles';
+import {useNavigation} from '@react-navigation/native';
 
-export const RequestVerificationListItem = ({navigation}) => {
+export const RequestVerificationListItem = () => {
+  const navigation = useNavigation();
   const title = 'Request verification';
 
   return (

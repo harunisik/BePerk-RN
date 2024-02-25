@@ -1,7 +1,9 @@
 import {View, Text, TouchableOpacity} from 'react-native';
 import common from '../../../styles/sharedStyles';
+import {useNavigation} from '@react-navigation/native';
 
-export const InviteListItem = ({navigation}) => {
+export const InviteListItem = () => {
+  const navigation = useNavigation();
   return (
     <TouchableOpacity onPress={() => navigation.navigate(Invite.name)}>
       <Text>Invite</Text>

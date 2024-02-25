@@ -3,8 +3,10 @@ import DovesItem from '../../components/doves/DovesItem';
 import {useGetUserPerks} from '../../hooks/userHooks';
 import ItemSeperator from '../../components/common/ItemSpearator';
 import common from '../../styles/sharedStyles';
+import {useRoute} from '@react-navigation/native';
 
-const DovesTab = ({navigation, route}) => {
+const DovesTab = () => {
+  const route = useRoute();
   const {
     params: {userId: id},
   } = route;
@@ -24,7 +26,6 @@ const DovesTab = ({navigation, route}) => {
         renderItem={({item}) => (
           <DovesItem
             item={item}
-            navigation={navigation}
             displayUsername={false}
             onDeleteItem={refetch}
           />

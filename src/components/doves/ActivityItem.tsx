@@ -3,6 +3,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import {dateDiff} from '../../utils/DateUtil';
 import common from '../../styles/sharedStyles';
+import {useNavigation} from '@react-navigation/native';
 
 enum HistoryItemType {
   Video,
@@ -33,7 +34,7 @@ const HistoryTypes = {
   [HistoryType.Shared]: {label: 'shared a'},
 };
 
-const ActivityItem = ({navigation, item}) => {
+const ActivityItem = ({item}) => {
   const {
     flex1,
     row,
@@ -43,8 +44,6 @@ const ActivityItem = ({navigation, item}) => {
     bold,
     jcSpaceBetween,
     aiCenter,
-    pt10,
-    pb10,
     shrink1,
   } = common;
 

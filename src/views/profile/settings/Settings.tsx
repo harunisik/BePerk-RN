@@ -47,13 +47,13 @@ const SECTIONS = Object.entries(MENU_LIST).map(([key, value]) => ({
   data: value.map(item => ({Comp: item})),
 }));
 
-const Settings = ({navigation}) => {
+const Settings = () => {
   return (
     <SafeAreaView>
       <SectionList
         sections={SECTIONS}
         keyExtractor={(item, index) => index}
-        renderItem={({item: {Comp}}) => <Comp navigation={navigation} />}
+        renderItem={({item: {Comp}}) => <Comp />}
         renderSectionHeader={({section: {title}}) => <Text>{title}</Text>}
       />
     </SafeAreaView>

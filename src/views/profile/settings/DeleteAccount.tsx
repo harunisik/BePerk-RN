@@ -1,7 +1,9 @@
 import {View, Text, TouchableOpacity} from 'react-native';
 import common from '../../../styles/sharedStyles';
+import {useNavigation} from '@react-navigation/native';
 
-export const DeleteAccountListItem = ({navigation}) => {
+export const DeleteAccountListItem = () => {
+  const navigation = useNavigation();
   const title = 'Delete account';
 
   return (

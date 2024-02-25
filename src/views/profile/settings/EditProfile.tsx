@@ -1,7 +1,9 @@
 import {View, Text, TouchableOpacity} from 'react-native';
 import common from '../../../styles/sharedStyles';
+import {useNavigation} from '@react-navigation/native';
 
-export const EditProfileListItem = ({navigation}) => {
+export const EditProfileListItem = () => {
+  const navigation = useNavigation();
   const title = 'Edit profile';
 
   return (
@@ -11,7 +13,7 @@ export const EditProfileListItem = ({navigation}) => {
   );
 };
 
-const EditProfile = ({navigation}) => {
+const EditProfile = () => {
   const {flex1, aiCenter, jcCenter} = common;
   return (
     <View style={[flex1, aiCenter, jcCenter]}>

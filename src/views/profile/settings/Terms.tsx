@@ -1,7 +1,9 @@
 import {View, Text, TouchableOpacity} from 'react-native';
 import common from '../../../styles/sharedStyles';
+import {useNavigation} from '@react-navigation/native';
 
-export const TermsListItem = ({navigation}) => {
+export const TermsListItem = () => {
+  const navigation = useNavigation();
   return (
     <TouchableOpacity onPress={() => navigation.navigate(Terms.name)}>
       <Text>Terms</Text>

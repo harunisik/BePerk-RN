@@ -25,7 +25,7 @@ const HeaderRight = ({navigation, route}) => {
   return <Text onPress={handlePressSent}>Sent</Text>;
 };
 
-const FollowersOptions = ({navigation, route}) => {
+const FollowersScreenOptions = ({navigation, route}) => {
   return {
     animation: 'slide_from_bottom',
     headerLeft: () => (
@@ -39,4 +39,4 @@ const FollowersOptions = ({navigation, route}) => {
   };
 };
 
-export default FollowersOptions;
+export default FollowersScreenOptions;

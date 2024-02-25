@@ -10,9 +10,11 @@ import {
 import ProfileButtonGroup from '../../components/profile/ProfileButtonGroup';
 import {useEffect, useState} from 'react';
 import {useStore} from '../../containers/StoreContainer';
+import {useRoute} from '@react-navigation/native';
 
-const Profile = ({navigation, route}) => {
+const Profile = () => {
   const [isFollowing, setIsFollowing] = useState(0);
+  const route = useRoute();
   const {
     store: {
       authResult: {id: currentUserId},
@@ -45,7 +47,6 @@ const Profile = ({navigation, route}) => {
     <View style={[flex1]}>
       <UserInfo data={data} />
       <ProfileButtonGroup
-        navigation={navigation}
         onPressFollowing={handlePressFollowing}
         pressButtonTitle={isFollowing === 1 ? 'Following' : 'Follow'}
         isCurrentUser={currentUserId === id}

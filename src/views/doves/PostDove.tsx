@@ -1,11 +1,14 @@
 import {StyleSheet, Switch, Text, TextInput, View} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {useEffect, useState} from 'react';
+import {useNavigation, useRoute} from '@react-navigation/native';
 
-const PostDove = ({navigation, route}) => {
+const PostDove = () => {
   const [caption, setCaption] = useState('');
   const [isAnonymous, setIsAnonymous] = useState(false);
   const toggleSwitch = () => setIsAnonymous(previousState => !previousState);
+  const navigation = useNavigation();
+  const route = useRoute();
   const {p15, row, rGap15, jcSpaceBetween, aiCenter} = common;
   const {
     params: {inputTextPlaceHolder},

@@ -6,8 +6,11 @@ import {useGetUserExploring} from '../../hooks/userHooks';
 import PostDove from './PostDove';
 import {useEffect} from 'react';
 import ItemSeperator from '../../components/common/ItemSpearator';
+import {useNavigation, useRoute} from '@react-navigation/native';
 
-const ListHeaderComponent = ({navigation, route}) => {
+const ListHeaderComponent = () => {
+  const navigation = useNavigation();
+  const route = useRoute();
   const {row, jcCenter, aiCenter, cGap10} = common;
   const {
     params: {subtype, buttonText, inputTextPlaceHolder, title, navigateTo},
@@ -34,7 +37,9 @@ const ListHeaderComponent = ({navigation, route}) => {
   );
 };
 
-const DoveTab = ({navigation, route}) => {
+const DoveTab = () => {
+  const navigation = useNavigation();
+  const route = useRoute();
   const {flex1, jcCenter, aiCenter} = common;
   const {
     params: {subtype, doRefresh},
@@ -59,18 +64,12 @@ const DoveTab = ({navigation, route}) => {
       <FlatList
         data={data?.exploring}
         renderItem={({item}) => (
-          <DovesItem
-            item={item}
-            navigation={navigation}
-            onDeleteItem={refetch}
-          />
+          <DovesItem item={item} onDeleteItem={refetch} />
         )}
         keyExtractor={item => item.id}
         onRefresh={refetch}
         refreshing={isFetching}
-        ListHeaderComponent={
-          <ListHeaderComponent navigation={navigation} route={route} />
-        }
+        ListHeaderComponent={ListHeaderComponent}
         ItemSeparatorComponent={<ItemSeperator lineVisible large />}
       />
     </View>

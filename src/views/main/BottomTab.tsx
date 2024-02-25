@@ -1,7 +1,6 @@
 import {createMaterialBottomTabNavigator} from 'react-native-paper/react-navigation';
 import Home from '../home/Home';
 import Stories from '../stories/Stories';
-import Doves from '../doves/Doves';
 import ProfileStack from '../profile/ProfileStack';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import BottomSheetModal from '../../components/common/BottomSheetModal';

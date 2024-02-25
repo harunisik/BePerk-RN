@@ -3,12 +3,14 @@ import common from '../../styles/sharedStyles';
 import {useGetUserHistory} from '../../hooks/userHooks';
 import ActivityItem from '../../components/doves/ActivityItem';
 import ItemSeperator from '../../components/common/ItemSpearator';
+import {useRoute} from '@react-navigation/native';
 
-const ActivityTab = ({navigation, route}) => {
-  const {flex1, p15} = common;
+const ActivityTab = () => {
+  const route = useRoute();
   const {
     params: {filter},
   } = route;
+  const {flex1, p15} = common;
 
   const {data, refetch, isFetching} = useGetUserHistory({
     filter,
@@ -21,9 +23,7 @@ const ActivityTab = ({navigation, route}) => {
     <View style={[flex1, p15]}>
       <FlatList
         data={data?.history}
-        renderItem={({item}) => (
-          <ActivityItem item={item} navigation={navigation} />
-        )}
+        renderItem={({item}) => <ActivityItem item={item} />}
         keyExtractor={item => item.history_id}
         onRefresh={refetch}
         refreshing={isFetching}

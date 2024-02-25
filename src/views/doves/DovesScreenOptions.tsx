@@ -37,7 +37,7 @@ const HeaderRight = ({navigation}) => {
   );
 };
 
-const DovesOptions = ({navigation}) => {
+const DovesScreenOptions = ({navigation}) => {
   return {
     title: '',
     headerLeft: () => (
@@ -51,4 +51,4 @@ const DovesOptions = ({navigation}) => {
   };
 };
 
-export default DovesOptions;
+export default DovesScreenOptions;

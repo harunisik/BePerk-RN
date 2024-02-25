@@ -10,10 +10,10 @@ import DeleteAccount from './settings/DeleteAccount';
 import PrivacyPolicy from './settings/PrivacyPolicy';
 import Terms from './settings/Terms';
 import Comment from '../doves/Comment';
-import FollowersOptions from './FollowerOptions';
+import FollowersScreenOptions from './FollowersScreenOptions';
 import Followers from './Followers';
 import Profile from './Profile';
-import ProfileOptions from './ProfileOptions';
+import ProfileScreenOptions from './ProfileScreenOptions';
 import {useStore} from '../../containers/StoreContainer';
 
 const ProfileStack = () => {
@@ -29,7 +29,7 @@ const ProfileStack = () => {
       <Stack.Screen
         name={Profile.name}
         component={Profile}
-        options={ProfileOptions}
+        options={ProfileScreenOptions}
         initialParams={{
           userId: id,
           username,
@@ -77,7 +77,7 @@ const ProfileStack = () => {
       <Stack.Screen
         name={Followers.name}
         component={Followers}
-        options={FollowersOptions}
+        options={FollowersScreenOptions}
       />
     </Stack.Navigator>
   );

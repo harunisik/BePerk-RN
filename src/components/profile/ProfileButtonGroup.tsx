@@ -1,13 +1,14 @@
 import {View, Alert, StyleSheet, TouchableOpacity, Text} from 'react-native';
 import EditProfile from '../../views/profile/settings/EditProfile';
 import common from '../../styles/sharedStyles';
+import {useNavigation} from '@react-navigation/native';
 
 const ProfileButtonGroup = ({
-  navigation,
   onPressFollowing,
   pressButtonTitle,
   isCurrentUser = true,
 }) => {
+  const navigation = useNavigation();
   const {aiCenter, row, jcCenter, p10} = common;
 
   return (
