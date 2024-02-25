@@ -1,4 +1,4 @@
-import {Alert, View} from 'react-native';
+import {View} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import common from '../../styles/sharedStyles';
@@ -6,6 +6,7 @@ import {useStore} from '../../containers/StoreContainer';
 import {ModalActionType} from '../../containers/ModalAction';
 import AddDoveModal from '../../components/doves/AddDoveModal';
 import Activity from './Activity';
+import Search from './Search';
 
 const HeaderRight = ({navigation}) => {
   const {dispatch} = useStore();
@@ -42,7 +43,7 @@ const DovesOptions = ({navigation}) => {
     headerLeft: () => (
       <MaterialIcons
         name="search"
-        onPress={() => Alert.alert('Under construction')}
+        onPress={() => navigation.navigate(Search.name)}
         size={26}
       />
     ),

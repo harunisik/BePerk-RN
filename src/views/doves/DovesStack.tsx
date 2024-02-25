@@ -9,6 +9,7 @@ import DovesOptions from './DovesOptions';
 import Activity from './Activity';
 import Profile from '../profile/Profile';
 import ProfileOptions from '../profile/ProfileOptions';
+import Search from './Search';
 
 const DovesStack = () => {
   const Stack = createNativeStackNavigator();
@@ -37,6 +38,7 @@ const DovesStack = () => {
         component={Profile}
         options={ProfileOptions}
       />
+      <Stack.Screen name={Search.name} component={Search} />
     </Stack.Navigator>
   );
 };

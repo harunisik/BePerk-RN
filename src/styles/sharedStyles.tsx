@@ -95,8 +95,14 @@ const common = StyleSheet.create({
   pb10: {
     paddingBottom: 10,
   },
+  pb15: {
+    paddingBottom: 15,
+  },
   pt10: {
     paddingTop: 10,
+  },
+  pt15: {
+    paddingTop: 15,
   },
   pt20: {
     paddingTop: 20,
@@ -118,6 +124,12 @@ const common = StyleSheet.create({
   },
   radius6: {
     borderRadius: 6,
+  },
+  circle: {
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 18,
+    padding: 7,
   },
 });
 

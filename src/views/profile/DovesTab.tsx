@@ -1,6 +1,8 @@
 import {View, FlatList} from 'react-native';
 import DovesItem from '../../components/doves/DovesItem';
 import {useGetUserPerks} from '../../hooks/userHooks';
+import ItemSeperator from '../../components/common/ItemSpearator';
+import common from '../../styles/sharedStyles';
 
 const DovesTab = ({navigation, route}) => {
   const {
@@ -13,8 +15,10 @@ const DovesTab = ({navigation, route}) => {
     offset: 0,
   });
 
+  const {pt15} = common;
+
   return (
-    <View>
+    <View style={pt15}>
       <FlatList
         data={data}
         renderItem={({item}) => (
@@ -28,6 +32,7 @@ const DovesTab = ({navigation, route}) => {
         keyExtractor={item => item.id}
         onRefresh={refetch}
         refreshing={isFetching}
+        ItemSeparatorComponent={<ItemSeperator lineVisible large />}
       />
     </View>
   );

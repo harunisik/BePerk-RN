@@ -12,6 +12,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useState} from 'react';
 import {Swipeable} from 'react-native-gesture-handler';
 import UserLike from '../common/UserLike';
+import ItemSeperator from '../common/ItemSpearator';
 
 const RenderRightActions = ({item, onPress}) => {
   return (
@@ -41,9 +42,10 @@ const CommentItem = ({
     jcSpaceBetween,
     flex1,
     pr10,
+    pr15,
+    pl15,
+    pt15,
     ml30,
-    p15,
-    pb5,
   } = common;
 
   const [showReplies, setShowReplies] = useState(false);
@@ -58,7 +60,7 @@ const CommentItem = ({
         renderRightActions={() => (
           <RenderRightActions item={item} onPress={onDeleteComment} />
         )}>
-        <View style={[p15, pb5, row, cGap10, ...(isChild ? [ml30] : [])]}>
+        <View style={[pr15, pl15, row, cGap10, ...(isChild ? [ml30] : [])]}>
           <MaterialIcons name="account-circle" size={26} color="lightgray" />
           <View style={[row, jcSpaceBetween, flex1, cGap10]}>
             <View style={[rGap15, flex1]}>
@@ -108,6 +110,8 @@ const CommentItem = ({
             />
           )}
           keyExtractor={item2 => item2.id}
+          ItemSeparatorComponent={<ItemSeperator medium />}
+          style={pt15}
         />
       )}
     </View>

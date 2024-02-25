@@ -27,12 +27,7 @@ const DovesItem = ({
   onDeleteItem = () => {},
   displayUsername = true,
 }) => {
-  const {
-    store: {
-      authResult: {id},
-    },
-    dispatch,
-  } = useStore();
+  const {dispatch} = useStore();
 
   const {
     jcSpaceBetween,
@@ -47,12 +42,13 @@ const DovesItem = ({
     gray,
     bold,
     p5,
-    p15,
+    pr15,
+    pl15,
     radius6,
   } = common;
 
   return (
-    <View style={[styles.itemContainer, rGap15, p15]}>
+    <View style={[rGap15, pr15, pl15]}>
       <View style={[aiCenter, row, jcSpaceBetween]}>
         <View style={[row, cGap10]}>
           <View style={[jcCenter]}>
@@ -67,7 +63,6 @@ const DovesItem = ({
                     navigation.navigate(Profile.name, {
                       userId: item.user_id,
                       username: item.username,
-                      isCurrentUser: id === item.user_id,
                     })
                   }>
                   {item.username}
@@ -113,12 +108,5 @@ const DovesItem = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  itemContainer: {
-    borderTopColor: 'lightgray',
-    borderTopWidth: 1,
-  },
-});
 
 export default DovesItem;

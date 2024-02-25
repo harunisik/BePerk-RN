@@ -4,7 +4,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useState} from 'react';
 
-const UserItem = ({item, onPress}) => {
+const UserItem = ({item, onPress, selectable = false}) => {
   const [selected, setSelected] = useState(false);
 
   const handlePress = () => {
@@ -12,23 +12,25 @@ const UserItem = ({item, onPress}) => {
     onPress(item, !selected);
   };
 
-  const {flex1, aiCenter, row, jcSpaceBetween, pt10, pb10, cGap10} = common;
+  const {aiCenter, row, jcSpaceBetween, cGap10} = common;
 
   return (
     <TouchableWithoutFeedback onPress={handlePress}>
-      <View style={[row, flex1, jcSpaceBetween, aiCenter, pb10, pt10]}>
+      <View style={[row, jcSpaceBetween, aiCenter]}>
         <View style={[row, aiCenter, cGap10]}>
-          <MaterialIcons name="account-circle" size={26} color="lightgray" />
+          <MaterialIcons name="account-circle" size={36} color="lightgray" />
           <Text>{item.fullname}</Text>
           {item.isVerified === 1 && (
             <MaterialIcons name="verified" size={16} color="dodgerblue" />
           )}
         </View>
-        <MaterialCommunityIcons
-          name={selected ? 'check-circle' : 'circle-outline'}
-          color={selected ? 'dodgerblue' : 'gray'}
-          size={22}
-        />
+        {selectable && (
+          <MaterialCommunityIcons
+            name={selected ? 'check-circle' : 'circle-outline'}
+            color={selected ? 'dodgerblue' : 'gray'}
+            size={22}
+          />
+        )}
       </View>
     </TouchableWithoutFeedback>
   );

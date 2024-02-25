@@ -54,7 +54,7 @@ const ActivityItem = ({navigation, item}) => {
   const historyItemTypeStr = HistoryItemType[type] ? HistoryItemType[type] : '';
 
   return (
-    <View style={[row, cGap10, jcSpaceBetween, pb10, pt10]}>
+    <View style={[row, cGap10, jcSpaceBetween]}>
       <View style={[flex1, row, cGap10, aiCenter]}>
         <MaterialIcons name="account-circle" size={26} color="lightgray" />
         <Text style={shrink1}>

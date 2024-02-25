@@ -2,6 +2,7 @@ import {FlatList} from 'react-native';
 import CommentItem from './CommentItem';
 import CommentHeaderItem from './CommentHeaderItem';
 import {useMemo} from 'react';
+import ItemSeperator from '../common/ItemSpearator';
 
 const findTopParent = (searchId, dataList) => {
   const parent = dataList.find(({id}) => id === searchId);
@@ -54,6 +55,7 @@ const CommentList = ({
       keyExtractor={item => item.id}
       onRefresh={onRefresh}
       refreshing={isFetching}
+      ItemSeparatorComponent={<ItemSeperator medium />}
     />
   );
 };

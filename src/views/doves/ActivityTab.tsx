@@ -2,6 +2,7 @@ import {View, FlatList} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {useGetUserHistory} from '../../hooks/userHooks';
 import ActivityItem from '../../components/doves/ActivityItem';
+import ItemSeperator from '../../components/common/ItemSpearator';
 
 const ActivityTab = ({navigation, route}) => {
   const {flex1, p15} = common;
@@ -26,6 +27,7 @@ const ActivityTab = ({navigation, route}) => {
         keyExtractor={item => item.history_id}
         onRefresh={refetch}
         refreshing={isFetching}
+        ItemSeparatorComponent={<ItemSeperator medium />}
       />
     </View>
   );

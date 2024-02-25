@@ -5,6 +5,7 @@ import UserItem from '../../components/profile/UserItem';
 import SelectedUsers from '../../components/profile/SelectedUsers';
 import {useSearchUsers} from '../../hooks/searchHooks';
 import {useGetUserFollowings} from '../../hooks/userHooks';
+import ItemSeperator from '../../components/common/ItemSpearator';
 
 const Followers = ({navigation}) => {
   const [searchText, setSearchText] = useState('');
@@ -68,15 +69,16 @@ const Followers = ({navigation}) => {
         <FlatList
           data={searchResult}
           renderItem={({item}) => (
-            <UserItem item={item} onPress={handlePressUserItem} />
+            <UserItem item={item} onPress={handlePressUserItem} selectable />
           )}
           keyExtractor={item => item.user_id}
+          ItemSeparatorComponent={ItemSeperator}
         />
       ) : (
         <FlatList
           data={data?.following}
           renderItem={({item}) => (
-            <UserItem item={item} onPress={handlePressUserItem} />
+            <UserItem item={item} onPress={handlePressUserItem} selectable />
           )}
           keyExtractor={item => item.user_id}
           onRefresh={refetch}
@@ -84,6 +86,7 @@ const Followers = ({navigation}) => {
           ListHeaderComponent={
             <Text style={[bold, font16, pb10, pt10]}>Suggested</Text>
           }
+          ItemSeparatorComponent={ItemSeperator}
         />
       )}
     </View>

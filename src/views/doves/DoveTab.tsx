@@ -5,6 +5,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {useGetUserExploring} from '../../hooks/userHooks';
 import PostDove from './PostDove';
 import {useEffect} from 'react';
+import ItemSeperator from '../../components/common/ItemSpearator';
 
 const ListHeaderComponent = ({navigation, route}) => {
   const {row, jcCenter, aiCenter, cGap10} = common;
@@ -70,6 +71,7 @@ const DoveTab = ({navigation, route}) => {
         ListHeaderComponent={
           <ListHeaderComponent navigation={navigation} route={route} />
         }
+        ItemSeparatorComponent={<ItemSeperator lineVisible large />}
       />
     </View>
   );

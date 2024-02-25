@@ -4,13 +4,22 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import DovesItem from '../../components/doves/DovesItem';
 import DovesItemOptions from '../../components/doves/DovesItemOptions';
 import {useGetUserFeed, useGetUserPerks} from '../../hooks/userHooks';
+import ItemSeperator from '../../components/common/ItemSpearator';
 
 const ListHeaderItem = ({item, navigation}) => {
   const {jcSpaceBetween, aiCenter, row, rGap15, pt20, p15, bold, white} =
     common;
 
   return (
-    <View style={[p15]}>
+    <View
+      style={[
+        p15,
+        {
+          borderBottomWidth: StyleSheet.hairlineWidth,
+          borderBottomColor: 'gray',
+          marginBottom: 15,
+        },
+      ]}>
       <View style={[styles.itemContainer, rGap15]}>
         <View>
           <Text style={[white]}>BePerk's Dove of the Day:</Text>
@@ -61,6 +70,7 @@ const HomeTab = ({navigation}) => {
             <ListHeaderItem item={beperkDove[0]} navigation={navigation} />
           )
         }
+        ItemSeparatorComponent={<ItemSeperator lineVisible large />}
       />
     </View>
   );

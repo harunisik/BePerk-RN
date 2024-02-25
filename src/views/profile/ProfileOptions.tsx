@@ -16,6 +16,7 @@ const ProfileOptions = ({navigation, route}) => {
   return {
     title: '',
     headerBackVisible: true,
+    headerBackTitleVisible: false,
     headerLeft: () => <Text style={[bold, font16]}>{username}</Text>,
     headerRight: () => (
       <View>
