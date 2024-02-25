@@ -1,28 +1,28 @@
 import {View, Text} from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import common from '../../styles/sharedStyles';
 
 const UserInfo = ({data}) => {
-  const {aiCenter, row, dashed, jcSpaceAround} = common;
+  const {aiCenter, row, jcCenter, bold, blue, cGap50, p10} = common;
 
   return (
-    <View>
-      <View style={[aiCenter, dashed]}>
-        <MaterialCommunityIcons name="account" size={56} />
-        <Text>{data?.fullname}</Text>
+    <View style={[aiCenter, jcCenter]}>
+      <View style={[aiCenter, p10]}>
+        <MaterialIcons name="account-circle" size={56} color="lightgray" />
+        <Text style={bold}>{data?.fullname}</Text>
       </View>
 
-      <View style={[aiCenter, row, dashed, jcSpaceAround]}>
-        <View style={[aiCenter, dashed]}>
-          <Text>{data?.posts}</Text>
+      <View style={[aiCenter, row, jcCenter, cGap50, p10]}>
+        <View style={[aiCenter]}>
+          <Text style={[bold, blue]}>{data?.posts}</Text>
           <Text>Posts</Text>
         </View>
-        <View style={[aiCenter, dashed]}>
-          <Text>{data?.followers}</Text>
+        <View style={[aiCenter]}>
+          <Text style={[bold, blue]}>{data?.followers}</Text>
           <Text>Followers</Text>
         </View>
-        <View style={[aiCenter, dashed]}>
-          <Text>{data?.following}</Text>
+        <View style={[aiCenter]}>
+          <Text style={[bold, blue]}>{data?.following}</Text>
           <Text>Following</Text>
         </View>
       </View>

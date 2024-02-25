@@ -1,13 +1,12 @@
 import {Text} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useStore} from '../../containers/StoreContainer';
 import {showMessage} from 'react-native-flash-message';
 import {useChatShare} from '../../hooks/chatHooks';
 
-const HeaderRight = ({navigation, comment}) => {
+const HeaderRight = ({navigation, route}) => {
   const {
-    store: {selectedUsers},
-  } = useStore();
+    params: {id, type, selectedUsers},
+  } = route;
 
   const handleChatShare = useChatShare(() => navigation.goBack());
 
@@ -16,9 +15,9 @@ const HeaderRight = ({navigation, comment}) => {
       showMessage({message: 'Please select users', type: 'warning'});
     } else {
       handleChatShare.mutate({
-        id: comment.id,
+        id,
+        type,
         share_to: JSON.stringify(selectedUsers.map(({user_id}) => user_id)),
-        type: comment.type,
       });
     }
   };
@@ -26,12 +25,7 @@ const HeaderRight = ({navigation, comment}) => {
   return <Text onPress={handlePressSent}>Sent</Text>;
 };
 
-const FollowersOptions = ({
-  navigation,
-  route: {
-    params: {comment},
-  },
-}) => {
+const FollowersOptions = ({navigation, route}) => {
   return {
     animation: 'slide_from_bottom',
     headerLeft: () => (
@@ -41,9 +35,7 @@ const FollowersOptions = ({
         size={26}
       />
     ),
-    headerRight: () => (
-      <HeaderRight navigation={navigation} comment={comment} />
-    ),
+    headerRight: () => <HeaderRight navigation={navigation} route={route} />,
   };
 };
 

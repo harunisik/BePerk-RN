@@ -1,10 +1,10 @@
 import {View, Text, StyleSheet} from 'react-native';
 import {useStore} from '../../containers/StoreContainer';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {dateDiff} from '../../utils/DateUtil';
 import common from '../../styles/sharedStyles';
 import {ModalActionType} from '../../containers/ModalAction';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import DovesItemOptions from './DovesItemOptions';
 import DovesItemModal from './DovesItemModal';
 import Profile from '../../views/profile/Profile';
@@ -27,7 +27,12 @@ const DovesItem = ({
   onDeleteItem = () => {},
   displayUsername = true,
 }) => {
-  const {dispatch} = useStore();
+  const {
+    store: {
+      authResult: {id},
+    },
+    dispatch,
+  } = useStore();
 
   const {
     jcSpaceBetween,
@@ -51,7 +56,7 @@ const DovesItem = ({
       <View style={[aiCenter, row, jcSpaceBetween]}>
         <View style={[row, cGap10]}>
           <View style={[jcCenter]}>
-            <MaterialCommunityIcons name="account" size={26} />
+            <MaterialIcons name="account-circle" size={30} color="lightgray" />
           </View>
           <View style={[jcCenter]}>
             {displayUsername && (
@@ -62,12 +67,13 @@ const DovesItem = ({
                     navigation.navigate(Profile.name, {
                       userId: item.user_id,
                       username: item.username,
+                      isCurrentUser: id === item.user_id,
                     })
                   }>
                   {item.username}
                 </Text>
                 {item.isVerified === 1 && (
-                  <MaterialIcons name="verified" size={16} color="blue" />
+                  <MaterialIcons name="verified" size={16} color="dodgerblue" />
                 )}
               </View>
             )}

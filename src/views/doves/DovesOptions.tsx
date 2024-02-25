@@ -16,7 +16,7 @@ const HeaderRight = ({navigation}) => {
       <MaterialCommunityIcons
         name="plus-circle"
         size={26}
-        color="blue"
+        color="dodgerblue"
         onPress={() => {
           dispatch({
             type: ModalActionType.OPEN,
@@ -30,7 +30,7 @@ const HeaderRight = ({navigation}) => {
         name="bell"
         onPress={() => navigation.navigate(Activity.name)}
         size={26}
-        color="blue"
+        color="dodgerblue"
       />
     </View>
   );

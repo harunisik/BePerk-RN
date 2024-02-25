@@ -68,7 +68,7 @@ const HomeTab = ({navigation}) => {
 
 const styles = StyleSheet.create({
   itemContainer: {
-    backgroundColor: 'blue',
+    backgroundColor: 'dodgerblue',
     borderRadius: 20,
     padding: 15,
   },

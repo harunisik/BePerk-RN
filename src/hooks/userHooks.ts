@@ -1,8 +1,10 @@
 import {showMessage} from 'react-native-flash-message';
 import {useMutation, useQuery, useQueryClient} from 'react-query';
 import {
+  addFollowing,
   addPerk,
   deleteComment,
+  deleteFollowing,
   deletePost,
   getUserComments,
   getUserExploring,
@@ -18,6 +20,8 @@ import {
 import {useStore} from '../containers/StoreContainer';
 import {ModalActionType} from '../containers/ModalAction';
 import {AuthActionType} from '../containers/AuthAction';
+
+// MUTATION requests
 
 export function useUpdateUser(onSuccessCallback) {
   return useMutation({
@@ -76,6 +80,28 @@ export function useAddPerk(onSuccessCallback) {
     },
   });
 }
+
+export function useAddFollowing(onSuccessCallback = () => {}) {
+  return useMutation({
+    mutationFn: following => addFollowing(following),
+    onSuccess: () => onSuccessCallback(),
+    onError: ({message}) => {
+      showMessage({message, type: 'danger'});
+    },
+  });
+}
+
+export function useDeleteFollowing(onSuccessCallback = () => {}) {
+  return useMutation({
+    mutationFn: following => deleteFollowing(following),
+    onSuccess: () => onSuccessCallback(),
+    onError: ({message}) => {
+      showMessage({message, type: 'danger'});
+    },
+  });
+}
+
+// QUERY requests
 
 export function useGetUserComments(data) {
   return useQuery({

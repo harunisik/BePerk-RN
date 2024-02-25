@@ -1,5 +1,6 @@
 import {View, Text} from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import {dateDiff} from '../../utils/DateUtil';
 import common from '../../styles/sharedStyles';
 
@@ -55,16 +56,14 @@ const ActivityItem = ({navigation, item}) => {
   return (
     <View style={[row, cGap10, jcSpaceBetween, pb10, pt10]}>
       <View style={[flex1, row, cGap10, aiCenter]}>
-        <MaterialCommunityIcons name="account" size={26} />
+        <MaterialIcons name="account-circle" size={26} color="lightgray" />
         <Text style={shrink1}>
           <Text style={bold}>{fullname + ' '}</Text>
           <Text>{`${historyTypeStr} ${historyItemTypeStr}. `}</Text>
           <Text style={[font11, gray]}>{dateDiff(date_time * 1000)}</Text>
         </Text>
       </View>
-      {item.media?.type === 1 && (
-        <MaterialCommunityIcons name="account" size={26} />
-      )}
+      {item.media?.type === 1 && <SimpleLineIcons name="picture" size={26} />}
     </View>
   );
 };

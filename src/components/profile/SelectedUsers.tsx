@@ -11,7 +11,7 @@ const SelectedUsers = ({data}) => {
           return (
             <View
               key={item.user_id}
-              style={[radius6, p10, {backgroundColor: 'blue'}]}>
+              style={[radius6, p10, {backgroundColor: 'dodgerblue'}]}>
               <Text style={[white, font11]}>{item.fullname}</Text>
             </View>
           );

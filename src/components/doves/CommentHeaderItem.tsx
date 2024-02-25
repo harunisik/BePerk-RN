@@ -1,7 +1,7 @@
 import {View, Text, StyleSheet} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {dateDiff} from '../../utils/DateUtil';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const CommentHeaderItem = ({item}) => {
   const {row, rGap15, cGap10, bold, font11, gray, pr10, flex1} = common;
@@ -9,7 +9,7 @@ const CommentHeaderItem = ({item}) => {
   return (
     <View style={[styles.headerContainer, row, cGap10]}>
       <View>
-        <MaterialCommunityIcons name="account" size={26} />
+        <MaterialIcons name="account-circle" size={26} color="lightgray" />
       </View>
       <View style={[rGap15, flex1]}>
         <Text style={pr10}>

@@ -33,6 +33,7 @@ const ProfileStack = () => {
         initialParams={{
           userId: id,
           username,
+          isCurrentUser: true,
         }}
       />
       <Stack.Screen name={Settings.name} component={Settings} />

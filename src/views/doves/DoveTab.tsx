@@ -26,7 +26,7 @@ const ListHeaderComponent = ({navigation, route}) => {
       <MaterialCommunityIcons
         name="file-document-edit-outline"
         size={26}
-        color="blue"
+        color="dodgerblue"
       />
       <Text>{buttonText}</Text>
     </TouchableOpacity>

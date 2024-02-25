@@ -1,23 +1,15 @@
 import {View, Text, TouchableWithoutFeedback} from 'react-native';
 import common from '../../styles/sharedStyles';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useState} from 'react';
-import {useStore} from '../../containers/StoreContainer';
-import {FollowersActionType} from '../../containers/FollowersAction';
 
-const UserItem = ({item}) => {
+const UserItem = ({item, onPress}) => {
   const [selected, setSelected] = useState(false);
-  const {dispatch} = useStore();
 
   const handlePress = () => {
     setSelected(!selected);
-    dispatch({
-      type: !selected
-        ? FollowersActionType.ADD_USER
-        : FollowersActionType.DELETE_USER,
-      user: item,
-    });
+    onPress(item, !selected);
   };
 
   const {flex1, aiCenter, row, jcSpaceBetween, pt10, pb10, cGap10} = common;
@@ -26,15 +18,15 @@ const UserItem = ({item}) => {
     <TouchableWithoutFeedback onPress={handlePress}>
       <View style={[row, flex1, jcSpaceBetween, aiCenter, pb10, pt10]}>
         <View style={[row, aiCenter, cGap10]}>
-          <MaterialCommunityIcons name="account" size={26} />
+          <MaterialIcons name="account-circle" size={26} color="lightgray" />
           <Text>{item.fullname}</Text>
           {item.isVerified === 1 && (
-            <MaterialIcons name="verified" size={16} color="blue" />
+            <MaterialIcons name="verified" size={16} color="dodgerblue" />
           )}
         </View>
         <MaterialCommunityIcons
           name={selected ? 'check-circle' : 'circle-outline'}
-          color={selected ? 'blue' : 'gray'}
+          color={selected ? 'dodgerblue' : 'gray'}
           size={22}
         />
       </View>

@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import common from '../../styles/sharedStyles';
 import {dateDiff} from '../../utils/DateUtil';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useState} from 'react';
 import {Swipeable} from 'react-native-gesture-handler';
 import UserLike from '../common/UserLike';
@@ -59,7 +59,7 @@ const CommentItem = ({
           <RenderRightActions item={item} onPress={onDeleteComment} />
         )}>
         <View style={[p15, pb5, row, cGap10, ...(isChild ? [ml30] : [])]}>
-          <MaterialCommunityIcons name="account" size={26} />
+          <MaterialIcons name="account-circle" size={26} color="lightgray" />
           <View style={[row, jcSpaceBetween, flex1, cGap10]}>
             <View style={[rGap15, flex1]}>
               <View style={[rGap5]}>

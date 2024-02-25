@@ -30,7 +30,11 @@ const DovesItemModal = ({item, onDeleteItem = () => {}}) => {
           showMessage({message: 'Link copied'});
           Clipboard.setString(`beperk://dove?id=${item.id}`);
         }}>
-        <MaterialCommunityIcons name="content-copy" size={26} color="blue" />
+        <MaterialCommunityIcons
+          name="content-copy"
+          size={26}
+          color="dodgerblue"
+        />
         <Text>Copy Link</Text>
       </TouchableOpacity>
       {id === item.user_id ? (
@@ -52,7 +56,7 @@ const DovesItemModal = ({item, onDeleteItem = () => {}}) => {
             <MaterialCommunityIcons
               name="bell-off-outline"
               size={26}
-              color="blue"
+              color="dodgerblue"
             />
             <Text>Turn off Post Notifications</Text>
           </TouchableOpacity>

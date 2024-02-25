@@ -1,32 +1,49 @@
-import {View, Button, Alert} from 'react-native';
-import EditProfile from './settings/EditProfile';
+import {View} from 'react-native';
 import common from '../../styles/sharedStyles';
 import ProfileTabGroup from '../../components/profile/ProfileTabGroup';
 import UserInfo from '../../components/profile/UserInfo';
-import {useGetUserProfile} from '../../hooks/userHooks';
+import {
+  useAddFollowing,
+  useDeleteFollowing,
+  useGetUserProfile,
+} from '../../hooks/userHooks';
+import ProfileButtonGroup from '../../components/profile/ProfileButtonGroup';
+import {useEffect, useState} from 'react';
 
 const Profile = ({navigation, route}) => {
+  const [isFollowing, setIsFollowing] = useState(0);
   const {
-    params: {userId: id},
+    params: {userId: id, isCurrentUser},
   } = route;
+
+  const {flex1} = common;
 
   const {data} = useGetUserProfile({id});
 
-  const {aiCenter, row, flex1, jcSpaceAround} = common;
+  const handleAddFollowing = useAddFollowing(() => setIsFollowing(1));
+  const handleDeleteFollowing = useDeleteFollowing(() => setIsFollowing(0));
+
+  const handlePressFollowing = () => {
+    if (isFollowing === 0) {
+      handleAddFollowing.mutate({id});
+    } else {
+      handleDeleteFollowing.mutate({id});
+    }
+  };
+
+  useEffect(() => {
+    setIsFollowing(data?.i_following);
+  }, [data]);
 
   return (
     <View style={[flex1]}>
       <UserInfo data={data} />
-      <View style={[aiCenter, row, jcSpaceAround]}>
-        <Button
-          onPress={() => navigation.navigate(EditProfile.name)}
-          title="Edit Profile"
-        />
-        <Button
-          onPress={() => Alert.alert('Under construction!')}
-          title="Messages"
-        />
-      </View>
+      <ProfileButtonGroup
+        navigation={navigation}
+        onPressFollowing={handlePressFollowing}
+        pressButtonTitle={isFollowing === 1 ? 'Following' : 'Follow'}
+        isCurrentUser={isCurrentUser}
+      />
       <ProfileTabGroup userId={id} />
     </View>
   );

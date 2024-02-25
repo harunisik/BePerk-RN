@@ -27,7 +27,7 @@ const AddDoveModal = ({navigation}) => {
             navigateTo: DoveTab.name,
           });
         }}>
-        <AntDesign name="picture" size={26} color="blue" />
+        <AntDesign name="picture" size={26} color="dodgerblue" />
         <Text>Discussion</Text>
       </TouchableOpacity>
 

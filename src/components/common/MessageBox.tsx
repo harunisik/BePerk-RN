@@ -6,6 +6,7 @@ import {
   Platform,
 } from 'react-native';
 import common from '../../styles/sharedStyles';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useEffect, useState} from 'react';
 import Emoji from './Emoji';
@@ -34,7 +35,7 @@ const MessageBox = ({initialText, onClearText, onPress}) => {
           })}
         </View>
         <View style={[row, jcSpaceBetween, aiCenter]}>
-          <MaterialCommunityIcons name="account" size={26} />
+          <MaterialIcons name="account-circle" size={26} color="lightgray" />
           <TextInput
             placeholder="Message..."
             onChangeText={text => {
@@ -50,7 +51,7 @@ const MessageBox = ({initialText, onClearText, onPress}) => {
           <MaterialCommunityIcons
             name="share"
             size={26}
-            color={message ? 'blue' : 'gray'}
+            color={message ? 'dodgerblue' : 'gray'}
             onPress={handlePress}
             disabled={!message}
           />

@@ -1,13 +1,11 @@
 import {createContext, Dispatch, Fragment, useContext, useReducer} from 'react';
 import AuthAction, {AuthActionType, AuthResult} from './AuthAction';
 import axios from 'axios';
-import {FollowersAction, FollowersActionType, User} from './FollowersAction';
 import ModalAction, {ModalActionType, ModalInfo} from './ModalAction';
 import ResetAction, {ResetActionType} from './ResetAction';
 
 interface StoreData {
   authResult?: AuthResult;
-  selectedUsers?: User[];
   modalInfo?: ModalInfo;
 }
 
@@ -18,7 +16,7 @@ const initialState: StoreData = {
   },
 };
 
-type StoreAction = ResetAction | AuthAction | FollowersAction | ModalAction;
+type StoreAction = ResetAction | AuthAction | ModalAction;
 
 const updateStore = (store: StoreData, action: StoreAction) => {
   switch (action.type) {
@@ -36,26 +34,6 @@ const updateStore = (store: StoreData, action: StoreAction) => {
       return {
         ...store,
         authResult: undefined,
-      };
-    case FollowersActionType.ADD_USER:
-      return {
-        ...store,
-        selectedUsers: [
-          ...(store.selectedUsers ? store.selectedUsers : []),
-          action.user,
-        ],
-      };
-    case FollowersActionType.DELETE_USER:
-      return {
-        ...store,
-        selectedUsers: store.selectedUsers?.filter(
-          ({user_id}) => user_id !== action.user?.user_id,
-        ),
-      };
-    case FollowersActionType.CLEAR_LIST:
-      return {
-        ...store,
-        selectedUsers: undefined,
       };
     case ModalActionType.OPEN:
       return {

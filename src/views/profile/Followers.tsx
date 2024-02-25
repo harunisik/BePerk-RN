@@ -1,21 +1,15 @@
 import {View, Text, TextInput, StyleSheet, FlatList} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {useEffect, useState} from 'react';
-import {useStore} from '../../containers/StoreContainer';
-import {FollowersActionType} from '../../containers/FollowersAction';
 import UserItem from '../../components/profile/UserItem';
 import SelectedUsers from '../../components/profile/SelectedUsers';
 import {useSearchUsers} from '../../hooks/searchHooks';
 import {useGetUserFollowings} from '../../hooks/userHooks';
 
-const Followers = () => {
+const Followers = ({navigation}) => {
   const [searchText, setSearchText] = useState('');
   const [searchResult, setSearchResult] = useState([]);
-
-  const {
-    dispatch,
-    store: {selectedUsers},
-  } = useStore();
+  const [selectedUsers, setSelectedUsers] = useState([]);
 
   const {bold, font16, pl15, pr15, pb10, pt10} = common;
 
@@ -26,6 +20,21 @@ const Followers = () => {
       profiles?.map(profile => ({...profile, user_id: profile.id})),
     ),
   );
+
+  const handlePressUserItem = (item, isSelected) => {
+    setSelectedUsers(prev => {
+      if (isSelected) {
+        return [...prev, item];
+      }
+      return prev.filter(({user_id}) => user_id !== item.user_id);
+    });
+  };
+
+  useEffect(() => {
+    navigation.setParams({
+      selectedUsers,
+    });
+  }, [selectedUsers]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -44,10 +53,6 @@ const Followers = () => {
     return () => clearTimeout(timer);
   }, [searchText]);
 
-  useEffect(() => {
-    return () => dispatch({type: FollowersActionType.CLEAR_LIST});
-  }, []);
-
   return (
     <View style={[pl15, pr15]}>
       <TextInput
@@ -62,13 +67,17 @@ const Followers = () => {
       {searchText ? (
         <FlatList
           data={searchResult}
-          renderItem={({item}) => <UserItem item={item} />}
+          renderItem={({item}) => (
+            <UserItem item={item} onPress={handlePressUserItem} />
+          )}
           keyExtractor={item => item.user_id}
         />
       ) : (
         <FlatList
           data={data?.following}
-          renderItem={({item}) => <UserItem item={item} />}
+          renderItem={({item}) => (
+            <UserItem item={item} onPress={handlePressUserItem} />
+          )}
           keyExtractor={item => item.user_id}
           onRefresh={refetch}
           refreshing={isFetching}

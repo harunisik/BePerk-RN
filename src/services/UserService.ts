@@ -1,6 +1,8 @@
 import axios from 'axios';
 import {handleError, handleResponse} from './ApiUtils';
 
+// GET requests
+
 export const signIn = ({username, password}) =>
   axios
     .get(`/user?login=${username}&password=${password}`)
@@ -38,17 +40,47 @@ export const getUserFeed = ({queryKey}) => {
     .catch(handleError);
 };
 
-export const updateUser = newLike => {
-  return axios
-    .post('/user/update', {...newLike})
-    .then(handleResponse)
-    .catch(handleError);
-};
-
 export const getUserComments = ({queryKey}) => {
   const {id, type} = queryKey[1];
   return axios
     .get(`/user/comment?id=${id}&type=${type}`)
+    .then(handleResponse)
+    .catch(handleError);
+};
+
+export const getUserFollowings = () => {
+  return axios
+    .get('/user/listFollowing')
+    .then(handleResponse)
+    .catch(handleError);
+};
+
+export const getUserExploring = ({queryKey}) => {
+  const {filter, limit, offset, subtype} = queryKey[1];
+  return axios
+    .get(
+      `/user/exploring?filter=${filter}&limit=${limit}&offset=${offset}&subtype=${subtype}`,
+    )
+    .then(handleResponse)
+    .catch(handleError);
+};
+
+export const getUserHistory = ({queryKey}) => {
+  const {filter, limit, offset, onlyNew} = queryKey[1];
+  return axios
+    .get(
+      `/user/getHistory?filter=${filter}&limit=${limit}&offset=${offset}&only_new=${onlyNew}`,
+      {headers: {'ACCEPT-VERSION': 3}},
+    )
+    .then(handleResponse)
+    .catch(handleError);
+};
+
+// POST requests
+
+export const updateUser = newLike => {
+  return axios
+    .post('/user/update', {...newLike})
     .then(handleResponse)
     .catch(handleError);
 };
@@ -67,26 +99,9 @@ export const deleteComment = comment => {
     .catch(handleError);
 };
 
-export const getUserFollowings = () => {
-  return axios
-    .get('/user/listFollowing')
-    .then(handleResponse)
-    .catch(handleError);
-};
-
 export const deletePost = posts => {
   return axios
     .post('/user/deletePost', {...posts}, {headers: {'ACCEPT-VERSION': 3}})
-    .then(handleResponse)
-    .catch(handleError);
-};
-
-export const getUserExploring = ({queryKey}) => {
-  const {filter, limit, offset, subtype} = queryKey[1];
-  return axios
-    .get(
-      `/user/exploring?filter=${filter}&limit=${limit}&offset=${offset}&subtype=${subtype}`,
-    )
     .then(handleResponse)
     .catch(handleError);
 };
@@ -98,11 +113,22 @@ export const addPerk = newPerk => {
     .catch(handleError);
 };
 
-export const getUserHistory = ({queryKey}) => {
-  const {filter, limit, offset, onlyNew} = queryKey[1];
+export const addFollowing = following => {
   return axios
-    .get(
-      `/user/getHistory?filter=${filter}&limit=${limit}&offset=${offset}&only_new=${onlyNew}`,
+    .post(
+      '/user/addFollowing',
+      {...following},
+      {headers: {'ACCEPT-VERSION': 3}},
+    )
+    .then(handleResponse)
+    .catch(handleError);
+};
+
+export const deleteFollowing = following => {
+  return axios
+    .post(
+      '/user/deleteFollowing',
+      {...following},
       {headers: {'ACCEPT-VERSION': 3}},
     )
     .then(handleResponse)

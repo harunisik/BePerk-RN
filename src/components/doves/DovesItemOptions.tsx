@@ -16,7 +16,9 @@ const DovesItemOptions = ({item, navigation}) => {
         name="share-outline"
         size={22}
         color="gray"
-        onPress={() => navigation.navigate(Followers.name, {comment: item})}
+        onPress={() =>
+          navigation.navigate(Followers.name, {id: item.id, type: item.type})
+        }
       />
     </View>
   );

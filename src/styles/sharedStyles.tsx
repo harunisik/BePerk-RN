@@ -50,6 +50,9 @@ const common = StyleSheet.create({
   cGap15: {
     columnGap: 15,
   },
+  cGap50: {
+    columnGap: 50,
+  },
   font11: {
     fontSize: 11,
   },
@@ -71,6 +74,9 @@ const common = StyleSheet.create({
   gray: {
     color: 'gray',
   },
+  blue: {
+    color: 'dodgerblue',
+  },
   p10: {
     padding: 10,
   },
@@ -79,6 +85,9 @@ const common = StyleSheet.create({
   },
   p15: {
     padding: 15,
+  },
+  p20: {
+    padding: 20,
   },
   pb5: {
     paddingBottom: 5,
