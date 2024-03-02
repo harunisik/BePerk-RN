@@ -15,6 +15,7 @@ const queryClient = new QueryClient();
 axios.defaults.baseURL = process.env.API_URL;
 axios.defaults.headers.post['Content-Type'] =
   'application/x-www-form-urlencoded';
+axios.defaults.headers.common['ACCEPT-VERSION'] = 3;
 
 if (process.env.APP_DEBUG === 'true') {
   if (Platform.OS === 'android') {

@@ -6,6 +6,7 @@ import {
   deleteComment,
   deleteFollowing,
   deletePost,
+  getPhotoVideo,
   getUserComments,
   getUserExploring,
   getUserFeed,
@@ -149,6 +150,13 @@ export function useGetUserHistory(data) {
   return useQuery({
     queryKey: ['getUserHistory', data],
     queryFn: getUserHistory,
+  });
+}
+
+export function useGetPhotoVideo(data) {
+  return useQuery({
+    queryKey: ['getPhotoVideo', data],
+    queryFn: getPhotoVideo,
   });
 }
 

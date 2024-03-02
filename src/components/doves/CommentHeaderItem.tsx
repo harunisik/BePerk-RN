@@ -24,9 +24,9 @@ const CommentHeaderItem = ({item}) => {
 
 const styles = StyleSheet.create({
   headerContainer: {
-    padding: 15,
     borderBottomColor: 'lightgray',
     borderBottomWidth: 1,
+    paddingVertical: 15,
     marginBottom: 15,
   },
 });

@@ -21,11 +21,13 @@ const ProfileTabGroup = ({userId}) => {
           name={PostsTab.name}
           component={PostsTab}
           options={{tabBarLabel: 'Posts'}}
+          initialParams={{userId}}
         />
         <Tab.Screen
           name={StoriesTab.name}
           component={StoriesTab}
           options={{tabBarLabel: 'Stories'}}
+          initialParams={{userId}}
         />
         <Tab.Screen
           name={DovesTab.name}

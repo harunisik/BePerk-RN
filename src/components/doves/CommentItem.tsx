@@ -42,10 +42,8 @@ const CommentItem = ({
     jcSpaceBetween,
     flex1,
     pr10,
-    pr15,
-    pl15,
-    pt15,
-    ml30,
+    pl30,
+    mb15,
   } = common;
 
   const [showReplies, setShowReplies] = useState(false);
@@ -60,7 +58,7 @@ const CommentItem = ({
         renderRightActions={() => (
           <RenderRightActions item={item} onPress={onDeleteComment} />
         )}>
-        <View style={[pr15, pl15, row, cGap10, ...(isChild ? [ml30] : [])]}>
+        <View style={[row, cGap10]}>
           <MaterialIcons name="account-circle" size={26} color="lightgray" />
           <View style={[row, jcSpaceBetween, flex1, cGap10]}>
             <View style={[rGap15, flex1]}>
@@ -84,7 +82,7 @@ const CommentItem = ({
               </View>
               {!isChild && item.childList?.length > 0 && (
                 <TouchableOpacity onPress={handleViewReply}>
-                  <Text style={[font11, gray]}>
+                  <Text style={[font11, gray, mb15]}>
                     {showReplies
                       ? 'Hide replies'
                       : `View ${item.childList.length} replies`}
@@ -111,7 +109,7 @@ const CommentItem = ({
           )}
           keyExtractor={item2 => item2.id}
           ItemSeparatorComponent={<ItemSeperator medium />}
-          style={pt15}
+          style={pl30}
         />
       )}
     </View>

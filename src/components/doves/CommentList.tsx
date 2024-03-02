@@ -3,6 +3,7 @@ import CommentItem from './CommentItem';
 import CommentHeaderItem from './CommentHeaderItem';
 import {useMemo} from 'react';
 import ItemSeperator from '../common/ItemSpearator';
+import common from '../../styles/sharedStyles';
 
 const findTopParent = (searchId, dataList) => {
   const parent = dataList.find(({id}) => id === searchId);
@@ -40,6 +41,7 @@ const CommentList = ({
   onDeleteItem,
 }) => {
   const result = useMemo(() => transformCommentList(data?.comment), [data]);
+  const {ph15} = common;
 
   return (
     <FlatList
@@ -56,6 +58,7 @@ const CommentList = ({
       onRefresh={onRefresh}
       refreshing={isFetching}
       ItemSeparatorComponent={<ItemSeperator medium />}
+      contentContainerStyle={ph15}
     />
   );
 };

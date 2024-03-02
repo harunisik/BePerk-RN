@@ -10,7 +10,7 @@ export const searchUsers = search => {
 
 export const searchHashTagCount = search => {
   return axios
-    .post('/search/hashtagCount', {...search}, {headers: {'ACCEPT-VERSION': 3}})
+    .post('/search/hashtagCount', {...search})
     .then(handleResponse)
     .catch(handleError);
 };

@@ -1,4 +1,4 @@
-import {View, FlatList} from 'react-native';
+import {FlatList} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {useGetUserHistory} from '../../hooks/userHooks';
 import ActivityItem from '../../components/doves/ActivityItem';
@@ -10,7 +10,7 @@ const ActivityTab = () => {
   const {
     params: {filter},
   } = route;
-  const {flex1, p15} = common;
+  const {p15} = common;
 
   const {data, refetch, isFetching} = useGetUserHistory({
     filter,
@@ -20,16 +20,15 @@ const ActivityTab = () => {
   });
 
   return (
-    <View style={[flex1, p15]}>
-      <FlatList
-        data={data?.history}
-        renderItem={({item}) => <ActivityItem item={item} />}
-        keyExtractor={item => item.history_id}
-        onRefresh={refetch}
-        refreshing={isFetching}
-        ItemSeparatorComponent={<ItemSeperator medium />}
-      />
-    </View>
+    <FlatList
+      data={data?.history}
+      renderItem={({item}) => <ActivityItem item={item} />}
+      keyExtractor={item => item.history_id}
+      onRefresh={refetch}
+      refreshing={isFetching}
+      ItemSeparatorComponent={<ItemSeperator medium />}
+      contentContainerStyle={p15}
+    />
   );
 };
 

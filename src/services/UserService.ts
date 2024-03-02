@@ -5,7 +5,7 @@ import {handleError, handleResponse} from './ApiUtils';
 
 export const signIn = ({username, password}) =>
   axios
-    .get(`/user?login=${username}&password=${password}`)
+    .get(`/user?username=${username}&password=${password}`)
     .then(handleResponse)
     .catch(response => {
       if (response.status === 401) {
@@ -33,9 +33,7 @@ export const getUserPerks = ({queryKey}) => {
 export const getUserFeed = ({queryKey}) => {
   const {filter, limit, offset} = queryKey[1];
   return axios
-    .get(`/user/getFeed?filter=${filter}&limit=${limit}&offset=${offset}`, {
-      headers: {'ACCEPT-VERSION': 3},
-    })
+    .get(`/user/getFeed?filter=${filter}&limit=${limit}&offset=${offset}`)
     .then(handleResponse)
     .catch(handleError);
 };
@@ -70,8 +68,15 @@ export const getUserHistory = ({queryKey}) => {
   return axios
     .get(
       `/user/getHistory?filter=${filter}&limit=${limit}&offset=${offset}&only_new=${onlyNew}`,
-      {headers: {'ACCEPT-VERSION': 3}},
     )
+    .then(handleResponse)
+    .catch(handleError);
+};
+
+export const getPhotoVideo = ({queryKey}) => {
+  const {id, limit, offset} = queryKey[1];
+  return axios
+    .get(`/user/getPhotoVideo?id=${id}&limit=${limit}&offset=${offset}`)
     .then(handleResponse)
     .catch(handleError);
 };
@@ -101,36 +106,28 @@ export const deleteComment = comment => {
 
 export const deletePost = posts => {
   return axios
-    .post('/user/deletePost', {...posts}, {headers: {'ACCEPT-VERSION': 3}})
+    .post('/user/deletePost', {...posts})
     .then(handleResponse)
     .catch(handleError);
 };
 
 export const addPerk = newPerk => {
   return axios
-    .post('/user/add_perk', {...newPerk}, {headers: {'ACCEPT-VERSION': 3}})
+    .post('/user/add_perk', {...newPerk})
     .then(handleResponse)
     .catch(handleError);
 };
 
 export const addFollowing = following => {
   return axios
-    .post(
-      '/user/addFollowing',
-      {...following},
-      {headers: {'ACCEPT-VERSION': 3}},
-    )
+    .post('/user/addFollowing', {...following})
     .then(handleResponse)
     .catch(handleError);
 };
 
 export const deleteFollowing = following => {
   return axios
-    .post(
-      '/user/deleteFollowing',
-      {...following},
-      {headers: {'ACCEPT-VERSION': 3}},
-    )
+    .post('/user/deleteFollowing', {...following})
     .then(handleResponse)
     .catch(handleError);
 };

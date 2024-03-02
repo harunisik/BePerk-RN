@@ -77,11 +77,14 @@ const common = StyleSheet.create({
   blue: {
     color: 'dodgerblue',
   },
-  p10: {
-    padding: 10,
+  p1: {
+    padding: 1,
   },
   p5: {
     padding: 5,
+  },
+  p10: {
+    padding: 10,
   },
   p15: {
     padding: 15,
@@ -116,11 +119,32 @@ const common = StyleSheet.create({
   pr15: {
     paddingRight: 15,
   },
+  pl30: {
+    paddingLeft: 30,
+  },
+  pv5: {
+    paddingVertical: 5,
+  },
+  pv10: {
+    paddingVertical: 10,
+  },
+  pv15: {
+    paddingVertical: 15,
+  },
+  ph15: {
+    paddingHorizontal: 15,
+  },
+  ph30: {
+    paddingHorizontal: 30,
+  },
   mr10: {
     marginRight: 10,
   },
   ml30: {
     marginLeft: 30,
+  },
+  mb15: {
+    marginBottom: 15,
   },
   radius6: {
     borderRadius: 6,

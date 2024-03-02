@@ -3,7 +3,7 @@ import common from '../../styles/sharedStyles';
 import {useEffect, useState} from 'react';
 import UserItem from '../../components/profile/UserItem';
 import SelectedUsers from '../../components/profile/SelectedUsers';
-import {useSearchUsers} from '../../hooks/searchHooks';
+import {useSearchText, useSearchUsers} from '../../hooks/searchHooks';
 import {useGetUserFollowings} from '../../hooks/userHooks';
 import ItemSeperator from '../../components/common/ItemSpearator';
 import {useNavigation} from '@react-navigation/native';
@@ -39,22 +39,16 @@ const Followers = () => {
     });
   }, [selectedUsers]);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (searchText.length === 0) {
-        setSearchResult([]);
-        return;
-      }
-
+  useSearchText(
+    searchText,
+    () =>
       handleSearchUsers.mutate({
         limit: 50,
         offset: 0,
         username: searchText,
-      });
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, [searchText]);
+      }),
+    () => setSearchResult([]),
+  );
 
   return (
     <View style={[pl15, pr15]}>
