@@ -15,6 +15,7 @@ import Followers from './Followers';
 import Profile from './Profile';
 import ProfileScreenOptions from './ProfileScreenOptions';
 import {useStore} from '../../containers/StoreContainer';
+import PostsDetails from './PostsDetails';
 
 const ProfileStack = () => {
   const Stack = createNativeStackNavigator();
@@ -79,6 +80,7 @@ const ProfileStack = () => {
         component={Followers}
         options={FollowersScreenOptions}
       />
+      <Stack.Screen name={PostsDetails.name} component={PostsDetails} />
     </Stack.Navigator>
   );
 };

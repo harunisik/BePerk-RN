@@ -1,24 +1,27 @@
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, TouchableWithoutFeedback, View} from 'react-native';
 import common from '../../styles/sharedStyles';
 import FastImage from 'react-native-fast-image';
-// import {useMemo} from 'react';
+import {useNavigation} from '@react-navigation/native';
+import PostsDetails from '../../views/profile/PostsDetails';
 
 const PostItem = ({item}) => {
+  const navigation = useNavigation();
   const {flex1, p1} = common;
-  // const randomBool = useMemo(() => Math.random() < 0.5, []);
 
   return (
-    <View style={[flex1, p1]}>
-      {item.filename && (
-        <FastImage
-          style={styles.image}
-          source={{
-            uri: item.filename,
-          }}
-          // resizeMode={FastImage.resizeMode.cover}
-        />
-      )}
-    </View>
+    <TouchableWithoutFeedback
+      onPress={() => navigation.navigate(PostsDetails.name)}>
+      <View style={[flex1, p1]}>
+        {item.filename && (
+          <FastImage
+            style={styles.image}
+            source={{
+              uri: item.filename,
+            }}
+          />
+        )}
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 

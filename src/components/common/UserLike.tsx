@@ -4,7 +4,7 @@ import common from '../../styles/sharedStyles';
 import {useEffect, useState} from 'react';
 import {useUpdateUser} from '../../hooks/userHooks';
 
-const UserLike = ({item, type, onLike = (count: number) => {}}) => {
+const UserLike = ({item, type}) => {
   const [liked, setLiked] = useState(item.liked);
   const [likesCount, setLikesCount] = useState(item.likes_count);
 
@@ -13,7 +13,6 @@ const UserLike = ({item, type, onLike = (count: number) => {}}) => {
   const handleLike = useUpdateUser((likes, comments) => {
     setLiked(liked ? 0 : 1);
     setLikesCount(likes);
-    onLike(comments);
   });
 
   useEffect(() => {
