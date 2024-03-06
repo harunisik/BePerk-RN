@@ -1,9 +1,10 @@
 import {FlatList} from 'react-native';
 import {useGetPhotoVideo} from '../../hooks/userHooks';
-import {useRoute} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import PostItem from '../../components/profile/PostItem';
 import {useEffect, useState} from 'react';
 import common from '../../styles/sharedStyles';
+import PostsDetails from './PostsDetails';
 
 const COL_NUM = 3;
 
@@ -13,6 +14,7 @@ const isDivideble = (num, div) => {
 
 const PostsTab = () => {
   const [additionalData, setAdditionalData] = useState([]);
+  const navigation = useNavigation();
   const route = useRoute();
   const {
     params: {userId: id},
@@ -34,10 +36,18 @@ const PostsTab = () => {
     }
   }, [data]);
 
+  const handlePressItem = index => {
+    if (data?.length > index) {
+      navigation.navigate(PostsDetails.name, {data, index});
+    }
+  };
+
   return (
     <FlatList
       data={[...(data ? data : []), ...additionalData]}
-      renderItem={({item}) => <PostItem item={item} />}
+      renderItem={({item, index}) => (
+        <PostItem item={item} onPress={() => handlePressItem(index)} />
+      )}
       keyExtractor={item => item.id}
       onRefresh={refetch}
       refreshing={isFetching}

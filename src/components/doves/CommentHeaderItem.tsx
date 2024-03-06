@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   headerContainer: {
     borderBottomColor: 'lightgray',
     borderBottomWidth: 1,
-    paddingVertical: 15,
+    paddingBottom: 15,
     marginBottom: 15,
   },
 });

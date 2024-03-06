@@ -1,10 +1,10 @@
 import {View, Text} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import common from '../../styles/sharedStyles';
+import common from '../../../styles/sharedStyles';
 import {useEffect, useState} from 'react';
-import {useUpdateUser} from '../../hooks/userHooks';
+import {useUpdateUser} from '../../../hooks/userHooks';
 
-const UserLike = ({item, type}) => {
+const LikeButtton = ({item, type}) => {
   const [liked, setLiked] = useState(item.liked);
   const [likesCount, setLikesCount] = useState(item.likes_count);
 
@@ -27,10 +27,11 @@ const UserLike = ({item, type}) => {
         onPress={() =>
           handleLike.mutate({id: item.id, type, like: liked ? -1 : 1})
         }
+        color="dodgerblue"
       />
       <Text style={[font12, gray]}>{likesCount}</Text>
     </View>
   );
 };
 
-export default UserLike;
+export default LikeButtton;

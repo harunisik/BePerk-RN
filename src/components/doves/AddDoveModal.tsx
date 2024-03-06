@@ -20,7 +20,6 @@ const AddDoveModal = ({navigation}) => {
           dispatch({type: ModalActionType.CLOSE});
           navigation.navigate(PostDove.name, {
             subtype: 0,
-            doRefresh: false,
             buttonText: "Post what's on your mind",
             inputTextPlaceHolder: "What's on your mind?",
             title: 'Post Dove',
@@ -37,7 +36,6 @@ const AddDoveModal = ({navigation}) => {
           dispatch({type: ModalActionType.CLOSE});
           navigation.navigate(PostDove.name, {
             subtype: 1,
-            doRefresh: false,
             buttonText: 'Write what God has done for you!',
             inputTextPlaceHolder: 'Share a testimony',
             title: 'Post Testimony',
@@ -58,7 +56,6 @@ const AddDoveModal = ({navigation}) => {
           dispatch({type: ModalActionType.CLOSE});
           navigation.navigate(PostDove.name, {
             subtype: 2,
-            doRefresh: false,
             buttonText: 'Share a prayer request!',
             inputTextPlaceHolder: 'Share a prayer request',
             title: 'Post Prayer Request',

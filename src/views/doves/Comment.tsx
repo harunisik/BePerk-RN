@@ -8,22 +8,22 @@ import {
   useGetUserComments,
   usePostComment,
 } from '../../hooks/userHooks';
+import {useRoute} from '@react-navigation/native';
 
-const Comment = ({
-  route: {
-    params: {comment: headerComment},
-  },
-}) => {
+const Comment = () => {
+  const {
+    params: {item},
+  } = useRoute();
   const [selectedComment, setSelectedComment] = useState('');
-  const [selectedCommentId, setSelectedCommentId] = useState(headerComment.id);
+  const [selectedCommentId, setSelectedCommentId] = useState(item.id);
   const {flex1} = common;
 
   const {data, refetch, isFetching} = useGetUserComments({
-    id: headerComment.id,
-    type: headerComment.type,
+    id: item.id,
+    type: item.type,
   });
-  const handleSendComment = usePostComment(() => handleRefresh());
-  const handleDeleteComment = useDeleteComment(() => handleRefresh());
+  const handleSendComment = usePostComment();
+  const handleDeleteComment = useDeleteComment();
 
   const handleRefresh = () => {
     clearSelectedComment();
@@ -32,13 +32,13 @@ const Comment = ({
 
   const clearSelectedComment = () => {
     setSelectedComment('');
-    setSelectedCommentId(headerComment.id);
+    setSelectedCommentId(item.id);
   };
 
   return (
     <View style={flex1}>
       <CommentList
-        headerComment={headerComment}
+        headerItem={item}
         data={data}
         isFetching={isFetching}
         onRefresh={handleRefresh}
@@ -46,23 +46,30 @@ const Comment = ({
           setSelectedComment(message);
           setSelectedCommentId(commentId);
         }}
-        onDeleteItem={item =>
-          handleDeleteComment.mutate({id: item.id, isMy24: 0})
+        onDeleteItem={({id}) =>
+          handleDeleteComment.mutate(
+            {id, isMy24: 0},
+            {onSuccess: () => clearSelectedComment()},
+          )
         }
+        isHeaderVisible={item.type === 3}
       />
 
       <MessageBox
         initialText={selectedComment}
-        onPress={message => {
-          if (message) {
-            handleSendComment.mutate({
-              comment: message,
-              id: headerComment.id,
-              type: headerComment.type,
-              ...(headerComment.id !== selectedCommentId && {
-                comment_id: selectedCommentId,
-              }),
-            });
+        onPress={comment => {
+          if (comment) {
+            handleSendComment.mutate(
+              {
+                comment,
+                id: item.id,
+                type: item.type,
+                ...(item.id !== selectedCommentId && {
+                  comment_id: selectedCommentId,
+                }),
+              },
+              {onSuccess: () => clearSelectedComment()},
+            );
           }
         }}
         onClearText={clearSelectedComment}

@@ -1,10 +1,10 @@
 import {View, Text} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import common from '../../styles/sharedStyles';
-import Comment from '../../views/doves/Comment';
+import common from '../../../styles/sharedStyles';
+import Comment from '../../../views/doves/Comment';
 import {useNavigation} from '@react-navigation/native';
 
-const UserComment = ({item}) => {
+const CommentButton = ({item}) => {
   const navigation = useNavigation();
   const {font12, cGap3, row, aiCenter} = common;
 
@@ -13,12 +13,12 @@ const UserComment = ({item}) => {
       <MaterialCommunityIcons
         name="comment-processing-outline"
         size={18}
-        color="gray"
-        onPress={() => navigation.navigate(Comment.name, {comment: item})}
+        color="dodgerblue"
+        onPress={() => navigation.navigate(Comment.name, {item})}
       />
       <Text style={font12}>{item.comments_count}</Text>
     </View>
   );
 };
 
-export default UserComment;
+export default CommentButton;

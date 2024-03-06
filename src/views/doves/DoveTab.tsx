@@ -42,7 +42,7 @@ const DoveTab = () => {
   const route = useRoute();
   const {flex1, jcCenter, aiCenter} = common;
   const {
-    params: {subtype, doRefresh},
+    params: {subtype},
   } = route;
 
   const {data, refetch, isFetching} = useGetUserExploring({
@@ -51,13 +51,6 @@ const DoveTab = () => {
     offset: 0,
     subtype,
   });
-
-  useEffect(() => {
-    if (doRefresh) {
-      navigation.setParams({doRefresh: false});
-      refetch();
-    }
-  }, [doRefresh]);
 
   return (
     <View style={[flex1, jcCenter, aiCenter]}>

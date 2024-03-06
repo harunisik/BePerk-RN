@@ -24,11 +24,7 @@ const DovesTab = () => {
       <FlatList
         data={data}
         renderItem={({item}) => (
-          <DovesItem
-            item={item}
-            displayUsername={false}
-            onDeleteItem={refetch}
-          />
+          <DovesItem item={item} displayUsername={false} />
         )}
         keyExtractor={item => item.id}
         onRefresh={refetch}

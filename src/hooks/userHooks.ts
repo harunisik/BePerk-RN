@@ -14,6 +14,7 @@ import {
   getUserHistory,
   getUserPerks,
   getUserProfile,
+  postBookmarks,
   postComment,
   signIn,
   updateUser,
@@ -36,15 +37,17 @@ export function useUpdateUser(onSuccessCallback) {
   });
 }
 
-export function useDeletePost(onSuccessCallback) {
+export function useDeletePost() {
   const {dispatch} = useStore();
+  const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: posts => deletePost(posts),
     onSuccess: () => {
       dispatch({type: ModalActionType.CLOSE});
-      showMessage({message: 'Message deleted'});
-      onSuccessCallback();
+      showMessage({message: 'Post deleted'});
+      queryClient.invalidateQueries(['getUserPerks']);
+      queryClient.invalidateQueries(['getPhotoVideo']);
     },
     onError: ({message}) => {
       showMessage({message, type: 'danger'});
@@ -52,30 +55,44 @@ export function useDeletePost(onSuccessCallback) {
   });
 }
 
-export function usePostComment(onSuccessCallback) {
+export function usePostComment() {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: newComment => postComment(newComment),
-    onSuccess: () => onSuccessCallback(),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['getUserComments']);
+    },
     onError: ({message}) => {
       showMessage({message, type: 'danger'});
     },
   });
 }
 
-export function useDeleteComment(onSuccessCallback) {
+export function useDeleteComment() {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: comment => deleteComment(comment),
-    onSuccess: () => onSuccessCallback(),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['getUserComments']);
+    },
     onError: ({message}) => {
       showMessage({message, type: 'danger'});
     },
   });
 }
 
-export function useAddPerk(onSuccessCallback) {
+export function useAddPerk() {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: newPerk => addPerk(newPerk),
-    onSuccess: () => onSuccessCallback(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['getUserExploring'],
+      });
+    },
     onError: ({message}) => {
       showMessage({message, type: 'danger'});
     },
@@ -95,6 +112,16 @@ export function useAddFollowing(onSuccessCallback = () => {}) {
 export function useDeleteFollowing(onSuccessCallback = () => {}) {
   return useMutation({
     mutationFn: following => deleteFollowing(following),
+    onSuccess: () => onSuccessCallback(),
+    onError: ({message}) => {
+      showMessage({message, type: 'danger'});
+    },
+  });
+}
+
+export function usePostBookmarks(onSuccessCallback = () => {}) {
+  return useMutation({
+    mutationFn: bookmark => postBookmarks(bookmark),
     onSuccess: () => onSuccessCallback(),
     onError: ({message}) => {
       showMessage({message, type: 'danger'});

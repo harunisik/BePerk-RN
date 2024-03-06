@@ -80,7 +80,11 @@ const ProfileStack = () => {
         component={Followers}
         options={FollowersScreenOptions}
       />
-      <Stack.Screen name={PostsDetails.name} component={PostsDetails} />
+      <Stack.Screen
+        name={PostsDetails.name}
+        component={PostsDetails}
+        options={{title: 'Posts'}}
+      />
     </Stack.Navigator>
   );
 };

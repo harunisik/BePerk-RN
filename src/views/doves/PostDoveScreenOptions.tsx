@@ -8,24 +8,29 @@ const HeaderRight = ({navigation, route}) => {
     params: {caption, isAnonymous, subtype, navigateTo},
   } = route;
 
-  const handleAddPerk = useAddPerk(() => {
-    navigation.navigate(navigateTo, {doRefresh: true});
-    showMessage({message: 'Message sent'});
-  });
+  const handleAddPerk = useAddPerk();
 
   const handlePressPost = () => {
     if (!caption) {
       showMessage({message: 'Please type something', type: 'warning'});
     } else {
-      handleAddPerk.mutate({
-        anonymous: isAnonymous ? 1 : 0,
-        caption,
-        comments: 1,
-        comments_private: 0,
-        likes: 1,
-        likes_private: 0,
-        subtype,
-      });
+      handleAddPerk.mutate(
+        {
+          anonymous: isAnonymous ? 1 : 0,
+          caption,
+          comments: 1,
+          comments_private: 0,
+          likes: 1,
+          likes_private: 0,
+          subtype,
+        },
+        {
+          onSuccess: () => {
+            navigation.navigate(navigateTo);
+            showMessage({message: 'Message sent'});
+          },
+        },
+      );
     }
   };
 

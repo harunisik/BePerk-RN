@@ -35,6 +35,9 @@ const common = StyleSheet.create({
   rGap5: {
     rowGap: 5,
   },
+  rGap10: {
+    rowGap: 10,
+  },
   rGap15: {
     rowGap: 15,
   },

@@ -131,3 +131,10 @@ export const deleteFollowing = following => {
     .then(handleResponse)
     .catch(handleError);
 };
+
+export const postBookmarks = bookmark => {
+  return axios
+    .post('/user/bookmarks', {...bookmark})
+    .then(handleResponse)
+    .catch(handleError);
+};

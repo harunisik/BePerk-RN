@@ -2,8 +2,8 @@ import {View} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import common from '../../styles/sharedStyles';
 import Followers from '../../views/profile/Followers';
-import UserLike from '../common/UserLike';
-import UserComment from '../common/UserComment';
+import LikeButtton from '../common/buttons/LikeButton';
+import CommentButton from '../common/buttons/CommentButton';
 import {useNavigation} from '@react-navigation/native';
 
 const DovesItemOptions = ({item}) => {
@@ -12,8 +12,8 @@ const DovesItemOptions = ({item}) => {
 
   return (
     <View style={[cGap15, row, aiCenter]}>
-      <UserLike item={item} type={item.type} />
-      <UserComment item={item} />
+      <LikeButtton item={item} type={item.type} />
+      <CommentButton item={item} />
       <MaterialCommunityIcons
         name="share-outline"
         size={22}

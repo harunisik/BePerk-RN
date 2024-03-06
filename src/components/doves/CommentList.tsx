@@ -33,20 +33,20 @@ const transformCommentList = commentList => {
 };
 
 const CommentList = ({
-  headerComment,
+  headerItem,
   onPressReply,
   data,
   isFetching,
   onRefresh,
   onDeleteItem,
+  isHeaderVisible = false,
 }) => {
   const result = useMemo(() => transformCommentList(data?.comment), [data]);
-  const {ph15} = common;
+  const {ph15, pv15} = common;
 
   return (
     <FlatList
       data={result}
-      ListHeaderComponent={<CommentHeaderItem item={headerComment} />}
       renderItem={({item}) => (
         <CommentItem
           item={item}
@@ -58,7 +58,10 @@ const CommentList = ({
       onRefresh={onRefresh}
       refreshing={isFetching}
       ItemSeparatorComponent={<ItemSeperator medium />}
-      contentContainerStyle={ph15}
+      contentContainerStyle={[ph15, pv15]}
+      {...(isHeaderVisible && {
+        ListHeaderComponent: <CommentHeaderItem item={headerItem} />,
+      })}
     />
   );
 };

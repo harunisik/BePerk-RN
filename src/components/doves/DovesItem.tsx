@@ -1,14 +1,11 @@
 import {View, Text} from 'react-native';
-import {useStore} from '../../containers/StoreContainer';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {dateDiff} from '../../utils/DateUtil';
 import common from '../../styles/sharedStyles';
-import {ModalActionType} from '../../containers/ModalAction';
 import DovesItemOptions from './DovesItemOptions';
-import DovesItemModal from './DovesItemModal';
 import Profile from '../../views/profile/Profile';
 import {useNavigation} from '@react-navigation/native';
+import DotsButton from '../common/buttons/DotsButton';
 
 enum DoveType {
   Dove,
@@ -22,9 +19,8 @@ const DoveTypes = {
   [DoveType.Prayer]: {label: 'Prayer request', color: 'darkorchid'},
 };
 
-const DovesItem = ({item, onDeleteItem = () => {}, displayUsername = true}) => {
+const DovesItem = ({item, displayUsername = true}) => {
   const navigation = useNavigation();
-  const {dispatch} = useStore();
 
   const {
     jcSpaceBetween,
@@ -86,21 +82,7 @@ const DovesItem = ({item, onDeleteItem = () => {}, displayUsername = true}) => {
       <Text>{item.caption}</Text>
       <View style={[aiCenter, row, jcSpaceBetween]}>
         <DovesItemOptions item={item} />
-        <MaterialCommunityIcons
-          name="dots-horizontal"
-          size={22}
-          color="gray"
-          onPress={() => {
-            dispatch({
-              type: ModalActionType.OPEN,
-              modalInfo: {
-                component: (
-                  <DovesItemModal item={item} onDeleteItem={onDeleteItem} />
-                ),
-              },
-            });
-          }}
-        />
+        <DotsButton item={item} />
       </View>
     </View>
   );

@@ -11,7 +11,7 @@ import {dateDiff} from '../../utils/DateUtil';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useState} from 'react';
 import {Swipeable} from 'react-native-gesture-handler';
-import UserLike from '../common/UserLike';
+import LikeButtton from '../common/buttons/LikeButton';
 import ItemSeperator from '../common/ItemSpearator';
 
 const RenderRightActions = ({item, onPress}) => {
@@ -91,7 +91,7 @@ const CommentItem = ({
               )}
             </View>
             <View>
-              <UserLike item={item} type={4} />
+              <LikeButtton item={item} type={4} />
             </View>
           </View>
         </View>
