@@ -12,6 +12,7 @@ import {PaperProvider} from 'react-native-paper';
 import BottomSheetModal from './src/components/common/BottomSheetModal';
 
 const queryClient = new QueryClient();
+
 axios.defaults.baseURL = process.env.API_URL;
 axios.defaults.headers.post['Content-Type'] =
   'application/x-www-form-urlencoded';
@@ -27,10 +28,10 @@ if (process.env.APP_DEBUG === 'true') {
 
   axios.interceptors.request.use(request => {
     const {headers, baseURL, method, url, data} = request;
-    console.log(
-      'Starting Request',
-      JSON.stringify({headers, baseURL, method, url, data}, null, 2),
-    );
+    // console.log(
+    //   'Starting Request',
+    //   JSON.stringify({headers, baseURL, method, url, data}, null, 2),
+    // );
     return request;
   });
 
@@ -40,10 +41,12 @@ if (process.env.APP_DEBUG === 'true') {
       status,
       request: {responseURL},
     } = response;
-    console.log(
-      'Starting Response',
-      JSON.stringify({data, status, responseURL}, null, 2),
-    );
+    // console.log(
+    //   'Starting Response',
+    //   JSON.stringify({status, responseURL}, null, 2),
+    // );
+    // console.log(JSON.stringify({data}));
+
     return response;
   });
 }

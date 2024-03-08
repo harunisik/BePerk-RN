@@ -11,7 +11,7 @@ const DovesTab = () => {
     params: {userId: id},
   } = route;
 
-  const {data, refetch, isFetching} = useGetUserPerks({
+  const {data, refetch, isFetching} = useGetUserPerks(route.name, {
     id,
     limit: 35,
     offset: 0,

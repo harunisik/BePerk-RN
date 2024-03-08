@@ -1,10 +1,9 @@
-import {View, FlatList, TouchableOpacity, StyleSheet, Text} from 'react-native';
+import {FlatList, TouchableOpacity, StyleSheet, Text} from 'react-native';
 import common from '../../styles/sharedStyles';
 import DovesItem from '../../components/doves/DovesItem';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useGetUserExploring} from '../../hooks/userHooks';
 import PostDove from './PostDove';
-import {useEffect} from 'react';
 import ItemSeperator from '../../components/common/ItemSpearator';
 import {useNavigation, useRoute} from '@react-navigation/native';
 
@@ -38,14 +37,12 @@ const ListHeaderComponent = () => {
 };
 
 const DoveTab = () => {
-  const navigation = useNavigation();
   const route = useRoute();
-  const {flex1, jcCenter, aiCenter} = common;
   const {
     params: {subtype},
   } = route;
 
-  const {data, refetch, isFetching} = useGetUserExploring({
+  const {data, refetch, isRefetching} = useGetUserExploring(route.name, {
     filter: 2,
     limit: 35,
     offset: 0,
@@ -53,19 +50,15 @@ const DoveTab = () => {
   });
 
   return (
-    <View style={[flex1, jcCenter, aiCenter]}>
-      <FlatList
-        data={data?.exploring}
-        renderItem={({item}) => (
-          <DovesItem item={item} onDeleteItem={refetch} />
-        )}
-        keyExtractor={item => item.id}
-        onRefresh={refetch}
-        refreshing={isFetching}
-        ListHeaderComponent={ListHeaderComponent}
-        ItemSeparatorComponent={<ItemSeperator lineVisible large />}
-      />
-    </View>
+    <FlatList
+      data={data?.exploring}
+      renderItem={({item}) => <DovesItem item={item} />}
+      keyExtractor={item => item.id}
+      onRefresh={refetch}
+      refreshing={isRefetching}
+      ListHeaderComponent={ListHeaderComponent}
+      ItemSeparatorComponent={<ItemSeperator lineVisible large />}
+    />
   );
 };
 

@@ -10,6 +10,7 @@ type FragmentType = typeof Fragment;
 export interface ModalInfo {
   isOpen?: boolean;
   component?: ReactElement | FragmentType;
+  routeName?: string;
 }
 
 interface ModalAction {

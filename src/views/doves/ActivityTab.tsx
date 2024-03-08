@@ -12,7 +12,7 @@ const ActivityTab = () => {
   } = route;
   const {p15} = common;
 
-  const {data, refetch, isFetching} = useGetUserHistory({
+  const {data, refetch, isFetching} = useGetUserHistory(route.name, {
     filter,
     limit: 50,
     offset: 0,

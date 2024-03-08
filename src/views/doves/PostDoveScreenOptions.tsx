@@ -8,7 +8,7 @@ const HeaderRight = ({navigation, route}) => {
     params: {caption, isAnonymous, subtype, navigateTo},
   } = route;
 
-  const handleAddPerk = useAddPerk();
+  const handleAddPerk = useAddPerk(route.name);
 
   const handlePressPost = () => {
     if (!caption) {

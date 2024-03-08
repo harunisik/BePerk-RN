@@ -5,7 +5,7 @@ import DeleteButton from './buttons/DeleteButton';
 import TurnOffButton from './buttons/TurnOffButton';
 import ReportButton from './buttons/ReportButton';
 
-const ItemModal = ({item, onDeleteItem = () => {}}) => {
+const ItemModal = ({item}) => {
   const {
     store: {
       authResult: {id, username},
@@ -16,7 +16,7 @@ const ItemModal = ({item, onDeleteItem = () => {}}) => {
     <View>
       <CopyLinkButton item={item} />
       {id === item.user_id || username === item.username ? (
-        <DeleteButton item={item} onDelete={onDeleteItem} />
+        <DeleteButton item={item} />
       ) : (
         <View>
           <TurnOffButton item={item} />

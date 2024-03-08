@@ -11,19 +11,20 @@ import {
 import {useRoute} from '@react-navigation/native';
 
 const Comment = () => {
+  const route = useRoute();
   const {
     params: {item},
-  } = useRoute();
+  } = route;
   const [selectedComment, setSelectedComment] = useState('');
   const [selectedCommentId, setSelectedCommentId] = useState(item.id);
   const {flex1} = common;
 
-  const {data, refetch, isFetching} = useGetUserComments({
+  const {data, refetch, isFetching} = useGetUserComments(route.name, {
     id: item.id,
     type: item.type,
   });
-  const handleSendComment = usePostComment();
-  const handleDeleteComment = useDeleteComment();
+  const handleSendComment = usePostComment(route.name);
+  const handleDeleteComment = useDeleteComment(route.name);
 
   const handleRefresh = () => {
     clearSelectedComment();

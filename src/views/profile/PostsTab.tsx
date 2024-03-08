@@ -21,7 +21,7 @@ const PostsTab = () => {
   } = route;
   const {pv5} = common;
 
-  const {data, refetch, isFetching} = useGetPhotoVideo({
+  const {data, refetch, isFetching} = useGetPhotoVideo(route.name, {
     id,
     limit: 35,
     offset: 0,

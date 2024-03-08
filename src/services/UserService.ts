@@ -83,9 +83,15 @@ export const getPhotoVideo = ({queryKey}) => {
 
 // POST requests
 
-export const updateUser = newLike => {
+export interface UserLikeProps {
+  id: number;
+  type: number;
+  like: number;
+}
+
+export const postUserLike = (like: UserLikeProps) => {
   return axios
-    .post('/user/update', {...newLike})
+    .post('/user/update', {...like})
     .then(handleResponse)
     .catch(handleError);
 };

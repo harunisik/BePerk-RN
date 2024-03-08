@@ -13,6 +13,7 @@ const initialState: StoreData = {
   modalInfo: {
     isOpen: false,
     component: Fragment,
+    routeName: '',
   },
 };
 
@@ -38,12 +39,12 @@ const updateStore = (store: StoreData, action: StoreAction) => {
     case ModalActionType.OPEN:
       return {
         ...store,
-        modalInfo: {isOpen: true, component: action.modalInfo?.component},
+        modalInfo: {isOpen: true, ...action.modalInfo},
       };
     case ModalActionType.CLOSE:
       return {
         ...store,
-        modalInfo: {isOpen: false, component: Fragment},
+        modalInfo: {isOpen: false, component: Fragment, routeName: ''},
       };
     default:
       return store;

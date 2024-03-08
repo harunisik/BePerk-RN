@@ -17,174 +17,135 @@ import {
   postBookmarks,
   postComment,
   signIn,
-  updateUser,
+  postUserLike,
+  UserLikeProps,
 } from '../services/UserService';
 import {useStore} from '../containers/StoreContainer';
-import {ModalActionType} from '../containers/ModalAction';
 import {AuthActionType} from '../containers/AuthAction';
 
 // MUTATION requests
 
-export function useUpdateUser(onSuccessCallback) {
-  return useMutation({
-    mutationFn: newLike => updateUser(newLike),
-    onSuccess: ([{likes, comments}]) => {
-      onSuccessCallback(likes, comments);
-    },
-    onError: ({message}) => {
-      showMessage({message, type: 'danger'});
-    },
-  });
+export function usePostUserLike(routeName: string) {
+  return useCustomMutation(
+    (like: UserLikeProps) => postUserLike(like),
+    routeName,
+  );
 }
 
-export function useDeletePost() {
-  const {dispatch} = useStore();
+export function useDeletePost(routeName: string) {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: posts => deletePost(posts),
-    onSuccess: () => {
-      dispatch({type: ModalActionType.CLOSE});
-      showMessage({message: 'Post deleted'});
-      queryClient.invalidateQueries(['getUserPerks']);
-      queryClient.invalidateQueries(['getPhotoVideo']);
-    },
-    onError: ({message}) => {
-      showMessage({message, type: 'danger'});
-    },
-  });
-}
+    onMutate: async newTodo => {
+      const options = queryClient.getDefaultOptions();
+      const queryKey = options.queries.meta[routeName];
+      const newItem = JSON.parse(newTodo.items);
 
-export function usePostComment() {
-  const queryClient = useQueryClient();
+      const previousTodos = queryClient.getQueryData(queryKey);
 
-  return useMutation({
-    mutationFn: newComment => postComment(newComment),
-    onSuccess: () => {
-      queryClient.invalidateQueries(['getUserComments']);
-    },
-    onError: ({message}) => {
-      showMessage({message, type: 'danger'});
-    },
-  });
-}
-
-export function useDeleteComment() {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: comment => deleteComment(comment),
-    onSuccess: () => {
-      queryClient.invalidateQueries(['getUserComments']);
-    },
-    onError: ({message}) => {
-      showMessage({message, type: 'danger'});
-    },
-  });
-}
-
-export function useAddPerk() {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: newPerk => addPerk(newPerk),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['getUserExploring'],
+      queryClient.setQueryData(queryKey, old => {
+        const result = old.exploring.filter(item => item.id !== newItem[0].id);
+        return {exploring: result};
       });
+
+      return {previousTodos, queryKey};
     },
+    onError: (err, newTodo, context) => {
+      queryClient.setQueryData(context.queryKey, context.previousTodos);
+    },
+    onSettled: (data, error, variables, context) => {
+      // queryClient.invalidateQueries({queryKey: context.queryKey});
+    },
+    // onSuccess: () => invalidateQueries(queryClient, routeName),
+    // onError: ({message}) => {
+    //   showMessage({message, type: 'danger'});
+    // },
+  });
+  // return useCustomMutation(posts => deletePost(posts), routeName);
+}
+
+export function usePostComment(routeName: string) {
+  return useCustomMutation(comment => postComment(comment), routeName);
+}
+
+export function useDeleteComment(routeName: string) {
+  return useCustomMutation(comment => deleteComment(comment), routeName);
+}
+
+export function useAddPerk(routeName: string) {
+  return useCustomMutation(perk => addPerk(perk), routeName);
+}
+
+export function useAddFollowing(routeName: string) {
+  return useCustomMutation(following => addFollowing(following), routeName);
+}
+
+export function useDeleteFollowing(routeName: string) {
+  return useCustomMutation(following => deleteFollowing(following), routeName);
+}
+
+export function usePostBookmarks(routeName: string) {
+  return useCustomMutation(bookmark => postBookmarks(bookmark), routeName);
+}
+
+function useCustomMutation(mutationFn, routeName) {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn,
+    onSuccess: () => invalidateQueries(queryClient, routeName),
     onError: ({message}) => {
       showMessage({message, type: 'danger'});
     },
   });
 }
 
-export function useAddFollowing(onSuccessCallback = () => {}) {
-  return useMutation({
-    mutationFn: following => addFollowing(following),
-    onSuccess: () => onSuccessCallback(),
-    onError: ({message}) => {
-      showMessage({message, type: 'danger'});
-    },
-  });
-}
+function invalidateQueries(queryClient, routeName) {
+  const options = queryClient.getDefaultOptions();
 
-export function useDeleteFollowing(onSuccessCallback = () => {}) {
-  return useMutation({
-    mutationFn: following => deleteFollowing(following),
-    onSuccess: () => onSuccessCallback(),
-    onError: ({message}) => {
-      showMessage({message, type: 'danger'});
-    },
-  });
-}
-
-export function usePostBookmarks(onSuccessCallback = () => {}) {
-  return useMutation({
-    mutationFn: bookmark => postBookmarks(bookmark),
-    onSuccess: () => onSuccessCallback(),
-    onError: ({message}) => {
-      showMessage({message, type: 'danger'});
-    },
-  });
+  if (options.queries?.meta?.[routeName]) {
+    queryClient.invalidateQueries(options.queries.meta[routeName]);
+  }
 }
 
 // QUERY requests
 
-export function useGetUserComments(data) {
-  return useQuery({
-    queryKey: ['getUserComments', data],
-    queryFn: getUserComments,
-  });
+export function useGetUserComments(routeName, data) {
+  return useCustomQuery(['getUserComments', data], getUserComments, routeName);
 }
 
-export function useGetUserExploring(data) {
-  return useQuery({
-    queryKey: ['getUserExploring', data],
-    queryFn: getUserExploring,
-  });
+export function useGetUserExploring(routeName, data) {
+  console.log(data);
+  return useCustomQuery(
+    ['getUserExploring', data],
+    getUserExploring,
+    routeName,
+  );
 }
 
-export function useGetUserPerks(data) {
-  return useQuery({
-    queryKey: ['getUserPerks', data],
-    queryFn: getUserPerks,
-  });
+export function useGetUserPerks(routeName, data) {
+  return useCustomQuery(['getUserPerks', data], getUserPerks, routeName);
 }
 
-export function useGetUserFeed(data) {
-  return useQuery({
-    queryKey: ['getUserFeed', data],
-    queryFn: getUserFeed,
-  });
+export function useGetUserFeed(routeName, data) {
+  return useCustomQuery(['getUserFeed', data], getUserFeed, routeName);
 }
 
-export function useGetUserFollowings() {
-  return useQuery({
-    queryKey: ['getUserFollowings'],
-    queryFn: getUserFollowings,
-  });
+export function useGetUserFollowings(routeName) {
+  return useCustomQuery(['getUserFollowings'], getUserFollowings, routeName);
 }
 
-export function useGetUserProfile(data) {
-  return useQuery({
-    queryKey: ['getUserProfile', data],
-    queryFn: getUserProfile,
-  });
+export function useGetUserProfile(routeName, data) {
+  return useCustomQuery(['getUserProfile', data], getUserProfile, routeName);
 }
 
-export function useGetUserHistory(data) {
-  return useQuery({
-    queryKey: ['getUserHistory', data],
-    queryFn: getUserHistory,
-  });
+export function useGetUserHistory(routeName, data) {
+  return useCustomQuery(['getUserHistory', data], getUserHistory, routeName);
 }
 
-export function useGetPhotoVideo(data) {
-  return useQuery({
-    queryKey: ['getPhotoVideo', data],
-    queryFn: getPhotoVideo,
-  });
+export function useGetPhotoVideo(routeName, data) {
+  return useCustomQuery(['getPhotoVideo', data], getPhotoVideo, routeName);
 }
 
 export function useSignIn(data) {
@@ -202,4 +163,11 @@ export function useSignIn(data) {
       })
       .catch(({message}) => showMessage({message, type: 'danger'}));
   };
+}
+
+function useCustomQuery(queryKey, queryFn, routeName) {
+  const queryClient = useQueryClient();
+  queryClient.setDefaultOptions({queries: {meta: {[routeName]: queryKey}}});
+
+  return useQuery({queryKey, queryFn});
 }

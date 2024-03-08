@@ -26,16 +26,16 @@ const Profile = () => {
 
   const {flex1} = common;
 
-  const {data} = useGetUserProfile({id});
+  const {data} = useGetUserProfile(route.name, {id});
 
-  const handleAddFollowing = useAddFollowing(() => setIsFollowing(1));
-  const handleDeleteFollowing = useDeleteFollowing(() => setIsFollowing(0));
+  const handleAddFollowing = useAddFollowing(route.name);
+  const handleDeleteFollowing = useDeleteFollowing(route.name);
 
   const handlePressFollowing = () => {
     if (isFollowing === 0) {
-      handleAddFollowing.mutate({id});
+      handleAddFollowing.mutate({id}, {onSuccess: () => setIsFollowing(1)});
     } else {
-      handleDeleteFollowing.mutate({id});
+      handleDeleteFollowing.mutate({id}, {onSuccess: () => setIsFollowing(0)});
     }
   };
 

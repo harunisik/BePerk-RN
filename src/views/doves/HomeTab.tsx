@@ -5,6 +5,7 @@ import DovesItem from '../../components/doves/DovesItem';
 import DovesItemOptions from '../../components/doves/DovesItemOptions';
 import {useGetUserFeed, useGetUserPerks} from '../../hooks/userHooks';
 import ItemSeperator from '../../components/common/ItemSpearator';
+import {useRoute} from '@react-navigation/native';
 
 const ListHeaderItem = ({item}) => {
   const {jcSpaceBetween, aiCenter, row, rGap15, pt20, p15, bold, white} =
@@ -42,31 +43,30 @@ const ListHeaderItem = ({item}) => {
 };
 
 const HomeTab = () => {
-  const {flex1, jcCenter, aiCenter} = common;
-
-  const {data: beperkDove} = useGetUserPerks({id: 2565, limit: 1, offset: 0});
-  const {data, refetch, isFetching} = useGetUserFeed({
+  const route = useRoute();
+  const {data: beperkDove} = useGetUserPerks(route.name, {
+    id: 2565,
+    limit: 1,
+    offset: 0,
+  });
+  const {data, refetch, isFetching} = useGetUserFeed(route.name, {
     filter: 2,
     limit: 35,
     offset: 0,
   });
 
   return (
-    <View style={[flex1, jcCenter, aiCenter]}>
-      <FlatList
-        data={data?.feed}
-        renderItem={({item}) => (
-          <DovesItem item={item} onDeleteItem={refetch} />
-        )}
-        keyExtractor={item => item.id}
-        onRefresh={refetch}
-        refreshing={isFetching}
-        ListHeaderComponent={
-          beperkDove && <ListHeaderItem item={beperkDove[0]} />
-        }
-        ItemSeparatorComponent={<ItemSeperator lineVisible large />}
-      />
-    </View>
+    <FlatList
+      data={data?.feed}
+      renderItem={({item}) => <DovesItem item={item} />}
+      keyExtractor={item => item.id}
+      onRefresh={refetch}
+      refreshing={isFetching}
+      ListHeaderComponent={
+        beperkDove && <ListHeaderItem item={beperkDove[0]} />
+      }
+      ItemSeparatorComponent={<ItemSeperator lineVisible large />}
+    />
   );
 };
 

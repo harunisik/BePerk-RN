@@ -2,9 +2,11 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {ModalActionType} from '../../../containers/ModalAction';
 import ItemModal from '../ItemModal';
 import {useStore} from '../../../containers/StoreContainer';
+import {useRoute} from '@react-navigation/native';
 
-const DotsButton = ({item, onDeleteItem = () => {}}) => {
+const DotsButton = ({item}) => {
   const {dispatch} = useStore();
+  const route = useRoute();
 
   return (
     <MaterialCommunityIcons
@@ -14,7 +16,8 @@ const DotsButton = ({item, onDeleteItem = () => {}}) => {
         dispatch({
           type: ModalActionType.OPEN,
           modalInfo: {
-            component: <ItemModal item={item} onDeleteItem={onDeleteItem} />,
+            component: <ItemModal item={item} />,
+            routeName: route.name,
           },
         });
       }}
