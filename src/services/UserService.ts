@@ -110,7 +110,11 @@ export const deleteComment = comment => {
     .catch(handleError);
 };
 
-export const deletePost = posts => {
+export interface DeletePostProps {
+  items: string;
+}
+
+export const deletePost = (posts: DeletePostProps) => {
   return axios
     .post('/user/deletePost', {...posts})
     .then(handleResponse)

@@ -3,9 +3,11 @@ import common from '../../styles/sharedStyles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import DovesItem from '../../components/doves/DovesItem';
 import DovesItemOptions from '../../components/doves/DovesItemOptions';
-import {useGetUserFeed, useGetUserPerks} from '../../hooks/userHooks';
 import ItemSeperator from '../../components/common/ItemSpearator';
 import {useRoute} from '@react-navigation/native';
+import {useCallback} from 'react';
+import {useCustomQuery as useQuery} from '../../hooks/commonHooks';
+import {getUserFeed, getUserPerks} from '../../services/UserService';
 
 const ListHeaderItem = ({item}) => {
   const {jcSpaceBetween, aiCenter, row, rGap15, pt20, p15, bold, white} =
@@ -44,16 +46,21 @@ const ListHeaderItem = ({item}) => {
 
 const HomeTab = () => {
   const route = useRoute();
-  const {data: beperkDove} = useGetUserPerks(route.name, {
-    id: 2565,
-    limit: 1,
-    offset: 0,
-  });
-  const {data, refetch, isFetching} = useGetUserFeed(route.name, {
-    filter: 2,
-    limit: 35,
-    offset: 0,
-  });
+  const {data: beperkDove} = useQuery(
+    getUserPerks,
+    {id: 2565, limit: 1, offset: 0},
+    route.key,
+  );
+  const {data, refetch, isFetching} = useQuery(
+    getUserFeed,
+    {filter: 2, limit: 35, offset: 0},
+    route.key,
+  );
+
+  const ItemSeparatorComponent = useCallback(
+    () => <ItemSeperator lineVisible large />,
+    [],
+  );
 
   return (
     <FlatList
@@ -62,10 +69,10 @@ const HomeTab = () => {
       keyExtractor={item => item.id}
       onRefresh={refetch}
       refreshing={isFetching}
-      ListHeaderComponent={
-        beperkDove && <ListHeaderItem item={beperkDove[0]} />
-      }
-      ItemSeparatorComponent={<ItemSeperator lineVisible large />}
+      ItemSeparatorComponent={ItemSeparatorComponent}
+      {...(beperkDove !== undefined && {
+        ListHeaderComponent: <ListHeaderItem item={beperkDove[0]} />,
+      })}
     />
   );
 };

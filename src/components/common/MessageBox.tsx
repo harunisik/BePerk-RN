@@ -30,9 +30,11 @@ const MessageBox = ({initialText, onClearText, onPress}) => {
       keyboardVerticalOffset={100}>
       <View style={[p10, styles.shadowProp]}>
         <View style={[row, jcSpaceBetween]}>
-          {['😌', '🤣', '❤️', '😍', '😱', '✝️', '🙏', '🔥', '😥'].map(item => {
-            return <Emoji emoji={item} onPress={setMessage} />;
-          })}
+          {['😌', '🤣', '❤️', '😍', '😱', '✝️', '🙏', '🔥', '😥'].map(
+            (item, index) => {
+              return <Emoji emoji={item} onPress={setMessage} key={index} />;
+            },
+          )}
         </View>
         <View style={[row, jcSpaceBetween, aiCenter]}>
           <MaterialIcons name="account-circle" size={26} color="lightgray" />

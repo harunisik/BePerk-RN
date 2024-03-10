@@ -2,15 +2,19 @@ import {View} from 'react-native';
 import common from '../../styles/sharedStyles';
 import ProfileTabGroup from '../../components/profile/ProfileTabGroup';
 import UserInfo from '../../components/profile/UserInfo';
-import {
-  useAddFollowing,
-  useDeleteFollowing,
-  useGetUserProfile,
-} from '../../hooks/userHooks';
 import ProfileButtonGroup from '../../components/profile/ProfileButtonGroup';
 import {useEffect, useState} from 'react';
 import {useStore} from '../../containers/StoreContainer';
 import {useRoute} from '@react-navigation/native';
+import {
+  useCustomQuery as useQuery,
+  useCustomMutation as useMutation,
+} from '../../hooks/commonHooks';
+import {
+  deleteFollowing as userDeleteFollowing,
+  addFollowing as userAddFollowing,
+  getUserProfile,
+} from '../../services/UserService';
 
 const Profile = () => {
   const [isFollowing, setIsFollowing] = useState(0);
@@ -26,16 +30,15 @@ const Profile = () => {
 
   const {flex1} = common;
 
-  const {data} = useGetUserProfile(route.name, {id});
-
-  const handleAddFollowing = useAddFollowing(route.name);
-  const handleDeleteFollowing = useDeleteFollowing(route.name);
+  const {data} = useQuery(getUserProfile, {id}, route.key);
+  const addFollowing = useMutation(userAddFollowing, route.key);
+  const deleteFollowing = useMutation(userDeleteFollowing, route.key);
 
   const handlePressFollowing = () => {
     if (isFollowing === 0) {
-      handleAddFollowing.mutate({id}, {onSuccess: () => setIsFollowing(1)});
+      addFollowing.mutate({id}, {onSuccess: () => setIsFollowing(1)});
     } else {
-      handleDeleteFollowing.mutate({id}, {onSuccess: () => setIsFollowing(0)});
+      deleteFollowing.mutate({id}, {onSuccess: () => setIsFollowing(0)});
     }
   };
 

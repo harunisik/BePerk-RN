@@ -32,6 +32,7 @@ if (process.env.APP_DEBUG === 'true') {
     //   'Starting Request',
     //   JSON.stringify({headers, baseURL, method, url, data}, null, 2),
     // );
+    // console.log('Starting Request', baseURL + url);
     return request;
   });
 
@@ -39,13 +40,13 @@ if (process.env.APP_DEBUG === 'true') {
     const {
       data,
       status,
-      request: {responseURL},
+      request: {responseURL, _method},
     } = response;
     // console.log(
     //   'Starting Response',
     //   JSON.stringify({status, responseURL}, null, 2),
     // );
-    // console.log(JSON.stringify({data}));
+    console.log('Received response:', status, _method, responseURL);
 
     return response;
   });

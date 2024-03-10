@@ -2,10 +2,11 @@ import {FlatList, TouchableOpacity, StyleSheet, Text} from 'react-native';
 import common from '../../styles/sharedStyles';
 import DovesItem from '../../components/doves/DovesItem';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useGetUserExploring} from '../../hooks/userHooks';
 import PostDove from './PostDove';
 import ItemSeperator from '../../components/common/ItemSpearator';
 import {useNavigation, useRoute} from '@react-navigation/native';
+import {useCustomQuery as useQuery} from '../../hooks/commonHooks';
+import {getUserExploring} from '../../services/UserService';
 
 const ListHeaderComponent = () => {
   const navigation = useNavigation();
@@ -42,12 +43,11 @@ const DoveTab = () => {
     params: {subtype},
   } = route;
 
-  const {data, refetch, isRefetching} = useGetUserExploring(route.name, {
-    filter: 2,
-    limit: 35,
-    offset: 0,
-    subtype,
-  });
+  const {data, refetch, isRefetching} = useQuery(
+    getUserExploring,
+    {filter: 2, limit: 35, offset: 0, subtype},
+    route.key,
+  );
 
   return (
     <FlatList

@@ -2,20 +2,19 @@ import {View, Text} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import common from '../../../styles/sharedStyles';
 import {useEffect, useState} from 'react';
-import {usePostUserLike} from '../../../hooks/userHooks';
-import {useRoute} from '@react-navigation/native';
+import {useCustomMutation as useMutation} from '../../../hooks/commonHooks';
+import {postUserLike} from '../../../services/UserService';
 
 const LikeButtton = ({item, type}) => {
   const [liked, setLiked] = useState(item.liked);
   const [likesCount, setLikesCount] = useState(item.likes_count);
-  const route = useRoute();
 
   const {font12, cGap3, row, aiCenter, gray} = common;
 
-  const postUserLike = usePostUserLike(route.name);
+  const userLike = useMutation(postUserLike);
 
   const handlePress = () =>
-    postUserLike.mutate(
+    userLike.mutate(
       {id: item.id, type, like: liked ? -1 : 1},
       {
         onSuccess: ([{likes}]) => {
@@ -27,6 +26,7 @@ const LikeButtton = ({item, type}) => {
 
   useEffect(() => {
     setLiked(item.liked);
+    setLikesCount(item.likes_count);
   }, [item]);
 
   return (

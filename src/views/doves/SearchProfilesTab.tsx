@@ -10,11 +10,7 @@ const SearchProfilesTab = ({searchText}) => {
   const [searchResult, setSearchResult] = useState([]);
   const navigation = useNavigation();
 
-  const handleSearchUsers = useSearchUsers(profiles =>
-    setSearchResult(
-      profiles?.map(profile => ({...profile, user_id: profile.id})),
-    ),
-  );
+  const searchUsers = useSearchUsers();
 
   const handlePressItem = item => {
     navigation.navigate(Profile.name, {
@@ -26,11 +22,19 @@ const SearchProfilesTab = ({searchText}) => {
   useSearchText(
     searchText,
     () =>
-      handleSearchUsers.mutate({
-        limit: 50,
-        offset: 0,
-        username: searchText,
-      }),
+      searchUsers.mutate(
+        {
+          limit: 50,
+          offset: 0,
+          username: searchText,
+        },
+        {
+          onSuccess: ({profiles}) =>
+            setSearchResult(
+              profiles?.map(profile => ({...profile, user_id: profile.id})),
+            ),
+        },
+      ),
     () => setSearchResult([]),
   );
 

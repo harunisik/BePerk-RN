@@ -1,24 +1,33 @@
 import {Text} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {showMessage} from 'react-native-flash-message';
-import {useChatShare} from '../../hooks/chatHooks';
+import {useCustomMutation as useMutation} from '../../hooks/commonHooks';
+import {chatShare as userChatShare} from '../../services/ChatService';
 
 const HeaderRight = ({navigation, route}) => {
   const {
     params: {id, type, selectedUsers},
   } = route;
 
-  const handleChatShare = useChatShare(() => navigation.goBack());
+  const chatShare = useMutation(userChatShare);
 
   const handlePressSent = () => {
     if (!selectedUsers || selectedUsers.length === 0) {
       showMessage({message: 'Please select users', type: 'warning'});
     } else {
-      handleChatShare.mutate({
-        id,
-        type,
-        share_to: JSON.stringify(selectedUsers.map(({user_id}) => user_id)),
-      });
+      chatShare.mutate(
+        {
+          id,
+          type,
+          share_to: JSON.stringify(selectedUsers.map(({user_id}) => user_id)),
+        },
+        {
+          onSuccess: () => {
+            navigation.goBack();
+            showMessage({message: 'Message sent'});
+          },
+        },
+      );
     }
   };
 

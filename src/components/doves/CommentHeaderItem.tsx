@@ -13,7 +13,7 @@ const CommentHeaderItem = ({item}) => {
       </View>
       <View style={[rGap15, flex1]}>
         <Text style={pr10}>
-          <Text style={bold}>{item.fullname + ' '}</Text>
+          <Text style={bold}>{(item.fullname ?? item.username) + ' '}</Text>
           <Text>{item.caption}</Text>
         </Text>
         <Text style={[font11, gray]}>{dateDiff(item.upload_time * 1000)}</Text>

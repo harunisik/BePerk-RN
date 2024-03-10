@@ -1,8 +1,9 @@
 import {showMessage} from 'react-native-flash-message';
-import {useDeletePost} from '../../../hooks/userHooks';
 import {useStore} from '../../../containers/StoreContainer';
 import {ModalActionType} from '../../../containers/ModalAction';
 import Button from './Button';
+import {useCustomMutation as useMutation} from '../../../hooks/commonHooks';
+import {deletePost as userDeletePost} from '../../../services/UserService';
 
 interface DeleteButtonProps {
   item: any;
@@ -15,7 +16,8 @@ const DeleteButton = ({item}: DeleteButtonProps) => {
       modalInfo: {routeName},
     },
   } = useStore();
-  const deletePost = useDeletePost(routeName);
+
+  const deletePost = useMutation(userDeletePost, routeName);
 
   const handlePress = () =>
     deletePost.mutate(

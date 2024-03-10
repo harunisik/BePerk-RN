@@ -3,24 +3,18 @@ import {useMutation} from 'react-query';
 import {searchHashTagCount, searchUsers} from '../services/SearchService';
 import {useEffect} from 'react';
 
-export function useSearchUsers(onSuccessCallback) {
+export function useSearchUsers() {
   return useMutation({
     mutationFn: search => searchUsers(search),
-    onSuccess: data => {
-      onSuccessCallback(data?.profiles);
-    },
     onError: ({message}) => {
       showMessage({message, type: 'danger'});
     },
   });
 }
 
-export function useSearchHashTagCount(onSuccessCallback) {
+export function useSearchHashTagCount() {
   return useMutation({
     mutationFn: search => searchHashTagCount(search),
-    onSuccess: data => {
-      onSuccessCallback(data?.hashtags);
-    },
     onError: ({message}) => {
       showMessage({message, type: 'danger'});
     },

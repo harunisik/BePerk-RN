@@ -1,9 +1,10 @@
 import {View, FlatList} from 'react-native';
 import DovesItem from '../../components/doves/DovesItem';
-import {useGetUserPerks} from '../../hooks/userHooks';
 import ItemSeperator from '../../components/common/ItemSpearator';
 import common from '../../styles/sharedStyles';
 import {useRoute} from '@react-navigation/native';
+import {useCustomQuery as useQuery} from '../../hooks/commonHooks';
+import {getUserPerks} from '../../services/UserService';
 
 const DovesTab = () => {
   const route = useRoute();
@@ -11,11 +12,11 @@ const DovesTab = () => {
     params: {userId: id},
   } = route;
 
-  const {data, refetch, isFetching} = useGetUserPerks(route.name, {
-    id,
-    limit: 35,
-    offset: 0,
-  });
+  const {data, refetch, isFetching} = useQuery(
+    getUserPerks,
+    {id, limit: 35, offset: 0},
+    route.key,
+  );
 
   const {pt15} = common;
 

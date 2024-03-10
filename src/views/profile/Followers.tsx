@@ -4,9 +4,10 @@ import {useEffect, useState} from 'react';
 import UserItem from '../../components/profile/UserItem';
 import SelectedUsers from '../../components/profile/SelectedUsers';
 import {useSearchText, useSearchUsers} from '../../hooks/searchHooks';
-import {useGetUserFollowings} from '../../hooks/userHooks';
 import ItemSeperator from '../../components/common/ItemSpearator';
 import {useNavigation, useRoute} from '@react-navigation/native';
+import {useCustomQuery as useQuery} from '../../hooks/commonHooks';
+import {getUserFollowings} from '../../services/UserService';
 
 const Followers = () => {
   const [searchText, setSearchText] = useState('');
@@ -17,13 +18,13 @@ const Followers = () => {
 
   const {bold, font16, pl15, pr15, pb10, pt10} = common;
 
-  const {data, refetch, isFetching} = useGetUserFollowings(route.name);
-
-  const handleSearchUsers = useSearchUsers(profiles =>
-    setSearchResult(
-      profiles?.map(profile => ({...profile, user_id: profile.id})),
-    ),
+  const {data, refetch, isFetching} = useQuery(
+    getUserFollowings,
+    null,
+    route.key,
   );
+
+  const searchUsers = useSearchUsers();
 
   const handlePressUserItem = (item, isSelected) => {
     setSelectedUsers(prev => {
@@ -35,19 +36,21 @@ const Followers = () => {
   };
 
   useEffect(() => {
-    navigation.setParams({
-      selectedUsers,
-    });
+    navigation.setParams({selectedUsers});
   }, [selectedUsers]);
 
   useSearchText(
     searchText,
     () =>
-      handleSearchUsers.mutate({
-        limit: 50,
-        offset: 0,
-        username: searchText,
-      }),
+      searchUsers.mutate(
+        {limit: 50, offset: 0, username: searchText},
+        {
+          onSuccess: ({profiles}) =>
+            setSearchResult(
+              profiles?.map(profile => ({...profile, user_id: profile.id})),
+            ),
+        },
+      ),
     () => setSearchResult([]),
   );
 

@@ -1,13 +1,14 @@
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useEffect, useState} from 'react';
-import {usePostBookmarks} from '../../../hooks/userHooks';
 import {useRoute} from '@react-navigation/native';
+import {useCustomMutation as useMutation} from '../../../hooks/commonHooks';
+import {postBookmarks as userPostBookmarks} from '../../../services/UserService';
 
 const BookmarkButton = ({item}) => {
   const [bookmark, setBookmark] = useState(item.bookmark);
   const route = useRoute();
 
-  const handleLike = usePostBookmarks(route.name);
+  const postBookmarks = useMutation(userPostBookmarks, route.key);
 
   useEffect(() => {
     setBookmark(item.bookmark);
@@ -18,7 +19,7 @@ const BookmarkButton = ({item}) => {
       name={bookmark ? 'bookmark' : 'bookmark-outline'}
       size={24}
       onPress={() =>
-        handleLike.mutate(
+        postBookmarks.mutate(
           {
             id: item.id,
             type: item.type,

@@ -17,7 +17,7 @@ const DotsButton = ({item}) => {
           type: ModalActionType.OPEN,
           modalInfo: {
             component: <ItemModal item={item} />,
-            routeName: route.name,
+            routeName: route.key,
           },
         });
       }}

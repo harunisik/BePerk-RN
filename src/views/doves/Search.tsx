@@ -12,7 +12,7 @@ import {TabBar, TabView} from 'react-native-tab-view';
 import SearchTagsTab from './SearchTagsTab';
 
 const renderScene = ({route, searchText}) => {
-  switch (route.key) {
+  switch (route.name) {
     case SearchProfilesTab.name:
       return <SearchProfilesTab searchText={searchText} />;
     case SearchTagsTab.name:

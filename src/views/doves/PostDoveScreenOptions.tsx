@@ -1,20 +1,21 @@
 import {Text} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useAddPerk} from '../../hooks/userHooks';
 import {showMessage} from 'react-native-flash-message';
+import {useCustomMutation as useMutation} from '../../hooks/commonHooks';
+import {addPerk as userAddPerk} from '../../services/UserService';
 
 const HeaderRight = ({navigation, route}) => {
   const {
     params: {caption, isAnonymous, subtype, navigateTo},
   } = route;
 
-  const handleAddPerk = useAddPerk(route.name);
+  const addPerk = useMutation(userAddPerk, route.key);
 
   const handlePressPost = () => {
     if (!caption) {
       showMessage({message: 'Please type something', type: 'warning'});
     } else {
-      handleAddPerk.mutate(
+      addPerk.mutate(
         {
           anonymous: isAnonymous ? 1 : 0,
           caption,

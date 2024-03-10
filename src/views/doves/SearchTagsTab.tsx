@@ -8,11 +8,7 @@ const SearchTagsTab = ({searchText}) => {
   const [searchResult, setSearchResult] = useState([]);
   const {bold} = common;
 
-  const handleSearchHashtags = useSearchHashTagCount(profiles =>
-    setSearchResult(
-      profiles?.map(profile => ({...profile, user_id: profile.id})),
-    ),
-  );
+  const handleSearchHashtags = useSearchHashTagCount();
 
   const handlePressItem = () => {
     Alert.alert('under construction');
@@ -21,12 +17,20 @@ const SearchTagsTab = ({searchText}) => {
   useSearchText(
     searchText,
     () =>
-      handleSearchHashtags.mutate({
-        limit: 50,
-        offset: 0,
-        hashtag: searchText,
-        filter: 0,
-      }),
+      handleSearchHashtags.mutate(
+        {
+          limit: 50,
+          offset: 0,
+          hashtag: searchText,
+          filter: 0,
+        },
+        {
+          onSuccess: ({hashtags}) =>
+            setSearchResult(
+              hashtags?.map(hashtag => ({...hashtag, user_id: hashtag.id})),
+            ),
+        },
+      ),
     () => setSearchResult([]),
   );
 

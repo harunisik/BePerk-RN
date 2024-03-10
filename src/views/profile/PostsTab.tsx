@@ -1,10 +1,11 @@
 import {FlatList} from 'react-native';
-import {useGetPhotoVideo} from '../../hooks/userHooks';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import PostItem from '../../components/profile/PostItem';
 import {useEffect, useState} from 'react';
 import common from '../../styles/sharedStyles';
 import PostsDetails from './PostsDetails';
+import {useCustomQuery as useQuery} from '../../hooks/commonHooks';
+import {getPhotoVideo} from '../../services/UserService';
 
 const COL_NUM = 3;
 
@@ -21,11 +22,11 @@ const PostsTab = () => {
   } = route;
   const {pv5} = common;
 
-  const {data, refetch, isFetching} = useGetPhotoVideo(route.name, {
-    id,
-    limit: 35,
-    offset: 0,
-  });
+  const {data, refetch, isFetching} = useQuery(
+    getPhotoVideo,
+    {id, limit: 35, offset: 0},
+    route.key,
+  );
 
   useEffect(() => {
     const length = data?.length;
