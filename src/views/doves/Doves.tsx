@@ -26,7 +26,6 @@ const Doves = () => {
             buttonText: "Post what's on your mind",
             inputTextPlaceHolder: "What's on your mind?",
             title: 'Post Dove',
-            navigateTo: DoveTab.name,
           }}
         />
         <Tab.Screen
@@ -38,7 +37,6 @@ const Doves = () => {
             buttonText: 'Write what God has done for you!',
             inputTextPlaceHolder: 'Share a testimony',
             title: 'Post Testimony',
-            navigateTo: 'TestimonyTab',
           }}
         />
         <Tab.Screen
@@ -50,7 +48,6 @@ const Doves = () => {
             buttonText: 'Share a prayer request!',
             inputTextPlaceHolder: 'Share a prayer request',
             title: 'Post Prayer Request',
-            navigateTo: 'PrayerTab',
           }}
         />
       </Tab.Navigator>

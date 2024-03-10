@@ -7,9 +7,11 @@ import {ModalActionType} from '../../containers/ModalAction';
 import AddDoveModal from '../../components/doves/AddDoveModal';
 import Activity from './Activity';
 import Search from './Search';
+import {useNavigation} from '@react-navigation/native';
 
-const HeaderRight = ({navigation}) => {
+const HeaderRight = () => {
   const {dispatch} = useStore();
+  const navigation = useNavigation();
   const {row, cGap15} = common;
 
   return (
@@ -37,7 +39,9 @@ const HeaderRight = ({navigation}) => {
   );
 };
 
-const DovesScreenOptions = ({navigation}) => {
+const DovesScreenOptions = () => {
+  const navigation = useNavigation();
+
   return {
     title: '',
     headerLeft: () => (
@@ -47,7 +51,7 @@ const DovesScreenOptions = ({navigation}) => {
         size={26}
       />
     ),
-    headerRight: () => <HeaderRight navigation={navigation} />,
+    headerRight: HeaderRight,
   };
 };
 

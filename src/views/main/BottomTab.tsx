@@ -3,13 +3,13 @@ import Home from '../home/Home';
 import Stories from '../stories/Stories';
 import ProfileStack from '../profile/ProfileStack';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import BottomSheetModal from '../../components/common/BottomSheetModal';
 import DovesStack from '../doves/DovesStack';
+import Add from '../home/Add';
 
 const routeIcons = {
   [Home.name]: 'home',
   [Stories.name]: 'account-multiple',
-  [BottomSheetModal.name]: 'plus',
+  [Add.name]: 'plus',
   [DovesStack.name]: 'bird',
   [ProfileStack.name]: 'account',
 };
@@ -30,8 +30,8 @@ const BottomTab = () => {
       <Tab.Screen name={Home.name} component={Home} />
       <Tab.Screen name={Stories.name} component={Stories} />
       <Tab.Screen
-        name={BottomSheetModal.name}
-        component={BottomSheetModal}
+        name={Add.name}
+        component={Add}
         options={{tabBarLabel: 'Add'}}
       />
       <Tab.Screen

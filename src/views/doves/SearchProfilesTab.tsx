@@ -23,11 +23,7 @@ const SearchProfilesTab = ({searchText}) => {
     searchText,
     () =>
       searchUsers.mutate(
-        {
-          limit: 50,
-          offset: 0,
-          username: searchText,
-        },
+        {limit: 50, offset: 0, username: searchText},
         {
           onSuccess: ({profiles}) =>
             setSearchResult(

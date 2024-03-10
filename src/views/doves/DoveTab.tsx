@@ -13,7 +13,7 @@ const ListHeaderComponent = () => {
   const route = useRoute();
   const {row, jcCenter, aiCenter, cGap10} = common;
   const {
-    params: {subtype, buttonText, inputTextPlaceHolder, title, navigateTo},
+    params: {subtype, buttonText, inputTextPlaceHolder, title},
   } = route;
 
   return (
@@ -24,7 +24,7 @@ const ListHeaderComponent = () => {
           subtype,
           inputTextPlaceHolder,
           title,
-          navigateTo,
+          routeKey: route.key,
         })
       }>
       <MaterialCommunityIcons

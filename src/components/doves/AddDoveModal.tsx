@@ -4,7 +4,6 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import common from '../../styles/sharedStyles';
 import PostDove from '../../views/doves/PostDove';
-import DoveTab from '../../views/doves/DoveTab';
 import {useStore} from '../../containers/StoreContainer';
 import {ModalActionType} from '../../containers/ModalAction';
 
@@ -23,7 +22,6 @@ const AddDoveModal = ({navigation}) => {
             buttonText: "Post what's on your mind",
             inputTextPlaceHolder: "What's on your mind?",
             title: 'Post Dove',
-            navigateTo: DoveTab.name,
           });
         }}>
         <AntDesign name="picture" size={26} color="dodgerblue" />
@@ -39,7 +37,6 @@ const AddDoveModal = ({navigation}) => {
             buttonText: 'Write what God has done for you!',
             inputTextPlaceHolder: 'Share a testimony',
             title: 'Post Testimony',
-            navigateTo: 'TestimonyTab',
           });
         }}>
         <MaterialCommunityIcons
@@ -59,7 +56,6 @@ const AddDoveModal = ({navigation}) => {
             buttonText: 'Share a prayer request!',
             inputTextPlaceHolder: 'Share a prayer request',
             title: 'Post Prayer Request',
-            navigateTo: 'PrayerTab',
           });
         }}>
         <MaterialIcons name="work" size={26} color="purple" />

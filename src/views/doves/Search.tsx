@@ -12,7 +12,7 @@ import {TabBar, TabView} from 'react-native-tab-view';
 import SearchTagsTab from './SearchTagsTab';
 
 const renderScene = ({route, searchText}) => {
-  switch (route.name) {
+  switch (route.key) {
     case SearchProfilesTab.name:
       return <SearchProfilesTab searchText={searchText} />;
     case SearchTagsTab.name:
@@ -35,7 +35,6 @@ const renderTabBar = props => (
 
 const SearchTabGroup = ({searchText}) => {
   const layout = useWindowDimensions();
-
   const [index, setIndex] = useState(0);
   const [routes] = useState([
     {key: SearchProfilesTab.name, title: 'Profiles'},
@@ -56,7 +55,6 @@ const SearchTabGroup = ({searchText}) => {
 
 const Search = () => {
   const [searchText, setSearchText] = useState('');
-
   const {pl15, pr15, flex1} = common;
 
   return (

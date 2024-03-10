@@ -6,10 +6,10 @@ import {addPerk as userAddPerk} from '../../services/UserService';
 
 const HeaderRight = ({navigation, route}) => {
   const {
-    params: {caption, isAnonymous, subtype, navigateTo},
+    params: {caption, isAnonymous, subtype, routeKey},
   } = route;
 
-  const addPerk = useMutation(userAddPerk, route.key);
+  const addPerk = useMutation(userAddPerk, routeKey);
 
   const handlePressPost = () => {
     if (!caption) {
@@ -27,7 +27,7 @@ const HeaderRight = ({navigation, route}) => {
         },
         {
           onSuccess: () => {
-            navigation.navigate(navigateTo);
+            navigation.goBack();
             showMessage({message: 'Message sent'});
           },
         },
