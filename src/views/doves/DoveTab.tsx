@@ -24,7 +24,6 @@ const ListHeaderComponent = () => {
           subtype,
           inputTextPlaceHolder,
           title,
-          routeKey: route.key,
         })
       }>
       <MaterialCommunityIcons
@@ -43,11 +42,12 @@ const DoveTab = () => {
     params: {subtype},
   } = route;
 
-  const {data, refetch, isRefetching} = useQuery(
-    getUserExploring,
-    {filter: 2, limit: 35, offset: 0, subtype},
-    route.key,
-  );
+  const {data, refetch, isRefetching} = useQuery(getUserExploring, {
+    filter: 2,
+    limit: 35,
+    offset: 0,
+    subtype,
+  });
 
   return (
     <FlatList

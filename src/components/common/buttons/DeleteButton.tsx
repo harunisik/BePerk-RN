@@ -10,14 +10,9 @@ interface DeleteButtonProps {
 }
 
 const DeleteButton = ({item}: DeleteButtonProps) => {
-  const {
-    dispatch,
-    store: {
-      modalInfo: {routeName},
-    },
-  } = useStore();
+  const {dispatch} = useStore();
 
-  const deletePost = useMutation(userDeletePost, routeName);
+  const deletePost = useMutation(userDeletePost);
 
   const handlePress = () =>
     deletePost.mutate(

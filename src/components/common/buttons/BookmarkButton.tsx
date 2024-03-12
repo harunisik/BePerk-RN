@@ -1,14 +1,12 @@
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useEffect, useState} from 'react';
-import {useRoute} from '@react-navigation/native';
 import {useCustomMutation as useMutation} from '../../../hooks/commonHooks';
 import {postBookmarks as userPostBookmarks} from '../../../services/UserService';
 
 const BookmarkButton = ({item}) => {
   const [bookmark, setBookmark] = useState(item.bookmark);
-  const route = useRoute();
 
-  const postBookmarks = useMutation(userPostBookmarks, route.key);
+  const postBookmarks = useMutation(userPostBookmarks);
 
   useEffect(() => {
     setBookmark(item.bookmark);

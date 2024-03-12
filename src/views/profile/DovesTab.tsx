@@ -12,11 +12,11 @@ const DovesTab = () => {
     params: {userId: id},
   } = route;
 
-  const {data, refetch, isFetching} = useQuery(
-    getUserPerks,
-    {id, limit: 35, offset: 0},
-    route.key,
-  );
+  const {data, refetch, isFetching} = useQuery(getUserPerks, {
+    id,
+    limit: 35,
+    offset: 0,
+  });
 
   const {pt15} = common;
 

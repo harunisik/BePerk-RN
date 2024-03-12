@@ -5,7 +5,7 @@ import UserItem from '../../components/profile/UserItem';
 import SelectedUsers from '../../components/profile/SelectedUsers';
 import {useSearchText, useSearchUsers} from '../../hooks/searchHooks';
 import ItemSeperator from '../../components/common/ItemSpearator';
-import {useNavigation, useRoute} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import {useCustomQuery as useQuery} from '../../hooks/commonHooks';
 import {getUserFollowings} from '../../services/UserService';
 
@@ -14,15 +14,10 @@ const Followers = () => {
   const [searchResult, setSearchResult] = useState([]);
   const [selectedUsers, setSelectedUsers] = useState([]);
   const navigation = useNavigation();
-  const route = useRoute();
 
   const {bold, font16, pl15, pr15, pb10, pt10} = common;
 
-  const {data, refetch, isFetching} = useQuery(
-    getUserFollowings,
-    null,
-    route.key,
-  );
+  const {data, refetch, isFetching} = useQuery(getUserFollowings);
 
   const searchUsers = useSearchUsers();
 

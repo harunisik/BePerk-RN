@@ -46,16 +46,16 @@ const ListHeaderItem = ({item}) => {
 
 const HomeTab = () => {
   const route = useRoute();
-  const {data: beperkDove} = useQuery(
-    getUserPerks,
-    {id: 2565, limit: 1, offset: 0},
-    route.key,
-  );
-  const {data, refetch, isFetching} = useQuery(
-    getUserFeed,
-    {filter: 2, limit: 35, offset: 0},
-    route.key,
-  );
+  const {data: beperkDove} = useQuery(getUserPerks, {
+    id: 2565,
+    limit: 1,
+    offset: 0,
+  });
+  const {data, refetch, isFetching} = useQuery(getUserFeed, {
+    filter: 2,
+    limit: 35,
+    offset: 0,
+  });
 
   const ItemSeparatorComponent = useCallback(
     () => <ItemSeperator lineVisible large />,

@@ -23,14 +23,13 @@ const Comment = () => {
   const [selectedCommentId, setSelectedCommentId] = useState(item.id);
   const {flex1} = common;
 
-  const {data, refetch, isFetching} = useQuery(
-    getUserComments,
-    {id: item.id, type: item.type},
-    route.key,
-  );
+  const {data, refetch, isFetching} = useQuery(getUserComments, {
+    id: item.id,
+    type: item.type,
+  });
 
-  const postComment = useMutation(userPostComment, route.key);
-  const deleteComment = useMutation(userDeleteComment, route.key);
+  const postComment = useMutation(userPostComment);
+  const deleteComment = useMutation(userDeleteComment);
 
   const handleRefresh = () => {
     clearSelectedComment();

@@ -7,25 +7,55 @@ import {
   useQuery,
   useQueryClient,
 } from 'react-query';
+import {
+  addFollowing,
+  addPerk,
+  deleteComment,
+  deleteFollowing,
+  deletePost,
+  getUserComments,
+  getUserExploring,
+  getUserFeed,
+  postBookmarks,
+  postComment,
+  postUserLike,
+} from '../services/UserService';
+import {chatShare} from '../services/ChatService';
+
+const queryMap = {
+  [postBookmarks.name]: [],
+  [deletePost.name]: [getUserFeed.name, getUserExploring.name],
+  [postUserLike.name]: [],
+  [postComment.name]: [getUserComments.name],
+  [deleteComment.name]: [getUserComments.name],
+  [addPerk.name]: [getUserFeed.name, getUserExploring.name],
+  [chatShare.name]: [],
+  [addFollowing.name]: [],
+  [deleteFollowing.name]: [],
+};
+
+// getUserHistory
+// getUserComment
+// getUserExploring
+// getUserPerks
+// getUserFeed
+// getUserFollowing
+// getPhotoVideo
+// getUserProfile
 
 // MUTATION requests
 
 export function useCustomMutation<TData = unknown, TVariables = void>(
   mutationFn: MutationFunction<TData, TVariables>,
-  routeName?: string,
 ) {
   const queryClient = useQueryClient();
-  const options = queryClient.getDefaultOptions();
 
   return useMutation({
     mutationFn,
     onSuccess: () => {
-      if (routeName) {
-        const queryKey = options.queries?.meta?.[routeName];
-        if (queryKey) {
-          queryClient.invalidateQueries({queryKey});
-        }
-      }
+      queryMap[mutationFn.name]?.forEach(item => {
+        queryClient.invalidateQueries({queryKey: item});
+      });
     },
     onError: ({message}) => {
       showMessage({message, type: 'danger'});
@@ -38,20 +68,7 @@ export function useCustomMutation<TData = unknown, TVariables = void>(
 export function useCustomQuery<
   TQueryFnData = unknown,
   TQueryKey extends QueryKey = QueryKey,
->(
-  queryFn: QueryFunction<TQueryFnData, TQueryKey>,
-  data?: TQueryFnData,
-  routeName?: string,
-) {
+>(queryFn: QueryFunction<TQueryFnData, TQueryKey>, data?: TQueryFnData) {
   const queryKey = data ? [queryFn.name, data] : [queryFn.name];
-  const queryClient = useQueryClient();
-  const options = queryClient.getDefaultOptions();
-
-  if (routeName) {
-    queryClient.setDefaultOptions({
-      queries: {meta: {...options.queries?.meta, [routeName]: queryKey}},
-    });
-  }
-
   return useQuery({queryKey, queryFn});
 }

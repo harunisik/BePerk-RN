@@ -30,9 +30,9 @@ const Profile = () => {
 
   const {flex1} = common;
 
-  const {data} = useQuery(getUserProfile, {id}, route.key);
-  const addFollowing = useMutation(userAddFollowing, route.key);
-  const deleteFollowing = useMutation(userDeleteFollowing, route.key);
+  const {data} = useQuery(getUserProfile, {id});
+  const addFollowing = useMutation(userAddFollowing);
+  const deleteFollowing = useMutation(userDeleteFollowing);
 
   const handlePressFollowing = () => {
     if (isFollowing === 0) {

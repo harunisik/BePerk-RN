@@ -13,11 +13,12 @@ const ActivityTab = () => {
   } = route;
   const {p15} = common;
 
-  const {data, refetch, isFetching} = useQuery(
-    getUserHistory,
-    {filter, limit: 50, offset: 0, onlyNew: 0},
-    route.key,
-  );
+  const {data, refetch, isFetching} = useQuery(getUserHistory, {
+    filter,
+    limit: 50,
+    offset: 0,
+    onlyNew: 0,
+  });
 
   return (
     <FlatList

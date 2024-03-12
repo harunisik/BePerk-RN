@@ -22,11 +22,11 @@ const PostsTab = () => {
   } = route;
   const {pv5} = common;
 
-  const {data, refetch, isFetching} = useQuery(
-    getPhotoVideo,
-    {id, limit: 35, offset: 0},
-    route.key,
-  );
+  const {data, refetch, isFetching} = useQuery(getPhotoVideo, {
+    id,
+    limit: 35,
+    offset: 0,
+  });
 
   useEffect(() => {
     const length = data?.length;

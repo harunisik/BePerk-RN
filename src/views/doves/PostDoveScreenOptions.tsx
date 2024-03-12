@@ -6,10 +6,10 @@ import {addPerk as userAddPerk} from '../../services/UserService';
 
 const HeaderRight = ({navigation, route}) => {
   const {
-    params: {caption, isAnonymous, subtype, routeKey},
+    params: {caption, isAnonymous, subtype},
   } = route;
 
-  const addPerk = useMutation(userAddPerk, routeKey);
+  const addPerk = useMutation(userAddPerk);
 
   const handlePressPost = () => {
     if (!caption) {
