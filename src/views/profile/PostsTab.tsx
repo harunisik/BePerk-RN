@@ -37,9 +37,9 @@ const PostsTab = () => {
     }
   }, [data]);
 
-  const handlePressItem = index => {
+  const handlePressItem = (index, item) => {
     if (data?.length > index) {
-      navigation.navigate(PostsDetails.name, {data, index});
+      navigation.navigate(PostsDetails.name, {data, index, item});
     }
   };
 
@@ -47,7 +47,7 @@ const PostsTab = () => {
     <FlatList
       data={[...(data ? data : []), ...additionalData]}
       renderItem={({item, index}) => (
-        <PostItem item={item} onPress={() => handlePressItem(index)} />
+        <PostItem item={item} onPress={() => handlePressItem(index, item)} />
       )}
       keyExtractor={item => item.id}
       onRefresh={refetch}

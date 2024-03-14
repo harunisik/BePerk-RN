@@ -2,25 +2,35 @@ import {FlatList} from 'react-native';
 import {useRoute} from '@react-navigation/native';
 import PostsDetailsItem from '../../components/profile/PostsDetailsItem';
 import ItemSeperator from '../../components/common/ItemSpearator';
-import {useEffect, useRef} from 'react';
+import {useCallback, useEffect, useRef} from 'react';
 
 const PostsDetails = () => {
   const flatList = useRef<FlatList>(null);
   const route = useRoute();
   const {
-    params: {data, index},
+    params: {data, index: indexParam, item},
   } = route;
 
   const handleScrollToIndexFailed = ({index}) => {
-    const wait = new Promise(resolve => setTimeout(resolve, 100));
-    wait.then(() => {
-      flatList.current?.scrollToIndex({index, animated: false});
-    });
+    console.log('handleScrollToIndexFailed');
+    // const wait = new Promise(resolve => setTimeout(resolve, 500));
+    // wait.then(() => {
+    //   flatList.current?.scrollToIndex({index, animated: false});
+    // });
+    // setTimeout(() => {
+    //   flatList.current?.scrollToOffset({offset: 1500, animated: false});
+    // }, 1500);
   };
 
   useEffect(() => {
-    flatList.current?.scrollToIndex({index: index, animated: false});
-  }, [index]);
+    // flatList.current?.scrollToIndex({index: indexParam, animated: false});
+    // flatList.current?.scrollToItem({item, animated: true});
+  }, [indexParam]);
+
+  const ItemSeparatorComponent = useCallback(
+    () => <ItemSeperator lineVisible />,
+    [],
+  );
 
   return (
     <FlatList
@@ -30,8 +40,16 @@ const PostsDetails = () => {
       keyExtractor={item => item.id}
       // onRefresh={refetch}
       // refreshing={isFetching}
-      ItemSeparatorComponent={<ItemSeperator lineVisible />}
+      ItemSeparatorComponent={ItemSeparatorComponent}
       onScrollToIndexFailed={handleScrollToIndexFailed}
+      initialScrollIndex={indexParam}
+      // initialNumToRender={20}
+      onLayout={event => {
+        setTimeout(() => {
+          // flatList.current?.scrollToOffset({offset: 1500, animated: false});
+          // flatList.current?.scrollToIndex({index: indexParam, animated: false});
+        }, 0);
+      }}
     />
   );
 };
