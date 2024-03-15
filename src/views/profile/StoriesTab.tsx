@@ -1,14 +1,44 @@
-import {View, Text} from 'react-native';
+import {FlatList} from 'react-native';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import PostItem from '../../components/profile/PostItem';
 import common from '../../styles/sharedStyles';
+import {useCustomQuery as useQuery} from '../../hooks/commonHooks';
+import {getMy24} from '../../services/UserService';
+import PostsDetails from './PostsDetails';
+import {appendData} from '../../utils/DataUtil';
+
+const COL_NUM = 3;
 
 const StoriesTab = () => {
-  const {flex1, jcCenter, aiCenter, dashed} = common;
+  const navigation = useNavigation();
+  const route = useRoute();
+  const {
+    params: {userId: id},
+  } = route;
+  const {pv5} = common;
 
-  //   /my24?id=170763 HTTP/1.1" 200 11
+  const {data, refetch, isFetching} = useQuery(getMy24, {id});
+
+  const {length} = appendData(data?.my24);
+
+  const handlePressItem = (index, item) => {
+    if (length > index) {
+      navigation.navigate(PostsDetails.name, {data: data.my24, index, item});
+    }
+  };
+
   return (
-    <View style={[flex1, jcCenter, aiCenter, dashed]}>
-      <Text>Stories Under construction!</Text>
-    </View>
+    <FlatList
+      data={data?.my24}
+      renderItem={({item, index}) => (
+        <PostItem item={item} onPress={() => handlePressItem(index, item)} />
+      )}
+      keyExtractor={item => item.id}
+      onRefresh={refetch}
+      refreshing={isFetching}
+      numColumns={COL_NUM}
+      contentContainerStyle={pv5}
+    />
   );
 };
 

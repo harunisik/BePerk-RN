@@ -1,7 +1,8 @@
-import {StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
+import {StyleSheet, TouchableWithoutFeedback, View} from 'react-native';
 import common from '../../styles/sharedStyles';
 import FastImage from 'react-native-fast-image';
 import {Fragment} from 'react';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const PostItem = ({item, onPress}) => {
   const {flex1, p1} = common;
@@ -17,7 +18,21 @@ const PostItem = ({item, onPress}) => {
             }}
           />
         ) : item.type === 0 ? (
-          <Text>{item.filename}</Text>
+          <View style={flex1}>
+            {/* <Video source={{uri: item.filename}} paused style={flex1} /> */}
+            <FastImage
+              style={styles.image}
+              source={{
+                uri: item.cover,
+              }}
+            />
+            <MaterialIcons
+              name="ondemand-video"
+              size={20}
+              style={styles.videoIcon}
+              color="white"
+            />
+          </View>
         ) : (
           <Fragment />
         )}
@@ -29,6 +44,11 @@ const PostItem = ({item, onPress}) => {
 const styles = StyleSheet.create({
   image: {
     height: 120,
+  },
+  videoIcon: {
+    position: 'absolute',
+    top: 5,
+    right: 5,
   },
 });
 

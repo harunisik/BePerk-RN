@@ -81,6 +81,11 @@ export const getPhotoVideo = ({queryKey}) => {
     .catch(handleError);
 };
 
+export const getMy24 = ({queryKey}) => {
+  const {id} = queryKey[1];
+  return axios.get(`/my24?id=${id}`).then(handleResponse).catch(handleError);
+};
+
 // POST requests
 
 export interface UserLikeProps {

@@ -1,20 +1,15 @@
 import {FlatList} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import PostItem from '../../components/profile/PostItem';
-import {useEffect, useState} from 'react';
 import common from '../../styles/sharedStyles';
 import PostsDetails from './PostsDetails';
 import {useCustomQuery as useQuery} from '../../hooks/commonHooks';
 import {getPhotoVideo} from '../../services/UserService';
+import {appendData} from '../../utils/DataUtil';
 
 const COL_NUM = 3;
 
-const isDivideble = (num, div) => {
-  return num % div === 0;
-};
-
 const PostsTab = () => {
-  const [additionalData, setAdditionalData] = useState([]);
   const navigation = useNavigation();
   const route = useRoute();
   const {
@@ -28,24 +23,17 @@ const PostsTab = () => {
     offset: 0,
   });
 
-  useEffect(() => {
-    const length = data?.length;
-    if (length && !isDivideble(length, COL_NUM)) {
-      for (let index = 0; !isDivideble(length + index, COL_NUM); index++) {
-        setAdditionalData(prev => [...prev, {id: length + index}]);
-      }
-    }
-  }, [data]);
+  const {length} = appendData(data);
 
   const handlePressItem = (index, item) => {
-    if (data?.length > index) {
+    if (length > index) {
       navigation.navigate(PostsDetails.name, {data, index, item});
     }
   };
 
   return (
     <FlatList
-      data={[...(data ? data : []), ...additionalData]}
+      data={data}
       renderItem={({item, index}) => (
         <PostItem item={item} onPress={() => handlePressItem(index, item)} />
       )}

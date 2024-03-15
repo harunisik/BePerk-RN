@@ -1,4 +1,4 @@
-import {Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import common from '../../styles/sharedStyles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import LikeButtton from '../common/buttons/LikeButton';
@@ -8,6 +8,7 @@ import FastImage from '../common/FastImage';
 import BookmarkButton from '../common/buttons/BookmarkButton';
 import DotsButton from '../common/buttons/DotsButton';
 import ShareButton from '../common/buttons/ShareButton';
+import Video from '../common/Video';
 
 const PostsDetailsItem = ({item}) => {
   const {
@@ -39,7 +40,11 @@ const PostsDetailsItem = ({item}) => {
         </View>
       </View>
 
-      <FastImage uri={item.filename} />
+      {item.type === 1 ? (
+        <FastImage uri={item.filename} />
+      ) : (
+        <Video uri={item.filename} />
+      )}
 
       <View style={[row, jcSpaceAround]}>
         <LikeButtton item={item} type={item.type} />

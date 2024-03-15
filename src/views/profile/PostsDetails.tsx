@@ -12,7 +12,7 @@ const PostsDetails = () => {
   } = route;
 
   const handleScrollToIndexFailed = ({index}) => {
-    console.log('handleScrollToIndexFailed');
+    // console.log('handleScrollToIndexFailed');
     // const wait = new Promise(resolve => setTimeout(resolve, 500));
     // wait.then(() => {
     //   flatList.current?.scrollToIndex({index, animated: false});
