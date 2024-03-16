@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import common from '../../styles/sharedStyles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import LikeButtton from '../common/buttons/LikeButton';

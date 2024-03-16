@@ -4,8 +4,8 @@ import PostItem from '../../components/profile/PostItem';
 import common from '../../styles/sharedStyles';
 import {useCustomQuery as useQuery} from '../../hooks/commonHooks';
 import {getMy24} from '../../services/UserService';
-import PostsDetails from './PostsDetails';
 import {appendData} from '../../utils/DataUtil';
+import StoryView from './StoryView';
 
 const COL_NUM = 3;
 
@@ -23,7 +23,7 @@ const StoriesTab = () => {
 
   const handlePressItem = (index, item) => {
     if (length > index) {
-      navigation.navigate(PostsDetails.name, {data: data.my24, index, item});
+      navigation.navigate(StoryView.name, {data: data.my24, index, item});
     }
   };
 

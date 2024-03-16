@@ -16,6 +16,7 @@ import Profile from './Profile';
 import ProfileScreenOptions from './ProfileScreenOptions';
 import {useStore} from '../../containers/StoreContainer';
 import PostsDetails from './PostsDetails';
+import StoryView from './StoryView';
 
 const ProfileStack = () => {
   const Stack = createNativeStackNavigator();
@@ -85,6 +86,7 @@ const ProfileStack = () => {
         component={PostsDetails}
         options={{title: 'Posts'}}
       />
+      <Stack.Screen name={StoryView.name} component={StoryView} />
     </Stack.Navigator>
   );
 };
