@@ -134,6 +134,15 @@ const common = StyleSheet.create({
   pv15: {
     paddingVertical: 15,
   },
+  pv50: {
+    paddingVertical: 50,
+  },
+  ph10: {
+    paddingHorizontal: 10,
+  },
+  ph20: {
+    paddingHorizontal: 20,
+  },
   ph15: {
     paddingHorizontal: 15,
   },

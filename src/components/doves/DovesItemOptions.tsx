@@ -19,7 +19,10 @@ const DovesItemOptions = ({item}) => {
         size={22}
         color="gray"
         onPress={() =>
-          navigation.navigate(Followers.name, {id: item.id, type: item.type})
+          navigation.navigate(Followers.name, {
+            itemId: item.id,
+            type: item.type,
+          })
         }
       />
     </View>

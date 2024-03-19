@@ -13,6 +13,7 @@ import {
   deleteComment,
   deleteFollowing,
   deletePost,
+  getMy24,
   getUserComments,
   getUserExploring,
   getUserFeed,
@@ -24,7 +25,7 @@ import {chatShare} from '../services/ChatService';
 
 const queryMap = {
   [postBookmarks.name]: [],
-  [deletePost.name]: [getUserFeed.name, getUserExploring.name],
+  [deletePost.name]: [getUserFeed.name, getUserExploring.name, getMy24.name],
   [postUserLike.name]: [],
   [postComment.name]: [getUserComments.name],
   [deleteComment.name]: [getUserComments.name],

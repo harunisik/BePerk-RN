@@ -20,6 +20,10 @@ const screenOptions = ({route}) => ({
     const iconName = routeIcons[route.name] ?? 'minus';
     return <MaterialCommunityIcons name={iconName} size={26} color={color} />;
   },
+  // tabBarStyle: {
+  //   display:
+  //     getFocusedRouteNameFromRoute(route) === StoryView.name ? 'none' : 'flex',
+  // },
 });
 
 const BottomTab = () => {

@@ -6,7 +6,7 @@ import {chatShare as userChatShare} from '../../services/ChatService';
 
 const HeaderRight = ({navigation, route}) => {
   const {
-    params: {id, type, selectedUsers},
+    params: {itemId, type, selectedUsers},
   } = route;
 
   const chatShare = useMutation(userChatShare);
@@ -17,7 +17,7 @@ const HeaderRight = ({navigation, route}) => {
     } else {
       chatShare.mutate(
         {
-          id,
+          id: itemId,
           type,
           share_to: JSON.stringify(selectedUsers.map(({user_id}) => user_id)),
         },
@@ -37,6 +37,7 @@ const HeaderRight = ({navigation, route}) => {
 const FollowersScreenOptions = ({navigation, route}) => {
   return {
     animation: 'slide_from_bottom',
+    presentation: 'fullScreenModal',
     headerLeft: () => (
       <MaterialCommunityIcons
         name="close"

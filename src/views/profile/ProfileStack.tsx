@@ -86,7 +86,15 @@ const ProfileStack = () => {
         component={PostsDetails}
         options={{title: 'Posts'}}
       />
-      <Stack.Screen name={StoryView.name} component={StoryView} />
+      <Stack.Screen
+        name={StoryView.name}
+        component={StoryView}
+        options={{
+          animation: 'fade',
+          headerShown: false,
+          presentation: 'fullScreenModal',
+        }}
+      />
     </Stack.Navigator>
   );
 };

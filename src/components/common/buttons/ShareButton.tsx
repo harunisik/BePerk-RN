@@ -11,7 +11,7 @@ const ShareButton = ({item}) => {
       size={26}
       color="dodgerblue"
       onPress={() =>
-        navigation.navigate(Followers.name, {id: item.id, type: item.type})
+        navigation.navigate(Followers.name, {itemId: item.id, type: item.type})
       }
     />
   );
