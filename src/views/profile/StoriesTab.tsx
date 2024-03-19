@@ -19,17 +19,17 @@ const StoriesTab = () => {
 
   const {data, refetch, isFetching} = useQuery(getMy24, {id});
 
-  const {length} = appendData(data?.my24);
+  const newData = appendData(data?.my24);
 
   const handlePressItem = (index, item) => {
-    if (length > index) {
+    if (data.my24.length > index) {
       navigation.navigate(StoryView.name, {data: data.my24, index, item});
     }
   };
 
   return (
     <FlatList
-      data={data?.my24}
+      data={newData}
       renderItem={({item, index}) => (
         <PostItem item={item} onPress={() => handlePressItem(index, item)} />
       )}

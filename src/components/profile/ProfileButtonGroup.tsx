@@ -1,4 +1,11 @@
-import {View, Alert, StyleSheet, TouchableOpacity, Text} from 'react-native';
+import {
+  View,
+  Alert,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  Modal,
+} from 'react-native';
 import EditProfile from '../../views/profile/settings/EditProfile';
 import common from '../../styles/sharedStyles';
 import {useNavigation} from '@react-navigation/native';

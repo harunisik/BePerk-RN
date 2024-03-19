@@ -1,5 +1,12 @@
-import {ImageBackground, Text, View, useWindowDimensions} from 'react-native';
-import {useRoute} from '@react-navigation/native';
+import {
+  View,
+  Text,
+  GestureResponderEvent,
+  ImageBackground,
+  TouchableWithoutFeedback,
+  useWindowDimensions,
+} from 'react-native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {dateDiff} from '../../utils/DateUtil';
 import common from '../../styles/sharedStyles';
@@ -19,8 +26,8 @@ const ProgressBarSet = ({length, currentIndex, progress, duration}) => {
                 index === currentIndex
                   ? progress / duration
                   : index < currentIndex + 1
-                  ? 1
-                  : 0
+                    ? 1
+                    : 0
               }
             />
           </View>
@@ -61,56 +68,115 @@ const Footer = () => {
 };
 
 const StoryView = () => {
-  const {width: windowWidth, height: windowHeight} = useWindowDimensions();
+  const {width: windowWidth} = useWindowDimensions();
+  const navigation = useNavigation();
   const route = useRoute();
   const {
-    params: {data},
+    params: {data, index: indexParam},
   } = route;
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(indexParam);
   const [progress, setProgress] = useState(0);
+  const [intervalId, setIntervalId] = useState();
+  const [paused, setPaused] = useState(false);
+  const [finished, setFinished] = useState(false);
   const tick = 200;
-  const duration = 3000;
+  const duration = 5000;
   const {jcSpaceBetween, jcCenter, flex1} = common;
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress(prevProgress => {
-        if (prevProgress >= duration) {
-          clearInterval(interval);
-          if (currentIndex < data.length - 1) {
-            setCurrentIndex(prevIndex => prevIndex + 1);
-            return 0;
+    if (!paused) {
+      setPaused(false);
+
+      const interval = setInterval(() => {
+        setProgress(prevProgress => {
+          // current slide finished
+          if (prevProgress >= duration) {
+            // has next
+            if (currentIndex < data.length - 1) {
+              setCurrentIndex(prevIndex => prevIndex + 1); // go to next slide
+              return 0; // clear the progress
+            } else {
+              // no slide available
+              clearInterval(interval);
+              setFinished(true);
+            }
           }
-          return duration;
-        }
-        return prevProgress + tick;
-      });
-    }, tick);
-    return () => clearInterval(interval);
-  }, [currentIndex]);
+          return prevProgress + tick; // animation in progress
+        });
+      }, tick);
+
+      setIntervalId(interval); // save the ID
+
+      return () => clearInterval(interval); // comp did unmount
+    }
+  }, [currentIndex, paused]);
+
+  useEffect(() => {
+    if (finished) {
+      navigation.goBack(); // close the page
+    }
+  }, [finished]);
+
+  const handlePress = (event: GestureResponderEvent) => {
+    const pressLocation =
+      windowWidth / 2 > event.nativeEvent.locationX ? 'left' : 'right';
+
+    if (
+      (pressLocation === 'left' && currentIndex === 0) ||
+      (pressLocation === 'right' && currentIndex >= data.length - 1)
+    ) {
+      clearInterval(intervalId);
+      navigation.goBack();
+    }
+
+    setCurrentIndex(prevIndex => {
+      if (pressLocation === 'left' && prevIndex > 0) {
+        setProgress(0);
+        return prevIndex - 1;
+      }
+
+      if (pressLocation === 'right' && prevIndex < data.length - 1) {
+        setProgress(0);
+        return prevIndex + 1;
+      }
+
+      return prevIndex;
+    });
+  };
+
+  const handleLongPress = () => {
+    clearInterval(intervalId);
+    setPaused(true);
+  };
+
+  const handlePressOut = () => {
+    setPaused(false);
+  };
 
   return (
     <View style={[flex1]}>
       <ImageBackground
         source={{uri: data[currentIndex].filename}}
         resizeMode="contain"
-        style={[flex1, jcCenter]}
-        // width={windowWidth}
-        // height={windowHeight}
-      >
-        <View style={[jcSpaceBetween, flex1]}>
-          <View>
-            <ProgressBarSet
-              length={data.length}
-              currentIndex={currentIndex}
-              duration={duration}
-              progress={progress}
-            />
-            <Header item={data[currentIndex]} />
+        style={[flex1, jcCenter]}>
+        <TouchableWithoutFeedback
+          style={flex1}
+          onPress={handlePress}
+          onLongPress={handleLongPress}
+          onPressOut={handlePressOut}>
+          <View style={[jcSpaceBetween, flex1]}>
+            <View>
+              <ProgressBarSet
+                length={data.length}
+                currentIndex={currentIndex}
+                duration={duration}
+                progress={progress}
+              />
+              <Header item={data[currentIndex]} />
+            </View>
+            <Footer />
           </View>
-
-          <Footer />
-        </View>
+        </TouchableWithoutFeedback>
       </ImageBackground>
     </View>
   );

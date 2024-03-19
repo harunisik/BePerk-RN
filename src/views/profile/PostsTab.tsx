@@ -23,17 +23,17 @@ const PostsTab = () => {
     offset: 0,
   });
 
-  const {length} = appendData(data);
+  const newData = appendData(data);
 
   const handlePressItem = (index, item) => {
-    if (length > index) {
+    if (data.length > index) {
       navigation.navigate(PostsDetails.name, {data, index, item});
     }
   };
 
   return (
     <FlatList
-      data={data}
+      data={newData}
       renderItem={({item, index}) => (
         <PostItem item={item} onPress={() => handlePressItem(index, item)} />
       )}
