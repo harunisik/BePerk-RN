@@ -19,6 +19,7 @@ import {
   getUserFeed,
   postBookmarks,
   postComment,
+  postMy24Like,
   postUserLike,
 } from '../services/UserService';
 import {chatShare} from '../services/ChatService';
@@ -27,6 +28,7 @@ const queryMap = {
   [postBookmarks.name]: [],
   [deletePost.name]: [getUserFeed.name, getUserExploring.name, getMy24.name],
   [postUserLike.name]: [],
+  [postMy24Like.name]: [getMy24.name],
   [postComment.name]: [getUserComments.name],
   [deleteComment.name]: [getUserComments.name],
   [addPerk.name]: [getUserFeed.name, getUserExploring.name],

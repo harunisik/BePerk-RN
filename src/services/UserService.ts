@@ -101,6 +101,13 @@ export const postUserLike = (like: UserLikeProps) => {
     .catch(handleError);
 };
 
+export const postMy24Like = (like: UserLikeProps) => {
+  return axios
+    .post('/my24/update', {...like})
+    .then(handleResponse)
+    .catch(handleError);
+};
+
 export const postComment = newComment => {
   return axios
     .post('/user/comment', {...newComment})

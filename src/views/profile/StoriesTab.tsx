@@ -13,17 +13,17 @@ const StoriesTab = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const {
-    params: {userId: id},
+    params: {userId},
   } = route;
   const {pv5} = common;
 
-  const {data, refetch, isFetching} = useQuery(getMy24, {id});
+  const {data, refetch, isFetching} = useQuery(getMy24, {id: userId});
 
   const newData = appendData(data?.my24);
 
-  const handlePressItem = (index, item) => {
+  const handlePressItem = index => {
     if (data.my24.length > index) {
-      navigation.navigate(StoryView.name, {data: data.my24, index, item});
+      navigation.navigate(StoryView.name, {data: data.my24, index, userId});
     }
   };
 
@@ -31,7 +31,7 @@ const StoriesTab = () => {
     <FlatList
       data={newData}
       renderItem={({item, index}) => (
-        <PostItem item={item} onPress={() => handlePressItem(index, item)} />
+        <PostItem item={item} onPress={() => handlePressItem(index)} />
       )}
       keyExtractor={item => item.id}
       onRefresh={refetch}

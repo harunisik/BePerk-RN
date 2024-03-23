@@ -6,9 +6,12 @@ import {
   TouchableWithoutFeedback,
   useWindowDimensions,
   StyleSheet,
-  Alert,
   Modal,
   Pressable,
+  TextInput,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {dateDiff} from '../../utils/DateUtil';
@@ -18,8 +21,17 @@ import {ProgressBar} from 'react-native-paper';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Followers from './Followers';
-import {deletePost as userDeletePost} from '../../services/UserService';
+import {
+  postMy24Like,
+  deletePost as userDeletePost,
+} from '../../services/UserService';
 import {useCustomMutation as useMutation} from '../../hooks/commonHooks';
+import {useStore} from '../../containers/StoreContainer';
+import {
+  chatSend as userChatSend,
+  chatShare as userChatShare,
+} from '../../services/ChatService';
+import uuid from 'react-native-uuid';
 
 const {
   jcSpaceBetween,
@@ -50,8 +62,6 @@ const ProgressBarSet = ({length, currentIndex, progress, duration}) => {
                   : index < currentIndex + 1
                     ? 1
                     : 0
-                      ? 1
-                      : 0
               }
             />
           </View>
@@ -86,10 +96,17 @@ const FooterIcon = ({
   color = 'dodgerblue',
   IconComponent = MaterialIcons,
   onPress,
+  disabled = false,
 }) => {
   return (
     <View style={styles.footerIcon}>
-      <IconComponent name={icon} size={24} color={color} onPress={onPress} />
+      <IconComponent
+        name={icon}
+        size={24}
+        color={color}
+        onPress={onPress}
+        disabled={disabled}
+      />
     </View>
   );
 };
@@ -103,10 +120,10 @@ const Footer = ({item, onShare, onDelete}) => {
         <Text style={white}>{`Viewed: ${item.views_count}`}</Text>
       </View>
       <View style={[row, cGap10]}>
-        <FooterIcon
+        {/* <FooterIcon
           icon="download"
           onPress={() => Alert.alert('under construction')}
-        />
+        /> */}
         <FooterIcon
           icon="share"
           IconComponent={MaterialCommunityIcons}
@@ -115,6 +132,53 @@ const Footer = ({item, onShare, onDelete}) => {
         <FooterIcon icon="delete" color="red" onPress={onDelete} />
       </View>
     </View>
+  );
+};
+
+const Footer2 = ({onShare, onLike, onSendMessage, liked, onFocus}) => {
+  const [message, setMessage] = useState('');
+
+  const handleSendMessage = () => {
+    onSendMessage(message);
+    setMessage('');
+  };
+
+  // useEffect(() => {
+  //   // rerender coponent
+  // }, [liked]);
+
+  return (
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      <View style={[row, jcSpaceBetween]}>
+        <View style={[row, cGap10]}>
+          <TextInput
+            placeholder="Message..."
+            onChangeText={text => setMessage(text)}
+            value={message}
+            style={styles.textInput}
+            onSubmitEditing={handleSendMessage}
+            onFocus={onFocus}
+          />
+          <FooterIcon
+            icon="send"
+            color={message ? 'dodgerblue' : 'gray'}
+            onPress={handleSendMessage}
+            disabled={!message}
+          />
+          <FooterIcon
+            icon={liked ? 'heart' : 'heart-outline'}
+            onPress={onLike}
+            IconComponent={MaterialCommunityIcons}
+          />
+          <FooterIcon
+            icon="share"
+            IconComponent={MaterialCommunityIcons}
+            onPress={onShare}
+          />
+        </View>
+      </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -164,12 +228,15 @@ const DeleteModal = ({onDelete, onCancel, modalVisible}) => {
 const StoryView = () => {
   const {width: windowWidth} = useWindowDimensions();
   const navigation = useNavigation();
-  const {width: windowWidth} = useWindowDimensions();
-  const navigation = useNavigation();
   const route = useRoute();
   const {
-    params: {data: dataParam, index: indexParam},
+    params: {data: dataParam, index: indexParam, userId: userIdParam},
   } = route;
+  const {
+    store: {
+      authResult: {id: userId},
+    },
+  } = useStore();
   const [data, setData] = useState(dataParam);
   const [currentIndex, setCurrentIndex] = useState(indexParam);
   const [progress, setProgress] = useState(0);
@@ -177,7 +244,12 @@ const StoryView = () => {
   const [paused, setPaused] = useState(true);
   const [finished, setFinished] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [liked, setLiked] = useState(data.map(item => item.liked));
+
   const deletePost = useMutation(userDeletePost);
+  const my24Like = useMutation(postMy24Like);
+  const chatShare = useMutation(userChatShare);
+  const chatSend = useMutation(userChatSend);
 
   const tick = 200; // ms
   const duration = 5000; // ms
@@ -223,7 +295,22 @@ const StoryView = () => {
     }
   }, [finished]);
 
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      setPaused(false);
+    });
+
+    // Return the function to unsubscribe from the event so it gets removed on unmount
+    return unsubscribe;
+  }, [navigation]);
+
   const handlePress = (event: GestureResponderEvent) => {
+    Keyboard.dismiss();
+    if (paused) {
+      setPaused(false);
+      return;
+    }
+
     const isLeft = windowWidth / 2 > event.nativeEvent.locationX;
 
     if ((isLeft && isFirstItem) || (!isLeft && isLastItem)) {
@@ -265,6 +352,58 @@ const StoryView = () => {
       itemId: currentItem.id,
       type: 2,
     });
+  };
+
+  const handleLike = () => {
+    my24Like.mutate(
+      {
+        id: currentItem.id,
+        type: currentItem.type,
+        like: liked[currentIndex] ? -1 : 1,
+      },
+      {
+        onSuccess: () => {
+          setLiked(prevLiked => {
+            prevLiked[currentIndex] = prevLiked[currentIndex] ? 0 : 1;
+            return [...prevLiked];
+          });
+        },
+      },
+    );
+  };
+
+  const handleSendMessage = message => {
+    chatShare.mutate(
+      {
+        id: currentItem.id,
+        type: currentItem.type,
+        share_to: JSON.stringify([currentItem.user_id]),
+      },
+      {
+        onSuccess: ({chat_id}) => {
+          Keyboard.dismiss();
+          setPaused(false);
+
+          chatSend.mutate(
+            {
+              chat_id,
+              message,
+              uid: uuid.v4(),
+            },
+            {
+              onSuccess: () => {
+                // navigation.goBack();
+                // showMessage({message: 'Message sent'});
+              },
+            },
+          );
+        },
+      },
+    );
+  };
+
+  const handleFocus = () => {
+    stopInterval();
   };
 
   const handleDelete = () => {
@@ -330,11 +469,21 @@ const StoryView = () => {
               />
               <Header item={currentItem} />
             </View>
-            <Footer
-              item={currentItem}
-              onShare={handleShare}
-              onDelete={handleDelete}
-            />
+            {userIdParam === userId ? (
+              <Footer
+                item={currentItem}
+                onShare={handleShare}
+                onDelete={handleDelete}
+              />
+            ) : (
+              <Footer2
+                onLike={handleLike}
+                onShare={handleShare}
+                onSendMessage={handleSendMessage}
+                liked={liked[currentIndex]}
+                onFocus={handleFocus}
+              />
+            )}
           </View>
         </TouchableWithoutFeedback>
         <DeleteModal
@@ -364,6 +513,13 @@ const styles = StyleSheet.create({
     padding: 5,
     opacity: 0.7,
     justifyContent: 'center',
+  },
+  textInput: {
+    height: 40,
+    width: 200,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
   },
 });
 

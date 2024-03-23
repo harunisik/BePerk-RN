@@ -7,3 +7,10 @@ export const chatShare = share => {
     .then(handleResponse)
     .catch(handleError);
 };
+
+export const chatSend = chat => {
+  return axios
+    .post('/chat/send', {...chat})
+    .then(handleResponse)
+    .catch(handleError);
+};

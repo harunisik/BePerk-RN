@@ -10,6 +10,7 @@ import Activity from './Activity';
 import Profile from '../profile/Profile';
 import ProfileScreenOptions from '../profile/ProfileScreenOptions';
 import Search from './Search';
+import StoryView from '../profile/StoryView';
 
 const DovesStack = () => {
   const Stack = createNativeStackNavigator();
@@ -39,6 +40,15 @@ const DovesStack = () => {
         options={ProfileScreenOptions}
       />
       <Stack.Screen name={Search.name} component={Search} />
+      <Stack.Screen
+        name={StoryView.name}
+        component={StoryView}
+        options={{
+          animation: 'fade',
+          headerShown: false,
+          presentation: 'fullScreenModal',
+        }}
+      />
     </Stack.Navigator>
   );
 };

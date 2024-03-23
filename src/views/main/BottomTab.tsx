@@ -24,6 +24,7 @@ const screenOptions = ({route}) => ({
   //   display:
   //     getFocusedRouteNameFromRoute(route) === StoryView.name ? 'none' : 'flex',
   // },
+  // https://stackoverflow.com/questions/51352081/react-navigation-how-to-hide-tabbar-from-inside-stack-navigation
 });
 
 const BottomTab = () => {
