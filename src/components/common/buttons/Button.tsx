@@ -6,7 +6,7 @@ import {ReactElement} from 'react';
 interface ButtonProps {
   title: string;
   icon?: string;
-  iconColor: string;
+  iconColor?: string;
   onPress: () => void;
   iconComponent?: ReactElement;
 }

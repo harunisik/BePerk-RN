@@ -40,8 +40,10 @@ const HeaderRight = ({navigation, route}) => {
 
 const PostDoveScreenOptions = ({navigation, route}) => {
   return {
+    headerShown: true,
     title: route.params.title,
     animation: 'slide_from_bottom',
+    presentation: 'fullScreenModal',
     headerLeft: () => (
       <MaterialCommunityIcons
         name="close"

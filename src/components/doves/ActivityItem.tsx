@@ -3,7 +3,6 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import {dateDiff} from '../../utils/DateUtil';
 import common from '../../styles/sharedStyles';
-import {useNavigation} from '@react-navigation/native';
 
 enum HistoryItemType {
   Video,
