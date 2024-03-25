@@ -3,7 +3,6 @@ import {useStore} from '../../containers/StoreContainer';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SignIn from '../auth/SignIn';
 import BottomTab from './BottomTab';
-import Add from '../home/Add';
 import PostDove from '../doves/PostDove';
 import PostDoveScreenOptions from '../doves/PostDoveScreenOptions';
 import {Fragment} from 'react';
@@ -20,13 +19,10 @@ const MainStack = () => {
           <Stack.Screen name={SignIn.name} component={SignIn} />
         ) : (
           <Fragment>
-            <Stack.Screen name={BottomTab.name} component={BottomTab} />
             <Stack.Screen
-              name={Add.name}
-              component={Add}
-              options={{
-                presentation: 'transparentModal',
-              }}
+              name={BottomTab.name}
+              component={BottomTab}
+              initialParams={{modalVisible: false}}
             />
             <Stack.Screen
               name={PostDove.name}

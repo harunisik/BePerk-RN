@@ -2,17 +2,17 @@ import {View} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import common from '../../styles/sharedStyles';
-import {useStore} from '../../containers/StoreContainer';
-import {ModalActionType} from '../../containers/ModalAction';
-import AddDoveModal from '../../components/doves/AddDoveModal';
 import Activity from './Activity';
 import Search from './Search';
 import {useNavigation} from '@react-navigation/native';
+import {useState} from 'react';
+import {AddDoveModal} from '../../components/common/AddModal';
+
+const {row, cGap15} = common;
 
 const HeaderRight = () => {
-  const {dispatch} = useStore();
   const navigation = useNavigation();
-  const {row, cGap15} = common;
+  const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <View style={[row, cGap15]}>
@@ -21,12 +21,7 @@ const HeaderRight = () => {
         size={26}
         color="dodgerblue"
         onPress={() => {
-          dispatch({
-            type: ModalActionType.OPEN,
-            modalInfo: {
-              component: <AddDoveModal navigation={navigation} />,
-            },
-          });
+          setModalVisible(true);
         }}
       />
       <MaterialCommunityIcons
@@ -34,6 +29,10 @@ const HeaderRight = () => {
         onPress={() => navigation.navigate(Activity.name)}
         size={26}
         color="dodgerblue"
+      />
+      <AddDoveModal
+        visible={modalVisible}
+        onDismiss={() => setModalVisible(false)}
       />
     </View>
   );

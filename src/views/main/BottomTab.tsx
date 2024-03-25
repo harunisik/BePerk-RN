@@ -5,7 +5,8 @@ import ProfileStack from '../profile/ProfileStack';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import DovesStack from '../doves/DovesStack';
 import {Text, View} from 'react-native';
-import Add from '../home/Add';
+import {Fragment, useState} from 'react';
+import AddModal from '../../components/common/AddModal';
 
 const Placeholder = () => <View />;
 
@@ -49,23 +50,31 @@ const screenOptions = ({route}) => ({
 const BottomTab = () => {
   const Tab = createBottomTabNavigator();
 
+  const [modalVisible, setModalVisible] = useState(false);
+
   return (
-    <Tab.Navigator screenOptions={screenOptions}>
-      <Tab.Screen name={Home.name} component={Home} />
-      <Tab.Screen name={Stories.name} component={Stories} />
-      <Tab.Screen
-        name={Placeholder.name}
-        component={Placeholder}
-        listeners={({navigation}) => ({
-          tabPress: e => {
-            e.preventDefault();
-            navigation.navigate(Add.name);
-          },
-        })}
+    <Fragment>
+      <Tab.Navigator screenOptions={screenOptions}>
+        <Tab.Screen name={Home.name} component={Home} />
+        <Tab.Screen name={Stories.name} component={Stories} />
+        <Tab.Screen
+          name={Placeholder.name}
+          component={Placeholder}
+          listeners={() => ({
+            tabPress: e => {
+              e.preventDefault();
+              setModalVisible(true);
+            },
+          })}
+        />
+        <Tab.Screen name={DovesStack.name} component={DovesStack} />
+        <Tab.Screen name={ProfileStack.name} component={ProfileStack} />
+      </Tab.Navigator>
+      <AddModal
+        visible={modalVisible}
+        onDismiss={() => setModalVisible(false)}
       />
-      <Tab.Screen name={DovesStack.name} component={DovesStack} />
-      <Tab.Screen name={ProfileStack.name} component={ProfileStack} />
-    </Tab.Navigator>
+    </Fragment>
   );
 };
 

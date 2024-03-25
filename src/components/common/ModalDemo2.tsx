@@ -1,10 +1,14 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Alert, Modal, StyleSheet, Text, Pressable, View} from 'react-native';
 
-const ModalDemo = () => {
-  const [modalVisible, setModalVisible] = useState(true);
+const ModalDemo = ({visible}) => {
+  const [modalVisible, setModalVisible] = useState(visible);
   const navigation = useNavigation();
+
+  useEffect(() => {
+    setModalVisible(visible);
+  }, [visible]);
 
   return (
     // <View style={styles.centeredView}>
@@ -16,7 +20,9 @@ const ModalDemo = () => {
         Alert.alert('Modal has been closed.');
         setModalVisible(!modalVisible);
       }}
-      onDismiss={() => navigation.goBack()}>
+      onDismiss={() => {
+        // navigation.goBack()
+      }}>
       <Pressable
         style={styles.centeredView}
         onPress={event => {

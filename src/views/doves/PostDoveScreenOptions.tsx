@@ -43,7 +43,7 @@ const PostDoveScreenOptions = ({navigation, route}) => {
     headerShown: true,
     title: route.params.title,
     animation: 'slide_from_bottom',
-    presentation: 'fullScreenModal',
+    // presentation: 'fullScreenModal',
     headerLeft: () => (
       <MaterialCommunityIcons
         name="close"

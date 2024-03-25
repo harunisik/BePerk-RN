@@ -9,6 +9,7 @@ import common from '../../styles/sharedStyles';
 import {useState} from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useSignIn} from '../../hooks/userHooks';
+import axios from 'axios';
 
 const SignIn = () => {
   const [username, setUsername] = useState('harun-local');
@@ -21,6 +22,7 @@ const SignIn = () => {
 
   return (
     <View style={[flex1, aiCenter, jcCenter]}>
+      <Text>{axios.defaults.baseURL}</Text>
       <Text>Username</Text>
       <TextInput
         placeholder="Tap to enter username"
