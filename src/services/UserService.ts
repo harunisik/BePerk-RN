@@ -82,8 +82,9 @@ export const getPhotoVideo = ({queryKey}) => {
 };
 
 export const getMy24 = ({queryKey}) => {
-  const {id} = queryKey[1];
-  return axios.get(`/my24?id=${id}`).then(handleResponse).catch(handleError);
+  const queryParams = queryKey[1];
+  const url = '/my24' + (queryParams?.id ? `?id=${queryParams.id}` : '');
+  return axios.get(url).then(handleResponse).catch(handleError);
 };
 
 // POST requests

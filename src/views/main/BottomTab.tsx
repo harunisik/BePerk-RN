@@ -1,18 +1,18 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from '../home/Home';
-import Stories from '../stories/Stories';
 import ProfileStack from '../profile/ProfileStack';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import DovesStack from '../doves/DovesStack';
 import {Text, View} from 'react-native';
 import {Fragment, useState} from 'react';
 import AddModal from '../../components/common/AddModal';
+import StoriesStack from '../stories/StoriesStack';
 
 const Placeholder = () => <View />;
 
 const routeIcons = {
   [Home.name]: 'home',
-  [Stories.name]: 'account-multiple',
+  [StoriesStack.name]: 'account-multiple',
   [Placeholder.name]: 'plus',
   [DovesStack.name]: 'bird',
   [ProfileStack.name]: 'account',
@@ -20,7 +20,7 @@ const routeIcons = {
 
 const tabBarLabels = {
   [Home.name]: 'Home',
-  [Stories.name]: 'Stories',
+  [StoriesStack.name]: 'Stories',
   [DovesStack.name]: 'Doves',
   [ProfileStack.name]: 'Profile',
 };
@@ -56,7 +56,7 @@ const BottomTab = () => {
     <Fragment>
       <Tab.Navigator screenOptions={screenOptions}>
         <Tab.Screen name={Home.name} component={Home} />
-        <Tab.Screen name={Stories.name} component={Stories} />
+        <Tab.Screen name={StoriesStack.name} component={StoriesStack} />
         <Tab.Screen
           name={Placeholder.name}
           component={Placeholder}
