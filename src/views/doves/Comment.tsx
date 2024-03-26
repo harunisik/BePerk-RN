@@ -44,8 +44,8 @@ const Comment = () => {
   return (
     <View style={flex1}>
       <CommentList
-        headerItem={item}
         data={data}
+        headerItem={item}
         isFetching={isFetching}
         onRefresh={handleRefresh}
         onPressReply={(message, commentId) => {

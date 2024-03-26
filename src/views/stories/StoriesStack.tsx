@@ -5,6 +5,8 @@ import Stories from './Stories';
 import StoriesScreenOptions from './StoriesScreenOptions';
 import Profile from '../profile/Profile';
 import ProfileScreenOptions from '../profile/ProfileScreenOptions';
+import Followers from '../profile/Followers';
+import FollowersScreenOptions from '../profile/FollowersScreenOptions';
 
 const StoriesStack = () => {
   const Stack = createNativeStackNavigator();
@@ -22,7 +24,6 @@ const StoriesStack = () => {
         component={Profile}
         options={ProfileScreenOptions}
       />
-
       <Stack.Screen
         name={StoryView.name}
         component={StoryView}
@@ -31,6 +32,11 @@ const StoriesStack = () => {
           headerShown: false,
           presentation: 'fullScreenModal',
         }}
+      />
+      <Stack.Screen
+        name={Followers.name}
+        component={Followers}
+        options={FollowersScreenOptions}
       />
     </Stack.Navigator>
   );
