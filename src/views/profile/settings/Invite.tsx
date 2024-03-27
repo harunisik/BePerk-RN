@@ -15,7 +15,7 @@ const Invite = () => {
   const {flex1, aiCenter, jcCenter} = common;
   return (
     <View style={[flex1, aiCenter, jcCenter]}>
-      <Text>Invite Under construction!</Text>
+      <Text>Invite is under construction!</Text>
     </View>
   );
 };

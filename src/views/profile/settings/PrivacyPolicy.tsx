@@ -17,7 +17,7 @@ const PrivacyPolicy = () => {
   const {flex1, aiCenter, jcCenter} = common;
   return (
     <View style={[flex1, aiCenter, jcCenter]}>
-      <Text>PrivacyPolicy Under construction!</Text>
+      <Text>PrivacyPolicy is under construction!</Text>
     </View>
   );
 };

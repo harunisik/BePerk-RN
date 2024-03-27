@@ -75,6 +75,17 @@ const ProfileScreenOptions = ({navigation, route}) => {
     headerBackVisible: true,
     headerBackTitleVisible: false,
     headerLeft: () => <Text style={[bold, font16]}>{username}</Text>,
+    // headerLeft: () => (
+    //   <View style={{flexDirection: 'row', alignItems: 'center'}}>
+    //     <MaterialIcons
+    //       name="arrow-back-ios"
+    //       color="dodgerblue"
+    //       size={26}
+    //       onPress={() => navigation.goBack()}
+    //     />
+    //     <Text style={[bold, font16]}>{username}</Text>
+    //   </View>
+    // ),
     headerRight: () => <HeaderRight navigation={navigation} route={route} />,
   };
 };

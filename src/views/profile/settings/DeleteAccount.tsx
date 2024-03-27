@@ -17,7 +17,7 @@ const DeleteAccount = () => {
   const {flex1, aiCenter, jcCenter} = common;
   return (
     <View style={[flex1, aiCenter, jcCenter]}>
-      <Text>DeleteAccount Under construction!</Text>
+      <Text>DeleteAccount is under construction!</Text>
     </View>
   );
 };

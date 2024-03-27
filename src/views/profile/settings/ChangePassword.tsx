@@ -17,7 +17,7 @@ const ChangePassword = () => {
   const {flex1, aiCenter, jcCenter} = common;
   return (
     <View style={[flex1, aiCenter, jcCenter]}>
-      <Text>ChangePassword Under construction!</Text>
+      <Text>ChangePassword is under construction!</Text>
     </View>
   );
 };

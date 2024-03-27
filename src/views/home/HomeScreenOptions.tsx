@@ -1,44 +1,36 @@
-import {View} from 'react-native';
+import {Alert, View} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import common from '../../styles/sharedStyles';
-import Activity from './Activity';
-import Search from './Search';
+import Search from '../doves/Search';
 import {useNavigation} from '@react-navigation/native';
-import {useState} from 'react';
-import {AddDoveModal} from '../../components/common/AddModal';
+import Activity from '../doves/Activity';
 
 const {row, cGap15} = common;
 
 const HeaderRight = () => {
   const navigation = useNavigation();
-  const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <View style={[row, cGap15]}>
-      <MaterialCommunityIcons
-        name="plus-circle"
-        size={22}
-        color="dodgerblue"
-        onPress={() => {
-          setModalVisible(true);
-        }}
-      />
       <MaterialCommunityIcons
         name="bell"
         onPress={() => navigation.navigate(Activity.name)}
         size={22}
         color="dodgerblue"
       />
-      <AddDoveModal
-        visible={modalVisible}
-        onDismiss={() => setModalVisible(false)}
+      <FontAwesome6
+        name="envelope"
+        onPress={() => Alert.alert('Under construction!')}
+        size={22}
+        color="dodgerblue"
       />
     </View>
   );
 };
 
-const DovesScreenOptions = () => {
+const HomeScreenOptions = () => {
   const navigation = useNavigation();
 
   return {
@@ -54,4 +46,4 @@ const DovesScreenOptions = () => {
   };
 };
 
-export default DovesScreenOptions;
+export default HomeScreenOptions;

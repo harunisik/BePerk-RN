@@ -18,7 +18,7 @@ const RequestVerification = () => {
   const {flex1, aiCenter, jcCenter} = common;
   return (
     <View style={[flex1, aiCenter, jcCenter]}>
-      <Text>RequestVerification Under construction!</Text>
+      <Text>RequestVerification is under construction!</Text>
     </View>
   );
 };

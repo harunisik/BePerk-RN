@@ -5,6 +5,7 @@ import Followers from '../../views/profile/Followers';
 import LikeButtton from '../common/buttons/LikeButton';
 import CommentButton from '../common/buttons/CommentButton';
 import {useNavigation} from '@react-navigation/native';
+import ShareButton from '../common/buttons/ShareButton';
 
 const DovesItemOptions = ({item}) => {
   const navigation = useNavigation();
@@ -14,17 +15,7 @@ const DovesItemOptions = ({item}) => {
     <View style={[cGap15, row, aiCenter]}>
       <LikeButtton item={item} type={item.type} />
       <CommentButton item={item} />
-      <MaterialCommunityIcons
-        name="share-outline"
-        size={22}
-        color="gray"
-        onPress={() =>
-          navigation.navigate(Followers.name, {
-            itemId: item.id,
-            type: item.type,
-          })
-        }
-      />
+      <ShareButton item={item} />
     </View>
   );
 };

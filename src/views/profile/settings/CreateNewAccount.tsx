@@ -18,7 +18,7 @@ const CreateNewAccount = () => {
   const {flex1, aiCenter, jcCenter} = common;
   return (
     <View style={[flex1, aiCenter, jcCenter]}>
-      <Text>CreateNewAccount Under construction!</Text>
+      <Text>CreateNewAccount is under construction!</Text>
     </View>
   );
 };

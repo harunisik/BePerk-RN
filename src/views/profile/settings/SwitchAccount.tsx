@@ -17,7 +17,7 @@ const SwitchAccount = () => {
   const {flex1, aiCenter, jcCenter} = common;
   return (
     <View style={[flex1, aiCenter, jcCenter]}>
-      <Text>SwitchAccount Under construction!</Text>
+      <Text>SwitchAccount is under construction!</Text>
     </View>
   );
 };

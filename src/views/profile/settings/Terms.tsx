@@ -15,7 +15,7 @@ const Terms = () => {
   const {flex1, aiCenter, jcCenter} = common;
   return (
     <View style={[flex1, aiCenter, jcCenter]}>
-      <Text>Terms Under construction!</Text>
+      <Text>Terms is under construction!</Text>
     </View>
   );
 };

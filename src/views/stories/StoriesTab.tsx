@@ -9,6 +9,7 @@ import {appendData} from '../../utils/DataUtil';
 import {useNavigation} from '@react-navigation/native';
 import StoryView from '../profile/StoryView';
 import CircleGradientBorder from '../../components/common/CircleGradientBorder';
+import {useStore} from '../../containers/StoreContainer';
 
 const COL_NUM = 4;
 
@@ -31,7 +32,7 @@ const transformMy24List = (data, func) => {
   });
 };
 
-const StoriesItem = ({item, onPress}) => {
+const StoriesItem = ({item, onPress, isMyStory = false}) => {
   return (
     <View style={[flex1, p5, aiCenter]}>
       {item.my24List && (
@@ -47,8 +48,14 @@ const StoriesItem = ({item, onPress}) => {
             />
           </CircleGradientBorder>
           <View style={[row]}>
-            <Text style={[bold, font12]} numberOfLines={1}>
-              {item.fullname}
+            <Text
+              style={[
+                bold,
+                font12,
+                {color: isMyStory ? 'dodgerblue' : 'black'},
+              ]}
+              numberOfLines={1}>
+              {isMyStory ? 'My story' : item.fullname}
             </Text>
             {item.isVerified === 1 && (
               <MaterialIcons name="verified" size={16} color="dodgerblue" />
@@ -62,6 +69,11 @@ const StoriesItem = ({item, onPress}) => {
 
 const StoriesTab = () => {
   const navigation = useNavigation();
+  const {
+    store: {
+      authResult: {id: userId},
+    },
+  } = useStore();
   const {data, refetch, isFetching} = useQuery(getMy24);
 
   const result = useMemo(
@@ -85,7 +97,11 @@ const StoriesTab = () => {
     <FlatList
       data={newData}
       renderItem={({item, index}) => (
-        <StoriesItem item={item} onPress={() => handlePressItem(item, index)} />
+        <StoriesItem
+          item={item}
+          onPress={() => handlePressItem(item, index)}
+          isMyStory={item.user_id === userId}
+        />
       )}
       keyExtractor={item => item.user_id}
       onRefresh={refetch}

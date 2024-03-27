@@ -17,7 +17,7 @@ const EditProfile = () => {
   const {flex1, aiCenter, jcCenter} = common;
   return (
     <View style={[flex1, aiCenter, jcCenter]}>
-      <Text>EditProfile Under construction!</Text>
+      <Text>EditProfile is under construction!</Text>
     </View>
   );
 };
