@@ -26,6 +26,7 @@ const tabBarLabels = {
 };
 
 const screenOptions = ({route}) => ({
+  lazy: true,
   headerShown: false,
   tabBarIcon: ({color}) => {
     const iconName = routeIcons[route.name] ?? 'minus';
@@ -47,9 +48,9 @@ const screenOptions = ({route}) => ({
   // https://stackoverflow.com/questions/51352081/react-navigation-how-to-hide-tabbar-from-inside-stack-navigation
 });
 
-const BottomTab = () => {
-  const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
+const BottomTab = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (

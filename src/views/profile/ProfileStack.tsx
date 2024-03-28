@@ -18,8 +18,9 @@ import {useStore} from '../../containers/StoreContainer';
 import PostsDetails from './PostsDetails';
 import StoryView from './StoryView';
 
+const Stack = createNativeStackNavigator();
+
 const ProfileStack = () => {
-  const Stack = createNativeStackNavigator();
   const {
     store: {
       authResult: {id, username},

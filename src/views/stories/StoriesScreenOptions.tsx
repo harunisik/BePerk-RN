@@ -3,7 +3,6 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import common from '../../styles/sharedStyles';
 import Search from '../doves/Search';
-import {useNavigation} from '@react-navigation/native';
 import {useState} from 'react';
 import {AddDoveModal} from '../../components/common/AddModal';
 
@@ -30,9 +29,7 @@ const HeaderRight = () => {
   );
 };
 
-const StoriesScreenOptions = () => {
-  const navigation = useNavigation();
-
+const StoriesScreenOptions = ({navigation}) => {
   return {
     title: '',
     headerLeft: () => (

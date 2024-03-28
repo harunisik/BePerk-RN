@@ -8,9 +8,9 @@ import ProfileScreenOptions from '../profile/ProfileScreenOptions';
 import Followers from '../profile/Followers';
 import FollowersScreenOptions from '../profile/FollowersScreenOptions';
 
-const StoriesStack = () => {
-  const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator();
 
+const StoriesStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen

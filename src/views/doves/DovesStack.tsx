@@ -12,9 +12,9 @@ import ProfileScreenOptions from '../profile/ProfileScreenOptions';
 import Search from './Search';
 import StoryView from '../profile/StoryView';
 
-const DovesStack = () => {
-  const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator();
 
+const DovesStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen

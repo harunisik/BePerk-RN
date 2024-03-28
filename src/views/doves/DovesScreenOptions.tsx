@@ -38,8 +38,8 @@ const HeaderRight = () => {
   );
 };
 
-const DovesScreenOptions = () => {
-  const navigation = useNavigation();
+const DovesScreenOptions = ({navigation}) => {
+  // const navigation = useNavigation();
 
   return {
     title: '',

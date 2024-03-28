@@ -3,8 +3,11 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {showMessage} from 'react-native-flash-message';
 import {useCustomMutation as useMutation} from '../../hooks/commonHooks';
 import {addPerk as userAddPerk} from '../../services/UserService';
+import {useNavigation, useRoute} from '@react-navigation/native';
 
-const HeaderRight = ({navigation, route}) => {
+const HeaderRight = () => {
+  const navigation = useNavigation();
+  const route = useRoute();
   const {
     params: {caption, isAnonymous, subtype},
   } = route;

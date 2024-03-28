@@ -7,9 +7,9 @@ import PostDove from '../doves/PostDove';
 import PostDoveScreenOptions from '../doves/PostDoveScreenOptions';
 import {Fragment} from 'react';
 
-const MainStack = () => {
-  const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator();
 
+const MainStack = () => {
   const {store} = useStore();
 
   return (

@@ -6,9 +6,9 @@ import Activity from '../doves/Activity';
 import Profile from '../profile/Profile';
 import ProfileScreenOptions from '../profile/ProfileScreenOptions';
 
-const HomeStack = () => {
-  const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator();
 
+const HomeStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen

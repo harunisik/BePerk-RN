@@ -5,15 +5,17 @@ import common from '../../styles/sharedStyles';
 import {useStore} from '../../containers/StoreContainer';
 import {ModalActionType} from '../../containers/ModalAction';
 import UserProfileModal from '../../components/profile/UserProfileModal';
+import {useNavigation, useRoute} from '@react-navigation/native';
 
-const HeaderRight = ({navigation, route}) => {
+const HeaderRight = () => {
   const {
     store: {
       authResult: {id},
     },
     dispatch,
   } = useStore();
-
+  const navigation = useNavigation();
+  const route = useRoute();
   const {
     params: {userId},
   } = route;
@@ -63,7 +65,7 @@ const HeaderRight = ({navigation, route}) => {
   );
 };
 
-const ProfileScreenOptions = ({navigation, route}) => {
+const ProfileScreenOptions = ({route}) => {
   const {
     params: {username},
   } = route;
@@ -86,7 +88,7 @@ const ProfileScreenOptions = ({navigation, route}) => {
     //     <Text style={[bold, font16]}>{username}</Text>
     //   </View>
     // ),
-    headerRight: () => <HeaderRight navigation={navigation} route={route} />,
+    headerRight: HeaderRight,
   };
 };
 

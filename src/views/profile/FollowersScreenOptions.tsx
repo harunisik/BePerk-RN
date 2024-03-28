@@ -3,8 +3,11 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {showMessage} from 'react-native-flash-message';
 import {useCustomMutation as useMutation} from '../../hooks/commonHooks';
 import {chatShare as userChatShare} from '../../services/ChatService';
+import {useNavigation, useRoute} from '@react-navigation/native';
 
-const HeaderRight = ({navigation, route}) => {
+const HeaderRight = () => {
+  const navigation = useNavigation();
+  const route = useRoute();
   const {
     params: {itemId, type, selectedUsers},
   } = route;
@@ -34,7 +37,7 @@ const HeaderRight = ({navigation, route}) => {
   return <Text onPress={handlePressSent}>Sent</Text>;
 };
 
-const FollowersScreenOptions = ({navigation, route}) => {
+const FollowersScreenOptions = ({navigation}) => {
   return {
     animation: 'slide_from_bottom',
     presentation: 'fullScreenModal',
@@ -45,7 +48,7 @@ const FollowersScreenOptions = ({navigation, route}) => {
         size={26}
       />
     ),
-    headerRight: () => <HeaderRight navigation={navigation} route={route} />,
+    headerRight: HeaderRight,
   };
 };
 
