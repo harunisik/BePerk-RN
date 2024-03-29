@@ -18,7 +18,7 @@ const ForYouTab = () => {
   const [paused, setPaused] = useState(false);
   const {data, refetch, isFetching} = useCustomQuery(getVideoFeed, {
     filter: 1,
-    limit: 1,
+    limit: 10,
     offset: 0,
   });
 
@@ -39,7 +39,10 @@ const ForYouTab = () => {
           layoutDirection="ltr"
           pageMargin={10}
           // Lib does not support dynamically orientation change
-          orientation="horizontal">
+          orientation="vertical"
+          onPageScroll={event => {
+            setCurrentIndex(event.nativeEvent.position);
+          }}>
           {
             // useMemo(() =>
             data.feed.map((page, index) => (
@@ -57,6 +60,7 @@ const ForYouTab = () => {
                 <Video
                   source={{uri: page.filename}}
                   style={{width: '100%', height: '100%'}}
+                  paused={index !== currentIndex}
                 />
               </View>
             ))
