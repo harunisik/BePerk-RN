@@ -8,7 +8,15 @@ const Tab = createMaterialTopTabNavigator();
 const Home = () => {
   return (
     <Tab.Navigator
-      screenOptions={{lazy: true, tabBarLabelStyle: {textTransform: 'none'}}}>
+      screenOptions={{
+        lazy: true,
+        tabBarLabelStyle: {textTransform: 'none', color: 'red'},
+        tabBarStyle: {
+          // backgroundColor: 'transparent',
+          // position: 'absolute',
+          // width: '100%',
+        },
+      }}>
       <Tab.Screen
         name={ForYouTab.name}
         component={ForYouTab}

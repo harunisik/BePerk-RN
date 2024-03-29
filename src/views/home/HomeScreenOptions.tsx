@@ -31,8 +31,6 @@ const HeaderRight = () => {
 };
 
 const HomeScreenOptions = ({navigation}) => {
-  // const navigation = useNavigation();
-
   return {
     title: '',
     headerLeft: () => (
