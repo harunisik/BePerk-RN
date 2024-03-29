@@ -15,18 +15,11 @@ const AnimatedPagerView = Animated.createAnimatedComponent(PagerView);
 
 const ForYouTab = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
   const {data, refetch, isFetching} = useCustomQuery(getVideoFeed, {
     filter: 1,
     limit: 10,
     offset: 0,
   });
-
-  useEffect(() => {
-    return () => {
-      setPaused(true);
-    };
-  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -38,37 +31,27 @@ const ForYouTab = () => {
           initialPage={0}
           layoutDirection="ltr"
           pageMargin={10}
-          // Lib does not support dynamically orientation change
           orientation="vertical"
           onPageScroll={event => {
             setCurrentIndex(event.nativeEvent.position);
           }}>
-          {
-            // useMemo(() =>
-            data.feed.map((page, index) => (
-              <View
-                testID="pager-view-content"
-                key={page.id}
-                style={{
-                  alignItems: 'center',
-                  padding: 20,
-                }}
-                collapsable={false}>
-                {/* <LikeCount /> */}
-                <Text
-                  testID={`pageNumber${index}`}>{`page number ${index}`}</Text>
-                <Video
-                  source={{uri: page.filename}}
-                  style={{width: '100%', height: '100%'}}
-                  paused={index !== currentIndex}
-                />
-              </View>
-            ))
-            // [navigationPanel.pages])
-          }
+          {data?.feed.map((page, index) => (
+            <View
+              testID="pager-view-content"
+              key={page.id}
+              style={{
+                alignItems: 'center',
+              }}
+              collapsable={false}>
+              <Video
+                source={{uri: page.filename}}
+                style={{width: '100%', height: '100%'}}
+                paused={index !== currentIndex}
+              />
+            </View>
+          ))}
         </AnimatedPagerView>
       )}
-      {/* <NavigationPanel {...navigationPanel} /> */}
     </SafeAreaView>
   );
 };
