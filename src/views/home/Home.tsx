@@ -2,6 +2,7 @@ import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs
 import ForYouTab from './ForYouTab';
 import FeaturedTab from './FeaturedTab';
 import FollowingTab from './FollowingTab';
+import {View} from 'react-native';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -10,11 +11,26 @@ const Home = () => {
     <Tab.Navigator
       screenOptions={{
         lazy: true,
-        tabBarLabelStyle: {textTransform: 'none', color: 'red'},
+        tabBarIndicatorStyle: {display: 'none'},
+        tabBarLabelStyle: {
+          textTransform: 'none',
+          color: 'white',
+        },
         tabBarStyle: {
-          // backgroundColor: 'transparent',
-          // position: 'absolute',
-          // width: '100%',
+          backgroundColor: 'transparent',
+          position: 'absolute',
+          alignSelf: 'center',
+          width: '70%',
+          // top: 50,
+        },
+        tabBarItemStyle: {
+          width: 'auto',
+          paddingHorizontal: 10,
+          paddingVertical: 0,
+          borderWidth: 1,
+          borderColor: 'white',
+          borderRadius: 18,
+          minHeight: 30,
         },
       }}>
       <Tab.Screen

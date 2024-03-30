@@ -12,7 +12,7 @@ const CopyLinkButton = ({item}) => {
       onPress={() => {
         dispatch({type: ModalActionType.CLOSE});
         showMessage({message: 'Link copied'});
-        if (item.type === 1) {
+        if (item.type === 1 || item.type === 0) {
           Clipboard.setString(`beperk://post?id=${item.id}&type=${item.type}`);
         } else {
           Clipboard.setString(`beperk://dove?id=${item.id}`);

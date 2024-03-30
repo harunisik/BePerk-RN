@@ -1,26 +1,47 @@
-import {View, useWindowDimensions} from 'react-native';
+import {
+  Pressable,
+  StyleProp,
+  View,
+  ViewProps,
+  useWindowDimensions,
+} from 'react-native';
 import RNVideo, {ReactVideoProps} from 'react-native-video';
 import common from '../../styles/sharedStyles';
+import {useEffect, useState} from 'react';
+
+const {flex1} = common;
 
 interface VideoProps extends ReactVideoProps {
   uri: string;
+  paused?: boolean;
+  fullscreen?: boolean;
 }
 
-const Video = ({uri, ...rest}: VideoProps) => {
-  const {width: windowWidth, height: windowHeight} = useWindowDimensions();
-  const {flex1} = common;
+const Video = ({
+  uri,
+  paused = true,
+  fullscreen = false,
+  ...rest
+}: VideoProps) => {
+  const [videoPaused, setVideoPaused] = useState(paused);
+
+  useEffect(() => {
+    setVideoPaused(paused);
+  }, [paused]);
 
   return (
-    <View
-      style={[
-        flex1,
-        {
-          width: windowWidth,
-          height: windowHeight * 0.6,
-        },
-      ]}>
-      <RNVideo source={{uri}} style={flex1} resizeMode="stretch" {...rest} />
-    </View>
+    <Pressable style={flex1} onPress={() => setVideoPaused(!videoPaused)}>
+      <RNVideo
+        source={{uri}}
+        style={{
+          width: '100%',
+          height: '100%',
+        }}
+        // resizeMode="stretch"
+        paused={videoPaused}
+        {...rest}
+      />
+    </Pressable>
   );
 };
 

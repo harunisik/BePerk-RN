@@ -4,19 +4,32 @@ import common from '../../../styles/sharedStyles';
 import Comment from '../../../views/doves/Comment';
 import {useNavigation} from '@react-navigation/native';
 
-const CommentButton = ({item}) => {
+const {font12, cGap3, row, aiCenter, rGap5} = common;
+
+interface CommentButtonProps {
+  item: any;
+  size?: number;
+  color?: string;
+  vertical?: boolean;
+}
+
+const CommentButton = ({
+  item,
+  size = 18,
+  color = 'dodgerblue',
+  vertical = false,
+}: CommentButtonProps) => {
   const navigation = useNavigation();
-  const {font12, cGap3, row, aiCenter} = common;
 
   return (
-    <View style={[cGap3, row, aiCenter]}>
+    <View style={[aiCenter, ...(vertical ? [rGap5] : [row, cGap3])]}>
       <MaterialCommunityIcons
         name="comment-processing-outline"
-        size={18}
-        color="dodgerblue"
+        size={size}
+        color={color}
         onPress={() => navigation.navigate(Comment.name, {item})}
       />
-      <Text style={font12}>{item.comments_count}</Text>
+      <Text style={[font12, {color}]}>{item.comments_count}</Text>
     </View>
   );
 };

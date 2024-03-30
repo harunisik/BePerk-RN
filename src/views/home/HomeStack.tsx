@@ -5,6 +5,9 @@ import Search from '../doves/Search';
 import Activity from '../doves/Activity';
 import Profile from '../profile/Profile';
 import ProfileScreenOptions from '../profile/ProfileScreenOptions';
+import Comment from '../doves/Comment';
+import Followers from '../profile/Followers';
+import FollowersScreenOptions from '../profile/FollowersScreenOptions';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +25,16 @@ const HomeStack = () => {
         name={Profile.name}
         component={Profile}
         options={ProfileScreenOptions}
+      />
+      <Stack.Screen
+        name={Comment.name}
+        component={Comment}
+        options={{presentation: 'formSheet'}}
+      />
+      <Stack.Screen
+        name={Followers.name}
+        component={Followers}
+        options={FollowersScreenOptions}
       />
     </Stack.Navigator>
   );

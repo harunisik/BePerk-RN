@@ -1,4 +1,4 @@
-import {Text, View} from 'react-native';
+import {Text, View, useWindowDimensions} from 'react-native';
 import common from '../../styles/sharedStyles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import LikeButtton from '../common/buttons/LikeButton';
@@ -10,21 +10,23 @@ import DotsButton from '../common/buttons/DotsButton';
 import ShareButton from '../common/buttons/ShareButton';
 import Video from '../common/Video';
 
+const {
+  jcSpaceBetween,
+  jcSpaceAround,
+  cGap10,
+  row,
+  aiCenter,
+  ph15,
+  pv10,
+  bold,
+  font11,
+  gray,
+  rGap5,
+  rGap10,
+} = common;
+
 const PostsDetailsItem = ({item}) => {
-  const {
-    jcSpaceBetween,
-    jcSpaceAround,
-    cGap10,
-    row,
-    aiCenter,
-    ph15,
-    pv10,
-    bold,
-    font11,
-    gray,
-    rGap5,
-    rGap10,
-  } = common;
+  const {width: windowWidth, height: windowHeight} = useWindowDimensions();
 
   return (
     <View style={[rGap10, pv10]}>
@@ -43,7 +45,13 @@ const PostsDetailsItem = ({item}) => {
       {item.type === 1 ? (
         <FastImage uri={item.filename} />
       ) : (
-        <Video uri={item.filename} />
+        <View
+          style={{
+            width: windowWidth,
+            height: windowHeight * 0.6,
+          }}>
+          <Video uri={item.filename} />
+        </View>
       )}
 
       <View style={[row, jcSpaceAround]}>

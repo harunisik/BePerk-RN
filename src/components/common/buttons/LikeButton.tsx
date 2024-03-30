@@ -5,12 +5,25 @@ import {useEffect, useState} from 'react';
 import {useCustomMutation as useMutation} from '../../../hooks/commonHooks';
 import {postUserLike} from '../../../services/UserService';
 
-const LikeButtton = ({item, type}) => {
+const {font12, cGap3, row, aiCenter, rGap5} = common;
+
+interface LikeButtonProps {
+  item: any;
+  type: any;
+  size?: number;
+  color?: string;
+  vertical?: boolean;
+}
+
+const LikeButtton = ({
+  item,
+  type,
+  size = 18,
+  color = 'dodgerblue',
+  vertical = false,
+}: LikeButtonProps) => {
   const [liked, setLiked] = useState(item.liked);
   const [likesCount, setLikesCount] = useState(item.likes_count);
-
-  const {font12, cGap3, row, aiCenter, gray} = common;
-
   const userLike = useMutation(postUserLike);
 
   const handlePress = () =>
@@ -30,14 +43,14 @@ const LikeButtton = ({item, type}) => {
   }, [item]);
 
   return (
-    <View style={[cGap3, row, aiCenter]}>
+    <View style={[aiCenter, ...(vertical ? [rGap5] : [row, cGap3])]}>
       <MaterialCommunityIcons
         name={liked ? 'heart' : 'heart-outline'}
-        size={18}
+        size={size}
+        color={color}
         onPress={handlePress}
-        color="dodgerblue"
       />
-      <Text style={[font12, gray]}>{likesCount}</Text>
+      <Text style={[font12, {color}]}>{likesCount}</Text>
     </View>
   );
 };

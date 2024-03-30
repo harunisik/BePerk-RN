@@ -62,6 +62,9 @@ const common = StyleSheet.create({
   font12: {
     fontSize: 12,
   },
+  font14: {
+    fontSize: 14,
+  },
   font16: {
     fontSize: 16,
   },

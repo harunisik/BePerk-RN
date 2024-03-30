@@ -33,6 +33,7 @@ const HeaderRight = () => {
 const HomeScreenOptions = ({navigation}) => {
   return {
     title: '',
+    // headerTransparent: true,
     headerLeft: () => (
       <MaterialIcons
         name="search"
