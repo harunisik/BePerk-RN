@@ -89,6 +89,13 @@ export const getVideoFeed = ({queryKey}) => {
     .catch(handleError);
 };
 
+export const getFeaturedFeed = (limit: number, offset: number) => {
+  return axios
+    .get(`/user/getFeaturedFeed?limit=${limit}&offset=${offset}`)
+    .then(handleResponse)
+    .catch(handleError);
+};
+
 export const getMy24 = ({queryKey}) => {
   const queryParams = queryKey[1];
   const url = '/my24' + (queryParams?.id ? `?id=${queryParams.id}` : '');

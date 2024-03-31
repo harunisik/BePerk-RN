@@ -170,6 +170,9 @@ const common = StyleSheet.create({
     borderRadius: 18,
     padding: 7,
   },
+  absolute: {
+    position: 'absolute',
+  },
 });
 
 export default common;

@@ -1,15 +1,11 @@
-import {
-  Pressable,
-  StyleProp,
-  View,
-  ViewProps,
-  useWindowDimensions,
-} from 'react-native';
+import {Pressable} from 'react-native';
 import RNVideo, {ReactVideoProps} from 'react-native-video';
 import common from '../../styles/sharedStyles';
-import {useEffect, useState} from 'react';
+import {useCallback, useState} from 'react';
+import {useFocusEffect} from '@react-navigation/native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-const {flex1} = common;
+const {absolute, jcCenter, aiCenter} = common;
 
 interface VideoProps extends ReactVideoProps {
   uri: string;
@@ -25,12 +21,17 @@ const Video = ({
 }: VideoProps) => {
   const [videoPaused, setVideoPaused] = useState(paused);
 
-  useEffect(() => {
-    setVideoPaused(paused);
-  }, [paused]);
+  useFocusEffect(
+    useCallback(() => {
+      setVideoPaused(paused);
+      return () => setVideoPaused(true);
+    }, [paused]),
+  );
 
   return (
-    <Pressable style={flex1} onPress={() => setVideoPaused(!videoPaused)}>
+    <Pressable
+      style={[aiCenter, jcCenter]}
+      onPress={() => setVideoPaused(!videoPaused)}>
       <RNVideo
         source={{uri}}
         style={{
@@ -41,6 +42,14 @@ const Video = ({
         paused={videoPaused}
         {...rest}
       />
+      {videoPaused && (
+        <MaterialIcons
+          name="play-arrow"
+          size={96}
+          color="rgba(255, 255, 255, 0.6)"
+          style={absolute}
+        />
+      )}
     </Pressable>
   );
 };

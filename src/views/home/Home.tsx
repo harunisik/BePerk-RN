@@ -2,7 +2,6 @@ import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs
 import ForYouTab from './ForYouTab';
 import FeaturedTab from './FeaturedTab';
 import FollowingTab from './FollowingTab';
-import {View} from 'react-native';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -24,6 +23,7 @@ const Home = () => {
           // top: 50,
         },
         tabBarItemStyle: {
+          backgroundColor: 'rgba(0, 0, 0,0.2)',
           width: 'auto',
           paddingHorizontal: 10,
           paddingVertical: 0,
