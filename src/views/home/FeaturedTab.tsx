@@ -17,7 +17,7 @@ const FeaturedTab = () => {
   const {data, fetchNextPage, isFetching} = useInfiniteQuery({
     queryKey: ['getFeaturedFeed'],
     queryFn: ({pageParam = 0}) => {
-      const limit = 5;
+      const limit = 25;
       return getFeaturedFeed(limit, limit * pageParam);
     },
     getNextPageParam: (lastPage, pages) => {

@@ -10,44 +10,13 @@ const Home = () => {
     <Tab.Navigator
       screenOptions={{
         lazy: true,
-        tabBarIndicatorStyle: {display: 'none'},
-        tabBarLabelStyle: {
-          textTransform: 'none',
-          color: 'white',
-        },
         tabBarStyle: {
-          backgroundColor: 'transparent',
-          position: 'absolute',
-          alignSelf: 'center',
-          width: '70%',
-          // top: 50,
-        },
-        tabBarItemStyle: {
-          backgroundColor: 'rgba(0, 0, 0,0.2)',
-          width: 'auto',
-          paddingHorizontal: 10,
-          paddingVertical: 0,
-          borderWidth: 1,
-          borderColor: 'white',
-          borderRadius: 18,
-          minHeight: 30,
+          display: 'none',
         },
       }}>
-      <Tab.Screen
-        name={ForYouTab.name}
-        component={ForYouTab}
-        options={{tabBarLabel: 'For You'}}
-      />
-      <Tab.Screen
-        name={FeaturedTab.name}
-        component={FeaturedTab}
-        options={{tabBarLabel: 'Featured'}}
-      />
-      <Tab.Screen
-        name={FollowingTab.name}
-        component={FollowingTab}
-        options={{tabBarLabel: 'Following'}}
-      />
+      <Tab.Screen name={ForYouTab.name} component={ForYouTab} />
+      <Tab.Screen name={FeaturedTab.name} component={FeaturedTab} />
+      <Tab.Screen name={FollowingTab.name} component={FollowingTab} />
     </Tab.Navigator>
   );
 };

@@ -8,7 +8,7 @@ import ShareButton from '../../components/common/buttons/ShareButton';
 import DotsButton from '../../components/common/buttons/DotsButton';
 import AccountButton from '../../components/common/buttons/AccountButton';
 
-const ForYouPagerItem = ({item, paused}) => {
+const ForYouPagerItem = ({item, paused = true}) => {
   return (
     <Fragment>
       <Video uri={item.filename} paused={paused} fullscreen />

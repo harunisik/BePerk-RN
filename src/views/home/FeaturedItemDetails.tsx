@@ -1,12 +1,12 @@
 import {Animated, View} from 'react-native';
 import common from '../../styles/sharedStyles';
 import PagerView from 'react-native-pager-view';
-import {useMemo, useState} from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import PagerItem from './ForYouPagerItem';
 import {useRoute} from '@react-navigation/native';
 
 const {flex1} = common;
-
+const WINDOW_SIZE = 2;
 const AnimatedPagerView = Animated.createAnimatedComponent(PagerView);
 
 const FeaturedItemDetails = () => {
@@ -14,46 +14,74 @@ const FeaturedItemDetails = () => {
   const {
     params: {data, index: indexParam},
   } = route;
-  const [currentIndex, setCurrentIndex] = useState(indexParam);
+  const [moveWindow, setMoveWindow] = useState(false);
+  const [dataIndex, setDataIndex] = useState(indexParam);
 
-  const windowSize = 5;
-  const start = indexParam < windowSize ? 0 : indexParam - windowSize;
-  const end =
-    indexParam + windowSize > data.length
-      ? data.length
-      : indexParam + windowSize;
+  const calculateStart = (index: number) => {
+    let start = index - WINDOW_SIZE;
+    return start < 0 ? 0 : start;
+  };
 
-  const newData = data.slice(start, end);
+  const calculateEnd = (index: number) => {
+    let end = index + WINDOW_SIZE + 1;
+    return end > data.length ? data.length : end;
+  };
 
-  const newIndex =
-    indexParam < windowSize
-      ? indexParam
-      : indexParam + windowSize > data.length
-        ? windowSize + data.length - indexParam
-        : windowSize;
+  const calculatePage = (index: number) => {
+    return index < WINDOW_SIZE ? index : WINDOW_SIZE;
+  };
+
+  const getData = (index: number) => {
+    const start = calculateStart(index);
+    const end = calculateEnd(index);
+    return data.slice(start, end);
+  };
+
+  const [newData, setNewData] = useState(() => getData(indexParam));
+
+  const initialPage = useMemo(
+    () => calculatePage(indexParam),
+    [indexParam, data],
+  );
+  const [page, setPage] = useState(initialPage);
+
+  const handlePageSelected = ({nativeEvent: {position}}) => {
+    if (page > position) {
+      setDataIndex(prevIndex => prevIndex - 1); // back
+      setMoveWindow(true);
+    } else if (page < position) {
+      setDataIndex(prevIndex => prevIndex + 1); // forward
+      setMoveWindow(true);
+    }
+  };
+
+  useEffect(() => {
+    if (moveWindow) {
+      setMoveWindow(false);
+      setPage(calculatePage(dataIndex));
+      setNewData(getData(dataIndex));
+    }
+  }, [moveWindow]);
 
   return (
     <View style={flex1}>
       {useMemo(
-        () =>
-          newData && (
-            <AnimatedPagerView
-              style={flex1}
-              initialPage={newIndex}
-              orientation="vertical"
-              onPageSelected={event => {
-                setCurrentIndex(event.nativeEvent.position);
-              }}>
-              {newData.map((item, index) => {
-                return (
-                  <View key={index} collapsable={false}>
-                    <PagerItem item={item} paused={index !== currentIndex} />
-                  </View>
-                );
-              })}
-            </AnimatedPagerView>
-          ),
-        [newData, currentIndex],
+        () => (
+          <AnimatedPagerView
+            style={flex1}
+            initialPage={initialPage}
+            orientation="vertical"
+            onPageSelected={handlePageSelected}>
+            {newData.map((item, index) => {
+              return (
+                <View key={item.id} collapsable={false}>
+                  <PagerItem item={item} paused={page !== index} />
+                </View>
+              );
+            })}
+          </AnimatedPagerView>
+        ),
+        [newData, page],
       )}
     </View>
   );
