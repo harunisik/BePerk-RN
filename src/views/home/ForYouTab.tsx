@@ -4,7 +4,7 @@ import PagerView from 'react-native-pager-view';
 import {getVideoFeed} from '../../services/UserService';
 import {useCustomQuery as useQuery} from '../../hooks/commonHooks';
 import {useMemo, useState} from 'react';
-import PagerItem from './ForYouPagerItem';
+import PagerItem from '../../components/home/ForYouPagerItem';
 
 const {flex1} = common;
 

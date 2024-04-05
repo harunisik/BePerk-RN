@@ -11,7 +11,7 @@ const {pv5} = common;
 
 const COL_NUM = 3;
 
-const FeaturedTab = () => {
+const Featured = () => {
   const navigation = useNavigation();
 
   const {data, fetchNextPage, isFetching} = useInfiniteQuery({
@@ -48,4 +48,4 @@ const FeaturedTab = () => {
   );
 };
 
-export default FeaturedTab;
+export default Featured;

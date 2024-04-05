@@ -1,12 +1,12 @@
 import {View} from 'react-native';
 import {Fragment} from 'react';
-import Video from '../../components/common/Video';
-import LikeButtton from '../../components/common/buttons/LikeButton';
-import CommentButton from '../../components/common/buttons/CommentButton';
-import BookmarkButton from '../../components/common/buttons/BookmarkButton';
-import ShareButton from '../../components/common/buttons/ShareButton';
-import DotsButton from '../../components/common/buttons/DotsButton';
-import AccountButton from '../../components/common/buttons/AccountButton';
+import Video from '../common/Video';
+import LikeButtton from '../common/buttons/LikeButton';
+import CommentButton from '../common/buttons/CommentButton';
+import BookmarkButton from '../common/buttons/BookmarkButton';
+import ShareButton from '../common/buttons/ShareButton';
+import DotsButton from '../common/buttons/DotsButton';
+import AccountButton from '../common/buttons/AccountButton';
 
 const ForYouPagerItem = ({item, paused = true}) => {
   return (

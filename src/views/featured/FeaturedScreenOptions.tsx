@@ -1,8 +1,6 @@
 import {View} from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import common from '../../styles/sharedStyles';
-import Search from '../doves/Search';
 import {useState} from 'react';
 import {AddDoveModal} from '../../components/common/AddModal';
 
@@ -29,18 +27,10 @@ const HeaderRight = () => {
   );
 };
 
-const StoriesScreenOptions = ({navigation}) => {
+const FeaturedScreenOptions = ({navigation}) => {
   return {
-    title: '',
-    headerLeft: () => (
-      <MaterialIcons
-        name="search"
-        onPress={() => navigation.navigate(Search.name)}
-        size={26}
-      />
-    ),
     headerRight: HeaderRight,
   };
 };
 
-export default StoriesScreenOptions;
+export default FeaturedScreenOptions;

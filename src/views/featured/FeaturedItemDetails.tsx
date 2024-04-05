@@ -2,7 +2,7 @@ import {Animated, View} from 'react-native';
 import common from '../../styles/sharedStyles';
 import PagerView from 'react-native-pager-view';
 import {useEffect, useMemo, useState} from 'react';
-import PagerItem from './ForYouPagerItem';
+import PagerItem from '../../components/home/ForYouPagerItem';
 import {useRoute} from '@react-navigation/native';
 
 const {flex1} = common;

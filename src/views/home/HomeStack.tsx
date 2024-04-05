@@ -8,7 +8,7 @@ import ProfileScreenOptions from '../profile/ProfileScreenOptions';
 import Comment from '../doves/Comment';
 import Followers from '../profile/Followers';
 import FollowersScreenOptions from '../profile/FollowersScreenOptions';
-import FeaturedItemDetails from './FeaturedItemDetails';
+import FeaturedItemDetails from '../featured/FeaturedItemDetails';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,15 +36,6 @@ const HomeStack = () => {
         name={Followers.name}
         component={Followers}
         options={FollowersScreenOptions}
-      />
-      <Stack.Screen
-        name={FeaturedItemDetails.name}
-        component={FeaturedItemDetails}
-        options={{
-          headerTransparent: true,
-          title: '',
-        }}
-        initialParams={{data: []}}
       />
     </Stack.Navigator>
   );

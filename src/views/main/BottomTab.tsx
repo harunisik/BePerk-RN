@@ -5,14 +5,14 @@ import DovesStack from '../doves/DovesStack';
 import {Text, View} from 'react-native';
 import {Fragment, useState} from 'react';
 import AddModal from '../../components/common/AddModal';
-import StoriesStack from '../stories/StoriesStack';
 import HomeStack from '../home/HomeStack';
+import FeaturedStack from '../featured/FeaturedStack';
 
 const Placeholder = () => <View />;
 
 const routeIcons = {
   [HomeStack.name]: 'home',
-  [StoriesStack.name]: 'account-multiple',
+  [FeaturedStack.name]: 'star',
   [Placeholder.name]: 'plus',
   [DovesStack.name]: 'bird',
   [ProfileStack.name]: 'account',
@@ -20,7 +20,7 @@ const routeIcons = {
 
 const tabBarLabels = {
   [HomeStack.name]: 'Home',
-  [StoriesStack.name]: 'Stories',
+  [FeaturedStack.name]: 'Featured',
   [DovesStack.name]: 'Doves',
   [ProfileStack.name]: 'Profile',
 };
@@ -57,7 +57,7 @@ const BottomTab = () => {
     <Fragment>
       <Tab.Navigator screenOptions={screenOptions}>
         <Tab.Screen name={HomeStack.name} component={HomeStack} />
-        <Tab.Screen name={StoriesStack.name} component={StoriesStack} />
+        <Tab.Screen name={FeaturedStack.name} component={FeaturedStack} />
         <Tab.Screen
           name={Placeholder.name}
           component={Placeholder}

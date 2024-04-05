@@ -1,12 +1,24 @@
-import {Text, View} from 'react-native';
-import common from '../../styles/sharedStyles';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import PostsTab from './PostsTab';
+import StoriesTab from '../profile/StoriesTab';
+
+const Tab = createMaterialTopTabNavigator();
 
 const FollowingTab = () => {
-  const {flex1, aiCenter, jcCenter} = common;
   return (
-    <View style={[flex1, aiCenter, jcCenter]}>
-      <Text>Following is under construction!</Text>
-    </View>
+    <Tab.Navigator
+      screenOptions={{lazy: true, tabBarLabelStyle: {textTransform: 'none'}}}>
+      <Tab.Screen
+        name={PostsTab.name}
+        component={PostsTab}
+        options={{tabBarLabel: 'Posts'}}
+      />
+      <Tab.Screen
+        name={StoriesTab.name}
+        component={StoriesTab}
+        options={{tabBarLabel: 'Stories'}}
+      />
+    </Tab.Navigator>
   );
 };
 
