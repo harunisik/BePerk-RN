@@ -7,14 +7,12 @@ import FeaturedItemDetails from './FeaturedItemDetails';
 import {useInfiniteQuery} from 'react-query';
 import {useMemo} from 'react';
 
-const {pv5} = common;
-
 const COL_NUM = 3;
 
 const Featured = () => {
   const navigation = useNavigation();
 
-  const {data, fetchNextPage, isFetching} = useInfiniteQuery({
+  const {data, fetchNextPage, isFetching, refetch, remove} = useInfiniteQuery({
     queryKey: ['getFeaturedFeed'],
     queryFn: ({pageParam = 0}) => {
       const limit = 25;
@@ -38,12 +36,13 @@ const Featured = () => {
         <PostItem item={item} onPress={() => handlePressItem(index)} />
       )}
       keyExtractor={item => item.id}
-      // onRefresh={refetch}
-      // refreshing={isFetching}
+      onRefresh={() => {
+        remove();
+        refetch();
+      }}
+      refreshing={isFetching}
       onEndReached={() => !isFetching && fetchNextPage()}
-      // onEndReachedThreshold={0.8}
       numColumns={COL_NUM}
-      contentContainerStyle={pv5}
     />
   );
 };

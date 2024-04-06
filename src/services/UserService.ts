@@ -81,8 +81,7 @@ export const getPhotoVideo = ({queryKey}) => {
     .catch(handleError);
 };
 
-export const getVideoFeed = ({queryKey}) => {
-  const {filter, limit, offset} = queryKey[1];
+export const getVideoFeed = (filter: number, limit: number, offset: number) => {
   return axios
     .get(`/user/getVideoFeed?filter=${filter}&limit=${limit}&offset=${offset}`)
     .then(handleResponse)

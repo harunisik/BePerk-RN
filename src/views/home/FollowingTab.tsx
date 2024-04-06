@@ -1,6 +1,6 @@
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import PostsTab from './PostsTab';
-import StoriesTab from '../profile/StoriesTab';
+import StoriesTab from './StoriesTab';
 
 const Tab = createMaterialTopTabNavigator();
 

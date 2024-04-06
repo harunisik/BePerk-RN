@@ -5,6 +5,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
@@ -91,12 +92,20 @@ const HomeScreenOptions = ({navigation}) => {
     headerTransparent: true,
     headerTitle: HeaderTitle,
     headerLeft: () => (
-      <MaterialIcons
-        name="search"
-        onPress={() => navigation.navigate(Search.name)}
-        size={26}
-        color="dodgerblue"
-      />
+      <View style={[row, cGap15]}>
+        <MaterialIcons
+          name="search"
+          onPress={() => navigation.navigate(Search.name)}
+          size={26}
+          color="dodgerblue"
+        />
+        <Ionicons
+          name="earth"
+          onPress={() => navigation.navigate(Search.name)}
+          size={24}
+          color="dodgerblue"
+        />
+      </View>
     ),
     headerRight: HeaderRight,
   };
