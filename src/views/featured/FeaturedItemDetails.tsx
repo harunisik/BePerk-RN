@@ -3,7 +3,7 @@ import common from '../../styles/sharedStyles';
 import PagerView from 'react-native-pager-view';
 import {useEffect, useMemo, useState} from 'react';
 import PagerItem from '../../components/home/ForYouPagerItem';
-import {useNavigation, useRoute} from '@react-navigation/native';
+import {useRoute} from '@react-navigation/native';
 import {useGetFeaturedFeed} from '../../hooks/featuredHooks';
 
 const {flex1} = common;
@@ -11,7 +11,6 @@ const WINDOW_SIZE = 5;
 const AnimatedPagerView = Animated.createAnimatedComponent(PagerView);
 
 const FeaturedItemDetails = () => {
-  const navigation = useNavigation();
   const route = useRoute();
   const {
     params: {index: indexParam},
@@ -49,16 +48,18 @@ const FeaturedItemDetails = () => {
   const [page, setPage] = useState(initialPage);
 
   const handlePageSelected = async ({nativeEvent: {position}}) => {
+    // back
     if (page > position) {
-      setDataIndex(prevIndex => prevIndex - 1); // back
-      setPage(prevPage => prevPage - 1); // back
+      setDataIndex(prevIndex => prevIndex - 1);
+      setPage(prevPage => prevPage - 1);
       setMoveWindow(position === 1);
+      // forward
     } else if (page < position) {
       if (dataIndex + 1 === data.length - 2) {
         await fetchNextPage();
       }
-      setDataIndex(prevIndex => prevIndex + 1); // forward
-      setPage(prevPage => prevPage + 1); // forward
+      setDataIndex(prevIndex => prevIndex + 1);
+      setPage(prevPage => prevPage + 1);
       setMoveWindow(position === newData.length - 2);
     }
   };

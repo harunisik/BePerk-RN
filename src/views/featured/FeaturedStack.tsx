@@ -12,7 +12,6 @@ const FeaturedStack = () => {
         name={Featured.name}
         component={Featured}
         options={FeaturedScreenOptions}
-        initialParams={{initialPage: 0}}
       />
       <Stack.Screen
         name={FeaturedItemDetails.name}
