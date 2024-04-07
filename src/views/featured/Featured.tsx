@@ -1,36 +1,39 @@
 import {FlatList} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {getFeaturedFeed} from '../../services/UserService';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import PostItem from '../../components/profile/PostItem';
 import FeaturedItemDetails from './FeaturedItemDetails';
-import {useInfiniteQuery} from 'react-query';
-import {useMemo} from 'react';
+import {useGetFeaturedFeed} from '../../hooks/featuredHooks';
+import {useEffect, useRef} from 'react';
 
 const COL_NUM = 3;
 
 const Featured = () => {
   const navigation = useNavigation();
+  const route = useRoute();
+  const {
+    params: {initialPage},
+  } = route;
+  const flatListRef = useRef<FlatList>(null);
 
-  const {data, fetchNextPage, isFetching, refetch, remove} = useInfiniteQuery({
-    queryKey: [getFeaturedFeed.name],
-    queryFn: ({pageParam = 0}) => {
-      const limit = 25;
-      return getFeaturedFeed(limit, limit * pageParam);
-    },
-    getNextPageParam: (lastPage, pages) => {
-      return lastPage.count > 0 ? pages.length : undefined;
-    },
-  });
-
-  const newData = useMemo(() => data?.pages.flatMap(({feed}) => feed), [data]);
+  const {data, fetchNextPage, isFetching, refetch, remove} =
+    useGetFeaturedFeed();
 
   const handlePressItem = index => {
-    navigation.navigate(FeaturedItemDetails.name, {data: newData, index});
+    navigation.navigate(FeaturedItemDetails.name, {index});
   };
+
+  useEffect(() => {
+    if (data?.length > 0) {
+      flatListRef.current?.scrollToIndex({index: initialPage});
+    }
+  }, [data, initialPage]);
+
+  console.log(initialPage);
 
   return (
     <FlatList
-      data={newData}
+      ref={flatListRef}
+      data={data}
       renderItem={({item, index}) => (
         <PostItem item={item} onPress={() => handlePressItem(index)} />
       )}
@@ -42,6 +45,7 @@ const Featured = () => {
       refreshing={isFetching}
       onEndReached={() => !isFetching && fetchNextPage()}
       numColumns={COL_NUM}
+      onScrollToIndexFailed={() => {}}
     />
   );
 };
