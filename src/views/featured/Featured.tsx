@@ -1,7 +1,6 @@
 import {FlatList} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {getFeaturedFeed} from '../../services/UserService';
-import common from '../../styles/sharedStyles';
 import PostItem from '../../components/profile/PostItem';
 import FeaturedItemDetails from './FeaturedItemDetails';
 import {useInfiniteQuery} from 'react-query';
@@ -13,7 +12,7 @@ const Featured = () => {
   const navigation = useNavigation();
 
   const {data, fetchNextPage, isFetching, refetch, remove} = useInfiniteQuery({
-    queryKey: ['getFeaturedFeed'],
+    queryKey: [getFeaturedFeed.name],
     queryFn: ({pageParam = 0}) => {
       const limit = 25;
       return getFeaturedFeed(limit, limit * pageParam);
