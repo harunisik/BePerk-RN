@@ -30,8 +30,7 @@ export const getUserPerks = ({queryKey}) => {
     .catch(handleError);
 };
 
-export const getUserFeed = ({queryKey}) => {
-  const {filter, limit, offset} = queryKey[1];
+export const getUserFeed = (filter: number, limit: number, offset: number) => {
   return axios
     .get(`/user/getFeed?filter=${filter}&limit=${limit}&offset=${offset}`)
     .then(handleResponse)

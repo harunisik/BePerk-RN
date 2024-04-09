@@ -9,6 +9,7 @@ import Comment from '../doves/Comment';
 import Followers from '../profile/Followers';
 import FollowersScreenOptions from '../profile/FollowersScreenOptions';
 import FeaturedItemDetails from '../featured/FeaturedItemDetails';
+import StoryView from '../profile/StoryView';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +37,15 @@ const HomeStack = () => {
         name={Followers.name}
         component={Followers}
         options={FollowersScreenOptions}
+      />
+      <Stack.Screen
+        name={StoryView.name}
+        component={StoryView}
+        options={{
+          animation: 'fade',
+          headerShown: false,
+          presentation: 'fullScreenModal',
+        }}
       />
     </Stack.Navigator>
   );

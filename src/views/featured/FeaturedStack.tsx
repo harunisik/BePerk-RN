@@ -2,6 +2,9 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Featured from './Featured';
 import FeaturedItemDetails from './FeaturedItemDetails';
 import FeaturedScreenOptions from './FeaturedScreenOptions';
+import Comment from '../doves/Comment';
+import Followers from '../profile/Followers';
+import FollowersScreenOptions from '../profile/FollowersScreenOptions';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +25,16 @@ const FeaturedStack = () => {
           headerBackTitleVisible: false,
         }}
         initialParams={{data: []}}
+      />
+      <Stack.Screen
+        name={Comment.name}
+        component={Comment}
+        options={{presentation: 'formSheet'}}
+      />
+      <Stack.Screen
+        name={Followers.name}
+        component={Followers}
+        options={FollowersScreenOptions}
       />
     </Stack.Navigator>
   );
