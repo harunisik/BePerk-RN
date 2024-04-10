@@ -2,7 +2,7 @@ import {FlatList} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import PostItem from '../../components/profile/PostItem';
 import FeaturedItemDetails from './FeaturedItemDetails';
-import {useGetFeaturedFeed} from '../../hooks/featuredHooks';
+import {useGetFeaturedFeed} from '../../hooks/infiniteQueryHooks';
 
 const COL_NUM = 3;
 

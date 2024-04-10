@@ -1,4 +1,4 @@
-import {Modal, Text, View} from 'react-native';
+import {View} from 'react-native';
 import common from '../../styles/sharedStyles';
 import ProfileTabGroup from '../../components/profile/ProfileTabGroup';
 import UserInfo from '../../components/profile/UserInfo';

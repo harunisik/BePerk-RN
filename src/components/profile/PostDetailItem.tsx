@@ -25,7 +25,7 @@ const {
   rGap10,
 } = common;
 
-const PostsDetailsItem = ({item, videoPaused = true}) => {
+const PostDetailItem = ({item, isViewable = false}) => {
   const {width: windowWidth, height: windowHeight} = useWindowDimensions();
 
   return (
@@ -50,7 +50,7 @@ const PostsDetailsItem = ({item, videoPaused = true}) => {
             width: windowWidth,
             height: windowHeight * 0.6,
           }}>
-          <Video uri={item.filename} paused={videoPaused} />
+          <Video uri={item.filename} paused={!isViewable} />
         </View>
       )}
 
@@ -72,4 +72,4 @@ const PostsDetailsItem = ({item, videoPaused = true}) => {
   );
 };
 
-export default PostsDetailsItem;
+export default PostDetailItem;

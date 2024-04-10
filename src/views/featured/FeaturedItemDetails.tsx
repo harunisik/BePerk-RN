@@ -4,7 +4,7 @@ import PagerView from 'react-native-pager-view';
 import {useEffect, useMemo, useState} from 'react';
 import PagerItem from '../../components/home/ForYouPagerItem';
 import {useRoute} from '@react-navigation/native';
-import {useGetFeaturedFeed} from '../../hooks/featuredHooks';
+import {useGetFeaturedFeed} from '../../hooks/infiniteQueryHooks';
 
 const {flex1} = common;
 const WINDOW_SIZE = 5;

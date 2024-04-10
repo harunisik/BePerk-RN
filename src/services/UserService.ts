@@ -52,14 +52,16 @@ export const getUserFollowings = () => {
     .catch(handleError);
 };
 
-export const getUserExploring = ({queryKey}) => {
-  const {filter, limit, offset, subtype} = queryKey[1];
-  return axios
-    .get(
-      `/user/exploring?filter=${filter}&limit=${limit}&offset=${offset}&subtype=${subtype}`,
-    )
-    .then(handleResponse)
-    .catch(handleError);
+export const getUserExploring = (
+  filter: number,
+  subtype: number | null,
+  limit: number,
+  offset: number,
+) => {
+  const url =
+    `/user/exploring?filter=${filter}&limit=${limit}&offset=${offset}` +
+    (subtype ? `&subtype=${subtype}` : '');
+  return axios.get(url).then(handleResponse).catch(handleError);
 };
 
 export const getUserHistory = ({queryKey}) => {
@@ -72,8 +74,11 @@ export const getUserHistory = ({queryKey}) => {
     .catch(handleError);
 };
 
-export const getPhotoVideo = ({queryKey}) => {
-  const {id, limit, offset} = queryKey[1];
+export const getUserPhotoVideo = (
+  id: number,
+  limit: number,
+  offset: number,
+) => {
   return axios
     .get(`/user/getPhotoVideo?id=${id}&limit=${limit}&offset=${offset}`)
     .then(handleResponse)

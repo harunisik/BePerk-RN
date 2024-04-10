@@ -1,13 +1,7 @@
-import {FlatList} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import PostItem from '../../components/profile/PostItem';
-import common from '../../styles/sharedStyles';
-import PostsDetails from './PostsDetails';
-import {useCustomQuery as useQuery} from '../../hooks/commonHooks';
-import {getPhotoVideo} from '../../services/UserService';
-import {appendData} from '../../utils/DataUtil';
-
-const COL_NUM = 3;
+import PostItemList from '../../components/profile/PostItemList';
+import {useGetUserPhotoVideo} from '../../hooks/infiniteQueryHooks';
+import ProfilePostsDetails from './ProfilePostsDetails';
 
 const PostsTab = () => {
   const navigation = useNavigation();
@@ -15,33 +9,25 @@ const PostsTab = () => {
   const {
     params: {userId: id},
   } = route;
-  const {pv5} = common;
 
-  const {data, refetch, isFetching} = useQuery(getPhotoVideo, {
-    id,
-    limit: 35,
-    offset: 0,
-  });
-
-  const newData = appendData(data);
+  const {data, fetchNextPage, isFetching, refetch, remove, hasNextPage} =
+    useGetUserPhotoVideo(id, 35);
 
   const handlePressItem = (index, item) => {
-    if (data.length > index) {
-      navigation.navigate(PostsDetails.name, {data, index, item});
-    }
+    navigation.navigate(ProfilePostsDetails.name, {userId: id});
   };
 
+  console.log('poststab');
+
   return (
-    <FlatList
-      data={newData}
-      renderItem={({item, index}) => (
-        <PostItem item={item} onPress={() => handlePressItem(index, item)} />
-      )}
-      keyExtractor={item => item.id}
-      onRefresh={refetch}
-      refreshing={isFetching}
-      numColumns={COL_NUM}
-      contentContainerStyle={pv5}
+    <PostItemList
+      data={data}
+      fetchNextPage={fetchNextPage}
+      isFetching={isFetching}
+      refetch={refetch}
+      remove={remove}
+      onPressItem={handlePressItem}
+      hasNextPage={hasNextPage}
     />
   );
 };

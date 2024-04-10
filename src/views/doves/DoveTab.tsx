@@ -7,6 +7,8 @@ import ItemSeperator from '../../components/common/ItemSpearator';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useCustomQuery as useQuery} from '../../hooks/commonHooks';
 import {getUserExploring} from '../../services/UserService';
+import {useCallback} from 'react';
+import {useGetUserExploring} from '../../hooks/infiniteQueryHooks';
 
 const ListHeaderComponent = () => {
   const navigation = useNavigation();
@@ -42,22 +44,27 @@ const DoveTab = () => {
     params: {subtype},
   } = route;
 
-  const {data, refetch, isRefetching} = useQuery(getUserExploring, {
-    filter: 2,
-    limit: 35,
-    offset: 0,
-    subtype,
-  });
+  const {data, fetchNextPage, isFetching, refetch, remove} =
+    useGetUserExploring(2, subtype, 35);
+
+  const ItemSeparatorComponent = useCallback(
+    () => <ItemSeperator lineVisible large />,
+    [],
+  );
 
   return (
     <FlatList
-      data={data?.exploring}
+      data={data}
       renderItem={({item}) => <DovesItem item={item} />}
       keyExtractor={item => item.id}
-      onRefresh={refetch}
-      refreshing={isRefetching}
+      onRefresh={() => {
+        remove();
+        refetch();
+      }}
+      refreshing={isFetching}
+      onEndReached={() => !isFetching && fetchNextPage()}
       ListHeaderComponent={ListHeaderComponent}
-      ItemSeparatorComponent={<ItemSeperator lineVisible large />}
+      ItemSeparatorComponent={ItemSeparatorComponent}
     />
   );
 };

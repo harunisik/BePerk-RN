@@ -9,7 +9,7 @@ const PostItem = ({item, onPress}) => {
 
   return (
     <TouchableWithoutFeedback onPress={onPress}>
-      <View style={[flex1, p1]}>
+      <View style={[p1, {flex: 1 / 3}]}>
         {item.type === 1 ? (
           <FastImage
             style={styles.image}

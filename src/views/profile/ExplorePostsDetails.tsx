@@ -1,8 +1,9 @@
-import {useGetUserFeed} from '../../hooks/infiniteQueryHooks';
 import PostDetailItemList from '../../components/profile/PostDetailItemList';
+import {useGetUserExploring} from '../../hooks/infiniteQueryHooks';
 
-const PostsTab = () => {
-  const {data, fetchNextPage, isFetching, refetch, remove} = useGetUserFeed(1);
+const ExplorePostsDetails = () => {
+  const {data, fetchNextPage, isFetching, refetch, remove} =
+    useGetUserExploring(1, null, 50);
 
   return (
     <PostDetailItemList
@@ -15,4 +16,4 @@ const PostsTab = () => {
   );
 };
 
-export default PostsTab;
+export default ExplorePostsDetails;

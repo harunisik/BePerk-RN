@@ -8,8 +8,9 @@ import ProfileScreenOptions from '../profile/ProfileScreenOptions';
 import Comment from '../doves/Comment';
 import Followers from '../profile/Followers';
 import FollowersScreenOptions from '../profile/FollowersScreenOptions';
-import FeaturedItemDetails from '../featured/FeaturedItemDetails';
 import StoryView from '../profile/StoryView';
+import Explore from './Explore';
+import ExplorePostsDetails from '../profile/ExplorePostsDetails';
 
 const Stack = createNativeStackNavigator();
 
@@ -46,6 +47,12 @@ const HomeStack = () => {
           headerShown: false,
           presentation: 'fullScreenModal',
         }}
+      />
+      <Stack.Screen name={Explore.name} component={Explore} />
+      <Stack.Screen
+        name={ExplorePostsDetails.name}
+        component={ExplorePostsDetails}
+        options={{title: 'Posts'}}
       />
     </Stack.Navigator>
   );

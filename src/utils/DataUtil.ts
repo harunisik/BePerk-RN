@@ -1,6 +1,6 @@
 import {isDivisible} from './MathUtil';
 
-export function appendData(data: [any], key = 'id', colNum = 3) {
+export function appendData(data: any[] | undefined, key = 'id', colNum = 3) {
   const length = data?.length;
   if (length && !isDivisible(length, colNum)) {
     const newData = [];

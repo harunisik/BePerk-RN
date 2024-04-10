@@ -16,6 +16,7 @@ import Activity from '../doves/Activity';
 import ForYouTab from './ForYouTab';
 import FollowingTab from './FollowingTab';
 import {useState} from 'react';
+import Explore from './Explore';
 
 const {row, cGap15} = common;
 
@@ -101,7 +102,7 @@ const HomeScreenOptions = ({navigation}) => {
         />
         <Ionicons
           name="earth"
-          onPress={() => navigation.navigate(Search.name)}
+          onPress={() => navigation.navigate(Explore.name)}
           size={24}
           color="dodgerblue"
         />
