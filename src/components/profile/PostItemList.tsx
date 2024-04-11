@@ -20,7 +20,7 @@ const PostItemList = ({
           item={item}
           onPress={() => {
             if (data.length > index) {
-              onPressItem();
+              onPressItem(index);
             }
           }}
         />
@@ -31,9 +31,7 @@ const PostItemList = ({
         refetch();
       }}
       refreshing={isFetching}
-      onEndReached={() => {
-        !isFetching && hasNextPage && fetchNextPage();
-      }}
+      onEndReached={() => !isFetching && hasNextPage && fetchNextPage()}
       numColumns={COL_NUM}
       contentContainerStyle={{paddingBottom: 10}}
     />

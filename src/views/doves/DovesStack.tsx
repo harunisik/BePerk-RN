@@ -22,7 +22,11 @@ const DovesStack = () => {
         component={Doves}
         options={DovesScreenOptions}
       />
-      <Stack.Screen name={Comment.name} component={Comment} />
+      <Stack.Screen
+        name={Comment.name}
+        component={Comment}
+        options={{presentation: 'formSheet'}}
+      />
       <Stack.Screen
         name={Followers.name}
         component={Followers}

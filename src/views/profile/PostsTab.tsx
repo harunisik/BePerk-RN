@@ -13,11 +13,9 @@ const PostsTab = () => {
   const {data, fetchNextPage, isFetching, refetch, remove, hasNextPage} =
     useGetUserPhotoVideo(id, 35);
 
-  const handlePressItem = (index, item) => {
+  const handlePressItem = index => {
     navigation.navigate(ProfilePostsDetails.name, {userId: id});
   };
-
-  console.log('poststab');
 
   return (
     <PostItemList

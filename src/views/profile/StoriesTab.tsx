@@ -4,7 +4,6 @@ import PostItem from '../../components/profile/PostItem';
 import common from '../../styles/sharedStyles';
 import {useCustomQuery as useQuery} from '../../hooks/commonHooks';
 import {getMy24} from '../../services/UserService';
-import {appendData} from '../../utils/DataUtil';
 import StoryView from './StoryView';
 
 const COL_NUM = 3;
@@ -19,17 +18,13 @@ const StoriesTab = () => {
 
   const {data, refetch, isFetching} = useQuery(getMy24, {id: userId});
 
-  const newData = appendData(data?.my24);
-
   const handlePressItem = index => {
-    if (data.my24.length > index) {
-      navigation.navigate(StoryView.name, {data: data.my24, index, userId});
-    }
+    navigation.navigate(StoryView.name, {data: data.my24, index, userId});
   };
 
   return (
     <FlatList
-      data={newData}
+      data={data?.my24}
       renderItem={({item, index}) => (
         <PostItem item={item} onPress={() => handlePressItem(index)} />
       )}

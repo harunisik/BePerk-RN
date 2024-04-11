@@ -1,10 +1,7 @@
-import {FlatList} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import PostItem from '../../components/profile/PostItem';
 import FeaturedItemDetails from './FeaturedItemDetails';
 import {useGetFeaturedFeed} from '../../hooks/infiniteQueryHooks';
-
-const COL_NUM = 3;
+import PostItemList from '../../components/profile/PostItemList';
 
 const Featured = () => {
   const navigation = useNavigation();
@@ -17,19 +14,13 @@ const Featured = () => {
   };
 
   return (
-    <FlatList
+    <PostItemList
       data={data}
-      renderItem={({item, index}) => (
-        <PostItem item={item} onPress={() => handlePressItem(index)} />
-      )}
-      keyExtractor={item => item.id}
-      onRefresh={() => {
-        remove();
-        refetch();
-      }}
-      refreshing={isFetching}
-      onEndReached={() => !isFetching && fetchNextPage()}
-      numColumns={COL_NUM}
+      fetchNextPage={fetchNextPage}
+      isFetching={isFetching}
+      refetch={refetch}
+      remove={remove}
+      onPressItem={handlePressItem}
     />
   );
 };

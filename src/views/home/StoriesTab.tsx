@@ -5,7 +5,6 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import common from '../../styles/sharedStyles';
 import {Fragment, useMemo} from 'react';
-import {appendData} from '../../utils/DataUtil';
 import {useNavigation} from '@react-navigation/native';
 import StoryView from '../profile/StoryView';
 import CircleGradientBorder from '../../components/common/CircleGradientBorder';
@@ -13,7 +12,7 @@ import {useStore} from '../../containers/StoreContainer';
 
 const COL_NUM = 4;
 
-const {bold, row, flex1, p5, p10, font12, aiCenter} = common;
+const {bold, row, p5, p10, font12, aiCenter} = common;
 
 const transformMy24List = (data, func) => {
   if (!data) return null;
@@ -34,7 +33,7 @@ const transformMy24List = (data, func) => {
 
 const StoriesItem = ({item, onPress, isMyStory = false}) => {
   return (
-    <View style={[flex1, p5, aiCenter]}>
+    <View style={[{flex: 1 / COL_NUM}, p5, aiCenter]}>
       {item.my24List && (
         <Fragment>
           <CircleGradientBorder
@@ -81,25 +80,21 @@ const StoriesTab = () => {
     [data],
   );
 
-  const newData = appendData(result, 'user_id', COL_NUM);
-
-  const handlePressItem = (item, index) => {
-    if (data.my24.length > index) {
-      navigation.navigate(StoryView.name, {
-        data: item.my24List,
-        index: 0,
-        userId: item.user_id,
-      });
-    }
+  const handlePressItem = item => {
+    navigation.navigate(StoryView.name, {
+      data: item.my24List,
+      index: 0,
+      userId: item.user_id,
+    });
   };
 
   return (
     <FlatList
-      data={newData}
-      renderItem={({item, index}) => (
+      data={result}
+      renderItem={({item}) => (
         <StoriesItem
           item={item}
-          onPress={() => handlePressItem(item, index)}
+          onPress={() => handlePressItem(item)}
           isMyStory={item.user_id === userId}
         />
       )}

@@ -8,7 +8,7 @@ const Explore = () => {
   const {data, fetchNextPage, isFetching, refetch, remove} =
     useGetUserExploring(1, null, 50);
 
-  const handlePressItem = (index, item) => {
+  const handlePressItem = index => {
     navigation.navigate(ExplorePostsDetails.name);
   };
 

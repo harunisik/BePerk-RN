@@ -11,6 +11,7 @@ import FollowersScreenOptions from '../profile/FollowersScreenOptions';
 import StoryView from '../profile/StoryView';
 import Explore from './Explore';
 import ExplorePostsDetails from '../profile/ExplorePostsDetails';
+import ProfilePostsDetails from '../profile/ProfilePostsDetails';
 
 const Stack = createNativeStackNavigator();
 
@@ -52,6 +53,11 @@ const HomeStack = () => {
       <Stack.Screen
         name={ExplorePostsDetails.name}
         component={ExplorePostsDetails}
+        options={{title: 'Posts'}}
+      />
+      <Stack.Screen
+        name={ProfilePostsDetails.name}
+        component={ProfilePostsDetails}
         options={{title: 'Posts'}}
       />
     </Stack.Navigator>
