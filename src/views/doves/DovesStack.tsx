@@ -7,10 +7,9 @@ import PostDove from './PostDove';
 import PostDoveScreenOptions from './PostDoveScreenOptions';
 import DovesScreenOptions from './DovesScreenOptions';
 import Activity from './Activity';
-import Profile from '../profile/Profile';
-import ProfileScreenOptions from '../profile/ProfileScreenOptions';
 import Search from './Search';
 import StoryView from '../profile/StoryView';
+import ProfileStack from '../profile/ProfileStack';
 
 const Stack = createNativeStackNavigator();
 
@@ -38,11 +37,6 @@ const DovesStack = () => {
         options={PostDoveScreenOptions}
       />
       <Stack.Screen name={Activity.name} component={Activity} />
-      <Stack.Screen
-        name={Profile.name}
-        component={Profile}
-        options={ProfileScreenOptions}
-      />
       <Stack.Screen name={Search.name} component={Search} />
       <Stack.Screen
         name={StoryView.name}
@@ -52,6 +46,11 @@ const DovesStack = () => {
           headerShown: false,
           presentation: 'fullScreenModal',
         }}
+      />
+      <Stack.Screen
+        name={ProfileStack.name}
+        component={ProfileStack}
+        options={{headerShown: false}}
       />
     </Stack.Navigator>
   );

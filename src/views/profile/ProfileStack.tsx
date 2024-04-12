@@ -14,16 +14,21 @@ import FollowersScreenOptions from './FollowersScreenOptions';
 import Followers from './Followers';
 import Profile from './Profile';
 import ProfileScreenOptions from './ProfileScreenOptions';
-import {useStore} from '../../containers/StoreContainer';
 import ProfilePostsDetails from './ProfilePostsDetails';
 import StoryView from './StoryView';
+import {useRoute} from '@react-navigation/native';
+import {useStore} from '../../containers/StoreContainer';
 
 const Stack = createNativeStackNavigator();
 
 const ProfileStack = () => {
+  const route = useRoute();
+  const {
+    params: {userId, username, headerBackVisible},
+  } = route;
   const {
     store: {
-      authResult: {id, username},
+      authResult: {id},
     },
   } = useStore();
 
@@ -34,8 +39,10 @@ const ProfileStack = () => {
         component={Profile}
         options={ProfileScreenOptions}
         initialParams={{
-          userId: id,
+          userId,
           username,
+          headerBackVisible: headerBackVisible,
+          isAuthUser: userId === id,
         }}
       />
       <Stack.Screen name={Settings.name} component={Settings} />

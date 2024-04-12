@@ -7,6 +7,7 @@ import {Fragment, useState} from 'react';
 import AddModal from '../../components/common/AddModal';
 import HomeStack from '../home/HomeStack';
 import FeaturedStack from '../featured/FeaturedStack';
+import {useStore} from '../../containers/StoreContainer';
 
 const Placeholder = () => <View />;
 
@@ -52,6 +53,11 @@ const Tab = createBottomTabNavigator();
 
 const BottomTab = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const {
+    store: {
+      authResult: {id, username},
+    },
+  } = useStore();
 
   return (
     <Fragment>
@@ -69,7 +75,11 @@ const BottomTab = () => {
           })}
         />
         <Tab.Screen name={DovesStack.name} component={DovesStack} />
-        <Tab.Screen name={ProfileStack.name} component={ProfileStack} />
+        <Tab.Screen
+          name={ProfileStack.name}
+          component={ProfileStack}
+          initialParams={{userId: id, username, headerBackVisible: false}}
+        />
       </Tab.Navigator>
       <AddModal
         visible={modalVisible}

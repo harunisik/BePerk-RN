@@ -1,9 +1,8 @@
 import {useNavigation} from '@react-navigation/native';
-import Followers from '../../../views/profile/Followers';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {Pressable, Text, View} from 'react-native';
+import {Pressable, Text} from 'react-native';
 import common from '../../../styles/sharedStyles';
-import Profile from '../../../views/profile/Profile';
+import ProfileStack from '../../../views/profile/ProfileStack';
 
 const {cGap3, row, aiCenter, rGap5, font14, bold} = common;
 
@@ -23,7 +22,8 @@ const AccountButton = ({
   const navigation = useNavigation();
 
   const handlePress = () =>
-    navigation.navigate(Profile.name, {
+    navigation.navigate(ProfileStack.name, {
+      headerBackVisible: true,
       userId: item.user_id,
       username: item.username,
     });

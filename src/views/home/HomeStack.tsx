@@ -3,15 +3,12 @@ import Home from './Home';
 import HomeScreenOptions from './HomeScreenOptions';
 import Search from '../doves/Search';
 import Activity from '../doves/Activity';
-import Profile from '../profile/Profile';
-import ProfileScreenOptions from '../profile/ProfileScreenOptions';
 import Comment from '../doves/Comment';
 import Followers from '../profile/Followers';
 import FollowersScreenOptions from '../profile/FollowersScreenOptions';
-import StoryView from '../profile/StoryView';
 import Explore from './Explore';
 import ExplorePostsDetails from '../profile/ExplorePostsDetails';
-import ProfilePostsDetails from '../profile/ProfilePostsDetails';
+import ProfileStack from '../profile/ProfileStack';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,11 +23,6 @@ const HomeStack = () => {
       <Stack.Screen name={Search.name} component={Search} />
       <Stack.Screen name={Activity.name} component={Activity} />
       <Stack.Screen
-        name={Profile.name}
-        component={Profile}
-        options={ProfileScreenOptions}
-      />
-      <Stack.Screen
         name={Comment.name}
         component={Comment}
         options={{presentation: 'formSheet'}}
@@ -40,15 +32,6 @@ const HomeStack = () => {
         component={Followers}
         options={FollowersScreenOptions}
       />
-      <Stack.Screen
-        name={StoryView.name}
-        component={StoryView}
-        options={{
-          animation: 'fade',
-          headerShown: false,
-          presentation: 'fullScreenModal',
-        }}
-      />
       <Stack.Screen name={Explore.name} component={Explore} />
       <Stack.Screen
         name={ExplorePostsDetails.name}
@@ -56,9 +39,9 @@ const HomeStack = () => {
         options={{title: 'Posts'}}
       />
       <Stack.Screen
-        name={ProfilePostsDetails.name}
-        component={ProfilePostsDetails}
-        options={{title: 'Posts'}}
+        name={ProfileStack.name}
+        component={ProfileStack}
+        options={{headerShown: false}}
       />
     </Stack.Navigator>
   );

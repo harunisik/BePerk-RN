@@ -3,8 +3,8 @@ import {useState} from 'react';
 import UserItem from '../../components/profile/UserItem';
 import {useSearchText, useSearchUsers} from '../../hooks/searchHooks';
 import ItemSeperator from '../../components/common/ItemSpearator';
-import Profile from '../profile/Profile';
 import {useNavigation} from '@react-navigation/native';
+import ProfileStack from '../profile/ProfileStack';
 
 const SearchProfilesTab = ({searchText}) => {
   const [searchResult, setSearchResult] = useState([]);
@@ -13,7 +13,8 @@ const SearchProfilesTab = ({searchText}) => {
   const searchUsers = useSearchUsers();
 
   const handlePressItem = item => {
-    navigation.navigate(Profile.name, {
+    navigation.navigate(ProfileStack.name, {
+      headerBackVisible: true,
       userId: item.user_id,
       username: item.username,
     });

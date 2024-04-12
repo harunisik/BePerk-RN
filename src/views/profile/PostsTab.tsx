@@ -7,14 +7,16 @@ const PostsTab = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const {
-    params: {userId: id},
+    params: {userId},
   } = route;
 
+  console.log('rendered', userId);
+
   const {data, fetchNextPage, isFetching, refetch, remove, hasNextPage} =
-    useGetUserPhotoVideo(id, 35);
+    useGetUserPhotoVideo(userId, 35);
 
   const handlePressItem = index => {
-    navigation.navigate(ProfilePostsDetails.name, {userId: id});
+    navigation.navigate(ProfilePostsDetails.name, {userId});
   };
 
   return (

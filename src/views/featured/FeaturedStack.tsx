@@ -5,6 +5,7 @@ import FeaturedScreenOptions from './FeaturedScreenOptions';
 import Comment from '../doves/Comment';
 import Followers from '../profile/Followers';
 import FollowersScreenOptions from '../profile/FollowersScreenOptions';
+import ProfileStack from '../profile/ProfileStack';
 
 const Stack = createNativeStackNavigator();
 
@@ -35,6 +36,11 @@ const FeaturedStack = () => {
         name={Followers.name}
         component={Followers}
         options={FollowersScreenOptions}
+      />
+      <Stack.Screen
+        name={ProfileStack.name}
+        component={ProfileStack}
+        options={{headerShown: false}}
       />
     </Stack.Navigator>
   );

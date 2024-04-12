@@ -13,14 +13,14 @@ import {useNavigation} from '@react-navigation/native';
 const ProfileButtonGroup = ({
   onPressFollowing,
   pressButtonTitle,
-  isCurrentUser = true,
+  isAuthUser = true,
 }) => {
   const navigation = useNavigation();
   const {aiCenter, row, jcCenter, p10} = common;
 
   return (
     <View style={[aiCenter, row, jcCenter, p10]}>
-      {isCurrentUser ? (
+      {isAuthUser ? (
         <TouchableOpacity
           style={[styles.button, aiCenter, row]}
           onPress={() => navigation.navigate(EditProfile.name)}>

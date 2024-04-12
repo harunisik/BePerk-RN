@@ -37,7 +37,7 @@ export function useGetFeaturedFeed() {
 
 export function useGetUserFeed(filter: number, limit: number = 25) {
   const {data, fetchNextPage, isFetching, refetch, remove} = useInfiniteQuery({
-    queryKey: [getUserFeed.name],
+    queryKey: [getUserFeed.name, filter],
     queryFn: ({pageParam = 0}) => {
       return getUserFeed(filter, limit, limit * pageParam);
     },
@@ -63,7 +63,7 @@ export function useGetUserExploring(
   limit: number = 25,
 ) {
   const {data, fetchNextPage, isFetching, refetch, remove} = useInfiniteQuery({
-    queryKey: [getUserExploring.name],
+    queryKey: [getUserExploring.name, filter],
     queryFn: ({pageParam = 0}) => {
       return getUserExploring(filter, subtype, limit, limit * pageParam);
     },
@@ -90,7 +90,7 @@ export function useGetUserExploring(
 export function useGetUserPhotoVideo(id: number, limit: number = 25) {
   const {data, fetchNextPage, isFetching, refetch, remove, hasNextPage} =
     useInfiniteQuery({
-      queryKey: [getUserPhotoVideo.name],
+      queryKey: [getUserPhotoVideo.name, id],
       queryFn: ({pageParam = 0}) => {
         return getUserPhotoVideo(id, limit, limit * pageParam);
       },

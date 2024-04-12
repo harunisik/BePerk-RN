@@ -4,7 +4,6 @@ import ProfileTabGroup from '../../components/profile/ProfileTabGroup';
 import UserInfo from '../../components/profile/UserInfo';
 import ProfileButtonGroup from '../../components/profile/ProfileButtonGroup';
 import {useEffect, useState} from 'react';
-import {useStore} from '../../containers/StoreContainer';
 import {useRoute} from '@react-navigation/native';
 import {
   useCustomQuery as useQuery,
@@ -16,29 +15,27 @@ import {
   getUserProfile,
 } from '../../services/UserService';
 
+const {flex1} = common;
+
 const Profile = () => {
   const [isFollowing, setIsFollowing] = useState(0);
   const route = useRoute();
   const {
-    store: {
-      authResult: {id: currentUserId},
-    },
-  } = useStore();
-  const {
-    params: {userId: id},
+    params: {userId, isAuthUser},
   } = route;
 
-  const {flex1} = common;
-
-  const {data} = useQuery(getUserProfile, {id});
+  const {data} = useQuery(getUserProfile, {id: userId});
   const addFollowing = useMutation(userAddFollowing);
   const deleteFollowing = useMutation(userDeleteFollowing);
 
   const handlePressFollowing = () => {
     if (isFollowing === 0) {
-      addFollowing.mutate({id}, {onSuccess: () => setIsFollowing(1)});
+      addFollowing.mutate({id: userId}, {onSuccess: () => setIsFollowing(1)});
     } else {
-      deleteFollowing.mutate({id}, {onSuccess: () => setIsFollowing(0)});
+      deleteFollowing.mutate(
+        {id: userId},
+        {onSuccess: () => setIsFollowing(0)},
+      );
     }
   };
 
@@ -52,9 +49,9 @@ const Profile = () => {
       <ProfileButtonGroup
         onPressFollowing={handlePressFollowing}
         pressButtonTitle={isFollowing === 1 ? 'Following' : 'Follow'}
-        isCurrentUser={currentUserId === id}
+        isAuthUser={isAuthUser}
       />
-      <ProfileTabGroup userId={id} />
+      <ProfileTabGroup userId={userId} />
     </View>
   );
 };

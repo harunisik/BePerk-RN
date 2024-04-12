@@ -1,4 +1,4 @@
-import {View} from 'react-native';
+import {Text, View} from 'react-native';
 import {Fragment} from 'react';
 import Video from '../common/Video';
 import LikeButtton from '../common/buttons/LikeButton';
@@ -25,8 +25,11 @@ const ForYouPagerItem = ({item, paused = true}) => {
         <View
           style={{
             alignSelf: 'flex-end',
+            width: '70%',
+            rowGap: 10,
           }}>
           <AccountButton item={item} color="white" size={40} vertical />
+          <Text style={{color: 'white'}}>{item.caption}</Text>
         </View>
         <View style={{rowGap: 25}}>
           <LikeButtton

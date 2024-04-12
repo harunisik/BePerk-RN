@@ -6,6 +6,7 @@ import {useStore} from '../../containers/StoreContainer';
 import {ModalActionType} from '../../containers/ModalAction';
 import UserProfileModal from '../../components/profile/UserProfileModal';
 import {useNavigation, useRoute} from '@react-navigation/native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const HeaderRight = () => {
   const {
@@ -65,29 +66,31 @@ const HeaderRight = () => {
   );
 };
 
-const ProfileScreenOptions = ({route}) => {
+const ProfileScreenOptions = ({route, navigation}) => {
   const {
-    params: {username},
+    params: {username, headerBackVisible},
   } = route;
 
   const {bold, font16} = common;
 
   return {
     title: '',
-    headerBackVisible: true,
-    headerBackTitleVisible: false,
-    headerLeft: () => <Text style={[bold, font16]}>{username}</Text>,
-    // headerLeft: () => (
-    //   <View style={{flexDirection: 'row', alignItems: 'center'}}>
-    //     <MaterialIcons
-    //       name="arrow-back-ios"
-    //       color="dodgerblue"
-    //       size={26}
-    //       onPress={() => navigation.goBack()}
-    //     />
-    //     <Text style={[bold, font16]}>{username}</Text>
-    //   </View>
-    // ),
+    // headerBackVisible: true,
+    // headerBackTitleVisible: false,
+    // headerLeft: () => <Text style={[bold, font16]}>{username}</Text>,
+    headerLeft: () => (
+      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        {headerBackVisible && (
+          <MaterialIcons
+            name="arrow-back-ios"
+            color="dodgerblue"
+            size={26}
+            onPress={() => navigation.goBack()}
+          />
+        )}
+        <Text style={[bold, font16]}>{username}</Text>
+      </View>
+    ),
     headerRight: HeaderRight,
   };
 };

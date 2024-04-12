@@ -3,9 +3,9 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {dateDiff} from '../../utils/DateUtil';
 import common from '../../styles/sharedStyles';
 import DovesItemOptions from './DovesItemOptions';
-import Profile from '../../views/profile/Profile';
 import {useNavigation} from '@react-navigation/native';
 import DotsButton from '../common/buttons/DotsButton';
+import ProfileStack from '../../views/profile/ProfileStack';
 
 enum DoveType {
   Dove,
@@ -53,7 +53,8 @@ const DovesItem = ({item, displayUsername = true}) => {
                 <Text
                   style={bold}
                   onPress={() =>
-                    navigation.navigate(Profile.name, {
+                    navigation.navigate(ProfileStack.name, {
+                      headerBackVisible: true,
                       userId: item.user_id,
                       username: item.username,
                     })
