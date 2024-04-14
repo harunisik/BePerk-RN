@@ -1,9 +1,6 @@
-import {View} from 'react-native';
-import common from '../../styles/sharedStyles';
-import ProfileTabGroup from '../../components/profile/ProfileTabGroup';
 import UserInfo from '../../components/profile/UserInfo';
 import ProfileButtonGroup from '../../components/profile/ProfileButtonGroup';
-import {useEffect, useState} from 'react';
+import {Fragment, useEffect, useState} from 'react';
 import {useRoute} from '@react-navigation/native';
 import {
   useCustomQuery as useQuery,
@@ -14,8 +11,10 @@ import {
   addFollowing as userAddFollowing,
   getUserProfile,
 } from '../../services/UserService';
-
-const {flex1} = common;
+import {Tabs} from 'react-native-collapsible-tab-view';
+import PostsTab from './PostsTab';
+import StoriesTab from './StoriesTab';
+import DovesTab from './DovesTab';
 
 const Profile = () => {
   const [isFollowing, setIsFollowing] = useState(0);
@@ -24,7 +23,7 @@ const Profile = () => {
     params: {userId, isAuthUser},
   } = route;
 
-  const {data} = useQuery(getUserProfile, {id: userId});
+  const {data, refetch, isFetching} = useQuery(getUserProfile, {id: userId});
   const addFollowing = useMutation(userAddFollowing);
   const deleteFollowing = useMutation(userDeleteFollowing);
 
@@ -44,15 +43,28 @@ const Profile = () => {
   }, [data]);
 
   return (
-    <View style={[flex1]}>
-      <UserInfo data={data} />
-      <ProfileButtonGroup
-        onPressFollowing={handlePressFollowing}
-        pressButtonTitle={isFollowing === 1 ? 'Following' : 'Follow'}
-        isAuthUser={isAuthUser}
-      />
-      <ProfileTabGroup userId={userId} />
-    </View>
+    <Tabs.Container
+      lazy
+      renderHeader={() => (
+        <Fragment>
+          <UserInfo data={data} />
+          <ProfileButtonGroup
+            onPressFollowing={handlePressFollowing}
+            pressButtonTitle={isFollowing === 1 ? 'Following' : 'Follow'}
+            isAuthUser={isAuthUser}
+          />
+        </Fragment>
+      )}>
+      <Tabs.Tab name="Posts">
+        <PostsTab userId={userId} />
+      </Tabs.Tab>
+      <Tabs.Tab name="Stories">
+        <StoriesTab userId={userId} />
+      </Tabs.Tab>
+      <Tabs.Tab name="Doves">
+        <DovesTab userId={userId} />
+      </Tabs.Tab>
+    </Tabs.Container>
   );
 };
 

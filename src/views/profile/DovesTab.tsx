@@ -2,18 +2,13 @@ import {View, FlatList} from 'react-native';
 import DovesItem from '../../components/doves/DovesItem';
 import ItemSeperator from '../../components/common/ItemSpearator';
 import common from '../../styles/sharedStyles';
-import {useRoute} from '@react-navigation/native';
 import {useCustomQuery as useQuery} from '../../hooks/commonHooks';
 import {getUserPerks} from '../../services/UserService';
+import {Tabs} from 'react-native-collapsible-tab-view';
 
-const DovesTab = () => {
-  const route = useRoute();
-  const {
-    params: {userId: id},
-  } = route;
-
+const DovesTab = ({userId}) => {
   const {data, refetch, isFetching} = useQuery(getUserPerks, {
-    id,
+    id: userId,
     limit: 35,
     offset: 0,
   });
@@ -22,7 +17,7 @@ const DovesTab = () => {
 
   return (
     <View style={pt15}>
-      <FlatList
+      <Tabs.FlatList
         data={data}
         renderItem={({item}) => (
           <DovesItem item={item} displayUsername={false} />

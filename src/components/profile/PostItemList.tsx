@@ -1,5 +1,6 @@
-import {FlatList} from 'react-native';
-import PostItem from './PostItem';
+import {MasonryFlashList} from '@shopify/flash-list';
+import PostItem, {IMAGE_HEIGHT} from './PostItem';
+import {Tabs} from 'react-native-collapsible-tab-view';
 
 const COL_NUM = 3;
 
@@ -11,9 +12,12 @@ const PostItemList = ({
   remove,
   onPressItem,
   hasNextPage = true,
+  useTabView = false,
 }) => {
+  const ListComp = useTabView ? Tabs.MasonryFlashList : MasonryFlashList;
+
   return (
-    <FlatList
+    <ListComp
       data={data}
       renderItem={({item, index}) => (
         <PostItem
@@ -33,6 +37,7 @@ const PostItemList = ({
       refreshing={isFetching}
       onEndReached={() => !isFetching && hasNextPage && fetchNextPage()}
       numColumns={COL_NUM}
+      estimatedItemSize={IMAGE_HEIGHT}
       contentContainerStyle={{paddingBottom: 10}}
     />
   );

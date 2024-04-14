@@ -1,17 +1,10 @@
-import {useNavigation, useRoute} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import PostItemList from '../../components/profile/PostItemList';
 import {useGetUserPhotoVideo} from '../../hooks/infiniteQueryHooks';
 import ProfilePostsDetails from './ProfilePostsDetails';
 
-const PostsTab = () => {
+const PostsTab = ({userId}) => {
   const navigation = useNavigation();
-  const route = useRoute();
-  const {
-    params: {userId},
-  } = route;
-
-  console.log('rendered', userId);
-
   const {data, fetchNextPage, isFetching, refetch, remove, hasNextPage} =
     useGetUserPhotoVideo(userId, 35);
 
@@ -28,6 +21,7 @@ const PostsTab = () => {
       remove={remove}
       onPressItem={handlePressItem}
       hasNextPage={hasNextPage}
+      useTabView
     />
   );
 };

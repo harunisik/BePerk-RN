@@ -1,21 +1,16 @@
-import {FlatList} from 'react-native';
-import {useNavigation, useRoute} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import PostItem from '../../components/profile/PostItem';
 import common from '../../styles/sharedStyles';
 import {useCustomQuery as useQuery} from '../../hooks/commonHooks';
 import {getMy24} from '../../services/UserService';
 import StoryView from './StoryView';
+import {Tabs} from 'react-native-collapsible-tab-view';
 
+const {pv5} = common;
 const COL_NUM = 3;
 
-const StoriesTab = () => {
+const StoriesTab = ({userId}) => {
   const navigation = useNavigation();
-  const route = useRoute();
-  const {
-    params: {userId},
-  } = route;
-  const {pv5} = common;
-
   const {data, refetch, isFetching} = useQuery(getMy24, {id: userId});
 
   const handlePressItem = index => {
@@ -23,7 +18,7 @@ const StoriesTab = () => {
   };
 
   return (
-    <FlatList
+    <Tabs.FlatList
       data={data?.my24}
       renderItem={({item, index}) => (
         <PostItem item={item} onPress={() => handlePressItem(index)} />
