@@ -25,7 +25,6 @@ const FeaturedStack = () => {
           title: '',
           headerBackTitleVisible: false,
         }}
-        initialParams={{data: []}}
       />
       <Stack.Screen
         name={Comment.name}

@@ -6,6 +6,7 @@ import {
   getUserFeed,
 } from '../services/UserService';
 import {useMemo} from 'react';
+import {getChat} from '../services/ChatService';
 
 // MUTATION requests
 

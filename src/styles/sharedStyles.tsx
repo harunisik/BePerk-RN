@@ -32,6 +32,9 @@ const common = StyleSheet.create({
     borderStyle: 'dashed',
     borderWidth: 1,
   },
+  rGap3: {
+    rowGap: 3,
+  },
   rGap5: {
     rowGap: 5,
   },

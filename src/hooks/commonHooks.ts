@@ -71,7 +71,11 @@ export function useCustomMutation<TData = unknown, TVariables = void>(
 export function useCustomQuery<
   TQueryFnData = unknown,
   TQueryKey extends QueryKey = QueryKey,
->(queryFn: QueryFunction<TQueryFnData, TQueryKey>, data?: TQueryFnData) {
+>(
+  queryFn: QueryFunction<TQueryFnData, TQueryKey>,
+  data?: TQueryFnData,
+  select?: (data: TQueryFnData) => TQueryFnData,
+) {
   const queryKey = data ? [queryFn.name, data] : [queryFn.name];
-  return useQuery({queryKey, queryFn});
+  return useQuery({queryKey, queryFn, select});
 }

@@ -4,12 +4,12 @@ import FastImage from 'react-native-fast-image';
 import {Fragment} from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
+const {flex1, p1} = common;
+
 export const VIDEO_HEIGHT = 240;
 export const IMAGE_HEIGHT = 119;
 
 const PostItem = ({item, onPress}) => {
-  const {flex1, p1} = common;
-
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       <View style={[p1]}>

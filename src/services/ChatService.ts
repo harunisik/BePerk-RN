@@ -14,3 +14,15 @@ export const chatSend = chat => {
     .then(handleResponse)
     .catch(handleError);
 };
+
+export const chatListOpen = () => {
+  return axios.get('/chat/listOpen').then(handleResponse).catch(handleError);
+};
+
+export const getChat = ({queryKey}) => {
+  const {chatId, limit, offset} = queryKey[1];
+  return axios
+    .get(`/chat?chat_id=${chatId}&limit=${limit}&offset=${offset}`)
+    .then(handleResponse)
+    .catch(handleError);
+};

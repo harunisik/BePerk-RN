@@ -1,14 +1,8 @@
-import {
-  View,
-  Alert,
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-  Modal,
-} from 'react-native';
+import {View, StyleSheet, TouchableOpacity, Text} from 'react-native';
 import EditProfile from '../../views/profile/settings/EditProfile';
 import common from '../../styles/sharedStyles';
 import {useNavigation} from '@react-navigation/native';
+import Messages from '../../views/profile/Messages';
 
 const ProfileButtonGroup = ({
   onPressFollowing,
@@ -35,7 +29,7 @@ const ProfileButtonGroup = ({
       )}
       <TouchableOpacity
         style={[styles.button, aiCenter, row]}
-        onPress={() => Alert.alert('Under construction!')}>
+        onPress={() => navigation.navigate(Messages.name)}>
         <Text>Messages</Text>
       </TouchableOpacity>
     </View>

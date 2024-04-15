@@ -19,11 +19,7 @@ const MainStack = () => {
           <Stack.Screen name={SignIn.name} component={SignIn} />
         ) : (
           <Fragment>
-            <Stack.Screen
-              name={BottomTab.name}
-              component={BottomTab}
-              initialParams={{modalVisible: false}}
-            />
+            <Stack.Screen name={BottomTab.name} component={BottomTab} />
             <Stack.Screen
               name={PostDove.name}
               component={PostDove}

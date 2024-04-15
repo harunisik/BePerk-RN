@@ -5,7 +5,22 @@ const DAY = HOUR * 24;
 const WEEK = DAY * 7;
 const YEAR = DAY * 365;
 
-export const dateDiff = (time: number) => {
+const monthNames = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+];
+
+export function dateDiff(time: number) {
   const start = new Date(time);
   const end = new Date();
   const diff = end.getTime() - start.getTime();
@@ -41,4 +56,9 @@ export const dateDiff = (time: number) => {
   }
 
   return years + 'y';
-};
+}
+
+export function formatDate(time: number) {
+  const date = new Date(time);
+  return `${date.getDate()} ${monthNames[date.getMonth()]} ${date.getFullYear()} at ${date.getHours()}:${('00' + date.getMinutes()).slice(-2)}`;
+}

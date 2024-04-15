@@ -9,23 +9,18 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const HeaderRight = () => {
-  const {
-    store: {
-      authResult: {id},
-    },
-    dispatch,
-  } = useStore();
+  const {dispatch} = useStore();
   const navigation = useNavigation();
   const route = useRoute();
   const {
-    params: {userId},
+    params: {userId, isAuthUser},
   } = route;
 
   const {aiCenter, row, jcSpaceAround, cGap15} = common;
 
   return (
     <View>
-      {id === userId ? (
+      {isAuthUser ? (
         <View style={[aiCenter, row, jcSpaceAround, cGap15]}>
           <MaterialCommunityIcons
             name="share-variant"
@@ -75,9 +70,6 @@ const ProfileScreenOptions = ({route, navigation}) => {
 
   return {
     title: '',
-    // headerBackVisible: true,
-    // headerBackTitleVisible: false,
-    // headerLeft: () => <Text style={[bold, font16]}>{username}</Text>,
     headerLeft: () => (
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
         {headerBackVisible && (
