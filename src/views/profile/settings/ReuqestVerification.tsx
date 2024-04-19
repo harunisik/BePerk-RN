@@ -1,21 +1,25 @@
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, Pressable} from 'react-native';
 import common from '../../../styles/sharedStyles';
 import {useNavigation} from '@react-navigation/native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
+const {row, flex1, aiCenter, jcCenter, jcSpaceBetween} = common;
 
 export const RequestVerificationListItem = () => {
   const navigation = useNavigation();
   const title = 'Request verification';
 
   return (
-    <TouchableOpacity
-      onPress={() => navigation.navigate(RequestVerification.name)}>
-      <Text>{title}</Text>
-    </TouchableOpacity>
+    <Pressable onPress={() => navigation.navigate(RequestVerification.name)}>
+      <View style={[row, jcSpaceBetween, aiCenter]}>
+        <Text>{title}</Text>
+        <MaterialIcons name="arrow-forward-ios" color="gray" size={20} />
+      </View>
+    </Pressable>
   );
 };
 
 const RequestVerification = () => {
-  const {flex1, aiCenter, jcCenter} = common;
   return (
     <View style={[flex1, aiCenter, jcCenter]}>
       <Text>RequestVerification is under construction!</Text>

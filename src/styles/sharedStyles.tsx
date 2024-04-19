@@ -7,6 +7,9 @@ const common = StyleSheet.create({
   flex2: {
     flex: 2,
   },
+  flex3: {
+    flex: 3,
+  },
   shrink1: {
     flexShrink: 1,
   },

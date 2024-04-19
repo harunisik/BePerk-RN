@@ -1,4 +1,4 @@
-import {Text, SafeAreaView, SectionList} from 'react-native';
+import {Text, SectionList} from 'react-native';
 import {SwitchAccountListItem} from './SwitchAccount';
 import LogOut from './LogOut';
 import {EditProfileListItem} from './EditProfile';
@@ -18,6 +18,11 @@ import Tag from './Tag';
 import NewPosts from './NewPosts';
 import {PrivacyPolicyListItem} from './PrivacyPolicy';
 import {TermsListItem} from './Terms';
+import ItemSeperator from '../../../components/common/ItemSpearator';
+import {useCallback} from 'react';
+import common from '../../../styles/sharedStyles';
+
+const {gray, p15} = common;
 
 const MENU_LIST = {
   Account: [
@@ -48,15 +53,26 @@ const SECTIONS = Object.entries(MENU_LIST).map(([key, value]) => ({
 }));
 
 const Settings = () => {
+  const ItemSeparatorComponent = useCallback(() => <ItemSeperator large />, []);
+  const SectionSeparatorComponent = useCallback(
+    () => <ItemSeperator large />,
+    [],
+  );
+
   return (
-    <SafeAreaView>
-      <SectionList
-        sections={SECTIONS}
-        keyExtractor={(item, index) => index}
-        renderItem={({item: {Comp}}) => <Comp />}
-        renderSectionHeader={({section: {title}}) => <Text>{title}</Text>}
-      />
-    </SafeAreaView>
+    <SectionList
+      sections={SECTIONS}
+      keyExtractor={(item, index) => {
+        return item.Comp.name + index;
+      }}
+      renderItem={({item: {Comp}}) => <Comp />}
+      renderSectionHeader={({section: {title}}) => (
+        <Text style={gray}>{title}</Text>
+      )}
+      ItemSeparatorComponent={ItemSeparatorComponent}
+      SectionSeparatorComponent={SectionSeparatorComponent}
+      contentContainerStyle={p15}
+    />
   );
 };
 

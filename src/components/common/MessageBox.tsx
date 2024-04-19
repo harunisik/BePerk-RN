@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 10,
     backgroundColor: 'white',
-    height: 100,
+    // height: 100,
   },
   textInput: {
     height: 40,

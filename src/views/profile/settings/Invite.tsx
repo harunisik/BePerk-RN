@@ -1,18 +1,25 @@
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, Pressable} from 'react-native';
 import common from '../../../styles/sharedStyles';
 import {useNavigation} from '@react-navigation/native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
+const {row, flex1, aiCenter, jcCenter, jcSpaceBetween} = common;
 
 export const InviteListItem = () => {
   const navigation = useNavigation();
+  const title = 'Invite';
+
   return (
-    <TouchableOpacity onPress={() => navigation.navigate(Invite.name)}>
-      <Text>Invite</Text>
-    </TouchableOpacity>
+    <Pressable onPress={() => navigation.navigate(Invite.name)}>
+      <View style={[row, jcSpaceBetween, aiCenter]}>
+        <Text>{title}</Text>
+        <MaterialIcons name="arrow-forward-ios" color="gray" size={20} />
+      </View>
+    </Pressable>
   );
 };
 
 const Invite = () => {
-  const {flex1, aiCenter, jcCenter} = common;
   return (
     <View style={[flex1, aiCenter, jcCenter]}>
       <Text>Invite is under construction!</Text>
