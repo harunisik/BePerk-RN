@@ -6,6 +6,10 @@ import BottomTab from './BottomTab';
 import PostDove from '../doves/PostDove';
 import PostDoveScreenOptions from '../doves/PostDoveScreenOptions';
 import {Fragment} from 'react';
+import CreateNewAccount from '../profile/settings/CreateNewAccount';
+import EditProfile, {
+  EditProfileScreenOptions,
+} from '../profile/settings/EditProfile';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,7 +20,13 @@ const MainStack = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
         {!store.authResult ? (
-          <Stack.Screen name={SignIn.name} component={SignIn} />
+          <Fragment>
+            <Stack.Screen name={SignIn.name} component={SignIn} />
+            <Stack.Screen
+              name={CreateNewAccount.name}
+              component={CreateNewAccount}
+            />
+          </Fragment>
         ) : (
           <Fragment>
             <Stack.Screen name={BottomTab.name} component={BottomTab} />
@@ -24,6 +34,11 @@ const MainStack = () => {
               name={PostDove.name}
               component={PostDove}
               options={PostDoveScreenOptions}
+            />
+            <Stack.Screen
+              name={EditProfile.name}
+              component={EditProfile}
+              options={EditProfileScreenOptions}
             />
           </Fragment>
         )}

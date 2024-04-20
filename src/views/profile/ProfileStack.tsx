@@ -4,7 +4,9 @@ import SwitchAccount from './settings/SwitchAccount';
 import EditProfile, {EditProfileScreenOptions} from './settings/EditProfile';
 import ChangePassword from './settings/ChangePassword';
 import Invite from './settings/Invite';
-import CreateNewAccount from './settings/CreateNewAccount';
+import CreateNewAccount, {
+  CreateNewAccountScreenOptions,
+} from './settings/CreateNewAccount';
 import RequestVerification from './settings/ReuqestVerification';
 import DeleteAccount from './settings/DeleteAccount';
 import PrivacyPolicy from './settings/PrivacyPolicy';
@@ -64,7 +66,7 @@ const ProfileStack = () => {
       <Stack.Screen
         name={CreateNewAccount.name}
         component={CreateNewAccount}
-        options={{title: 'Create a new account'}}
+        options={CreateNewAccountScreenOptions}
       />
       <Stack.Screen
         name={RequestVerification.name}
@@ -74,7 +76,12 @@ const ProfileStack = () => {
       <Stack.Screen
         name={DeleteAccount.name}
         component={DeleteAccount}
-        options={{title: 'Delete account'}}
+        options={{
+          // title: '',
+          presentation: 'transparentModal',
+          animation: 'none',
+          headerShown: false,
+        }}
       />
       <Stack.Screen
         name={PrivacyPolicy.name}

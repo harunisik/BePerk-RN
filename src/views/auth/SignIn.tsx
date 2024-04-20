@@ -1,72 +1,120 @@
 import {
-  StyleSheet,
+  View,
   Text,
   TextInput,
+  StyleSheet,
   TouchableOpacity,
-  View,
+  SafeAreaView,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {Fragment, useState} from 'react';
+import {showMessage} from 'react-native-flash-message';
+import LinearGradient from 'react-native-linear-gradient';
 import common from '../../styles/sharedStyles';
-import {useState} from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import CreateNewAccount from '../profile/settings/CreateNewAccount';
 import {useSignIn} from '../../hooks/userHooks';
-import axios from 'axios';
 
-const SignIn = () => {
-  const [username, setUsername] = useState('jesus_freak_4l');
+const {row, flex1, aiCenter, rGap30, jcSpaceBetween, white, font11, bold} =
+  common;
+
+const Signin = () => {
+  const [username, setUsername] = useState('harun');
   const [password, setPassword] = useState('123');
-  const {flex1, aiCenter, jcCenter, row} = common;
+  const navigation = useNavigation();
+  const signIn = useSignIn({username, password});
 
-  const handleLogin = useSignIn({username, password});
+  const handlePressLogin = () => {
+    if (!username) {
+      showMessage({
+        message: 'Username is empty',
+        type: 'warning',
+      });
+      return;
+    }
 
-  handleLogin();
+    if (!password) {
+      showMessage({
+        message: 'Password is empty',
+        type: 'warning',
+      });
+      return;
+    }
+
+    signIn();
+  };
 
   return (
-    <View style={[flex1, aiCenter, jcCenter]}>
-      <Text>{axios.defaults.baseURL}</Text>
-      <Text>Username</Text>
-      <TextInput
-        placeholder="Tap to enter username"
-        onChangeText={setUsername}
-        value={username}
-        style={styles.textInput}
-        autoFocus
-      />
-      <Text>Password</Text>
-      <TextInput
-        placeholder="Tap to enter password"
-        onChangeText={setPassword}
-        value={password}
-        style={styles.textInput}
-        secureTextEntry
-        onSubmitEditing={handleLogin}
-      />
-      <TouchableOpacity style={[styles.button, aiCenter]} onPress={handleLogin}>
-        <Text>Log In</Text>
-      </TouchableOpacity>
-      <Text>Or</Text>
-      <View style={row}>
-        <MaterialCommunityIcons name="apple" size={26} />
-        <MaterialCommunityIcons name="facebook" size={26} />
-        <MaterialCommunityIcons name="twitter" size={26} />
+    <Fragment>
+      <LinearGradient colors={['dodgerblue', 'white']} style={{height: '30%'}}>
+        <SafeAreaView>
+          <View style={[aiCenter, {paddingTop: 40}]}>
+            <MaterialIcons name="account-circle" size={80} color="dodgerblue" />
+          </View>
+        </SafeAreaView>
+      </LinearGradient>
+      <View style={[flex1, aiCenter, rGap30, {backgroundColor: 'white'}]}>
+        <View style={{width: '75%'}}>
+          <Text>Username</Text>
+          <TextInput
+            placeholder="Tap to enter username"
+            onChangeText={setUsername}
+            value={username}
+            style={[styles.textInput, styles.line]}
+          />
+        </View>
+        <View style={{width: '75%'}}>
+          <Text>Password</Text>
+          <TextInput
+            placeholder="Tap to enter password"
+            onChangeText={setPassword}
+            value={password}
+            style={[styles.textInput, styles.line]}
+            secureTextEntry
+          />
+        </View>
+        <TouchableOpacity
+          style={[
+            {
+              backgroundColor: 'dodgerblue',
+              padding: 15,
+              width: '55%',
+              borderRadius: 20,
+            },
+            aiCenter,
+          ]}
+          onPress={handlePressLogin}>
+          <Text style={white}>Log In</Text>
+        </TouchableOpacity>
+        <Text>Or</Text>
+        <View style={row}>
+          <MaterialCommunityIcons name="apple" size={50} />
+          <MaterialCommunityIcons name="facebook" size={50} />
+          <MaterialCommunityIcons name="twitter" size={50} />
+        </View>
+        <Text>
+          Do not have account?{' '}
+          <Text
+            style={{color: 'dodgerblue'}}
+            onPress={() => navigation.navigate(CreateNewAccount.name)}>
+            Registration
+          </Text>
+        </Text>
+        <Text style={{color: 'dodgerblue'}}>Forgot password?</Text>
       </View>
-      <Text>Do not have account? Registration</Text>
-      <Text>Forgot password?</Text>
-    </View>
+    </Fragment>
   );
 };
 
 const styles = StyleSheet.create({
   textInput: {
-    height: 40,
-    width: 200,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
+    height: 30,
   },
-  button: {
-    backgroundColor: '#DDDDDD',
-    padding: 10,
+  line: {
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: 'gray',
   },
 });
 
-export default SignIn;
+export default Signin;

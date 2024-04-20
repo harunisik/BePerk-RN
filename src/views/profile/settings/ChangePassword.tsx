@@ -11,7 +11,7 @@ import {useNavigation} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useState} from 'react';
 import {useCustomMutation as useMutation} from '../../../hooks/commonHooks';
-import {postPassword as userPostPassword} from '../../../services/AuthService';
+import {changePassword as userPostPassword} from '../../../services/AuthService';
 import {showMessage} from 'react-native-flash-message';
 
 const {row, gray, aiCenter, rGap30, jcSpaceBetween, white} = common;
@@ -39,6 +39,22 @@ const ChangePassword = () => {
   const postPassword = useMutation(userPostPassword);
 
   const handlePressSave = () => {
+    if (!oldPassword) {
+      showMessage({
+        message: 'Old password is empty',
+        type: 'warning',
+      });
+      return;
+    }
+
+    if (!newPassword) {
+      showMessage({
+        message: 'New password is empty',
+        type: 'warning',
+      });
+      return;
+    }
+
     if (newPassword !== confirmNewPassword) {
       showMessage({
         message: 'New password is not the same as confirm password',

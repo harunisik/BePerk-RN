@@ -72,8 +72,8 @@ const HeaderRight = () => {
       },
       {
         onSuccess: () => {
-          navigation.goBack();
-          showMessage({message: 'Settings updated'});
+          // navigation.goBack();
+          // showMessage({message: 'Settings updated'});
         },
       },
     );
@@ -89,6 +89,7 @@ const HeaderRight = () => {
 export const EditProfileScreenOptions = () => {
   return {
     title: pageTitle,
+    headerShown: true,
     headerRight: HeaderRight,
   };
 };

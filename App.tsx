@@ -10,6 +10,7 @@ import {Platform} from 'react-native';
 import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import {PaperProvider} from 'react-native-paper';
 import BottomSheetModal from './src/components/common/BottomSheetModal';
+import {FullWindowOverlay} from 'react-native-screens';
 
 const queryClient = new QueryClient();
 
@@ -68,6 +69,9 @@ function App(): React.JSX.Element {
           <PaperProvider>
             <BottomSheetModalProvider>
               <MainStack />
+              <FullWindowOverlay>
+                <FlashMessage />
+              </FullWindowOverlay>
               <BottomSheetModal />
             </BottomSheetModalProvider>
           </PaperProvider>

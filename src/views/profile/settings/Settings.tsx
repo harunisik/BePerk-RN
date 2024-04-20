@@ -55,7 +55,7 @@ const SECTIONS = Object.entries(MENU_LIST).map(([key, value]) => ({
 const Settings = () => {
   const ItemSeparatorComponent = useCallback(() => <ItemSeperator large />, []);
   const SectionSeparatorComponent = useCallback(
-    () => <ItemSeperator large />,
+    () => <ItemSeperator medium />,
     [],
   );
 
@@ -63,6 +63,9 @@ const Settings = () => {
     <SectionList
       sections={SECTIONS}
       keyExtractor={(item, index) => {
+        if (!item.Comp) {
+          console.log(JSON.stringify(item), index);
+        }
         return item.Comp.name + index;
       }}
       renderItem={({item: {Comp}}) => <Comp />}

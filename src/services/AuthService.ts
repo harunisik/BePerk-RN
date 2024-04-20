@@ -16,9 +16,23 @@ export const signIn = ({username, password}) =>
 
 // POST requests
 
-export const postPassword = password => {
+export const changePassword = password => {
   return axios
     .post('/user/password', {...password})
+    .then(handleResponse)
+    .catch(handleError);
+};
+
+export const createUser = user => {
+  return axios
+    .post('/user', {...user})
+    .then(handleResponse)
+    .catch(handleError);
+};
+
+export const deleteUser = user => {
+  return axios
+    .post('/user/delete', {...user})
     .then(handleResponse)
     .catch(handleError);
 };
