@@ -1,7 +1,7 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Settings from './settings/Settings';
 import SwitchAccount from './settings/SwitchAccount';
-import EditProfile from './settings/EditProfile';
+import EditProfile, {EditProfileScreenOptions} from './settings/EditProfile';
 import ChangePassword from './settings/ChangePassword';
 import Invite from './settings/Invite';
 import CreateNewAccount from './settings/CreateNewAccount';
@@ -53,7 +53,7 @@ const ProfileStack = () => {
       <Stack.Screen
         name={EditProfile.name}
         component={EditProfile}
-        options={{title: 'Edit profile'}}
+        options={EditProfileScreenOptions}
       />
       <Stack.Screen
         name={ChangePassword.name}

@@ -7,24 +7,99 @@ import {
   Switch,
 } from 'react-native';
 import common from '../../../styles/sharedStyles';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {useCustomQuery as useQuery} from '../../../hooks/commonHooks';
-import {getUserProfile} from '../../../services/UserService';
+import {
+  useCustomMutation as useMutation,
+  useCustomQuery as useQuery,
+} from '../../../hooks/commonHooks';
+import {
+  getUserProfile,
+  postSettings as userPostSettings,
+  postProfile as userPostProfile,
+} from '../../../services/UserService';
 import {useStore} from '../../../containers/StoreContainer';
 import {useEffect, useState} from 'react';
+import {showMessage} from 'react-native-flash-message';
 
 const {row, flex1, flex3, aiCenter, jcSpaceBetween, p15, gray, mb15, cGap10} =
   common;
 
+const pageTitle = 'Edit profile';
+
+const HeaderRight = () => {
+  const navigation = useNavigation();
+  const route = useRoute();
+  const {
+    params: {
+      fullname,
+      username,
+      comment,
+      webSite,
+      hideFollowers,
+      hideFollowersEmoji,
+      hideFollowing,
+      hideFollowingEmoji,
+      privateAccount,
+    } = {},
+  } = route;
+
+  const postProfile = useMutation(userPostProfile);
+  const postSettings = useMutation(userPostSettings);
+
+  const handlePressDone = () => {
+    postProfile.mutate(
+      {
+        fullname,
+        username,
+        comment,
+        webSite,
+      },
+      {
+        onSuccess: () => {
+          navigation.goBack();
+          showMessage({message: 'Profile updated'});
+        },
+      },
+    );
+    postSettings.mutate(
+      {
+        hideFollowers: hideFollowers ? 1 : 0,
+        hideFollowersEmoji,
+        hideFollowing: hideFollowing ? 1 : 0,
+        hideFollowingEmoji,
+        privateAccount: privateAccount ? 1 : 0,
+      },
+      {
+        onSuccess: () => {
+          navigation.goBack();
+          showMessage({message: 'Settings updated'});
+        },
+      },
+    );
+  };
+
+  return (
+    <Text style={{color: 'dodgerblue'}} onPress={handlePressDone}>
+      Done
+    </Text>
+  );
+};
+
+export const EditProfileScreenOptions = () => {
+  return {
+    title: pageTitle,
+    headerRight: HeaderRight,
+  };
+};
+
 export const EditProfileListItem = () => {
   const navigation = useNavigation();
-  const title = 'Edit profile';
 
   return (
     <Pressable onPress={() => navigation.navigate(EditProfile.name)}>
       <View style={[row, jcSpaceBetween, aiCenter]}>
-        <Text>{title}</Text>
+        <Text>{pageTitle}</Text>
         <MaterialIcons name="arrow-forward-ios" color="gray" size={20} />
       </View>
     </Pressable>
@@ -32,31 +107,60 @@ export const EditProfileListItem = () => {
 };
 
 const EditProfile = () => {
+  const [fullname, setFullname] = useState('');
+  const [username, setUsername] = useState('');
+  const [comment, setComment] = useState('');
+  const [webSite, setWebSite] = useState('');
+  const [hideFollowers, setHideFollowers] = useState(false);
+  const [hideFollowersEmoji, setHideFollowersEmoji] = useState('');
+  const [hideFollowing, setHideFollowing] = useState(false);
+  const [hideFollowingEmoji, setHideFollowingEmoji] = useState('');
+  const [privateAccount, setPrivateAccount] = useState(false);
+
   const {
     store: {
       authResult: {id},
     },
   } = useStore();
+  const navigation = useNavigation();
 
   const {data} = useQuery(getUserProfile, {id});
-
-  const [fullname, setFullname] = useState('');
-  const [username, setUsername] = useState('');
-  const [comment, setComment] = useState('');
-  const [website, setWebsite] = useState('');
-  const [hideFollowers, setHideFollowers] = useState(false);
-  const [hideFollowings, setHideFollowings] = useState(false);
-  const [privateAccount, setPrivateAccount] = useState(false);
 
   useEffect(() => {
     setFullname(data?.fullname);
     setUsername(data?.username);
     setComment(data?.comment);
-    setWebsite(data?.website);
+    setWebSite(data?.webSite);
     setHideFollowers(new Boolean(data?.hide_followers).valueOf());
-    setHideFollowings(new Boolean(data?.hide_following).valueOf());
+    setHideFollowersEmoji(data?.hide_followers_emoji);
+    setHideFollowing(new Boolean(data?.hide_following).valueOf());
+    setHideFollowingEmoji(data?.hide_following_emoji);
     setPrivateAccount(new Boolean(data?.private).valueOf());
   }, [data]);
+
+  useEffect(() => {
+    navigation.setParams({
+      fullname,
+      username,
+      comment,
+      webSite,
+      hideFollowers,
+      hideFollowersEmoji,
+      hideFollowing,
+      hideFollowingEmoji,
+      privateAccount,
+    });
+  }, [
+    fullname,
+    username,
+    comment,
+    webSite,
+    hideFollowers,
+    hideFollowersEmoji,
+    hideFollowing,
+    hideFollowingEmoji,
+    privateAccount,
+  ]);
 
   return (
     <View style={p15}>
@@ -96,8 +200,8 @@ const EditProfile = () => {
         <Text style={[gray, flex1]}>Website</Text>
         <TextInput
           placeholder="Tap to enter website"
-          onChangeText={setWebsite}
-          value={website}
+          onChangeText={setWebSite}
+          value={webSite}
           style={[styles.textInput, flex3]}
         />
       </View>
@@ -112,7 +216,7 @@ const EditProfile = () => {
         <Text>Hide followings</Text>
         <View style={[row, aiCenter, cGap10]}>
           <Text>{data?.hide_following_emoji}</Text>
-          <Switch onValueChange={setHideFollowings} value={hideFollowings} />
+          <Switch onValueChange={setHideFollowing} value={hideFollowing} />
         </View>
       </View>
       <View style={[row, jcSpaceBetween, aiCenter, mb15]}>

@@ -1,8 +1,8 @@
 import {showMessage} from 'react-native-flash-message';
 import {useQueryClient} from 'react-query';
-import {signIn} from '../services/UserService';
 import {useStore} from '../containers/StoreContainer';
 import {AuthActionType} from '../containers/AuthAction';
+import {signIn} from '../services/AuthService';
 
 // MUTATION requests
 

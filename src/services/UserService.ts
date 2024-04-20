@@ -3,17 +3,6 @@ import {handleError, handleResponse} from './ApiUtils';
 
 // GET requests
 
-export const signIn = ({username, password}) =>
-  axios
-    .get(`/user?username=${username}&password=${password}`)
-    .then(handleResponse)
-    .catch(response => {
-      if (response.status === 401) {
-        return Promise.reject('User not found');
-      }
-      return handleError(response);
-    });
-
 export const getUserProfile = ({queryKey}) => {
   const {id} = queryKey[1];
   return axios
@@ -176,6 +165,20 @@ export const deleteFollowing = following => {
 export const postBookmarks = bookmark => {
   return axios
     .post('/user/bookmarks', {...bookmark})
+    .then(handleResponse)
+    .catch(handleError);
+};
+
+export const postProfile = profile => {
+  return axios
+    .post('/user/profile', {...profile})
+    .then(handleResponse)
+    .catch(handleError);
+};
+
+export const postSettings = settings => {
+  return axios
+    .post('/user/settings', {...settings})
     .then(handleResponse)
     .catch(handleError);
 };
