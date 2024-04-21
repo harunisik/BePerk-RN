@@ -8,19 +8,21 @@ import {CreateNewAccountListItem} from './CreateNewAccount';
 import {RequestVerificationListItem} from './ReuqestVerification';
 import {DeleteAccountListItem} from './DeleteAccount';
 import DarkMode from './DarkMode';
-import PushNotifications from './PushNotifications';
-import SoundNotifications from './SoundNotifications';
-import Likes from './Likes';
-import Comments from './Comments';
-import Messages from './Messages';
-import NewFollowers from './NewFollowers';
-import Tag from './Tag';
-import NewPosts from './NewPosts';
+import NotificationPush from './NotificationPush';
+import NotificationSound from './NotificationSound';
+import NotificationLikes from './NotificationLikes';
+import NotificationComments from './NotificationComments';
+import NotificationMessages from './NotificationMessages';
+import NotificationNewFollowers from './NotificationNewFollowers';
+import NotificationTag from './NotificationTag';
+import NotificationNewPosts from './NotificationNewPosts';
 import {PrivacyPolicyListItem} from './PrivacyPolicy';
 import {TermsListItem} from './Terms';
 import ItemSeperator from '../../../components/common/ItemSpearator';
 import {useCallback} from 'react';
 import common from '../../../styles/sharedStyles';
+import {useCustomQuery} from '../../../hooks/commonHooks';
+import {getUserSettings} from '../../../services/UserService';
 
 const {gray, p15} = common;
 
@@ -35,14 +37,14 @@ const MENU_LIST = {
   ],
   Interface: [DarkMode],
   Notifications: [
-    PushNotifications,
-    SoundNotifications,
-    Likes,
-    Comments,
-    Messages,
-    NewFollowers,
-    Tag,
-    NewPosts,
+    NotificationPush,
+    NotificationSound,
+    NotificationLikes,
+    NotificationComments,
+    NotificationMessages,
+    NotificationNewFollowers,
+    NotificationTag,
+    NotificationNewPosts,
   ],
   About: [PrivacyPolicyListItem, TermsListItem, SwitchAccountListItem, LogOut],
 };
@@ -53,9 +55,14 @@ const SECTIONS = Object.entries(MENU_LIST).map(([key, value]) => ({
 }));
 
 const Settings = () => {
-  const ItemSeparatorComponent = useCallback(() => <ItemSeperator large />, []);
-  const SectionSeparatorComponent = useCallback(
+  const {data, refetch, isFetching} = useCustomQuery(getUserSettings);
+
+  const ItemSeparatorComponent = useCallback(
     () => <ItemSeperator medium />,
+    [],
+  );
+  const SectionSeparatorComponent = useCallback(
+    () => <ItemSeperator large />,
     [],
   );
 
@@ -63,12 +70,9 @@ const Settings = () => {
     <SectionList
       sections={SECTIONS}
       keyExtractor={(item, index) => {
-        if (!item.Comp) {
-          console.log(JSON.stringify(item), index);
-        }
         return item.Comp.name + index;
       }}
-      renderItem={({item: {Comp}}) => <Comp />}
+      renderItem={({item: {Comp}}) => <Comp settings={data} />}
       renderSectionHeader={({section: {title}}) => (
         <Text style={gray}>{title}</Text>
       )}

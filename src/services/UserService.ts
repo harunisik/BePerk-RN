@@ -11,6 +11,10 @@ export const getUserProfile = ({queryKey}) => {
     .catch(handleError);
 };
 
+export const getUserSettings = () => {
+  return axios.get('/user/settings').then(handleResponse).catch(handleError);
+};
+
 export const getUserPerks = ({queryKey}) => {
   const {id, limit, offset} = queryKey[1];
   return axios

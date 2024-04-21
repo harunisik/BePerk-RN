@@ -49,11 +49,11 @@ export const CreateNewAccountListItem = () => {
   const navigation = useNavigation();
 
   return (
-    <Pressable onPress={() => navigation.navigate(CreateNewAccount.name)}>
-      <View style={[row, jcSpaceBetween, aiCenter]}>
-        <Text>{pageTitle}</Text>
-        <MaterialIcons name="arrow-forward-ios" color="gray" size={20} />
-      </View>
+    <Pressable
+      onPress={() => navigation.navigate(CreateNewAccount.name)}
+      style={[row, jcSpaceBetween, aiCenter]}>
+      <Text>{pageTitle}</Text>
+      <MaterialIcons name="arrow-forward-ios" color="gray" size={20} />
     </Pressable>
   );
 };

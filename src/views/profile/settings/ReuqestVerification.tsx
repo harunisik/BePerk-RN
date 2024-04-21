@@ -10,11 +10,11 @@ export const RequestVerificationListItem = () => {
   const title = 'Request verification';
 
   return (
-    <Pressable onPress={() => navigation.navigate(RequestVerification.name)}>
-      <View style={[row, jcSpaceBetween, aiCenter]}>
-        <Text>{title}</Text>
-        <MaterialIcons name="arrow-forward-ios" color="gray" size={20} />
-      </View>
+    <Pressable
+      onPress={() => navigation.navigate(RequestVerification.name)}
+      style={[row, jcSpaceBetween, aiCenter]}>
+      <Text>{title}</Text>
+      <MaterialIcons name="arrow-forward-ios" color="gray" size={20} />
     </Pressable>
   );
 };

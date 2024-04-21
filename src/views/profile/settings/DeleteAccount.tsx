@@ -18,11 +18,11 @@ export const DeleteAccountListItem = () => {
   const navigation = useNavigation();
 
   return (
-    <Pressable onPress={() => navigation.navigate(DeleteAccount.name)}>
-      <View style={[row, jcSpaceBetween, aiCenter]}>
-        <Text>{pageTitle}</Text>
-        <MaterialIcons name="arrow-forward-ios" color="gray" size={20} />
-      </View>
+    <Pressable
+      onPress={() => navigation.navigate(DeleteAccount.name)}
+      style={[row, jcSpaceBetween, aiCenter]}>
+      <Text>{pageTitle}</Text>
+      <MaterialIcons name="arrow-forward-ios" color="gray" size={20} />
     </Pressable>
   );
 };
