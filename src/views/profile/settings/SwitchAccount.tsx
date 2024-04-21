@@ -1,20 +1,27 @@
-import {View, Text, TouchableOpacity} from 'react-native';
+import {Text, Pressable} from 'react-native';
 import common from '../../../styles/sharedStyles';
 import {useNavigation} from '@react-navigation/native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {View} from 'react-native';
+
+const {flex1, jcCenter, row, aiCenter, jcSpaceBetween} = common;
+
+const pageTitle = 'Switch account';
 
 export const SwitchAccountListItem = () => {
   const navigation = useNavigation();
-  const title = 'Switch account';
 
   return (
-    <TouchableOpacity onPress={() => navigation.navigate(SwitchAccount.name)}>
-      <Text>{title}</Text>
-    </TouchableOpacity>
+    <Pressable
+      onPress={() => navigation.navigate(SwitchAccount.name)}
+      style={[row, jcSpaceBetween, aiCenter]}>
+      <Text>{pageTitle}</Text>
+      <MaterialIcons name="arrow-forward-ios" color="gray" size={20} />
+    </Pressable>
   );
 };
 
 const SwitchAccount = () => {
-  const {flex1, aiCenter, jcCenter} = common;
   return (
     <View style={[flex1, aiCenter, jcCenter]}>
       <Text>SwitchAccount is under construction!</Text>

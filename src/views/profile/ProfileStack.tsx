@@ -9,8 +9,10 @@ import CreateNewAccount, {
 } from './settings/CreateNewAccount';
 import RequestVerification from './settings/ReuqestVerification';
 import DeleteAccount from './settings/DeleteAccount';
-import PrivacyPolicy from './settings/PrivacyPolicy';
-import Terms from './settings/Terms';
+import PrivacyPolicy, {
+  PrivacyPolicyScreenOptions,
+} from './settings/PrivacyPolicy';
+import Terms, {TermsScreenOptions} from './settings/Terms';
 import Comment from '../doves/Comment';
 import FollowersScreenOptions from './FollowersScreenOptions';
 import Followers from './Followers';
@@ -77,7 +79,6 @@ const ProfileStack = () => {
         name={DeleteAccount.name}
         component={DeleteAccount}
         options={{
-          // title: '',
           presentation: 'transparentModal',
           animation: 'none',
           headerShown: false,
@@ -86,9 +87,13 @@ const ProfileStack = () => {
       <Stack.Screen
         name={PrivacyPolicy.name}
         component={PrivacyPolicy}
-        options={{title: 'Privacy policy'}}
+        options={PrivacyPolicyScreenOptions}
       />
-      <Stack.Screen name={Terms.name} component={Terms} />
+      <Stack.Screen
+        name={Terms.name}
+        component={Terms}
+        options={TermsScreenOptions}
+      />
       <Stack.Screen
         name={SwitchAccount.name}
         component={SwitchAccount}

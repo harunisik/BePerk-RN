@@ -19,8 +19,6 @@ import LinearGradient from 'react-native-linear-gradient';
 import {useStore} from '../../../containers/StoreContainer';
 import {AuthActionType} from '../../../containers/AuthAction';
 import Signin from '../../auth/SignIn';
-import BottomTab from '../../main/BottomTab';
-import ProfileStack from '../ProfileStack';
 import EditProfile from './EditProfile';
 
 const {row, flex1, aiCenter, rGap30, jcSpaceBetween, white, font11, bold} =
