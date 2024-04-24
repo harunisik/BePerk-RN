@@ -2,7 +2,7 @@ import {View} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import common from '../../styles/sharedStyles';
 import {useState} from 'react';
-import {AddDoveModal} from '../../components/common/AddModal';
+import {AddDoveModal} from '../add/AddModal';
 
 const {row, cGap15} = common;
 

@@ -1,15 +1,16 @@
 import {NavigationContainer} from '@react-navigation/native';
-import {useStore} from '../../containers/StoreContainer';
+import {useStore} from '../containers/StoreContainer';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import SignIn from '../auth/SignIn';
+import SignIn from './auth/SignIn';
 import BottomTab from './BottomTab';
-import PostDove from '../doves/PostDove';
-import PostDoveScreenOptions from '../doves/PostDoveScreenOptions';
+import PostDove from './doves/PostDove';
+import PostDoveScreenOptions from './doves/PostDoveScreenOptions';
 import {Fragment} from 'react';
-import CreateNewAccount from '../profile/settings/CreateNewAccount';
+import CreateNewAccount from './profile/settings/CreateNewAccount';
 import EditProfile, {
   EditProfileScreenOptions,
-} from '../profile/settings/EditProfile';
+} from './profile/settings/EditProfile';
+import AddStack from './add/AddStack';
 
 const Stack = createNativeStackNavigator();
 
@@ -39,6 +40,13 @@ const MainStack = () => {
               name={EditProfile.name}
               component={EditProfile}
               options={EditProfileScreenOptions}
+            />
+            <Stack.Screen
+              name={AddStack.name}
+              component={AddStack}
+              options={{
+                animation: 'slide_from_bottom',
+              }}
             />
           </Fragment>
         )}

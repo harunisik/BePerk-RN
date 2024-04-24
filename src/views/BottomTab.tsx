@@ -1,13 +1,13 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import ProfileStack from '../profile/ProfileStack';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import DovesStack from '../doves/DovesStack';
 import {Text, View} from 'react-native';
 import {Fragment, useState} from 'react';
-import AddModal from '../../components/common/AddModal';
-import HomeStack from '../home/HomeStack';
-import FeaturedStack from '../featured/FeaturedStack';
-import {useStore} from '../../containers/StoreContainer';
+import HomeStack from './home/HomeStack';
+import FeaturedStack from './featured/FeaturedStack';
+import DovesStack from './doves/DovesStack';
+import ProfileStack from './profile/ProfileStack';
+import {useStore} from '../containers/StoreContainer';
+import AddModal from './add/AddModal';
 
 const Placeholder = () => <View />;
 

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import common from './src/styles/sharedStyles';
 import {StoreContainer} from './src/containers/StoreContainer';
-import MainStack from './src/views/main/MainStack';
+import MainStack from './src/views/MainStack';
 import {QueryClient, QueryClientProvider} from 'react-query';
 import FlashMessage from 'react-native-flash-message';
 import axios from 'axios';

@@ -6,7 +6,7 @@ import Activity from './Activity';
 import Search from './Search';
 import {useNavigation} from '@react-navigation/native';
 import {useState} from 'react';
-import {AddDoveModal} from '../../components/common/AddModal';
+import {AddDoveModal} from '../add/AddModal';
 
 const {row, cGap15} = common;
 
