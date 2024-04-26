@@ -186,3 +186,10 @@ export const postSettings = settings => {
     .then(handleResponse)
     .catch(handleError);
 };
+
+export const uploadPhoto = formData => {
+  return axios
+    .post('/user/upload_photo', formData)
+    .then(handleResponse)
+    .catch(handleError);
+};
