@@ -11,6 +11,8 @@ import EditProfile, {
   EditProfileScreenOptions,
 } from './profile/settings/EditProfile';
 import AddStack from './add/AddStack';
+import Followers from './profile/Followers';
+import FollowersScreenOptions from './profile/FollowersScreenOptions';
 
 const Stack = createNativeStackNavigator();
 
@@ -40,6 +42,11 @@ const MainStack = () => {
               name={EditProfile.name}
               component={EditProfile}
               options={EditProfileScreenOptions}
+            />
+            <Stack.Screen
+              name={Followers.name}
+              component={Followers}
+              options={FollowersScreenOptions}
             />
             <Stack.Screen
               name={AddStack.name}

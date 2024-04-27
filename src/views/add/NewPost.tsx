@@ -12,6 +12,8 @@ import {uploadPhoto as userUploadPhoto} from '../../services/UserService';
 import {useCustomMutation as useMutation} from '../../hooks/commonHooks';
 import {showMessage} from 'react-native-flash-message';
 import {toNumber} from '../../utils/BooleanUtil';
+import Followers from '../profile/Followers';
+import {HeaderRight2} from '../profile/FollowersScreenOptions';
 
 const {flex1, aiCenter, jcCenter} = common;
 
@@ -135,6 +137,10 @@ const NewPost = () => {
     views,
   ]);
 
+  const handlePressTagPeople = () => {
+    navigation.navigate(Followers.name, {headerRightName: HeaderRight2.name});
+  };
+
   return (
     <View style={{padding: 10, rowGap: 15}}>
       <View style={{flexDirection: 'row', columnGap: 15, marginBottom: 15}}>
@@ -165,7 +171,7 @@ const NewPost = () => {
           alignItems: 'center',
         }}>
         <MaterialIcons name="account-circle" size={30} color="dodgerblue" />
-        <Text>Tag people</Text>
+        <Text onPress={handlePressTagPeople}>Tag people</Text>
       </View>
       <View
         style={{

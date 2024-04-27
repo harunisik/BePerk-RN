@@ -20,7 +20,7 @@ const {row, flex1, aiCenter, rGap30, jcSpaceBetween, white, font11, bold} =
   common;
 
 const Signin = () => {
-  const [username, setUsername] = useState('harun');
+  const [username, setUsername] = useState('jesus_freak_4l');
   const [password, setPassword] = useState('123');
   const navigation = useNavigation();
   const signIn = useSignIn({username, password});

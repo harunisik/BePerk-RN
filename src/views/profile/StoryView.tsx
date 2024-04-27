@@ -32,6 +32,7 @@ import {
   chatShare as userChatShare,
 } from '../../services/ChatService';
 import uuid from 'react-native-uuid';
+import {HeaderRight1} from './FollowersScreenOptions';
 
 const {
   jcSpaceBetween,
@@ -349,8 +350,11 @@ const StoryView = () => {
   const handleShare = () => {
     stopInterval();
     navigation.navigate(Followers.name, {
-      itemId: currentItem.id,
-      type: 2,
+      HeaderRightName: HeaderRight1.name,
+      headerRightProp: {
+        itemId: currentItem.id,
+        type: 2,
+      },
     });
   };
 

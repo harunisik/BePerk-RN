@@ -7,6 +7,7 @@ import {ModalActionType} from '../../containers/ModalAction';
 import {showMessage} from 'react-native-flash-message';
 import Clipboard from '@react-native-clipboard/clipboard';
 import Followers from '../../views/profile/Followers';
+import {HeaderRight1} from '../../views/profile/FollowersScreenOptions';
 
 const UserProfileModal = ({navigation, userId}) => {
   const {dispatch} = useStore();
@@ -33,7 +34,10 @@ const UserProfileModal = ({navigation, userId}) => {
         style={[styles.button, aiCenter, row, cGap15]}
         onPress={() => {
           dispatch({type: ModalActionType.CLOSE});
-          navigation.navigate(Followers.name, {itemId: userId, type: 6});
+          navigation.navigate(Followers.name, {
+            HeaderRightName: HeaderRight1.name,
+            headerRightProp: {itemId: userId, type: 6},
+          });
         }}>
         <MaterialCommunityIcons name="share" size={26} color="dodgerblue" />
         <Text>Share This Profile</Text>

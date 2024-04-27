@@ -5,7 +5,7 @@ import UserItem from '../../components/profile/UserItem';
 import SelectedUsers from '../../components/profile/SelectedUsers';
 import {useSearchText, useSearchUsers} from '../../hooks/searchHooks';
 import ItemSeperator from '../../components/common/ItemSpearator';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {useCustomQuery as useQuery} from '../../hooks/commonHooks';
 import {getUserFollowings} from '../../services/UserService';
 
