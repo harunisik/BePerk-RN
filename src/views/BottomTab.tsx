@@ -1,7 +1,7 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Text, View} from 'react-native';
-import {Fragment, useState} from 'react';
+import {useState} from 'react';
 import HomeStack from './home/HomeStack';
 import FeaturedStack from './featured/FeaturedStack';
 import DovesStack from './doves/DovesStack';
@@ -60,7 +60,7 @@ const BottomTab = () => {
   } = useStore();
 
   return (
-    <Fragment>
+    <>
       <Tab.Navigator screenOptions={screenOptions}>
         <Tab.Screen name={HomeStack.name} component={HomeStack} />
         <Tab.Screen name={FeaturedStack.name} component={FeaturedStack} />
@@ -85,7 +85,7 @@ const BottomTab = () => {
         visible={modalVisible}
         onDismiss={() => setModalVisible(false)}
       />
-    </Fragment>
+    </>
   );
 };
 

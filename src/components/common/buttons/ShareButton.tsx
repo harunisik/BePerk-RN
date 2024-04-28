@@ -23,7 +23,7 @@ const ShareButton = ({
       color={color}
       onPress={() =>
         navigation.navigate(Followers.name, {
-          headerRightName: HeaderRight1.name,
+          headerRightComp: HeaderRight1.name,
           headerRightProp: {itemId: item.id, type: item.type},
         })
       }

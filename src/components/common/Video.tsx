@@ -20,6 +20,7 @@ const Video = ({
   ...rest
 }: VideoProps) => {
   const [videoPaused, setVideoPaused] = useState(paused);
+  const [width, setWidth] = useState<number>(0);
 
   useFocusEffect(
     useCallback(() => {
@@ -31,7 +32,8 @@ const Video = ({
   return (
     <Pressable
       style={[aiCenter, jcCenter]}
-      onPress={() => setVideoPaused(!videoPaused)}>
+      onPress={() => setVideoPaused(!videoPaused)}
+      onLayout={event => setWidth(event.nativeEvent.layout.width)}>
       <RNVideo
         source={{uri}}
         style={{
@@ -45,7 +47,7 @@ const Video = ({
       {videoPaused && (
         <MaterialIcons
           name="play-arrow"
-          size={96}
+          size={width / 3}
           color="rgba(255, 255, 255, 0.6)"
           style={absolute}
         />

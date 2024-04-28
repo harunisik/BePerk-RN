@@ -4,15 +4,36 @@ import {showMessage} from 'react-native-flash-message';
 import {useCustomMutation as useMutation} from '../../hooks/commonHooks';
 import {chatShare as userChatShare} from '../../services/ChatService';
 import {useNavigation, useRoute} from '@react-navigation/native';
+import NewPost from '../add/NewPost';
 
 export const HeaderRight2 = () => {
-  return <Text>Hello</Text>;
+  const navigation = useNavigation();
+  const route = useRoute();
+  const {
+    params: {selectedUsers},
+  } = route;
+
+  const handlePressTag = () => {
+    navigation.navigate(NewPost.name, {
+      selectedUsers: selectedUsers.map(({fullname, user_id}) => {
+        return {fullname, user_id};
+      }),
+    });
+  };
+
+  return (
+    <Text style={{color: 'dodgerblue'}} onPress={handlePressTag}>
+      Tag
+    </Text>
+  );
 };
 
 export const HeaderRight1 = ({itemId, type}) => {
   const navigation = useNavigation();
   const route = useRoute();
-  const {params: {selectedUsers, isChat} = {}} = route;
+  const {
+    params: {selectedUsers},
+  } = route;
 
   const chatShare = useMutation(userChatShare);
 
@@ -20,26 +41,27 @@ export const HeaderRight1 = ({itemId, type}) => {
     if (!selectedUsers || selectedUsers.length === 0) {
       showMessage({message: 'Please select users', type: 'warning'});
     } else {
-      if (isChat) {
-      } else {
-        chatShare.mutate(
-          {
-            id: itemId,
-            type,
-            share_to: JSON.stringify(selectedUsers.map(({user_id}) => user_id)),
+      chatShare.mutate(
+        {
+          id: itemId,
+          type,
+          share_to: JSON.stringify(selectedUsers.map(({user_id}) => user_id)),
+        },
+        {
+          onSuccess: () => {
+            navigation.goBack();
+            showMessage({message: 'Message sent'});
           },
-          {
-            onSuccess: () => {
-              navigation.goBack();
-              showMessage({message: 'Message sent'});
-            },
-          },
-        );
-      }
+        },
+      );
     }
   };
 
-  return <Text onPress={handlePressSent}>{isChat ? 'Chat' : 'Sent'}</Text>;
+  return (
+    <Text style={{color: 'dodgerblue'}} onPress={handlePressSent}>
+      Sent
+    </Text>
+  );
 };
 
 const HEADER_LIST = {
@@ -50,10 +72,10 @@ const HEADER_LIST = {
 const HeaderRight = () => {
   const route = useRoute();
   const {
-    params: {headerRightName, headerRightProp},
+    params: {headerRightComp, headerRightProp},
   } = route;
 
-  const HeaderRightComp = HEADER_LIST[headerRightName];
+  const HeaderRightComp = HEADER_LIST[headerRightComp];
 
   return <HeaderRightComp {...headerRightProp} />;
 };

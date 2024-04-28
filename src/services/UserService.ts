@@ -193,3 +193,10 @@ export const uploadPhoto = formData => {
     .then(handleResponse)
     .catch(handleError);
 };
+
+export const uploadVideo = formData => {
+  return axios
+    .post('/user/upload_video', formData)
+    .then(handleResponse)
+    .catch(handleError);
+};

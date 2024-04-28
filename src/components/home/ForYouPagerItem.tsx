@@ -1,5 +1,4 @@
 import {Text, View} from 'react-native';
-import {Fragment} from 'react';
 import Video from '../common/Video';
 import LikeButtton from '../common/buttons/LikeButton';
 import CommentButton from '../common/buttons/CommentButton';
@@ -10,7 +9,7 @@ import AccountButton from '../common/buttons/AccountButton';
 
 const ForYouPagerItem = ({item, paused = true}) => {
   return (
-    <Fragment>
+    <>
       <Video uri={item.filename} paused={paused} fullscreen />
       <View
         style={{
@@ -45,7 +44,7 @@ const ForYouPagerItem = ({item, paused = true}) => {
           <DotsButton item={item} size={28} color="white" />
         </View>
       </View>
-    </Fragment>
+    </>
   );
 };
 

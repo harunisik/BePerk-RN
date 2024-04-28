@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {Fragment, useState} from 'react';
+import {useState} from 'react';
 import {showMessage} from 'react-native-flash-message';
 import LinearGradient from 'react-native-linear-gradient';
 import common from '../../styles/sharedStyles';
@@ -46,7 +46,7 @@ const Signin = () => {
   };
 
   return (
-    <Fragment>
+    <>
       <LinearGradient colors={['dodgerblue', 'white']} style={{height: '30%'}}>
         <SafeAreaView>
           <View style={[aiCenter, {paddingTop: 40}]}>
@@ -103,7 +103,7 @@ const Signin = () => {
         </Text>
         <Text style={{color: 'dodgerblue'}}>Forgot password?</Text>
       </View>
-    </Fragment>
+    </>
   );
 };
 

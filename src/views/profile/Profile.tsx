@@ -1,6 +1,6 @@
 import UserInfo from '../../components/profile/UserInfo';
 import ProfileButtonGroup from '../../components/profile/ProfileButtonGroup';
-import {Fragment, useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useRoute} from '@react-navigation/native';
 import {
   useCustomQuery as useQuery,
@@ -46,14 +46,14 @@ const Profile = () => {
     <Tabs.Container
       lazy
       renderHeader={() => (
-        <Fragment>
+        <>
           <UserInfo data={data} />
           <ProfileButtonGroup
             onPressFollowing={handlePressFollowing}
             pressButtonTitle={isFollowing === 1 ? 'Following' : 'Follow'}
             isAuthUser={isAuthUser}
           />
-        </Fragment>
+        </>
       )}>
       <Tabs.Tab name="Posts">
         <PostsTab userId={userId} />

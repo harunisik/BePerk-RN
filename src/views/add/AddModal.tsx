@@ -1,4 +1,4 @@
-import {Fragment, useState} from 'react';
+import {useState} from 'react';
 import Modal from '../../components/common/Modal';
 import Button from '../../components/common/buttons/Button';
 import {Alert} from 'react-native';
@@ -30,7 +30,7 @@ export const ImageVideoSelectionModal = ({visible, onDismiss}) => {
             );
 
             request(PERMISSIONS.IOS.PHOTO_LIBRARY).then(result => {
-              console.log(result);
+              // console.log(result);
             });
             break;
           case RESULTS.LIMITED:
@@ -44,10 +44,16 @@ export const ImageVideoSelectionModal = ({visible, onDismiss}) => {
                 presentationStyle: 'fullScreen',
               },
               data => {
-                console.log(data);
+                // console.log(data);
                 if (data.assets?.length && data.assets.length > 0) {
                   navigation.navigate(AddStack.name, {
-                    assets: data.assets,
+                    assets: data.assets.map(({type, ...rest}) => {
+                      console.log(type);
+                      return {
+                        ...rest,
+                        mediaType: type.startsWith('image') ? 'image' : 'video',
+                      };
+                    }),
                   });
                 }
               },
@@ -94,7 +100,6 @@ export const ImageVideoSelectionModal = ({visible, onDismiss}) => {
                 durationLimit: 10,
               },
               data => {
-                console.log(data);
                 if (data.assets?.length && data.assets.length > 0) {
                   navigation.navigate(AddStack.name, {
                     assets: data.assets,
@@ -207,7 +212,7 @@ const AddModal = ({visible, onDismiss}) => {
   };
 
   return (
-    <Fragment>
+    <>
       <Modal visible={visible} onDismiss={onDismiss}>
         <Button
           title="Post"
@@ -231,7 +236,7 @@ const AddModal = ({visible, onDismiss}) => {
         visible={imageVideoModalVisible}
         onDismiss={() => setImageVideoModalVisible(false)}
       />
-    </Fragment>
+    </>
   );
 };
 

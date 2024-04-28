@@ -59,6 +59,8 @@ if (process.env.APP_DEBUG === 'true') {
 //   });
 // }
 
+// navigator.geolocation = require('@react-native-community/geolocation');
+
 function App(): React.JSX.Element {
   const {flex1} = common;
 

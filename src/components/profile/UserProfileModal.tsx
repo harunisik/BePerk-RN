@@ -35,7 +35,7 @@ const UserProfileModal = ({navigation, userId}) => {
         onPress={() => {
           dispatch({type: ModalActionType.CLOSE});
           navigation.navigate(Followers.name, {
-            HeaderRightName: HeaderRight1.name,
+            HeaderRightComp: HeaderRight1.name,
             headerRightProp: {itemId: userId, type: 6},
           });
         }}>

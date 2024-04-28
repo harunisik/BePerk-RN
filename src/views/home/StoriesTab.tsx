@@ -4,7 +4,7 @@ import {getMy24} from '../../services/UserService';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import common from '../../styles/sharedStyles';
-import {Fragment, useMemo} from 'react';
+import {useMemo} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import StoryView from '../profile/StoryView';
 import CircleGradientBorder from '../../components/common/CircleGradientBorder';
@@ -35,7 +35,7 @@ const StoriesItem = ({item, onPress, isMyStory = false}) => {
   return (
     <View style={[{flex: 1 / COL_NUM}, p5, aiCenter]}>
       {item.my24List && (
-        <Fragment>
+        <>
           <CircleGradientBorder
             disabled={item.my24List.some(my24Item => my24Item.showing === 1)}>
             <MaterialCommunityIcons
@@ -60,7 +60,7 @@ const StoriesItem = ({item, onPress, isMyStory = false}) => {
               <MaterialIcons name="verified" size={16} color="dodgerblue" />
             )}
           </View>
-        </Fragment>
+        </>
       )}
     </View>
   );

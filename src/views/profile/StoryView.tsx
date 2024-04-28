@@ -350,7 +350,7 @@ const StoryView = () => {
   const handleShare = () => {
     stopInterval();
     navigation.navigate(Followers.name, {
-      HeaderRightName: HeaderRight1.name,
+      HeaderRightComp: HeaderRight1.name,
       headerRightProp: {
         itemId: currentItem.id,
         type: 2,

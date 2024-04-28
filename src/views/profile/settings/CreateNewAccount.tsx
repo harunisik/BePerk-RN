@@ -10,7 +10,7 @@ import {
 import common from '../../../styles/sharedStyles';
 import {useNavigation} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {Fragment, useState} from 'react';
+import {useState} from 'react';
 import {useCustomMutation as useMutation} from '../../../hooks/commonHooks';
 import {createUser as userCreateUser} from '../../../services/AuthService';
 import {showMessage} from 'react-native-flash-message';
@@ -141,7 +141,7 @@ const CreateNewAccount = () => {
   };
 
   return (
-    <Fragment>
+    <>
       <LinearGradient colors={['dodgerblue', 'white']} style={{height: '30%'}}>
         <SafeAreaView>
           <View style={[aiCenter, {paddingTop: 40}]}>
@@ -231,7 +231,7 @@ const CreateNewAccount = () => {
           </Text>
         </Text>
       </View>
-    </Fragment>
+    </>
   );
 };
 
