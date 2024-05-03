@@ -20,10 +20,10 @@ axios.defaults.headers.post['Content-Type'] =
 axios.defaults.headers.common['ACCEPT-VERSION'] = 3;
 
 if (process.env.APP_DEBUG === 'true') {
-  if (Platform.OS === 'android') {
-    console.log('Platform.OS is android');
-    axios.defaults.baseURL = process.env.API_URL_ANDROID;
-  }
+  // if (Platform.OS === 'android') {
+  //   console.log('Platform.OS is android');
+  //   axios.defaults.baseURL = process.env.API_URL_ANDROID;
+  // }
 
   console.log(`baseUrl: ${axios.defaults.baseURL}`);
 
@@ -71,9 +71,11 @@ function App(): React.JSX.Element {
           <PaperProvider>
             <BottomSheetModalProvider>
               <MainStack />
-              <FullWindowOverlay>
-                <FlashMessage />
-              </FullWindowOverlay>
+              {Platform.OS === 'ios' && (
+                <FullWindowOverlay>
+                  <FlashMessage />
+                </FullWindowOverlay>
+              )}
               <BottomSheetModal />
             </BottomSheetModalProvider>
           </PaperProvider>

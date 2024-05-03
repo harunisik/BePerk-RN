@@ -16,12 +16,11 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import CreateNewAccount from '../profile/settings/CreateNewAccount';
 import {useSignIn} from '../../hooks/userHooks';
 
-const {row, flex1, aiCenter, rGap30, jcSpaceBetween, white, font11, bold} =
-  common;
+const {row, flex1, aiCenter, rGap30, white} = common;
 
 const Signin = () => {
-  const [username, setUsername] = useState('jesus_freak_4l');
-  const [password, setPassword] = useState('123');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const navigation = useNavigation();
   const signIn = useSignIn({username, password});
 
