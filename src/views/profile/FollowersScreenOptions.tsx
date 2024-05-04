@@ -5,6 +5,40 @@ import {useCustomMutation as useMutation} from '../../hooks/commonHooks';
 import {chatShare as userChatShare} from '../../services/ChatService';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import NewPost from '../add/NewPost';
+import {postMy24 as userPostMy24} from '../../services/My24Service';
+
+export const HeaderRight3 = ({formData}) => {
+  const navigation = useNavigation();
+  const route = useRoute();
+  const {
+    params: {selectedUsers},
+  } = route;
+
+  const postMy24 = useMutation(userPostMy24);
+
+  const handlePressPost = () => {
+    formData.append(
+      'send_users',
+      selectedUsers.length > 0
+        ? JSON.stringify(selectedUsers.map(({user_id}) => user_id))
+        : '',
+    );
+
+    postMy24.mutate(formData, {
+      onSuccess: () => {
+        showMessage({message: 'New post sent'});
+        navigation.goBack();
+        navigation.goBack();
+      },
+    });
+  };
+
+  return (
+    <Text style={{color: 'dodgerblue'}} onPress={handlePressPost}>
+      Post
+    </Text>
+  );
+};
 
 export const HeaderRight2 = () => {
   const navigation = useNavigation();
@@ -67,6 +101,7 @@ export const HeaderRight1 = ({itemId, type}) => {
 const HEADER_LIST = {
   [HeaderRight1.name]: HeaderRight1,
   [HeaderRight2.name]: HeaderRight2,
+  [HeaderRight3.name]: HeaderRight3,
 };
 
 const HeaderRight = () => {

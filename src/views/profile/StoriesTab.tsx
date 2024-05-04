@@ -1,10 +1,10 @@
 import {useNavigation} from '@react-navigation/native';
-import PostItem from '../../components/profile/PostItem';
+import PostItem, {IMAGE_HEIGHT} from '../../components/profile/PostItem';
 import common from '../../styles/sharedStyles';
 import {useCustomQuery as useQuery} from '../../hooks/commonHooks';
-import {getMy24} from '../../services/UserService';
 import StoryView from './StoryView';
 import {Tabs} from 'react-native-collapsible-tab-view';
+import {getMy24} from '../../services/My24Service';
 
 const {pv5} = common;
 const COL_NUM = 3;
@@ -18,7 +18,7 @@ const StoriesTab = ({userId}) => {
   };
 
   return (
-    <Tabs.FlatList
+    <Tabs.MasonryFlashList
       data={data?.my24}
       renderItem={({item, index}) => (
         <PostItem item={item} onPress={() => handlePressItem(index)} />
@@ -27,6 +27,7 @@ const StoriesTab = ({userId}) => {
       onRefresh={refetch}
       refreshing={isFetching}
       numColumns={COL_NUM}
+      estimatedItemSize={IMAGE_HEIGHT}
       contentContainerStyle={pv5}
     />
   );

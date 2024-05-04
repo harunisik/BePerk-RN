@@ -1,6 +1,5 @@
 import {View, FlatList, Text} from 'react-native';
 import {useCustomQuery as useQuery} from '../../hooks/commonHooks';
-import {getMy24} from '../../services/UserService';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import common from '../../styles/sharedStyles';
@@ -9,6 +8,7 @@ import {useNavigation} from '@react-navigation/native';
 import StoryView from '../profile/StoryView';
 import CircleGradientBorder from '../../components/common/CircleGradientBorder';
 import {useStore} from '../../containers/StoreContainer';
+import {getMy24} from '../../services/My24Service';
 
 const COL_NUM = 4;
 

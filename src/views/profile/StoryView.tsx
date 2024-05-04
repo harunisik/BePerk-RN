@@ -21,10 +21,7 @@ import {ProgressBar} from 'react-native-paper';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Followers from './Followers';
-import {
-  postMy24Like,
-  deletePost as userDeletePost,
-} from '../../services/UserService';
+import {deletePost as userDeletePost} from '../../services/UserService';
 import {useCustomMutation as useMutation} from '../../hooks/commonHooks';
 import {useStore} from '../../containers/StoreContainer';
 import {
@@ -33,6 +30,7 @@ import {
 } from '../../services/ChatService';
 import uuid from 'react-native-uuid';
 import {HeaderRight1} from './FollowersScreenOptions';
+import {postMy24Like} from '../../services/My24Service';
 
 const {
   jcSpaceBetween,

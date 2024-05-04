@@ -5,6 +5,7 @@ import Followers from '../profile/Followers';
 import FollowersScreenOptions from '../profile/FollowersScreenOptions';
 import GooglePlaces from './GooglePlaces';
 import GooglePlacesScreenOptions from './GooglePlacesScreenOptions';
+import NewStory, {NewStoryScreenOptions} from './NewStory';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,6 +21,12 @@ const AddStack = () => {
         name={NewPost.name}
         component={NewPost}
         options={NewPostScreenOptions}
+        initialParams={{assets}}
+      />
+      <Stack.Screen
+        name={NewStory.name}
+        component={NewStory}
+        options={NewStoryScreenOptions}
         initialParams={{assets}}
       />
       <Stack.Screen

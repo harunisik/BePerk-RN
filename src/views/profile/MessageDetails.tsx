@@ -1,6 +1,6 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {FlatList, Pressable, StyleSheet, Text, View} from 'react-native';
-import {Fragment, useCallback} from 'react';
+import {useCallback} from 'react';
 import {formatDate} from '../../utils/DateUtil';
 import ItemSeperator from '../../components/common/ItemSpearator';
 import common from '../../styles/sharedStyles';
@@ -119,7 +119,10 @@ const MessageDetailsItem = ({item}) => {
                   borderRadius: 10,
                 }}
                 source={{
-                  uri: item.media.filename,
+                  uri:
+                    item.media.type === 0
+                      ? item.media.cover
+                      : item.media.filename,
                 }}
               />
             </View>

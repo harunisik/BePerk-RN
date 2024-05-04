@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: '#DDDDDD',
     padding: 10,
-    paddingLeft: 70,
+    // paddingLeft: 70,
     margin: 10,
   },
 });

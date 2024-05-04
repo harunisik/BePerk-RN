@@ -1,4 +1,4 @@
-import {View, Text, TextInput, StyleSheet, Switch} from 'react-native';
+import {View, Text, TextInput, StyleSheet, Switch, Image} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FastImage from 'react-native-fast-image';
@@ -17,6 +17,7 @@ import Followers from '../profile/Followers';
 import {HeaderRight2} from '../profile/FollowersScreenOptions';
 import GooglePlaces from './GooglePlaces';
 import Video from '../../components/common/Video';
+import {createThumbnail} from 'react-native-create-thumbnail';
 
 const HeaderRight = () => {
   const navigation = useNavigation();
@@ -42,7 +43,7 @@ const HeaderRight = () => {
   const uploadPhoto = useMutation(userUploadPhoto);
   const uploadVideo = useMutation(userUploadVideo);
 
-  const handlePressPost = () => {
+  const handlePressPost = async () => {
     const form = new FormData();
     form.append('height', asset.height);
     form.append('width', asset.width);
@@ -65,7 +66,7 @@ const HeaderRight = () => {
       uri: asset.uri,
     });
 
-    if (asset.mediaType === 'image') {
+    if (asset.mediaType === 'photo') {
       uploadPhoto.mutate(form, {
         onSuccess: () => {
           navigation.goBack();
@@ -73,6 +74,20 @@ const HeaderRight = () => {
         },
       });
     } else {
+      try {
+        const response = await createThumbnail({
+          url: asset.uri,
+        });
+
+        form.append('photo', {
+          name: response.path,
+          type: response.mime,
+          uri: response.path,
+        });
+      } catch (err) {
+        console.log(err);
+      }
+
       uploadVideo.mutate(form, {
         onSuccess: () => {
           navigation.goBack();
@@ -117,7 +132,6 @@ const NewPost = () => {
     params: {assets, selectedUsers, location_address, lat, lon},
   } = route;
   const asset = assets[0];
-  console.log(asset);
 
   useEffect(() => {
     if (selectedUsers) {
@@ -173,7 +187,7 @@ const NewPost = () => {
   return (
     <View style={{padding: 10, rowGap: 15}}>
       <View style={{flexDirection: 'row', columnGap: 15, marginBottom: 15}}>
-        {asset.mediaType === 'image' ? (
+        {asset.mediaType === 'photo' ? (
           <FastImage
             source={{uri: asset.uri}}
             style={{

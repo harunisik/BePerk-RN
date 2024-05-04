@@ -10,8 +10,10 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {check, request, PERMISSIONS, RESULTS} from 'react-native-permissions';
 import AddStack from './AddStack';
+import NewStory from './NewStory';
+import NewPost from './NewPost';
 
-export const ImageVideoSelectionModal = ({visible, onDismiss}) => {
+export const ImageVideoSelectionModal = ({visible, onDismiss, navigateTo}) => {
   const navigation = useNavigation();
 
   const handlePressImage = () => {
@@ -44,16 +46,19 @@ export const ImageVideoSelectionModal = ({visible, onDismiss}) => {
                 presentationStyle: 'fullScreen',
               },
               data => {
-                // console.log(data);
                 if (data.assets?.length && data.assets.length > 0) {
                   navigation.navigate(AddStack.name, {
-                    assets: data.assets.map(({type, ...rest}) => {
-                      console.log(type);
-                      return {
-                        ...rest,
-                        mediaType: type.startsWith('image') ? 'image' : 'video',
-                      };
-                    }),
+                    screen: navigateTo,
+                    params: {
+                      assets: data.assets.map(({type, ...rest}) => {
+                        return {
+                          ...rest,
+                          mediaType: type.startsWith('image')
+                            ? 'photo'
+                            : 'video',
+                        };
+                      }),
+                    },
                   });
                 }
               },
@@ -102,7 +107,8 @@ export const ImageVideoSelectionModal = ({visible, onDismiss}) => {
               data => {
                 if (data.assets?.length && data.assets.length > 0) {
                   navigation.navigate(AddStack.name, {
-                    assets: data.assets,
+                    screen: navigateTo,
+                    params: {assets: data.assets},
                   });
                 }
               },
@@ -199,15 +205,16 @@ export const AddDoveModal = ({visible, onDismiss}) => {
 const AddModal = ({visible, onDismiss}) => {
   const [doveModalVisible, setDoveModalVisible] = useState(false);
   const [imageVideoModalVisible, setImageVideoModalVisible] = useState(false);
-  const navigation = useNavigation();
+  const [navigateTo, setNavigateTo] = useState('');
 
   const handleDovePress = () => {
     onDismiss();
     setDoveModalVisible(true);
   };
 
-  const handlePostPress = () => {
+  const handlePostPress = (navigateTo: string) => {
     onDismiss();
+    setNavigateTo(navigateTo);
     setImageVideoModalVisible(true);
   };
 
@@ -216,14 +223,14 @@ const AddModal = ({visible, onDismiss}) => {
       <Modal visible={visible} onDismiss={onDismiss}>
         <Button
           title="Post"
-          onPress={handlePostPress}
+          onPress={() => handlePostPress(NewPost.name)}
           iconComponent={
             <SimpleLineIcons name="picture" size={26} color="dodgerblue" />
           }
         />
         <Button
           title="Story"
-          onPress={() => Alert.alert('under construction')}
+          onPress={() => handlePostPress(NewStory.name)}
           icon="account-multiple"
         />
         <Button title="Dove" icon="bird" onPress={handleDovePress} />
@@ -235,6 +242,7 @@ const AddModal = ({visible, onDismiss}) => {
       <ImageVideoSelectionModal
         visible={imageVideoModalVisible}
         onDismiss={() => setImageVideoModalVisible(false)}
+        navigateTo={navigateTo}
       />
     </>
   );
