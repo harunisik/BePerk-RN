@@ -12,7 +12,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {
   useCustomMutation as useMutation,
   useCustomQuery as useQuery,
-} from '../../../hooks/commonHooks';
+} from '../../../hooks/customHooks';
 import {
   getUserProfile,
   postSettings as userPostSettings,

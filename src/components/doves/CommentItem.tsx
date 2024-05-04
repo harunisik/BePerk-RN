@@ -1,11 +1,4 @@
-import {
-  View,
-  Text,
-  FlatList,
-  TouchableOpacity,
-  Animated,
-  StyleSheet,
-} from 'react-native';
+import {View, Text, TouchableOpacity, Animated, StyleSheet} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {dateDiff} from '../../utils/DateUtil';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -13,6 +6,7 @@ import {useState} from 'react';
 import {Swipeable} from 'react-native-gesture-handler';
 import LikeButtton from '../common/buttons/LikeButton';
 import ItemSeperator from '../common/ItemSpearator';
+import FlatList from '../common/FlatList';
 
 const RenderRightActions = ({item, onPress}) => {
   return (
@@ -107,8 +101,6 @@ const CommentItem = ({
               onDeleteComment={onDeleteComment}
             />
           )}
-          keyExtractor={item2 => item2.id}
-          ItemSeparatorComponent={<ItemSeperator medium />}
           style={pl30}
         />
       )}

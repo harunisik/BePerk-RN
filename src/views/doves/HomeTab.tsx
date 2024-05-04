@@ -1,13 +1,15 @@
-import {View, FlatList, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import common from '../../styles/sharedStyles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import DovesItem from '../../components/doves/DovesItem';
 import DovesItemOptions from '../../components/doves/DovesItemOptions';
 import ItemSeperator from '../../components/common/ItemSpearator';
 import {useCallback} from 'react';
-import {useCustomQuery as useQuery} from '../../hooks/commonHooks';
+import {useCustomQuery as useQuery} from '../../hooks/customHooks';
 import {getUserPerks} from '../../services/UserService';
 import {useGetUserFeed} from '../../hooks/infiniteQueryHooks';
+import FlatList from '../../components/common/FlatList';
+import InfiniteFlatList from '../../components/common/InfiniteFlatList';
 
 const ListHeaderItem = ({item}) => {
   const {jcSpaceBetween, aiCenter, row, rGap15, pt20, p15, bold, white} =
@@ -61,16 +63,13 @@ const HomeTab = () => {
   );
 
   return (
-    <FlatList
+    <InfiniteFlatList
       data={data}
       renderItem={({item}) => <DovesItem item={item} />}
-      keyExtractor={item => item.id}
-      onRefresh={() => {
-        remove();
-        refetch();
-      }}
-      refreshing={isFetching}
-      onEndReached={() => !isFetching && fetchNextPage()}
+      fetchNextPage={fetchNextPage}
+      isFetching={isFetching}
+      refetch={refetch}
+      remove={remove}
       ItemSeparatorComponent={ItemSeparatorComponent}
       {...(beperkDove !== undefined && {
         ListHeaderComponent: <ListHeaderItem item={beperkDove[0]} />,

@@ -1,10 +1,9 @@
-import {FlatList} from 'react-native';
 import {useState} from 'react';
 import UserItem from '../../components/profile/UserItem';
 import {useSearchText, useSearchUsers} from '../../hooks/searchHooks';
-import ItemSeperator from '../../components/common/ItemSpearator';
 import {useNavigation} from '@react-navigation/native';
 import ProfileStack from '../profile/ProfileStack';
+import FlatList from '../../components/common/FlatList';
 
 const SearchProfilesTab = ({searchText}) => {
   const [searchResult, setSearchResult] = useState([]);
@@ -41,8 +40,6 @@ const SearchProfilesTab = ({searchText}) => {
       renderItem={({item}) => (
         <UserItem item={item} onPress={item => handlePressItem(item)} />
       )}
-      keyExtractor={item => item.id}
-      ItemSeparatorComponent={ItemSeperator}
     />
   );
 };

@@ -10,7 +10,7 @@ import common from '../../../styles/sharedStyles';
 import {useNavigation} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useState} from 'react';
-import {useCustomMutation as useMutation} from '../../../hooks/commonHooks';
+import {useCustomMutation as useMutation} from '../../../hooks/customHooks';
 import {changePassword as userPostPassword} from '../../../services/AuthService';
 import {showMessage} from 'react-native-flash-message';
 

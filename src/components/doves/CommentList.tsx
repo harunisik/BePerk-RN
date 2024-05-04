@@ -1,9 +1,8 @@
-import {FlatList} from 'react-native';
 import CommentItem from './CommentItem';
 import CommentHeaderItem from './CommentHeaderItem';
-import {useCallback, useMemo} from 'react';
-import ItemSeperator from '../common/ItemSpearator';
+import {useMemo} from 'react';
 import common from '../../styles/sharedStyles';
+import FlatList from '../common/FlatList';
 
 const findTopParent = (searchId, dataList) => {
   const parent = dataList.find(({id}) => id === searchId);
@@ -44,11 +43,6 @@ const CommentList = ({
   const result = useMemo(() => transformCommentList(data?.comment), [data]);
   const {ph15, pv15} = common;
 
-  const ItemSeparatorComponent = useCallback(
-    () => <ItemSeperator medium />,
-    [],
-  );
-
   return (
     <FlatList
       data={result}
@@ -59,10 +53,8 @@ const CommentList = ({
           onPressReply={onPressReply}
         />
       )}
-      keyExtractor={item => item.id}
       onRefresh={onRefresh}
       refreshing={isFetching}
-      ItemSeparatorComponent={ItemSeparatorComponent}
       contentContainerStyle={[ph15, pv15]}
       {...(isHeaderVisible && {
         ListHeaderComponent: <CommentHeaderItem item={headerItem} />,

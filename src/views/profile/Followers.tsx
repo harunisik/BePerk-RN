@@ -1,13 +1,13 @@
-import {View, Text, TextInput, StyleSheet, FlatList} from 'react-native';
+import {View, Text, TextInput, StyleSheet} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {useEffect, useState} from 'react';
 import UserItem from '../../components/profile/UserItem';
 import SelectedUsers from '../../components/profile/SelectedUsers';
 import {useSearchText, useSearchUsers} from '../../hooks/searchHooks';
-import ItemSeperator from '../../components/common/ItemSpearator';
-import {useNavigation, useRoute} from '@react-navigation/native';
-import {useCustomQuery as useQuery} from '../../hooks/commonHooks';
+import {useNavigation} from '@react-navigation/native';
+import {useCustomQuery as useQuery} from '../../hooks/customHooks';
 import {getUserFollowings} from '../../services/UserService';
+import FlatList from '../../components/common/FlatList';
 
 const Followers = () => {
   const [searchText, setSearchText] = useState('');
@@ -67,7 +67,6 @@ const Followers = () => {
             <UserItem item={item} onPress={handlePressUserItem} selectable />
           )}
           keyExtractor={item => item.user_id}
-          ItemSeparatorComponent={ItemSeperator}
         />
       ) : (
         <FlatList
@@ -81,7 +80,6 @@ const Followers = () => {
           ListHeaderComponent={
             <Text style={[bold, font16, pb10, pt10]}>Suggested</Text>
           }
-          ItemSeparatorComponent={ItemSeperator}
         />
       )}
     </View>

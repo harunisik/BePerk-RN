@@ -1,7 +1,6 @@
-import {FlatList} from 'react-native';
-import {useCallback, useState} from 'react';
-import ItemSeperator from '../common/ItemSpearator';
+import {useState} from 'react';
 import PostDetailItem from './PostDetailItem';
+import InfiniteFlatList from '../common/InfiniteFlatList';
 
 const PostDetailItemList = ({
   data,
@@ -13,25 +12,16 @@ const PostDetailItemList = ({
 }) => {
   const [viewableItem, setViewableItem] = useState(0);
 
-  const ItemSeparatorComponent = useCallback(
-    () => <ItemSeperator lineVisible />,
-    [],
-  );
-
   return (
-    <FlatList
+    <InfiniteFlatList
       data={data}
       renderItem={({item, index}) => (
         <PostDetailItem item={item} isViewable={index === viewableItem} />
       )}
-      keyExtractor={item => item.id}
-      ItemSeparatorComponent={ItemSeparatorComponent}
-      onRefresh={() => {
-        remove();
-        refetch();
-      }}
-      refreshing={isFetching}
-      onEndReached={() => !isFetching && hasNextPage && fetchNextPage()}
+      fetchNextPage={fetchNextPage}
+      isFetching={isFetching}
+      refetch={refetch}
+      remove={remove}
       onViewableItemsChanged={({viewableItems}) => {
         if (viewableItems.length > 0) {
           const element = viewableItems[0];
@@ -40,7 +30,6 @@ const PostDetailItemList = ({
           }
         }
       }}
-      viewabilityConfig={{viewAreaCoveragePercentThreshold: 100}}
     />
   );
 };

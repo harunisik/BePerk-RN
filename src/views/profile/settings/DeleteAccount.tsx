@@ -4,7 +4,7 @@ import {useNavigation} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {Modal} from 'react-native';
 import {useState} from 'react';
-import {useCustomMutation as useMutation} from '../../../hooks/commonHooks';
+import {useCustomMutation as useMutation} from '../../../hooks/customHooks';
 import {deleteUser as userDeleteUser} from '../../../services/AuthService';
 import {useStore} from '../../../containers/StoreContainer';
 import {AuthActionType} from '../../../containers/AuthAction';

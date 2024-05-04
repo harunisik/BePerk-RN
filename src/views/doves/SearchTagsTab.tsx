@@ -1,8 +1,9 @@
-import {Alert, FlatList, Text} from 'react-native';
+import {Alert, Text} from 'react-native';
 import {useState} from 'react';
 import {useSearchHashTagCount, useSearchText} from '../../hooks/searchHooks';
 import ItemSeperator from '../../components/common/ItemSpearator';
 import common from '../../styles/sharedStyles';
+import FlatList from '../../components/common/FlatList';
 
 const SearchTagsTab = ({searchText}) => {
   const [searchResult, setSearchResult] = useState([]);
@@ -43,7 +44,6 @@ const SearchTagsTab = ({searchText}) => {
         </Text>
       )}
       keyExtractor={item => item.hashtag}
-      ItemSeparatorComponent={<ItemSeperator medium />}
     />
   );
 };

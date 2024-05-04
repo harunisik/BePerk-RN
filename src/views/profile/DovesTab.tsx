@@ -1,10 +1,13 @@
-import {View, FlatList} from 'react-native';
+import {View} from 'react-native';
 import DovesItem from '../../components/doves/DovesItem';
 import ItemSeperator from '../../components/common/ItemSpearator';
 import common from '../../styles/sharedStyles';
-import {useCustomQuery as useQuery} from '../../hooks/commonHooks';
+import {useCustomQuery as useQuery} from '../../hooks/customHooks';
 import {getUserPerks} from '../../services/UserService';
 import {Tabs} from 'react-native-collapsible-tab-view';
+import ListEmptyComponent from '../../components/common/ListEmptyComponent';
+
+const {pt15} = common;
 
 const DovesTab = ({userId}) => {
   const {data, refetch, isFetching} = useQuery(getUserPerks, {
@@ -12,8 +15,6 @@ const DovesTab = ({userId}) => {
     limit: 35,
     offset: 0,
   });
-
-  const {pt15} = common;
 
   return (
     <View style={pt15}>
@@ -26,6 +27,7 @@ const DovesTab = ({userId}) => {
         onRefresh={refetch}
         refreshing={isFetching}
         ItemSeparatorComponent={<ItemSeperator lineVisible large />}
+        ListEmptyComponent={ListEmptyComponent}
       />
     </View>
   );

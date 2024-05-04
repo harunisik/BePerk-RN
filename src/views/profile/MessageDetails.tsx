@@ -1,17 +1,16 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {FlatList, Pressable, StyleSheet, Text, View} from 'react-native';
-import {useCallback} from 'react';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {formatDate} from '../../utils/DateUtil';
-import ItemSeperator from '../../components/common/ItemSpearator';
 import common from '../../styles/sharedStyles';
 import DovesItem from '../../components/doves/DovesItem';
-import {useCustomQuery as useQuery} from '../../hooks/commonHooks';
+import {useCustomQuery as useQuery} from '../../hooks/customHooks';
 import {getChat} from '../../services/ChatService';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FastImage from 'react-native-fast-image';
 import Profile from './Profile';
 import StoryView from './StoryView';
 import {useStore} from '../../containers/StoreContainer';
+import FlatList from '../../components/common/FlatList';
 
 const {p10} = common;
 
@@ -178,18 +177,13 @@ const MessageDetails = () => {
       });
     },
   );
-  const ItemSeparatorComponent = useCallback(() => <ItemSeperator />, []);
 
   return (
     <FlatList
       data={data}
       renderItem={({item}) => <MessageDetailsItem item={item} />}
-      keyExtractor={item => item.id}
-      // onRefresh={refetch}
-      // refreshing={isFetching}
-      ItemSeparatorComponent={ItemSeparatorComponent}
       contentContainerStyle={p10}
-      inverted
+      inverted={data?.length > 0}
     />
   );
 };

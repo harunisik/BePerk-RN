@@ -10,7 +10,7 @@ import {
   uploadVideo as userUploadVideo,
   uploadPhoto as userUploadPhoto,
 } from '../../services/UserService';
-import {useCustomMutation as useMutation} from '../../hooks/commonHooks';
+import {useCustomMutation as useMutation} from '../../hooks/customHooks';
 import {showMessage} from 'react-native-flash-message';
 import {toNumber} from '../../utils/BooleanUtil';
 import Followers from '../profile/Followers';

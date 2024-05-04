@@ -21,7 +21,7 @@ import {TermsListItem} from './Terms';
 import ItemSeperator from '../../../components/common/ItemSpearator';
 import {useCallback} from 'react';
 import common from '../../../styles/sharedStyles';
-import {useCustomQuery} from '../../../hooks/commonHooks';
+import {useCustomQuery} from '../../../hooks/customHooks';
 import {getUserSettings} from '../../../services/UserService';
 
 const {gray, p15} = common;

@@ -2,7 +2,7 @@ import {showMessage} from 'react-native-flash-message';
 import {useStore} from '../../../containers/StoreContainer';
 import {ModalActionType} from '../../../containers/ModalAction';
 import Button from './Button';
-import {useCustomMutation as useMutation} from '../../../hooks/commonHooks';
+import {useCustomMutation as useMutation} from '../../../hooks/customHooks';
 import {deletePost as userDeletePost} from '../../../services/UserService';
 
 interface DeleteButtonProps {

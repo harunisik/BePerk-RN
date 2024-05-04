@@ -1,10 +1,9 @@
-import {FlatList} from 'react-native';
 import common from '../../styles/sharedStyles';
 import ActivityItem from '../../components/doves/ActivityItem';
-import ItemSeperator from '../../components/common/ItemSpearator';
 import {useRoute} from '@react-navigation/native';
-import {useCustomQuery as useQuery} from '../../hooks/commonHooks';
+import {useCustomQuery as useQuery} from '../../hooks/customHooks';
 import {getUserHistory} from '../../services/UserService';
+import FlatList from '../../components/common/FlatList';
 
 const ActivityTab = () => {
   const route = useRoute();
@@ -27,7 +26,6 @@ const ActivityTab = () => {
       keyExtractor={item => item.history_id}
       onRefresh={refetch}
       refreshing={isFetching}
-      ItemSeparatorComponent={<ItemSeperator medium />}
       contentContainerStyle={p15}
     />
   );

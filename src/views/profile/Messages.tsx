@@ -1,12 +1,11 @@
-import {FlatList, Pressable, Text, View} from 'react-native';
-import {useCustomQuery as useQuery} from '../../hooks/commonHooks';
+import {Pressable, Text, View} from 'react-native';
+import {useCustomQuery as useQuery} from '../../hooks/customHooks';
 import {chatListOpen} from '../../services/ChatService';
-import ItemSeperator from '../../components/common/ItemSpearator';
-import {useCallback} from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import common from '../../styles/sharedStyles';
 import {useNavigation} from '@react-navigation/native';
 import MessageDetails from './MessageDetails';
+import FlatList from '../../components/common/FlatList';
 
 const {
   row,
@@ -92,19 +91,12 @@ const Messages = () => {
     return {chats: data.chats?.sort((a, b) => b.date - a.date)};
   });
 
-  const ItemSeparatorComponent = useCallback(
-    () => <ItemSeperator medium />,
-    [],
-  );
-
   return (
     <FlatList
       data={data?.chats}
       renderItem={({item}) => <MessageItem item={item} />}
-      keyExtractor={item => item.id}
       onRefresh={refetch}
       refreshing={isFetching}
-      ItemSeparatorComponent={ItemSeparatorComponent}
       contentContainerStyle={p10}
     />
   );

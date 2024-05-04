@@ -5,7 +5,7 @@ import {useRoute} from '@react-navigation/native';
 import {
   useCustomQuery as useQuery,
   useCustomMutation as useMutation,
-} from '../../hooks/commonHooks';
+} from '../../hooks/customHooks';
 import {
   deleteFollowing as userDeleteFollowing,
   addFollowing as userAddFollowing,

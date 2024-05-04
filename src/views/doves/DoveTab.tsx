@@ -1,14 +1,13 @@
-import {FlatList, TouchableOpacity, StyleSheet, Text} from 'react-native';
+import {TouchableOpacity, StyleSheet, Text} from 'react-native';
 import common from '../../styles/sharedStyles';
 import DovesItem from '../../components/doves/DovesItem';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import PostDove from './PostDove';
 import ItemSeperator from '../../components/common/ItemSpearator';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {useCustomQuery as useQuery} from '../../hooks/commonHooks';
-import {getUserExploring} from '../../services/UserService';
 import {useCallback} from 'react';
 import {useGetUserExploring} from '../../hooks/infiniteQueryHooks';
+import InfiniteFlatList from '../../components/common/InfiniteFlatList';
 
 const ListHeaderComponent = () => {
   const navigation = useNavigation();
@@ -53,16 +52,13 @@ const DoveTab = () => {
   );
 
   return (
-    <FlatList
+    <InfiniteFlatList
       data={data}
       renderItem={({item}) => <DovesItem item={item} />}
-      keyExtractor={item => item.id}
-      onRefresh={() => {
-        remove();
-        refetch();
-      }}
-      refreshing={isFetching}
-      onEndReached={() => !isFetching && fetchNextPage()}
+      fetchNextPage={fetchNextPage}
+      isFetching={isFetching}
+      refetch={refetch}
+      remove={remove}
       ListHeaderComponent={ListHeaderComponent}
       ItemSeparatorComponent={ItemSeparatorComponent}
     />
