@@ -1,20 +1,20 @@
 import React, {useEffect, useState} from 'react';
-import {
-  Modal as RNModal,
-  StyleSheet,
-  Pressable,
-  View,
-  GestureResponderEvent,
-} from 'react-native';
+import {Modal as RNModal, Pressable, GestureResponderEvent} from 'react-native';
 import common from '../../styles/sharedStyles';
 
 const {flex1} = common;
 
-const Modal = ({visible, onDismiss, children}) => {
+const Modal = ({
+  visible,
+  onDismiss = undefined,
+  children,
+  dismissable = true,
+  animationType = 'slide',
+}) => {
   const [modalVisible, setModalVisible] = useState(visible);
 
   const handlePress = (event: GestureResponderEvent) => {
-    if (event.target == event.currentTarget) {
+    if (dismissable && event.target == event.currentTarget) {
       setModalVisible(false);
     }
   };
@@ -25,7 +25,7 @@ const Modal = ({visible, onDismiss, children}) => {
 
   return (
     <RNModal
-      animationType="slide"
+      animationType={animationType}
       transparent={true}
       visible={modalVisible}
       onRequestClose={() => {
@@ -33,28 +33,10 @@ const Modal = ({visible, onDismiss, children}) => {
       }}
       onDismiss={onDismiss}>
       <Pressable style={flex1} onPress={handlePress}>
-        <View style={styles.modalView}>{children}</View>
+        {children}
       </Pressable>
     </RNModal>
   );
 };
-
-const styles = StyleSheet.create({
-  modalView: {
-    paddingVertical: 20,
-    paddingHorizontal: 10,
-    marginTop: 'auto',
-    backgroundColor: 'white',
-    borderRadius: 20,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-});
 
 export default Modal;

@@ -6,8 +6,6 @@ import {
   TouchableWithoutFeedback,
   useWindowDimensions,
   StyleSheet,
-  Modal,
-  Pressable,
   TextInput,
   Keyboard,
   KeyboardAvoidingView,
@@ -31,6 +29,7 @@ import {
 import uuid from 'react-native-uuid';
 import {HeaderRight1} from './FollowersScreenOptions';
 import {postMy24Like} from '../../services/My24Service';
+import Popup from '../../components/common/Popup';
 
 const {
   jcSpaceBetween,
@@ -142,10 +141,6 @@ const Footer2 = ({onShare, onLike, onSendMessage, liked, onFocus}) => {
     setMessage('');
   };
 
-  // useEffect(() => {
-  //   // rerender coponent
-  // }, [liked]);
-
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
@@ -178,49 +173,6 @@ const Footer2 = ({onShare, onLike, onSendMessage, liked, onFocus}) => {
         </View>
       </View>
     </KeyboardAvoidingView>
-  );
-};
-
-const DeleteModal = ({onDelete, onCancel, modalVisible}) => {
-  return (
-    <Modal
-      transparent={true}
-      visible={modalVisible}
-      onRequestClose={() => {
-        onCancel();
-      }}>
-      <View
-        style={{
-          flex: 1,
-          justifyContent: 'center',
-          backgroundColor: 'rgba(0, 0, 0, 0.4)',
-        }}>
-        <View
-          style={{
-            alignItems: 'center',
-            backgroundColor: 'white',
-            borderRadius: 20,
-            padding: 20,
-            margin: 20,
-            shadowOpacity: 0.25,
-          }}>
-          <Text>Delete this story?</Text>
-          <Text>Once you delete it's gone!</Text>
-          <Pressable
-            onPress={() => {
-              onDelete();
-            }}>
-            <Text>Delete</Text>
-          </Pressable>
-          <Pressable
-            onPress={() => {
-              onCancel();
-            }}>
-            <Text>Cancel</Text>
-          </Pressable>
-        </View>
-      </View>
-    </Modal>
   );
 };
 
@@ -488,10 +440,12 @@ const StoryView = () => {
             )}
           </View>
         </TouchableWithoutFeedback>
-        <DeleteModal
-          modalVisible={modalVisible}
-          onDelete={handleModalDelete}
-          onCancel={handleModalCancel}
+        <Popup
+          visible={modalVisible}
+          header="Delete this story?"
+          message="Once you delete it's gone"
+          onPressOk={handleModalDelete}
+          onPressCancel={handleModalCancel}
         />
       </ImageBackground>
     </View>

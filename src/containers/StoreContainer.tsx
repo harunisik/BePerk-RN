@@ -1,23 +1,15 @@
 import {createContext, Dispatch, Fragment, useContext, useReducer} from 'react';
 import AuthAction, {AuthActionType, AuthResult} from './AuthAction';
 import axios from 'axios';
-import ModalAction, {ModalActionType, ModalInfo} from './ModalAction';
 import ResetAction, {ResetActionType} from './ResetAction';
 
 interface StoreData {
   authResult?: AuthResult;
-  modalInfo?: ModalInfo;
 }
 
-const initialState: StoreData = {
-  modalInfo: {
-    isOpen: false,
-    component: Fragment,
-    routeName: '',
-  },
-};
+const initialState: StoreData = {};
 
-type StoreAction = ResetAction | AuthAction | ModalAction;
+type StoreAction = ResetAction | AuthAction;
 
 const updateStore = (store: StoreData, action: StoreAction) => {
   switch (action.type) {
@@ -35,16 +27,6 @@ const updateStore = (store: StoreData, action: StoreAction) => {
       return {
         ...store,
         authResult: undefined,
-      };
-    case ModalActionType.OPEN:
-      return {
-        ...store,
-        modalInfo: {isOpen: true, ...action.modalInfo},
-      };
-    case ModalActionType.CLOSE:
-      return {
-        ...store,
-        modalInfo: {isOpen: false, component: Fragment, routeName: ''},
       };
     default:
       return store;

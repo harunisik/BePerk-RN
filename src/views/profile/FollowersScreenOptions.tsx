@@ -118,7 +118,7 @@ const HeaderRight = () => {
 const FollowersScreenOptions = ({navigation}) => {
   return {
     animation: 'slide_from_bottom',
-    presentation: 'fullScreenModal',
+    // presentation: 'fullScreenModal',
     headerShown: true,
     headerLeft: () => (
       <MaterialCommunityIcons

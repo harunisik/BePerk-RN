@@ -1,24 +1,25 @@
-import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native';
+import {Text, StyleSheet, TouchableOpacity, Alert} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import common from '../../styles/sharedStyles';
-import {useStore} from '../../containers/StoreContainer';
-import {ModalActionType} from '../../containers/ModalAction';
 import {showMessage} from 'react-native-flash-message';
 import Clipboard from '@react-native-clipboard/clipboard';
 import Followers from '../../views/profile/Followers';
 import {HeaderRight1} from '../../views/profile/FollowersScreenOptions';
+import {useNavigation} from '@react-navigation/native';
+import BottomModal from '../common/BottomModal';
 
-const UserProfileModal = ({navigation, userId}) => {
-  const {dispatch} = useStore();
-  const {aiCenter, cGap15, row} = common;
+const {aiCenter, cGap15, row} = common;
+
+const UserProfileModal = ({userId, visible, onDismiss}) => {
+  const navigation = useNavigation();
 
   return (
-    <View>
+    <BottomModal visible={visible} onDismiss={onDismiss}>
       <TouchableOpacity
         style={[styles.button, aiCenter, row, cGap15]}
         onPress={() => {
-          dispatch({type: ModalActionType.CLOSE});
+          onDismiss();
           showMessage({message: 'Link copied'});
           Clipboard.setString(`beperk://profile?id=${userId}`);
         }}>
@@ -33,9 +34,9 @@ const UserProfileModal = ({navigation, userId}) => {
       <TouchableOpacity
         style={[styles.button, aiCenter, row, cGap15]}
         onPress={() => {
-          dispatch({type: ModalActionType.CLOSE});
+          onDismiss();
           navigation.navigate(Followers.name, {
-            HeaderRightComp: HeaderRight1.name,
+            headerRightComp: HeaderRight1.name,
             headerRightProp: {itemId: userId, type: 6},
           });
         }}>
@@ -56,7 +57,7 @@ const UserProfileModal = ({navigation, userId}) => {
         <MaterialIcons name="block" size={26} color="red" />
         <Text>Block</Text>
       </TouchableOpacity>
-    </View>
+    </BottomModal>
   );
 };
 

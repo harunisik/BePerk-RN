@@ -1,7 +1,5 @@
 import {useState} from 'react';
-import Modal from '../../components/common/Modal';
 import Button from '../../components/common/buttons/Button';
-import {Alert} from 'react-native';
 import PostDove from '../doves/PostDove';
 import {useNavigation} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -12,6 +10,7 @@ import {check, request, PERMISSIONS, RESULTS} from 'react-native-permissions';
 import AddStack from './AddStack';
 import NewStory from './NewStory';
 import NewPost from './NewPost';
+import BottomModal from '../../components/common/BottomModal';
 
 export const ImageVideoSelectionModal = ({visible, onDismiss, navigateTo}) => {
   const navigation = useNavigation();
@@ -125,7 +124,7 @@ export const ImageVideoSelectionModal = ({visible, onDismiss, navigateTo}) => {
   };
 
   return (
-    <Modal visible={visible} onDismiss={onDismiss}>
+    <BottomModal visible={visible} onDismiss={onDismiss}>
       <Button
         title="Photo Library"
         onPress={handlePressImage}
@@ -139,7 +138,7 @@ export const ImageVideoSelectionModal = ({visible, onDismiss, navigateTo}) => {
         onPress={handlePressVideo}
         iconComponent={<AntDesign name="camera" size={26} color="dodgerblue" />}
       />
-    </Modal>
+    </BottomModal>
   );
 };
 
@@ -177,7 +176,7 @@ export const AddDoveModal = ({visible, onDismiss}) => {
   };
 
   return (
-    <Modal visible={visible} onDismiss={onDismiss}>
+    <BottomModal visible={visible} onDismiss={onDismiss}>
       <Button
         title="Discussion"
         onPress={handlePressDiscussion}
@@ -198,7 +197,7 @@ export const AddDoveModal = ({visible, onDismiss}) => {
         onPress={handlePressPrayer}
         iconComponent={<MaterialIcons name="work" size={26} color="purple" />}
       />
-    </Modal>
+    </BottomModal>
   );
 };
 
@@ -220,7 +219,7 @@ const AddModal = ({visible, onDismiss}) => {
 
   return (
     <>
-      <Modal visible={visible} onDismiss={onDismiss}>
+      <BottomModal visible={visible} onDismiss={onDismiss}>
         <Button
           title="Post"
           onPress={() => handlePostPress(NewPost.name)}
@@ -234,7 +233,7 @@ const AddModal = ({visible, onDismiss}) => {
           icon="account-multiple"
         />
         <Button title="Dove" icon="bird" onPress={handleDovePress} />
-      </Modal>
+      </BottomModal>
       <AddDoveModal
         visible={doveModalVisible}
         onDismiss={() => setDoveModalVisible(false)}
