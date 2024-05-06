@@ -8,13 +8,12 @@ import DovesStack from './doves/DovesStack';
 import ProfileStack from './profile/ProfileStack';
 import {useStore} from '../containers/StoreContainer';
 import AddModal from './add/AddModal';
-
-const Placeholder = () => <View />;
+import AddStack from './add/AddStack';
 
 const routeIcons = {
   [HomeStack.name]: 'home',
   [FeaturedStack.name]: 'star',
-  [Placeholder.name]: 'plus',
+  [AddStack.name]: 'plus',
   [DovesStack.name]: 'bird',
   [ProfileStack.name]: 'account',
 };
@@ -22,6 +21,7 @@ const routeIcons = {
 const tabBarLabels = {
   [HomeStack.name]: 'Home',
   [FeaturedStack.name]: 'Featured',
+  [AddStack.name]: '',
   [DovesStack.name]: 'Doves',
   [ProfileStack.name]: 'Profile',
 };
@@ -35,7 +35,7 @@ const screenOptions = ({route}) => ({
     return (
       <View style={{alignItems: 'center'}}>
         <MaterialCommunityIcons name={iconName} size={26} color={color} />
-        {route.name !== Placeholder.name && (
+        {route.name !== AddStack.name && (
           <Text style={{fontSize: 11, color}}>{tabBarLabels[route.name]}</Text>
         )}
       </View>
@@ -65,8 +65,8 @@ const BottomTab = () => {
         <Tab.Screen name={HomeStack.name} component={HomeStack} />
         <Tab.Screen name={FeaturedStack.name} component={FeaturedStack} />
         <Tab.Screen
-          name={Placeholder.name}
-          component={Placeholder}
+          name={AddStack.name}
+          component={AddStack}
           listeners={() => ({
             tabPress: e => {
               e.preventDefault();

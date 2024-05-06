@@ -1,4 +1,11 @@
-import {View, Text, TextInput, StyleSheet, Switch, Image} from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  Switch,
+  ActivityIndicator,
+} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FastImage from 'react-native-fast-image';
@@ -13,52 +20,107 @@ import {
 import {useCustomMutation as useMutation} from '../../hooks/customHooks';
 import {showMessage} from 'react-native-flash-message';
 import {toNumber} from '../../utils/BooleanUtil';
-import Followers from '../profile/Followers';
-import {HeaderRight2} from '../profile/FollowersScreenOptions';
+import Followers, {NewPostHeaderRight} from '../profile/Followers';
 import GooglePlaces from './GooglePlaces';
 import Video from '../../components/common/Video';
 import {createThumbnail} from 'react-native-create-thumbnail';
 
-const HeaderRight = () => {
+const PostButton = ({onPress}) => {
+  return (
+    <Text onPress={onPress} style={{color: 'dodgerblue'}}>
+      Post
+    </Text>
+  );
+};
+
+export const NewPostScreenOptions = ({navigation}) => {
+  return {
+    title: 'New Post',
+    headerLeft: () => (
+      <MaterialCommunityIcons
+        name="close"
+        onPress={() => navigation.goBack()}
+        size={26}
+      />
+    ),
+    headerRight: PostButton,
+  };
+};
+
+const NewPost = () => {
+  const [showIndicator, setShowIndicator] = useState(false);
+  const [caption, setCaption] = useState('');
+  const [showTimer, setShowTimer] = useState(false);
+  const [comments, setComments] = useState('public');
+  const [likes, setLikes] = useState('public');
+  const [views, setViews] = useState('public');
+  const [attachedUsers, setAttachedUsers] = useState([]);
+  const [location, setLocation] = useState();
   const navigation = useNavigation();
   const route = useRoute();
   const {
-    params: {
-      asset,
-      caption,
-      attached_users,
-      lat,
-      lon,
-      location_address,
-      expiration_timer,
-      show_timer,
-      comments,
-      comments_private,
-      likes,
-      likes_private,
-      views_private,
-    },
+    params: {assets, selectedUsers, location_address, lat, lon},
   } = route;
+  const asset = assets[0];
 
   const uploadPhoto = useMutation(userUploadPhoto);
   const uploadVideo = useMutation(userUploadVideo);
 
+  useEffect(() => {
+    if (selectedUsers) {
+      setAttachedUsers(selectedUsers);
+    }
+  }, [selectedUsers]);
+
+  useEffect(() => {
+    if (location_address) {
+      setLocation({location_address, lat, lon});
+    }
+  }, [location_address]);
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => <PostButton onPress={handlePressPost} />,
+    });
+  }, [
+    navigation,
+    asset,
+    caption,
+    attachedUsers,
+    location,
+    showTimer,
+    comments,
+    likes,
+    views,
+  ]);
+
   const handlePressPost = async () => {
+    setShowIndicator(true);
+
     const form = new FormData();
     form.append('height', asset.height);
     form.append('width', asset.width);
     form.append('caption', caption);
-    form.append('attached_users', attached_users);
-    form.append('lat', lat);
-    form.append('lon', lon);
-    form.append('location_address', location_address);
-    form.append('expiration_timer', expiration_timer);
-    form.append('show_timer', show_timer);
-    form.append('comments', comments);
-    form.append('comments_private', comments_private);
-    form.append('likes', likes);
-    form.append('likes_private', likes_private);
-    form.append('views_private', views_private);
+    form.append(
+      'attached_users',
+      attachedUsers?.length > 0
+        ? JSON.stringify(
+            attachedUsers.map(({user_id}) => {
+              return {id: user_id};
+            }),
+          )
+        : '',
+    );
+    form.append('lat', location ? location.lat : '0');
+    form.append('lon', location ? location.lon : '0');
+    form.append('location_address', location ? location.location_address : '');
+    form.append('expiration_timer', '0');
+    form.append('show_timer', toNumber(showTimer));
+    form.append('comments', comments === 'public' ? 1 : 0);
+    form.append('comments_private', comments === 'private' ? 1 : 0);
+    form.append('likes', likes === 'public' ? 1 : 0);
+    form.append('likes_private', likes === 'private' ? 1 : 0);
+    form.append('views_private', views === 'private' ? 1 : 0);
 
     form.append(asset.mediaType, {
       name: asset.fileName,
@@ -69,8 +131,8 @@ const HeaderRight = () => {
     if (asset.mediaType === 'photo') {
       uploadPhoto.mutate(form, {
         onSuccess: () => {
-          navigation.goBack();
           showMessage({message: 'New post sent'});
+          navigation.goBack();
         },
       });
     } else {
@@ -90,102 +152,22 @@ const HeaderRight = () => {
 
       uploadVideo.mutate(form, {
         onSuccess: () => {
-          navigation.goBack();
           showMessage({message: 'New post sent'});
+          navigation.goBack();
         },
       });
     }
   };
 
-  return (
-    <Text style={{color: 'dodgerblue'}} onPress={handlePressPost}>
-      Post
-    </Text>
-  );
-};
-
-export const NewPostScreenOptions = ({navigation}) => {
-  return {
-    title: 'New Post',
-    headerLeft: () => (
-      <MaterialCommunityIcons
-        name="close"
-        onPress={() => navigation.goBack()}
-        size={26}
-      />
-    ),
-    headerRight: HeaderRight,
-  };
-};
-
-const NewPost = () => {
-  const [caption, setCaption] = useState('');
-  const [showTimer, setShowTimer] = useState(false);
-  const [comments, setComments] = useState('public');
-  const [likes, setLikes] = useState('public');
-  const [views, setViews] = useState('public');
-  const [attachedUsers, setAttachedUsers] = useState([]);
-  const [location, setLocation] = useState();
-  const navigation = useNavigation();
-  const route = useRoute();
-  const {
-    params: {assets, selectedUsers, location_address, lat, lon},
-  } = route;
-  const asset = assets[0];
-
-  useEffect(() => {
-    if (selectedUsers) {
-      setAttachedUsers(selectedUsers);
-    }
-  }, [selectedUsers]);
-
-  useEffect(() => {
-    if (location_address) {
-      setLocation({location_address, lat, lon});
-    }
-  }, [location_address]);
-
-  useEffect(() => {
-    navigation.setParams({
-      asset,
-      caption,
-      attached_users:
-        attachedUsers?.length > 0
-          ? JSON.stringify(
-              attachedUsers.map(({user_id}) => {
-                return {id: user_id};
-              }),
-            )
-          : '',
-      location_address: location ? location.location_address : '',
-      lat: location ? location.lat : '0',
-      lon: location ? location.lon : '0',
-      expiration_timer: '0',
-      show_timer: toNumber(showTimer),
-      comments: comments === 'public' ? 1 : 0,
-      comments_private: comments === 'private' ? 1 : 0,
-      likes: likes === 'public' ? 1 : 0,
-      likes_private: likes === 'private' ? 1 : 0,
-      views_private: views === 'private' ? 1 : 0,
-    });
-  }, [
-    asset,
-    caption,
-    attachedUsers,
-    location,
-    // expiration_timer,
-    showTimer,
-    comments,
-    likes,
-    views,
-  ]);
-
   const handlePressTagPeople = () => {
-    navigation.navigate(Followers.name, {headerRightComp: HeaderRight2.name});
+    navigation.navigate(Followers.name, {
+      headerRightComp: NewPostHeaderRight.name,
+    });
   };
 
   return (
     <View style={{padding: 10, rowGap: 15}}>
+      {showIndicator && <ActivityIndicator />}
       <View style={{flexDirection: 'row', columnGap: 15, marginBottom: 15}}>
         {asset.mediaType === 'photo' ? (
           <FastImage

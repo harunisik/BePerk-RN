@@ -1,11 +1,11 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import NewPost, {NewPostScreenOptions} from './NewPost';
 import {useRoute} from '@react-navigation/native';
-import Followers from '../profile/Followers';
-import FollowersScreenOptions from '../profile/FollowersScreenOptions';
+import Followers, {FollowersScreenOptions} from '../profile/Followers';
 import GooglePlaces from './GooglePlaces';
 import GooglePlacesScreenOptions from './GooglePlacesScreenOptions';
 import NewStory, {NewStoryScreenOptions} from './NewStory';
+import PostDove, {PostDoveScreenOptions} from '../doves/PostDove';
 
 const Stack = createNativeStackNavigator();
 
@@ -38,6 +38,11 @@ const AddStack = () => {
         name={GooglePlaces.name}
         component={GooglePlaces}
         options={GooglePlacesScreenOptions}
+      />
+      <Stack.Screen
+        name={PostDove.name}
+        component={PostDove}
+        options={PostDoveScreenOptions}
       />
     </Stack.Navigator>
   );

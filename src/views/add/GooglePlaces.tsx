@@ -30,10 +30,14 @@ const GooglePlaces = () => {
           },
         },
       ) => {
-        navigation.navigate(NewPost.name, {
-          location_address: description,
-          lat,
-          lon: lng,
+        navigation.navigate({
+          name: NewPost.name,
+          params: {
+            location_address: description,
+            lat,
+            lon: lng,
+          },
+          merge: true,
         });
       }}
       // currentLocation

@@ -5,6 +5,7 @@ import {
   TextInput,
   StyleSheet,
   Switch,
+  ActivityIndicator,
 } from 'react-native';
 import common from '../../../styles/sharedStyles';
 import {useNavigation, useRoute} from '@react-navigation/native';
@@ -27,27 +28,60 @@ const {row, flex1, flex3, aiCenter, jcSpaceBetween, p15, gray, mb15, cGap10} =
 
 const pageTitle = 'Edit profile';
 
-const HeaderRight = () => {
-  const navigation = useNavigation();
-  const route = useRoute();
-  const {
-    params: {
-      fullname,
-      username,
-      comment,
-      webSite,
-      hideFollowers,
-      hideFollowersEmoji,
-      hideFollowing,
-      hideFollowingEmoji,
-      privateAccount,
-    } = {},
-  } = route;
+const DoneButton = ({onPress}) => {
+  return (
+    <Text onPress={onPress} style={{color: 'dodgerblue'}}>
+      Post
+    </Text>
+  );
+};
 
+export const EditProfileScreenOptions = () => {
+  return {
+    title: pageTitle,
+    headerShown: true,
+    headerRight: DoneButton,
+  };
+};
+
+export const EditProfileListItem = () => {
+  const navigation = useNavigation();
+
+  return (
+    <Pressable
+      onPress={() => navigation.navigate(EditProfile.name)}
+      style={[row, jcSpaceBetween, aiCenter]}>
+      <Text>{pageTitle}</Text>
+      <MaterialIcons name="arrow-forward-ios" color="gray" size={20} />
+    </Pressable>
+  );
+};
+
+const EditProfile = () => {
+  const [showIndicator, setShowIndicator] = useState(false);
+  const [fullname, setFullname] = useState('');
+  const [username, setUsername] = useState('');
+  const [comment, setComment] = useState('');
+  const [webSite, setWebSite] = useState('');
+  const [hideFollowers, setHideFollowers] = useState(false);
+  const [hideFollowersEmoji, setHideFollowersEmoji] = useState('');
+  const [hideFollowing, setHideFollowing] = useState(false);
+  const [hideFollowingEmoji, setHideFollowingEmoji] = useState('');
+  const [privateAccount, setPrivateAccount] = useState(false);
+
+  const {
+    store: {
+      authResult: {id},
+    },
+  } = useStore();
+  const navigation = useNavigation();
+
+  const {data} = useQuery(getUserProfile, {id});
   const postProfile = useMutation(userPostProfile);
   const postSettings = useMutation(userPostSettings);
 
   const handlePressDone = () => {
+    setShowIndicator(true);
     postProfile.mutate(
       {
         fullname,
@@ -72,60 +106,13 @@ const HeaderRight = () => {
       },
       {
         onSuccess: () => {
+          // TODO: ?
           // navigation.goBack();
           // showMessage({message: 'Settings updated'});
         },
       },
     );
   };
-
-  return (
-    <Text style={{color: 'dodgerblue'}} onPress={handlePressDone}>
-      Done
-    </Text>
-  );
-};
-
-export const EditProfileScreenOptions = () => {
-  return {
-    title: pageTitle,
-    headerShown: true,
-    headerRight: HeaderRight,
-  };
-};
-
-export const EditProfileListItem = () => {
-  const navigation = useNavigation();
-
-  return (
-    <Pressable
-      onPress={() => navigation.navigate(EditProfile.name)}
-      style={[row, jcSpaceBetween, aiCenter]}>
-      <Text>{pageTitle}</Text>
-      <MaterialIcons name="arrow-forward-ios" color="gray" size={20} />
-    </Pressable>
-  );
-};
-
-const EditProfile = () => {
-  const [fullname, setFullname] = useState('');
-  const [username, setUsername] = useState('');
-  const [comment, setComment] = useState('');
-  const [webSite, setWebSite] = useState('');
-  const [hideFollowers, setHideFollowers] = useState(false);
-  const [hideFollowersEmoji, setHideFollowersEmoji] = useState('');
-  const [hideFollowing, setHideFollowing] = useState(false);
-  const [hideFollowingEmoji, setHideFollowingEmoji] = useState('');
-  const [privateAccount, setPrivateAccount] = useState(false);
-
-  const {
-    store: {
-      authResult: {id},
-    },
-  } = useStore();
-  const navigation = useNavigation();
-
-  const {data} = useQuery(getUserProfile, {id});
 
   useEffect(() => {
     setFullname(data?.fullname);
@@ -140,18 +127,11 @@ const EditProfile = () => {
   }, [data]);
 
   useEffect(() => {
-    navigation.setParams({
-      fullname,
-      username,
-      comment,
-      webSite,
-      hideFollowers,
-      hideFollowersEmoji,
-      hideFollowing,
-      hideFollowingEmoji,
-      privateAccount,
+    navigation.setOptions({
+      headerRight: () => <DoneButton onPress={handlePressDone} />,
     });
   }, [
+    navigation,
     fullname,
     username,
     comment,
@@ -165,6 +145,7 @@ const EditProfile = () => {
 
   return (
     <View style={p15}>
+      {showIndicator && <ActivityIndicator />}
       <View style={[aiCenter, mb15]}>
         <MaterialIcons name="account-circle" size={76} color="lightgray" />
         <Text style={{color: 'dodgerblue'}}>Change profile photo</Text>

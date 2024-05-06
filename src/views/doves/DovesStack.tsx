@@ -1,10 +1,8 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Doves from './Doves';
 import Comment from './Comment';
-import FollowersScreenOptions from '../profile/FollowersScreenOptions';
-import Followers from '../profile/Followers';
-import PostDove from './PostDove';
-import PostDoveScreenOptions from './PostDoveScreenOptions';
+import Followers, {FollowersScreenOptions} from '../profile/Followers';
+import PostDove, {PostDoveScreenOptions} from './PostDove';
 import DovesScreenOptions from './DovesScreenOptions';
 import Activity from './Activity';
 import Search from './Search';

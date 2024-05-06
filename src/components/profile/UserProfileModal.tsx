@@ -5,9 +5,9 @@ import common from '../../styles/sharedStyles';
 import {showMessage} from 'react-native-flash-message';
 import Clipboard from '@react-native-clipboard/clipboard';
 import Followers from '../../views/profile/Followers';
-import {HeaderRight1} from '../../views/profile/FollowersScreenOptions';
 import {useNavigation} from '@react-navigation/native';
 import BottomModal from '../common/BottomModal';
+import {ChatShareHeaderRight} from '../common/buttons/ShareButton';
 
 const {aiCenter, cGap15, row} = common;
 
@@ -36,8 +36,8 @@ const UserProfileModal = ({userId, visible, onDismiss}) => {
         onPress={() => {
           onDismiss();
           navigation.navigate(Followers.name, {
-            headerRightComp: HeaderRight1.name,
-            headerRightProp: {itemId: userId, type: 6},
+            headerRightComp: ChatShareHeaderRight.name,
+            headerRightProps: {itemId: userId, type: 6},
           });
         }}>
         <MaterialCommunityIcons name="share" size={26} color="dodgerblue" />

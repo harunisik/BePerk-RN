@@ -14,8 +14,7 @@ import PrivacyPolicy, {
 } from './settings/PrivacyPolicy';
 import Terms, {TermsScreenOptions} from './settings/Terms';
 import Comment from '../doves/Comment';
-import FollowersScreenOptions from './FollowersScreenOptions';
-import Followers from './Followers';
+import Followers, {FollowersScreenOptions} from './Followers';
 import Profile from './Profile';
 import ProfileScreenOptions from './ProfileScreenOptions';
 import ProfilePostsDetails from './ProfilePostsDetails';

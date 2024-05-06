@@ -27,7 +27,6 @@ import {
   chatShare as userChatShare,
 } from '../../services/ChatService';
 import uuid from 'react-native-uuid';
-import {HeaderRight1} from './FollowersScreenOptions';
 import {postMy24Like} from '../../services/My24Service';
 import Popup from '../../components/common/Popup';
 
@@ -301,7 +300,7 @@ const StoryView = () => {
     stopInterval();
     navigation.navigate(Followers.name, {
       HeaderRightComp: HeaderRight1.name,
-      headerRightProp: {
+      headerRightProps: {
         itemId: currentItem.id,
         type: 2,
       },

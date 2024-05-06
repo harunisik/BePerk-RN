@@ -1,4 +1,9 @@
-import {ImageBackground, SafeAreaView, View} from 'react-native';
+import {
+  ActivityIndicator,
+  ImageBackground,
+  SafeAreaView,
+  View,
+} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useCustomMutation as useMutation} from '../../hooks/customHooks';
@@ -6,10 +11,10 @@ import {showMessage} from 'react-native-flash-message';
 import {postMy24 as userPostMy24} from '../../services/My24Service';
 import common from '../../styles/sharedStyles';
 import Button from '../../components/common/buttons/Button';
-import Followers from '../profile/Followers';
-import {HeaderRight3} from '../profile/FollowersScreenOptions';
+import Followers, {NewStoryHeaderRight} from '../profile/Followers';
 import Video from '../../components/common/Video';
 import {createThumbnail} from 'react-native-create-thumbnail';
+import {useState} from 'react';
 
 const {flex1} = common;
 
@@ -38,13 +43,14 @@ const ButtonGroup = ({onPressPost, onPressMessage}) => {
 };
 
 const NewStory = () => {
+  const [showIndicator, setShowIndicator] = useState(false);
   const navigation = useNavigation();
   const route = useRoute();
   const {
     params: {assets},
   } = route;
   const asset = assets[0];
-
+  console.log(asset);
   const postMy24 = useMutation(userPostMy24);
 
   const getFormData = async () => {
@@ -88,6 +94,7 @@ const NewStory = () => {
   };
 
   const handlePressPost = async () => {
+    setShowIndicator(true);
     const form = await getFormData();
     form.append('send_users', '');
 
@@ -103,19 +110,20 @@ const NewStory = () => {
     const form = await getFormData();
 
     navigation.navigate(Followers.name, {
-      headerRightComp: HeaderRight3.name,
-      headerRightProp: {formData: form},
+      headerRightComp: NewStoryHeaderRight.name,
+      headerRightProps: {formData: form},
     });
   };
 
   return (
     <>
-      {asset.mediaType === 'image' ? (
+      {asset.mediaType === 'photo' ? (
         <ImageBackground
           source={{uri: asset.uri}}
           // resizeMode="contain"
           style={[flex1, {alignItems: 'center'}]}>
           <SafeAreaView style={{flexDirection: 'row', marginTop: 'auto'}}>
+            {showIndicator && <ActivityIndicator />}
             <ButtonGroup
               onPressPost={handlePressPost}
               onPressMessage={handlePressMessage}
@@ -136,6 +144,7 @@ const NewStory = () => {
             style={{
               marginTop: 'auto',
             }}>
+            {showIndicator && <ActivityIndicator />}
             <ButtonGroup
               onPressPost={handlePressPost}
               onPressMessage={handlePressMessage}

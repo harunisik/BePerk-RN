@@ -1,7 +1,8 @@
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/native';
-import Followers from '../../../views/profile/Followers';
-import {HeaderRight1} from '../../../views/profile/FollowersScreenOptions';
+import Followers, {
+  ChatShareHeaderRight,
+} from '../../../views/profile/Followers';
 
 interface ShareButtonProps {
   item: any;
@@ -23,8 +24,8 @@ const ShareButton = ({
       color={color}
       onPress={() =>
         navigation.navigate(Followers.name, {
-          headerRightComp: HeaderRight1.name,
-          headerRightProp: {itemId: item.id, type: item.type},
+          headerRightComp: ChatShareHeaderRight.name,
+          headerRightProps: {itemId: item.id, type: item.type},
         })
       }
     />

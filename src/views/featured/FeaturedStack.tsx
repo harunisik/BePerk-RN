@@ -3,8 +3,7 @@ import Featured from './Featured';
 import FeaturedItemDetails from './FeaturedItemDetails';
 import FeaturedScreenOptions from './FeaturedScreenOptions';
 import Comment from '../doves/Comment';
-import Followers from '../profile/Followers';
-import FollowersScreenOptions from '../profile/FollowersScreenOptions';
+import Followers, {FollowersScreenOptions} from '../profile/Followers';
 import ProfileStack from '../profile/ProfileStack';
 
 const Stack = createNativeStackNavigator();

@@ -147,31 +147,40 @@ export const AddDoveModal = ({visible, onDismiss}) => {
 
   const handlePressDiscussion = () => {
     onDismiss();
-    navigation.navigate(PostDove.name, {
-      subtype: 0,
-      buttonText: "Post what's on your mind",
-      inputTextPlaceHolder: "What's on your mind?",
-      title: 'Post Dove',
+    navigation.navigate(AddStack.name, {
+      screen: PostDove.name,
+      params: {
+        subtype: 0,
+        buttonText: "Post what's on your mind",
+        inputTextPlaceHolder: "What's on your mind?",
+        title: 'Post Dove',
+      },
     });
   };
 
   const handlePressTestimony = () => {
     onDismiss();
-    navigation.navigate(PostDove.name, {
-      subtype: 1,
-      buttonText: 'Write what God has done for you!',
-      inputTextPlaceHolder: 'Share a testimony',
-      title: 'Post Testimony',
+    navigation.navigate(AddStack.name, {
+      screen: PostDove.name,
+      params: {
+        subtype: 1,
+        buttonText: 'Write what God has done for you!',
+        inputTextPlaceHolder: 'Share a testimony',
+        title: 'Post Testimony',
+      },
     });
   };
 
   const handlePressPrayer = () => {
     onDismiss();
-    navigation.navigate(PostDove.name, {
-      subtype: 2,
-      buttonText: 'Share a prayer request!',
-      inputTextPlaceHolder: 'Share a prayer request',
-      title: 'Post Prayer Request',
+    navigation.navigate(AddStack.name, {
+      screen: PostDove.name,
+      params: {
+        subtype: 2,
+        buttonText: 'Share a prayer request!',
+        inputTextPlaceHolder: 'Share a prayer request',
+        title: 'Post Prayer Request',
+      },
     });
   };
 
