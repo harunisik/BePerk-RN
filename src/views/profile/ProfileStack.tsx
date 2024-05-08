@@ -25,6 +25,7 @@ import Messages from './Messages';
 import MessagesScreenOptions from './MessagesScreenOptions';
 import MessageDetails from './MessageDetails';
 import MessageDetailsScreenOptions from './MessageDetailsScreenOptions';
+import StoryView2 from './StoryView2';
 
 const Stack = createNativeStackNavigator();
 
@@ -116,6 +117,15 @@ const ProfileStack = () => {
       <Stack.Screen
         name={StoryView.name}
         component={StoryView}
+        options={{
+          animation: 'fade',
+          headerShown: false,
+          presentation: 'fullScreenModal',
+        }}
+      />
+      <Stack.Screen
+        name={StoryView2.name}
+        component={StoryView2}
         options={{
           animation: 'fade',
           headerShown: false,

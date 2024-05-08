@@ -10,11 +10,13 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
+  Animated,
 } from 'react-native';
+import PagerView from 'react-native-pager-view';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {dateDiff} from '../../utils/DateUtil';
 import common from '../../styles/sharedStyles';
-import {useEffect, useState} from 'react';
+import {useEffect, useMemo, useRef, useState} from 'react';
 import {ProgressBar} from 'react-native-paper';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -46,22 +48,16 @@ const {
   white,
 } = common;
 
-const ProgressBarSet = ({length, currentIndex, progress}) => {
+const ProgressBarSet = ({length, currentIndex, progress, duration}) => {
   return (
     <View style={[row, cGap3]}>
       {Array.from({length: length}, (_item, index) => {
         return (
           <View style={[flex1]} key={index}>
             <ProgressBar
-              style={{
-                height: 3,
-                borderRadius: 10,
-                backgroundColor: 'lightgray',
-              }}
-              color="dodgerblue"
               progress={
                 index === currentIndex
-                  ? progress
+                  ? progress / duration
                   : index < currentIndex + 1
                     ? 1
                     : 0
@@ -84,7 +80,6 @@ const Header = ({item}) => {
         <Text style={white}>{item.fullname}</Text>
         <Text style={[font11, white]}>{dateDiff(item.upload_time * 1000)}</Text>
       </View>
-      {/* <Text style={white}>Left</Text> */}
       <MaterialIcons
         name="close"
         size={30}
@@ -181,12 +176,15 @@ const Footer2 = ({onShare, onLike, onSendMessage, liked, onFocus}) => {
   );
 };
 
-const StoryView = () => {
+const AnimatedPagerView = Animated.createAnimatedComponent(PagerView);
+
+const StoryView2 = () => {
+  const pagerViewRef = useRef<PagerView>(null);
   const {width: windowWidth} = useWindowDimensions();
   const navigation = useNavigation();
   const route = useRoute();
   const {
-    params: {data: dataParam, index: indexParam, userId: userIdParam},
+    params: {data, index: indexParam, userId: userIdParam},
   } = route;
   const {
     store: {
@@ -194,72 +192,28 @@ const StoryView = () => {
     },
   } = useStore();
 
-  const [data, setData] = useState(dataParam);
-  const [currentIndex, setCurrentIndex] = useState(indexParam);
+  const [page, setPage] = useState(0);
   const [progress, setProgress] = useState(0);
-  const [intervalId, setIntervalId] = useState();
   const [paused, setPaused] = useState(true);
   const [finished, setFinished] = useState(false);
+  const [intervalId, setIntervalId] = useState();
   const [modalVisible, setModalVisible] = useState(false);
   const [liked, setLiked] = useState(data.map(item => item.liked));
+
+  const tick = 200; // ms
+  const duration = 5000; // ms
+  const isFirstItem = page === 0;
+  const isLastItem = page === data.length - 1;
+  const hasNext = page < data.length - 1;
 
   const deletePost = useMutation(userDeletePost);
   const my24Like = useMutation(postMy24Like);
   const chatShare = useMutation(userChatShare);
   const chatSend = useMutation(userChatSend);
 
-  const tick = 200; // ms
-  const duration = 5000; // ms
-  const currentItem = data[currentIndex];
-  const isFirstItem = currentIndex === 0;
-  const isLastItem = currentIndex === data.length - 1;
-  const hasNext = currentIndex < data.length - 1;
-
-  useEffect(() => {
-    if (!paused) {
-      setPaused(false);
-
-      const interval = setInterval(() => {
-        setProgress(prevProgress => {
-          // current slide finished
-          if (prevProgress >= duration) {
-            if (hasNext) {
-              setCurrentIndex(prevIndex => prevIndex + 1); // go to next slide
-              return 0; // clear the progress
-            } else {
-              // no slide available
-              setFinished(true);
-              return duration;
-            }
-          }
-          return prevProgress + tick; // animation in progress
-        });
-      }, tick);
-
-      setIntervalId(interval); // save intervalId
-
-      // componentDidUnmount
-      return () => {
-        clearInterval(interval);
-      };
-    }
-  }, [currentIndex, paused]);
-
-  useEffect(() => {
-    // detect last slide finish
-    if (finished) {
-      navigation.goBack();
-    }
-  }, [finished]);
-
-  useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      setPaused(false);
-    });
-
-    // Return the function to unsubscribe from the event so it gets removed on unmount
-    return unsubscribe;
-  }, [navigation]);
+  const handlePageSelected = ({nativeEvent: {position}}) => {
+    setPage(position);
+  };
 
   const handlePress = (event: GestureResponderEvent) => {
     Keyboard.dismiss();
@@ -272,22 +226,21 @@ const StoryView = () => {
 
     if ((isLeft && isFirstItem) || (!isLeft && isLastItem)) {
       setFinished(true);
+      navigation.goBack();
       return;
     }
 
-    setProgress(0);
-
-    setCurrentIndex(prevIndex => {
-      if (isLeft && prevIndex > 0) {
-        return prevIndex - 1;
+    if (isLeft) {
+      pagerViewRef.current?.setPage(page - 1);
+      if (isLeft && page > 0) {
+        setProgress(0);
       }
-
-      if (!isLeft && prevIndex < data.length - 1) {
-        return prevIndex + 1;
+    } else {
+      pagerViewRef.current?.setPage(page + 1);
+      if (!isLeft && page < data.length - 1) {
+        setProgress(0);
       }
-
-      return prevIndex;
-    });
+    }
   };
 
   const stopInterval = () => {
@@ -393,66 +346,132 @@ const StoryView = () => {
           setModalVisible(false);
           setPaused(false);
           setProgress(0);
-          setData(prevData => {
-            setCurrentIndex(prevIndex => {
-              if (prevIndex === data.length - 1) {
-                return prevIndex - 1;
-              }
-              return prevIndex;
-            });
+          // setData(prevData => {
+          //   setCurrentIndex(prevIndex => {
+          //     if (prevIndex === data.length - 1) {
+          //       return prevIndex - 1;
+          //     }
+          //     return prevIndex;
+          //   });
 
-            return prevData.filter((_item, index) => index !== currentIndex);
-          });
+          //   return prevData.filter((_item, index) => index !== currentIndex);
+          // });
         },
       },
     );
   };
 
+  useEffect(() => {
+    if (!paused) {
+      setPaused(false);
+
+      const interval = setInterval(() => {
+        setProgress(prevProgress => {
+          // current slide finished
+          if (prevProgress >= duration) {
+            if (hasNext) {
+              pagerViewRef.current?.setPage(page + 1); // go to next slide
+              return 0; // clear the progress
+            } else {
+              // no slide available
+              setFinished(true);
+              return duration;
+            }
+          }
+          return prevProgress + tick; // animation in progress
+        });
+      }, tick);
+
+      setIntervalId(interval); // save intervalId
+
+      // componentDidUnmount
+      return () => {
+        clearInterval(interval);
+      };
+    }
+  }, [page, paused]);
+
+  useEffect(() => {
+    // detect last slide finish
+    if (finished) {
+      navigation.goBack();
+    }
+  }, [finished]);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      setPaused(false);
+    });
+
+    // Return the function to unsubscribe from the event so it gets removed on unmount
+    return unsubscribe;
+  }, [navigation]);
+
   return (
     <View style={[flex1]}>
-      <ImageBackground
-        source={{uri: currentItem.filename}}
-        resizeMode="contain"
-        style={[flex1, jcCenter]}>
-        <TouchableWithoutFeedback
-          style={flex1}
-          onPress={handlePress}
-          onLongPress={handleLongPress}
-          onPressOut={handlePressOut}>
-          <View style={[jcSpaceBetween, flex1, ph15, pv50]}>
-            <View style={rGap10}>
-              <ProgressBarSet
-                length={data.length}
-                currentIndex={currentIndex}
-                progress={progress / duration}
-              />
-              <Header item={currentItem} />
-            </View>
-            {userIdParam === userId ? (
-              <Footer
-                item={currentItem}
-                onShare={handleShare}
-                onDelete={handleDelete}
-              />
-            ) : (
-              <Footer2
-                onLike={handleLike}
-                onShare={handleShare}
-                onSendMessage={handleSendMessage}
-                liked={liked[currentIndex]}
-                onFocus={handleFocus}
-              />
-            )}
-          </View>
-        </TouchableWithoutFeedback>
-        <Popup
-          visible={modalVisible}
-          header="Delete this story?"
-          message="Once you delete it's gone"
-          onPressOk={handleModalDelete}
-          onPressCancel={handleModalCancel}
-        />
-      </ImageBackground>
+      {useMemo(
+        () =>
+          data && (
+            <AnimatedPagerView
+              ref={pagerViewRef}
+              style={flex1}
+              initialPage={indexParam}
+              orientation="horizontal"
+              onPageSelected={handlePageSelected}>
+              {data.map((item, index) => {
+                return (
+                  <View key={item.id} collapsable={false}>
+                    <ImageBackground
+                      source={{uri: item.filename}}
+                      resizeMode="contain"
+                      style={[flex1, jcCenter]}>
+                      <TouchableWithoutFeedback
+                        style={flex1}
+                        onPress={handlePress}
+                        onLongPress={handleLongPress}
+                        onPressOut={handlePressOut}>
+                        <View style={[jcSpaceBetween, flex1, ph15, pv50]}>
+                          <View style={rGap10}>
+                            <ProgressBarSet
+                              length={data.length}
+                              currentIndex={index}
+                              duration={duration}
+                              progress={progress}
+                            />
+                            <Header item={item} />
+                          </View>
+                          {userIdParam === userId ? (
+                            <Footer
+                              item={item}
+                              onShare={handleShare}
+                              onDelete={handleDelete}
+                            />
+                          ) : (
+                            <Footer2
+                              onLike={handleLike}
+                              onShare={handleShare}
+                              onSendMessage={handleSendMessage}
+                              liked={liked[index]}
+                              onFocus={handleFocus}
+                            />
+                          )}
+                        </View>
+                      </TouchableWithoutFeedback>
+                      <Popup
+                        visible={modalVisible}
+                        header="Delete this story?"
+                        message="Once you delete it's gone"
+                        onPressOk={handleModalDelete}
+                        onPressCancel={handleModalCancel}
+                      />
+                    </ImageBackground>
+                  </View>
+                );
+              })}
+            </AnimatedPagerView>
+          ),
+        [data, page, progress],
+      )}
     </View>
   );
 };
@@ -484,4 +503,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StoryView;
+export default StoryView2;

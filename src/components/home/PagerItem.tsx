@@ -7,7 +7,7 @@ import ShareButton from '../common/buttons/ShareButton';
 import DotsButton from '../common/buttons/DotsButton';
 import AccountButton from '../common/buttons/AccountButton';
 
-const ForYouPagerItem = ({item, paused = true}) => {
+const PagerItem = ({item, paused = true}) => {
   return (
     <>
       <Video uri={item.filename} paused={paused} fullscreen />
@@ -48,4 +48,4 @@ const ForYouPagerItem = ({item, paused = true}) => {
   );
 };
 
-export default ForYouPagerItem;
+export default PagerItem;

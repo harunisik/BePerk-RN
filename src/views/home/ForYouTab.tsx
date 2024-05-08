@@ -3,7 +3,7 @@ import common from '../../styles/sharedStyles';
 import PagerView from 'react-native-pager-view';
 import {getVideoFeed} from '../../services/UserService';
 import {useMemo, useState} from 'react';
-import PagerItem from '../../components/home/ForYouPagerItem';
+import PagerItem from '../../components/home/PagerItem';
 import {useInfiniteQuery} from 'react-query';
 
 const {flex1} = common;
