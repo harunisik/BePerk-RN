@@ -29,6 +29,8 @@ import {
 import uuid from 'react-native-uuid';
 import {postMy24Like} from '../../services/My24Service';
 import Popup from '../../components/common/Popup';
+import FastImage from '../../components/common/FastImage';
+import Video from '../../components/common/Video';
 
 const {
   jcSpaceBetween,
@@ -410,49 +412,49 @@ const StoryView = () => {
 
   return (
     <View style={[flex1]}>
-      <ImageBackground
-        source={{uri: currentItem.filename}}
-        resizeMode="contain"
-        style={[flex1, jcCenter]}>
-        <TouchableWithoutFeedback
-          style={flex1}
-          onPress={handlePress}
-          onLongPress={handleLongPress}
-          onPressOut={handlePressOut}>
-          <View style={[jcSpaceBetween, flex1, ph15, pv50]}>
-            <View style={rGap10}>
-              <ProgressBarSet
-                length={data.length}
-                currentIndex={currentIndex}
-                progress={progress / duration}
-              />
-              <Header item={currentItem} />
-            </View>
-            {userIdParam === userId ? (
-              <Footer
-                item={currentItem}
-                onShare={handleShare}
-                onDelete={handleDelete}
-              />
-            ) : (
-              <Footer2
-                onLike={handleLike}
-                onShare={handleShare}
-                onSendMessage={handleSendMessage}
-                liked={liked[currentIndex]}
-                onFocus={handleFocus}
-              />
-            )}
+      <TouchableWithoutFeedback
+        style={flex1}
+        onPress={handlePress}
+        onLongPress={handleLongPress}
+        onPressOut={handlePressOut}>
+        <View style={[jcSpaceBetween, flex1, ph15, pv50]}>
+          <View style={rGap10}>
+            <ProgressBarSet
+              length={data.length}
+              currentIndex={currentIndex}
+              progress={progress / duration}
+            />
+            <Header item={currentItem} />
           </View>
-        </TouchableWithoutFeedback>
-        <Popup
-          visible={modalVisible}
-          header="Delete this story?"
-          message="Once you delete it's gone"
-          onPressOk={handleModalDelete}
-          onPressCancel={handleModalCancel}
-        />
-      </ImageBackground>
+          {currentItem.type === 1 ? (
+            <FastImage uri={currentItem.filename} />
+          ) : (
+            <Video uri={currentItem.filename} />
+          )}
+          {userIdParam === userId ? (
+            <Footer
+              item={currentItem}
+              onShare={handleShare}
+              onDelete={handleDelete}
+            />
+          ) : (
+            <Footer2
+              onLike={handleLike}
+              onShare={handleShare}
+              onSendMessage={handleSendMessage}
+              liked={liked[currentIndex]}
+              onFocus={handleFocus}
+            />
+          )}
+        </View>
+      </TouchableWithoutFeedback>
+      <Popup
+        visible={modalVisible}
+        header="Delete this story?"
+        message="Once you delete it's gone"
+        onPressOk={handleModalDelete}
+        onPressCancel={handleModalCancel}
+      />
     </View>
   );
 };

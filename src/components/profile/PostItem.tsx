@@ -15,7 +15,7 @@ const PostItem = ({item, onPress}) => {
       <View style={[p1]}>
         {item.type === 1 ? (
           <FastImage
-            style={{height: IMAGE_HEIGHT}}
+            style={{height: VIDEO_HEIGHT}}
             source={{
               uri: item.filename,
             }}
