@@ -6,15 +6,21 @@ import {useCustomQuery as useQuery} from '../../hooks/customHooks';
 import {getUserPerks} from '../../services/UserService';
 import {Tabs} from 'react-native-collapsible-tab-view';
 import ListEmptyComponent from '../../components/common/ListEmptyComponent';
+import {useCallback} from 'react';
 
 const {pt15} = common;
 
-const DovesTab = ({userId}) => {
+const DovesTab = ({userId, onRefresh}) => {
   const {data, refetch, isFetching} = useQuery(getUserPerks, {
     id: userId,
     limit: 35,
     offset: 0,
   });
+
+  const ItemSeparatorComponent = useCallback(
+    () => <ItemSeperator lineVisible large />,
+    [],
+  );
 
   return (
     <View style={pt15}>
@@ -24,9 +30,12 @@ const DovesTab = ({userId}) => {
           <DovesItem item={item} displayUsername={false} />
         )}
         keyExtractor={item => item.id}
-        onRefresh={refetch}
+        onRefresh={() => {
+          onRefresh();
+          refetch();
+        }}
         refreshing={isFetching}
-        ItemSeparatorComponent={<ItemSeperator lineVisible large />}
+        ItemSeparatorComponent={ItemSeparatorComponent}
         ListEmptyComponent={ListEmptyComponent}
       />
     </View>

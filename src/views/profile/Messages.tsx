@@ -1,4 +1,4 @@
-import {Pressable, Text, View} from 'react-native';
+import {Alert, Pressable, Text, View} from 'react-native';
 import {useCustomQuery as useQuery} from '../../hooks/customHooks';
 import {chatListOpen} from '../../services/ChatService';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -6,6 +6,7 @@ import common from '../../styles/sharedStyles';
 import {useNavigation} from '@react-navigation/native';
 import MessageDetails from './MessageDetails';
 import FlatList from '../../components/common/FlatList';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const {
   row,
@@ -20,6 +21,19 @@ const {
   white,
   flex1,
 } = common;
+
+export const MessagesScreenOptions = ({}) => {
+  return {
+    headerRight: () => (
+      <MaterialCommunityIcons
+        name="file-document-edit-outline"
+        size={26}
+        color="dodgerblue"
+        onPress={() => Alert.alert('under construction')}
+      />
+    ),
+  };
+};
 
 const MessageItem = ({item}) => {
   const navigation = useNavigation();

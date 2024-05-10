@@ -10,6 +10,8 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
+  Pressable,
+  SafeAreaView,
 } from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {dateDiff} from '../../utils/DateUtil';
@@ -29,8 +31,9 @@ import {
 import uuid from 'react-native-uuid';
 import {postMy24Like} from '../../services/My24Service';
 import Popup from '../../components/common/Popup';
-import FastImage from '../../components/common/FastImage';
+// import FastImage from '../../components/common/FastImage';
 import Video from '../../components/common/Video';
+import FastImage from 'react-native-fast-image';
 
 const {
   jcSpaceBetween,
@@ -47,6 +50,8 @@ const {
   cGap10,
   white,
 } = common;
+
+const DURATION = 5000;
 
 const ProgressBarSet = ({length, currentIndex, progress}) => {
   return (
@@ -104,21 +109,19 @@ const FooterIcon = ({
   disabled = false,
 }) => {
   return (
-    <View style={styles.footerIcon}>
+    <Pressable style={styles.footerIcon} onPress={onPress}>
       <IconComponent
         name={icon}
         size={24}
         color={color}
-        onPress={onPress}
+        // onPress={onPress}
         disabled={disabled}
       />
-    </View>
+    </Pressable>
   );
 };
 
-const Footer = ({item, onShare, onDelete}) => {
-  const navigation = useNavigation();
-
+const Footer1 = ({item, onShare, onDelete}) => {
   return (
     <View style={[row, jcSpaceBetween]}>
       <View style={styles.viewed}>
@@ -204,6 +207,7 @@ const StoryView = () => {
   const [finished, setFinished] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [liked, setLiked] = useState(data.map(item => item.liked));
+  const [duration, setDuration] = useState(DURATION);
 
   const deletePost = useMutation(userDeletePost);
   const my24Like = useMutation(postMy24Like);
@@ -211,15 +215,18 @@ const StoryView = () => {
   const chatSend = useMutation(userChatSend);
 
   const tick = 200; // ms
-  const duration = 5000; // ms
   const currentItem = data[currentIndex];
   const isFirstItem = currentIndex === 0;
   const isLastItem = currentIndex === data.length - 1;
   const hasNext = currentIndex < data.length - 1;
 
   useEffect(() => {
+    if (currentItem.type === 1) {
+      setDuration(DURATION);
+    }
+
     if (!paused) {
-      setPaused(false);
+      // setPaused(false);
 
       const interval = setInterval(() => {
         setProgress(prevProgress => {
@@ -245,7 +252,7 @@ const StoryView = () => {
         clearInterval(interval);
       };
     }
-  }, [currentIndex, paused]);
+  }, [currentIndex, paused, duration]);
 
   useEffect(() => {
     // detect last slide finish
@@ -308,7 +315,7 @@ const StoryView = () => {
   const handleShare = () => {
     stopInterval();
     navigation.navigate(Followers.name, {
-      HeaderRightComp: ChatShareHeaderRight.name,
+      headerRightComp: ChatShareHeaderRight.name,
       headerRightProps: {
         itemId: currentItem.id,
         type: 2,
@@ -412,13 +419,38 @@ const StoryView = () => {
 
   return (
     <View style={[flex1]}>
-      <TouchableWithoutFeedback
+      <Pressable
         style={flex1}
         onPress={handlePress}
         onLongPress={handleLongPress}
-        onPressOut={handlePressOut}>
-        <View style={[jcSpaceBetween, flex1, ph15, pv50]}>
-          <View style={rGap10}>
+        onPressOut={handlePressOut}
+        // onStartShouldSetResponderCapture={_event => true}
+      >
+        {currentItem.type === 1 ? (
+          <FastImage
+            source={{uri: currentItem.filename}}
+            style={{width: '100%', height: '100%'}}
+            // resizeMode="stretch"
+          />
+        ) : (
+          <Video
+            uri={currentItem.filename}
+            paused={paused}
+            onLoad={event => {
+              setDuration(event.duration * 1000);
+            }}
+            // resizeMode="stretch"
+          />
+        )}
+        <SafeAreaView
+          style={{
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            width: '100%',
+            height: '100%',
+          }}>
+          <View style={[jcSpaceBetween, ph15, rGap10]}>
             <ProgressBarSet
               length={data.length}
               currentIndex={currentIndex}
@@ -426,28 +458,25 @@ const StoryView = () => {
             />
             <Header item={currentItem} />
           </View>
-          {currentItem.type === 1 ? (
-            <FastImage uri={currentItem.filename} />
-          ) : (
-            <Video uri={currentItem.filename} />
-          )}
-          {userIdParam === userId ? (
-            <Footer
-              item={currentItem}
-              onShare={handleShare}
-              onDelete={handleDelete}
-            />
-          ) : (
-            <Footer2
-              onLike={handleLike}
-              onShare={handleShare}
-              onSendMessage={handleSendMessage}
-              liked={liked[currentIndex]}
-              onFocus={handleFocus}
-            />
-          )}
-        </View>
-      </TouchableWithoutFeedback>
+          <View style={[{marginTop: 'auto', paddingVertical: 15}, ph15]}>
+            {userIdParam === userId ? (
+              <Footer1
+                item={currentItem}
+                onShare={handleShare}
+                onDelete={handleDelete}
+              />
+            ) : (
+              <Footer2
+                onLike={handleLike}
+                onShare={handleShare}
+                onSendMessage={handleSendMessage}
+                liked={liked[currentIndex]}
+                onFocus={handleFocus}
+              />
+            )}
+          </View>
+        </SafeAreaView>
+      </Pressable>
       <Popup
         visible={modalVisible}
         header="Delete this story?"

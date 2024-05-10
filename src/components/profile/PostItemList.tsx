@@ -1,8 +1,6 @@
 import {MasonryFlashList} from '@shopify/flash-list';
 import PostItem, {IMAGE_HEIGHT} from './PostItem';
 import {Tabs} from 'react-native-collapsible-tab-view';
-import {useCallback} from 'react';
-import {Text, View} from 'react-native';
 import ListEmptyComponent from '../common/ListEmptyComponent';
 
 const COL_NUM = 3;

@@ -3,12 +3,12 @@ import PostItemList from '../../components/profile/PostItemList';
 import {useGetUserPhotoVideo} from '../../hooks/infiniteQueryHooks';
 import ProfilePostsDetails from './ProfilePostsDetails';
 
-const PostsTab = ({userId}) => {
+const PostsTab = ({userId, onRefresh}) => {
   const navigation = useNavigation();
   const {data, fetchNextPage, isFetching, refetch, remove, hasNextPage} =
     useGetUserPhotoVideo(userId, 35);
 
-  const handlePressItem = index => {
+  const handlePressItem = _index => {
     navigation.navigate(ProfilePostsDetails.name, {userId});
   };
 
@@ -17,7 +17,10 @@ const PostsTab = ({userId}) => {
       data={data}
       fetchNextPage={fetchNextPage}
       isFetching={isFetching}
-      refetch={refetch}
+      refetch={() => {
+        onRefresh();
+        refetch();
+      }}
       remove={remove}
       onPressItem={handlePressItem}
       hasNextPage={hasNextPage}

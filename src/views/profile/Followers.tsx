@@ -122,10 +122,12 @@ const HEADER_LIST = {
   [NewStoryHeaderRight.name]: NewStoryHeaderRight,
 };
 
-export const FollowersScreenOptions = ({navigation}) => {
+export const FollowersScreenOptions = ({navigation, route}) => {
   return {
     animation: 'slide_from_bottom',
-    // presentation: 'fullScreenModal',
+    ...(route.params?.presentation !== 'none' && {
+      presentation: 'fullScreenModal',
+    }),
     headerShown: true,
     headerLeft: () => (
       <MaterialCommunityIcons
@@ -134,7 +136,7 @@ export const FollowersScreenOptions = ({navigation}) => {
         size={26}
       />
     ),
-    // headerRight: HeaderRight,
+    headerRight: () => <Text style={{color: 'dodgerblue'}}>Sent</Text>,
   };
 };
 

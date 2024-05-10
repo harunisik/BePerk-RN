@@ -21,11 +21,10 @@ import ProfilePostsDetails from './ProfilePostsDetails';
 import StoryView from './StoryView';
 import {useRoute} from '@react-navigation/native';
 import {useStore} from '../../containers/StoreContainer';
-import Messages from './Messages';
-import MessagesScreenOptions from './MessagesScreenOptions';
+import Messages, {MessagesScreenOptions} from './Messages';
 import MessageDetails from './MessageDetails';
-import MessageDetailsScreenOptions from './MessageDetailsScreenOptions';
 import StoryView2 from './StoryView2';
+import MessageDetailsScreenOptions from './MessageDetailsScreenOptions';
 
 const Stack = createNativeStackNavigator();
 

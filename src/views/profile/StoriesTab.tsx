@@ -10,7 +10,7 @@ import ListEmptyComponent from '../../components/common/ListEmptyComponent';
 const {pv5} = common;
 const COL_NUM = 3;
 
-const StoriesTab = ({userId}) => {
+const StoriesTab = ({userId, onRefresh}) => {
   const navigation = useNavigation();
   const {data, refetch, isFetching} = useQuery(getMy24, {id: userId});
 
@@ -25,7 +25,10 @@ const StoriesTab = ({userId}) => {
         <PostItem item={item} onPress={() => handlePressItem(index)} />
       )}
       keyExtractor={item => item.id}
-      onRefresh={refetch}
+      onRefresh={() => {
+        onRefresh();
+        refetch();
+      }}
       refreshing={isFetching}
       numColumns={COL_NUM}
       estimatedItemSize={IMAGE_HEIGHT}
