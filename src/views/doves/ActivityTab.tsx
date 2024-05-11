@@ -1,7 +1,7 @@
 import common from '../../styles/sharedStyles';
 import ActivityItem from '../../components/doves/ActivityItem';
 import {useRoute} from '@react-navigation/native';
-import {useCustomQuery as useQuery} from '../../hooks/customHooks';
+import {useQuery} from '../../hooks/customHooks';
 import {getUserHistory} from '../../services/UserService';
 import FlatList from '../../components/common/FlatList';
 

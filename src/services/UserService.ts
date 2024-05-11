@@ -38,9 +38,16 @@ export const getUserComments = ({queryKey}) => {
     .catch(handleError);
 };
 
-export const getUserFollowings = () => {
+export const getUserFollowing = () => {
   return axios
     .get('/user/listFollowing')
+    .then(handleResponse)
+    .catch(handleError);
+};
+
+export const getUserFollowers = () => {
+  return axios
+    .get('/user/listFollowers')
     .then(handleResponse)
     .catch(handleError);
 };

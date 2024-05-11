@@ -16,13 +16,13 @@ import NotificationMessages from './NotificationMessages';
 import NotificationNewFollowers from './NotificationNewFollowers';
 import NotificationTag from './NotificationTag';
 import NotificationNewPosts from './NotificationNewPosts';
-import {PrivacyPolicyListItem} from './PrivacyPolicy';
-import {TermsListItem} from './Terms';
 import ItemSeperator from '../../../components/common/ItemSpearator';
 import {useCallback} from 'react';
 import common from '../../../styles/sharedStyles';
-import {useCustomQuery} from '../../../hooks/customHooks';
+import {useQuery} from '../../../hooks/customHooks';
 import {getUserSettings} from '../../../services/UserService';
+import PrivacyPolicyListItem from './PrivacyPolicy';
+import TermsListItem from './Terms';
 
 const {gray, p15} = common;
 
@@ -55,7 +55,7 @@ const SECTIONS = Object.entries(MENU_LIST).map(([key, value]) => ({
 }));
 
 const Settings = () => {
-  const {data, refetch, isFetching} = useCustomQuery(getUserSettings);
+  const {data, refetch, isFetching} = useQuery(getUserSettings);
 
   const ItemSeparatorComponent = useCallback(
     () => <ItemSeperator medium />,

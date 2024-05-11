@@ -10,10 +10,7 @@ import {
 import common from '../../../styles/sharedStyles';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {
-  useCustomMutation as useMutation,
-  useCustomQuery as useQuery,
-} from '../../../hooks/customHooks';
+import {useMutation, useQuery} from '../../../hooks/customHooks';
 import {
   getUserProfile,
   postSettings as userPostSettings,

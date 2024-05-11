@@ -3,7 +3,7 @@ import Featured from './Featured';
 import FeaturedItemDetails from './FeaturedItemDetails';
 import FeaturedScreenOptions from './FeaturedScreenOptions';
 import Comment from '../doves/Comment';
-import Followers, {FollowersScreenOptions} from '../profile/Followers';
+import UserSearch, {UserSearchScreenOptions} from '../profile/UserSearch';
 import ProfileStack from '../profile/ProfileStack';
 
 const Stack = createNativeStackNavigator();
@@ -31,9 +31,9 @@ const FeaturedStack = () => {
         options={{presentation: 'formSheet'}}
       />
       <Stack.Screen
-        name={Followers.name}
-        component={Followers}
-        options={FollowersScreenOptions}
+        name={UserSearch.name}
+        component={UserSearch}
+        options={UserSearchScreenOptions}
       />
       <Stack.Screen
         name={ProfileStack.name}

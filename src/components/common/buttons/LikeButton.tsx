@@ -2,7 +2,7 @@ import {View, Text} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import common from '../../../styles/sharedStyles';
 import {useEffect, useState} from 'react';
-import {useCustomMutation as useMutation} from '../../../hooks/customHooks';
+import {useMutation} from '../../../hooks/customHooks';
 import {postUserLike} from '../../../services/UserService';
 
 const {font12, cGap3, row, aiCenter, rGap5} = common;

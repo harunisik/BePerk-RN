@@ -5,7 +5,7 @@ import DovesItem from '../../components/doves/DovesItem';
 import DovesItemOptions from '../../components/doves/DovesItemOptions';
 import ItemSeperator from '../../components/common/ItemSpearator';
 import {useCallback} from 'react';
-import {useCustomQuery as useQuery} from '../../hooks/customHooks';
+import {useQuery} from '../../hooks/customHooks';
 import {getUserPerks} from '../../services/UserService';
 import {useGetUserFeed} from '../../hooks/infiniteQueryHooks';
 import FlatList from '../../components/common/FlatList';

@@ -1,7 +1,7 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import NewPost, {NewPostScreenOptions} from './NewPost';
 import {useRoute} from '@react-navigation/native';
-import Followers, {FollowersScreenOptions} from '../profile/Followers';
+import UserSearch, {UserSearchScreenOptions} from '../profile/UserSearch';
 import GooglePlaces from './GooglePlaces';
 import GooglePlacesScreenOptions from './GooglePlacesScreenOptions';
 import NewStory, {NewStoryScreenOptions} from './NewStory';
@@ -30,9 +30,9 @@ const AddStack = () => {
         initialParams={{assets}}
       />
       <Stack.Screen
-        name={Followers.name}
-        component={Followers}
-        options={FollowersScreenOptions}
+        name={UserSearch.name}
+        component={UserSearch}
+        options={UserSearchScreenOptions}
       />
       <Stack.Screen
         name={GooglePlaces.name}

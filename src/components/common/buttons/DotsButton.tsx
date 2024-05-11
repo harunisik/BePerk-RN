@@ -5,7 +5,7 @@ import {showMessage} from 'react-native-flash-message';
 import Clipboard from '@react-native-clipboard/clipboard';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {deletePost as userDeletePost} from '../../../services/UserService';
-import {useCustomMutation as useMutation} from '../../../hooks/customHooks';
+import {useMutation} from '../../../hooks/customHooks';
 import {useStore} from '../../../containers/StoreContainer';
 import Button from './Button';
 import BottomModal from '../BottomModal';

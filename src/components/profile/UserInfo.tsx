@@ -1,21 +1,23 @@
 import {View, Text, Pressable} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import common from '../../styles/sharedStyles';
-import Followers from '../../views/profile/Followers';
 import {useNavigation} from '@react-navigation/native';
+import FollowersList from '../../views/profile/FollowersList';
+import WebView from '../common/WebView';
 
-const {aiCenter, row, jcCenter, bold, blue, cGap50, p10} = common;
+const {aiCenter, row, jcCenter, bold, blue, cGap50} = common;
 
-const UserInfo = ({data, isAuthUser}) => {
+const UserInfo = ({data, isAuthUser, userId}) => {
   const navigation = useNavigation();
+
   return (
-    <View style={[aiCenter, jcCenter]}>
-      <View style={[aiCenter, p10]}>
+    <View style={[aiCenter, jcCenter, {rowGap: 20}]}>
+      <View style={[aiCenter]}>
         <MaterialIcons name="account-circle" size={56} color="lightgray" />
         <Text style={bold}>{data?.fullname}</Text>
       </View>
 
-      <View style={[aiCenter, row, jcCenter, cGap50, p10]}>
+      <View style={[aiCenter, row, jcCenter, cGap50]}>
         <View style={[aiCenter]}>
           <Text style={[bold, blue]}>{data?.posts}</Text>
           <Text>Posts</Text>
@@ -24,7 +26,13 @@ const UserInfo = ({data, isAuthUser}) => {
           {!isAuthUser && data?.hide_followers === 1 ? (
             <Text style={[bold, blue]}>{data?.hide_followers_emoji}</Text>
           ) : (
-            <Pressable onPress={() => navigation.navigate(Followers.name)}>
+            <Pressable
+              onPress={() =>
+                navigation.navigate(FollowersList.name, {
+                  userId,
+                  isFollowing: 0,
+                })
+              }>
               <Text style={[bold, blue]}>{data?.followers}</Text>
             </Pressable>
           )}
@@ -34,12 +42,29 @@ const UserInfo = ({data, isAuthUser}) => {
           {!isAuthUser && data?.hide_followers === 1 ? (
             <Text style={[bold, blue]}>{data?.hide_following_emoji}</Text>
           ) : (
-            <Pressable onPress={() => navigation.navigate(Followers.name)}>
+            <Pressable
+              onPress={() =>
+                navigation.navigate(FollowersList.name, {
+                  userId,
+                  isFollowing: 1,
+                })
+              }>
               <Text style={[bold, blue]}>{data?.following}</Text>
             </Pressable>
           )}
           <Text>Following</Text>
         </View>
+      </View>
+      <View
+        style={{alignSelf: 'flex-start', paddingHorizontal: 15, rowGap: 10}}>
+        <Text>{data?.comment}</Text>
+        <Text
+          style={{color: 'dodgerblue'}}
+          onPress={() =>
+            navigation.navigate(WebView.name, {uri: data?.webSite})
+          }>
+          {data?.webSite}
+        </Text>
       </View>
     </View>
   );

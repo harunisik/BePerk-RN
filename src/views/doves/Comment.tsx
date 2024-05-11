@@ -4,10 +4,7 @@ import {useState} from 'react';
 import MessageBox from '../../components/common/MessageBox';
 import CommentList from '../../components/doves/CommentList';
 import {useRoute} from '@react-navigation/native';
-import {
-  useCustomQuery as useQuery,
-  useCustomMutation as useMutation,
-} from '../../hooks/customHooks';
+import {useQuery, useMutation} from '../../hooks/customHooks';
 import {
   getUserComments,
   deleteComment as userDeleteComment,

@@ -11,7 +11,7 @@ import {useEffect, useState} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {showMessage} from 'react-native-flash-message';
-import {useCustomMutation as useMutation} from '../../hooks/customHooks';
+import {useMutation} from '../../hooks/customHooks';
 import {addPerk as userAddPerk} from '../../services/UserService';
 
 const PostButton = ({onPress}) => {

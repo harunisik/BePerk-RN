@@ -1,16 +1,13 @@
 import UserInfo from '../../components/profile/UserInfo';
 import {useEffect, useState} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
+import {useQuery, useMutation} from '../../hooks/customHooks';
 import {
-  useCustomQuery as useQuery,
-  useCustomMutation as useMutation,
-} from '../../hooks/customHooks';
-import {
-  deleteFollowing as userDeleteFollowing,
-  addFollowing as userAddFollowing,
+  deleteFollowing,
+  addFollowing,
   getUserProfile,
 } from '../../services/UserService';
-import {Tabs} from 'react-native-collapsible-tab-view';
+import {MaterialTabBar, Tabs} from 'react-native-collapsible-tab-view';
 import PostsTab from './PostsTab';
 import StoriesTab from './StoriesTab';
 import DovesTab from './DovesTab';
@@ -30,7 +27,7 @@ const ButtonGroup = ({
   const navigation = useNavigation();
 
   return (
-    <View style={[aiCenter, row, jcCenter, p10]}>
+    <View style={[aiCenter, row, jcCenter]}>
       {isAuthUser ? (
         <TouchableOpacity
           style={[styles.button, aiCenter, row]}
@@ -61,17 +58,20 @@ const Profile = () => {
   } = route;
 
   const {data, refetch, isFetching} = useQuery(getUserProfile, {id: userId});
-  const addFollowing = useMutation(userAddFollowing);
-  const deleteFollowing = useMutation(userDeleteFollowing);
+  const addFollowingApi = useMutation(addFollowing);
+  const deleteFollowingApi = useMutation(deleteFollowing);
 
   const isPrivate =
     !isAuthUser && data?.private === 1 && data?.i_following === 0;
 
   const handlePressFollowing = () => {
     if (isFollowing === 0) {
-      addFollowing.mutate({id: userId}, {onSuccess: () => setIsFollowing(1)});
+      addFollowingApi.mutate(
+        {id: userId},
+        {onSuccess: () => setIsFollowing(1)},
+      );
     } else {
-      deleteFollowing.mutate(
+      deleteFollowingApi.mutate(
         {id: userId},
         {onSuccess: () => setIsFollowing(0)},
       );
@@ -85,18 +85,38 @@ const Profile = () => {
   return (
     <Tabs.Container
       lazy
+      renderTabBar={props => {
+        return (
+          <MaterialTabBar
+            {...props}
+            tabStyle={{
+              backgroundColor: 'dodgerblue',
+              borderRadius: 20,
+              height: 30,
+              marginHorizontal: 2,
+              marginVertical: 5,
+            }}
+            contentContainerStyle={{paddingHorizontal: 70}}
+            activeColor="white"
+            indicatorStyle={{display: 'none'}}
+            labelStyle={{
+              fontWeight: 'bold',
+            }}
+          />
+        );
+      }}
       renderHeader={() => (
-        <>
-          <UserInfo data={data} isAuthUser={isAuthUser} />
+        <View style={{rowGap: 10}}>
+          <UserInfo data={data} isAuthUser={isAuthUser} userId={userId} />
           <ButtonGroup
             onPressFollowing={handlePressFollowing}
             pressButtonTitle={isFollowing === 1 ? 'Following' : 'Follow'}
             isAuthUser={isAuthUser}
           />
-        </>
+        </View>
       )}>
       {isPrivate && (
-        <Tabs.Tab name=" ">
+        <Tabs.Tab name="Private Account" label="Private Account">
           <Tabs.ScrollView
             refreshControl={
               <RefreshControl refreshing={isFetching} onRefresh={refetch} />
@@ -112,17 +132,17 @@ const Profile = () => {
       )}
 
       {!isPrivate && (
-        <Tabs.Tab name="Posts">
+        <Tabs.Tab name="Posts" label="Posts">
           <PostsTab userId={userId} onRefresh={refetch} />
         </Tabs.Tab>
       )}
       {!isPrivate && (
-        <Tabs.Tab name="Stories">
+        <Tabs.Tab name="Stories" label="Stories">
           <StoriesTab userId={userId} onRefresh={refetch} />
         </Tabs.Tab>
       )}
       {!isPrivate && (
-        <Tabs.Tab name="Doves">
+        <Tabs.Tab name="Doves" label="Doves">
           <DovesTab userId={userId} onRefresh={refetch} />
         </Tabs.Tab>
       )}

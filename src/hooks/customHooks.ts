@@ -3,8 +3,8 @@ import {
   MutationFunction,
   QueryFunction,
   QueryKey,
-  useMutation,
-  useQuery,
+  useMutation as useRQMutation,
+  useQuery as useRQQuery,
   useQueryClient,
 } from 'react-query';
 import {
@@ -47,12 +47,12 @@ const queryMap = {
 
 // MUTATION requests
 
-export function useCustomMutation<TData = unknown, TVariables = void>(
+export function useMutation<TData = unknown, TVariables = void>(
   mutationFn: MutationFunction<TData, TVariables>,
 ) {
   const queryClient = useQueryClient();
 
-  return useMutation({
+  return useRQMutation({
     mutationFn,
     onSuccess: () => {
       queryMap[mutationFn.name]?.forEach(item => {
@@ -67,7 +67,7 @@ export function useCustomMutation<TData = unknown, TVariables = void>(
 
 // QUERY requests
 
-export function useCustomQuery<
+export function useQuery<
   TQueryFnData = unknown,
   TQueryKey extends QueryKey = QueryKey,
 >(
@@ -76,5 +76,5 @@ export function useCustomQuery<
   select?: (data: TQueryFnData) => TQueryFnData,
 ) {
   const queryKey = data ? [queryFn.name, data] : [queryFn.name];
-  return useQuery({queryKey, queryFn, select});
+  return useRQQuery({queryKey, queryFn, select});
 }

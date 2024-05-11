@@ -1,7 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 import PostItem, {IMAGE_HEIGHT} from '../../components/profile/PostItem';
 import common from '../../styles/sharedStyles';
-import {useCustomQuery as useQuery} from '../../hooks/customHooks';
+import {useQuery} from '../../hooks/customHooks';
 import StoryView from './StoryView';
 import {Tabs} from 'react-native-collapsible-tab-view';
 import {getMy24} from '../../services/My24Service';

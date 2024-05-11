@@ -17,10 +17,10 @@ import {
   uploadVideo as userUploadVideo,
   uploadPhoto as userUploadPhoto,
 } from '../../services/UserService';
-import {useCustomMutation as useMutation} from '../../hooks/customHooks';
+import {useMutation} from '../../hooks/customHooks';
 import {showMessage} from 'react-native-flash-message';
 import {toNumber} from '../../utils/BooleanUtil';
-import Followers, {NewPostHeaderRight} from '../profile/Followers';
+import UserSearch, {NewPostHeaderRight} from '../profile/UserSearch';
 import GooglePlaces from './GooglePlaces';
 import Video from '../../components/common/Video';
 import {createThumbnail} from 'react-native-create-thumbnail';
@@ -160,7 +160,7 @@ const NewPost = () => {
   };
 
   const handlePressTagPeople = () => {
-    navigation.navigate(Followers.name, {
+    navigation.navigate(UserSearch.name, {
       headerRightComp: NewPostHeaderRight.name,
     });
   };

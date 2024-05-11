@@ -6,12 +6,12 @@ import {
 } from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useCustomMutation as useMutation} from '../../hooks/customHooks';
+import {useMutation} from '../../hooks/customHooks';
 import {showMessage} from 'react-native-flash-message';
 import {postMy24 as userPostMy24} from '../../services/My24Service';
 import common from '../../styles/sharedStyles';
 import Button from '../../components/common/buttons/Button';
-import Followers, {NewStoryHeaderRight} from '../profile/Followers';
+import UserSearch, {NewStoryHeaderRight} from '../profile/UserSearch';
 import Video from '../../components/common/Video';
 import {createThumbnail} from 'react-native-create-thumbnail';
 import {useState} from 'react';
@@ -109,7 +109,7 @@ const NewStory = () => {
   const handlePressMessage = async () => {
     const form = await getFormData();
 
-    navigation.navigate(Followers.name, {
+    navigation.navigate(UserSearch.name, {
       headerRightComp: NewStoryHeaderRight.name,
       headerRightProps: {formData: form},
     });

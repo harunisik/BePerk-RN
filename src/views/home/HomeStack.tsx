@@ -4,7 +4,7 @@ import HomeScreenOptions from './HomeScreenOptions';
 import Search from '../doves/Search';
 import Activity from '../doves/Activity';
 import Comment from '../doves/Comment';
-import Followers, {FollowersScreenOptions} from '../profile/Followers';
+import UserSearch, {UserSearchScreenOptions} from '../profile/UserSearch';
 import Explore from './Explore';
 import ExplorePostsDetails from '../profile/ExplorePostsDetails';
 import ProfileStack from '../profile/ProfileStack';
@@ -27,9 +27,9 @@ const HomeStack = () => {
         options={{presentation: 'formSheet'}}
       />
       <Stack.Screen
-        name={Followers.name}
-        component={Followers}
-        options={FollowersScreenOptions}
+        name={UserSearch.name}
+        component={UserSearch}
+        options={UserSearchScreenOptions}
       />
       <Stack.Screen name={Explore.name} component={Explore} />
       <Stack.Screen

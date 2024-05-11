@@ -4,7 +4,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import common from '../../styles/sharedStyles';
 import {showMessage} from 'react-native-flash-message';
 import Clipboard from '@react-native-clipboard/clipboard';
-import Followers, {ChatShareHeaderRight} from '../../views/profile/Followers';
+import UserSearch, {ChatShareHeaderRight} from '../../views/profile/UserSearch';
 import {useNavigation} from '@react-navigation/native';
 import BottomModal from '../common/BottomModal';
 
@@ -34,7 +34,7 @@ const UserProfileModal = ({userId, visible, onDismiss}) => {
         style={[styles.button, aiCenter, row, cGap15]}
         onPress={() => {
           onDismiss();
-          navigation.navigate(Followers.name, {
+          navigation.navigate(UserSearch.name, {
             presentation: 'none',
             headerRightComp: ChatShareHeaderRight.name,
             headerRightProps: {itemId: userId, type: 6},

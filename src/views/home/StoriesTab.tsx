@@ -1,5 +1,5 @@
 import {View, Text} from 'react-native';
-import {useCustomQuery as useQuery} from '../../hooks/customHooks';
+import {useQuery} from '../../hooks/customHooks';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import common from '../../styles/sharedStyles';

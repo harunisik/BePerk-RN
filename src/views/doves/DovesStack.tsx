@@ -1,7 +1,7 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Doves from './Doves';
 import Comment from './Comment';
-import Followers, {FollowersScreenOptions} from '../profile/Followers';
+import UserSearch, {UserSearchScreenOptions} from '../profile/UserSearch';
 import PostDove, {PostDoveScreenOptions} from './PostDove';
 import DovesScreenOptions from './DovesScreenOptions';
 import Activity from './Activity';
@@ -25,9 +25,9 @@ const DovesStack = () => {
         options={{presentation: 'formSheet'}}
       />
       <Stack.Screen
-        name={Followers.name}
-        component={Followers}
-        options={FollowersScreenOptions}
+        name={UserSearch.name}
+        component={UserSearch}
+        options={UserSearchScreenOptions}
       />
       <Stack.Screen
         name={PostDove.name}

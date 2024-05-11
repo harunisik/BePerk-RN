@@ -3,7 +3,7 @@ import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {formatDate} from '../../utils/DateUtil';
 import common from '../../styles/sharedStyles';
 import DovesItem from '../../components/doves/DovesItem';
-import {useCustomQuery as useQuery} from '../../hooks/customHooks';
+import {useQuery} from '../../hooks/customHooks';
 import {getChat} from '../../services/ChatService';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FastImage from 'react-native-fast-image';

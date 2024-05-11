@@ -1,5 +1,5 @@
 import {Alert, Pressable, Text, View} from 'react-native';
-import {useCustomQuery as useQuery} from '../../hooks/customHooks';
+import {useQuery} from '../../hooks/customHooks';
 import {chatListOpen} from '../../services/ChatService';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import common from '../../styles/sharedStyles';

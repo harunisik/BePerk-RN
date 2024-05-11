@@ -9,12 +9,8 @@ import CreateNewAccount, {
 } from './settings/CreateNewAccount';
 import RequestVerification from './settings/ReuqestVerification';
 import DeleteAccount from './settings/DeleteAccount';
-import PrivacyPolicy, {
-  PrivacyPolicyScreenOptions,
-} from './settings/PrivacyPolicy';
-import Terms, {TermsScreenOptions} from './settings/Terms';
 import Comment from '../doves/Comment';
-import Followers, {FollowersScreenOptions} from './Followers';
+import UserSearch, {UserSearchScreenOptions} from './UserSearch';
 import Profile from './Profile';
 import ProfileScreenOptions from './ProfileScreenOptions';
 import ProfilePostsDetails from './ProfilePostsDetails';
@@ -25,6 +21,8 @@ import Messages, {MessagesScreenOptions} from './Messages';
 import MessageDetails from './MessageDetails';
 import StoryView2 from './StoryView2';
 import MessageDetailsScreenOptions from './MessageDetailsScreenOptions';
+import FollowersList from './FollowersList';
+import WebView, {WebViewScreenOptions} from '../../components/common/WebView';
 
 const Stack = createNativeStackNavigator();
 
@@ -84,16 +82,6 @@ const ProfileStack = () => {
         }}
       />
       <Stack.Screen
-        name={PrivacyPolicy.name}
-        component={PrivacyPolicy}
-        options={PrivacyPolicyScreenOptions}
-      />
-      <Stack.Screen
-        name={Terms.name}
-        component={Terms}
-        options={TermsScreenOptions}
-      />
-      <Stack.Screen
         name={SwitchAccount.name}
         component={SwitchAccount}
         options={{title: 'Switch account'}}
@@ -104,9 +92,14 @@ const ProfileStack = () => {
         options={{presentation: 'formSheet'}}
       />
       <Stack.Screen
-        name={Followers.name}
-        component={Followers}
-        options={FollowersScreenOptions}
+        name={UserSearch.name}
+        component={UserSearch}
+        options={UserSearchScreenOptions}
+      />
+      <Stack.Screen
+        name={FollowersList.name}
+        component={FollowersList}
+        options={{title: ''}}
       />
       <Stack.Screen
         name={ProfilePostsDetails.name}
@@ -140,6 +133,11 @@ const ProfileStack = () => {
         name={MessageDetails.name}
         component={MessageDetails}
         options={MessageDetailsScreenOptions}
+      />
+      <Stack.Screen
+        name={WebView.name}
+        component={WebView}
+        options={WebViewScreenOptions}
       />
     </Stack.Navigator>
   );

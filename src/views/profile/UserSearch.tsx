@@ -11,11 +11,8 @@ import UserItem from '../../components/profile/UserItem';
 import SelectedUsers from '../../components/profile/SelectedUsers';
 import {useSearchText, useSearchUsers} from '../../hooks/searchHooks';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {
-  useCustomMutation as useMutation,
-  useCustomQuery as useQuery,
-} from '../../hooks/customHooks';
-import {getUserFollowings} from '../../services/UserService';
+import {useMutation, useQuery} from '../../hooks/customHooks';
+import {getUserFollowing} from '../../services/UserService';
 import FlatList from '../../components/common/FlatList';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {showMessage} from 'react-native-flash-message';
@@ -122,7 +119,7 @@ const HEADER_LIST = {
   [NewStoryHeaderRight.name]: NewStoryHeaderRight,
 };
 
-export const FollowersScreenOptions = ({navigation, route}) => {
+export const UserSearchScreenOptions = ({navigation, route}) => {
   return {
     animation: 'slide_from_bottom',
     ...(route.params?.presentation !== 'none' && {
@@ -140,7 +137,7 @@ export const FollowersScreenOptions = ({navigation, route}) => {
   };
 };
 
-const Followers = () => {
+const UserSearch = () => {
   const [showIndicator, setShowIndicator] = useState(false);
   const [searchText, setSearchText] = useState('');
   const [searchResult, setSearchResult] = useState([]);
@@ -153,7 +150,7 @@ const Followers = () => {
 
   const HeaderRightComp = HEADER_LIST[headerRightComp];
 
-  const {data, refetch, isFetching} = useQuery(getUserFollowings);
+  const {data, refetch, isFetching} = useQuery(getUserFollowing);
 
   const searchUsers = useSearchUsers();
 
@@ -245,4 +242,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Followers;
+export default UserSearch;
