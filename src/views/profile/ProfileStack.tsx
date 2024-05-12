@@ -11,16 +11,14 @@ import RequestVerification from './settings/ReuqestVerification';
 import DeleteAccount from './settings/DeleteAccount';
 import Comment from '../doves/Comment';
 import UserSearch, {UserSearchScreenOptions} from './UserSearch';
-import Profile from './Profile';
-import ProfileScreenOptions from './ProfileScreenOptions';
+import Profile, {ProfileScreenOptions} from './Profile';
 import ProfilePostsDetails from './ProfilePostsDetails';
 import StoryView from './StoryView';
 import {useRoute} from '@react-navigation/native';
 import {useStore} from '../../containers/StoreContainer';
 import Messages, {MessagesScreenOptions} from './Messages';
-import MessageDetails from './MessageDetails';
+import MessageDetails, {MessageDetailsScreenOptions} from './MessageDetails';
 import StoryView2 from './StoryView2';
-import MessageDetailsScreenOptions from './MessageDetailsScreenOptions';
 import FollowersList from './FollowersList';
 import WebView, {WebViewScreenOptions} from '../../components/common/WebView';
 
@@ -46,7 +44,7 @@ const ProfileStack = () => {
         initialParams={{
           userId,
           username,
-          headerBackVisible: headerBackVisible,
+          headerBackVisible,
           isAuthUser: userId === id,
         }}
       />

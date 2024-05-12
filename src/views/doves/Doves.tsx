@@ -1,6 +1,59 @@
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import HomeTab from './HomeTab';
 import DoveTab from './DoveTab';
+import {View} from 'react-native';
+import {AddDoveModal} from '../add/AddModal';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import common from '../../styles/sharedStyles';
+import {useNavigation} from '@react-navigation/native';
+import {useState} from 'react';
+import Search from './Search';
+import Activity from './Activity';
+
+const {row, cGap15} = common;
+
+const HeaderRight = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const navigation = useNavigation();
+
+  return (
+    <View style={[row, cGap15]}>
+      <MaterialCommunityIcons
+        name="plus-circle"
+        size={22}
+        color="dodgerblue"
+        onPress={() => {
+          setModalVisible(true);
+        }}
+      />
+      <MaterialCommunityIcons
+        name="bell"
+        onPress={() => navigation.navigate(Activity.name)}
+        size={22}
+        color="dodgerblue"
+      />
+      <AddDoveModal
+        visible={modalVisible}
+        onDismiss={() => setModalVisible(false)}
+      />
+    </View>
+  );
+};
+
+export const DovesScreenOptions = ({navigation}) => {
+  return {
+    title: '',
+    headerLeft: () => (
+      <MaterialIcons
+        name="search"
+        onPress={() => navigation.navigate(Search.name)}
+        size={26}
+      />
+    ),
+    headerRight: HeaderRight,
+  };
+};
 
 const Tab = createMaterialTopTabNavigator();
 

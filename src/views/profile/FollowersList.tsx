@@ -14,10 +14,17 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import Popup from '../../components/common/Popup';
 import {showMessage} from 'react-native-flash-message';
 import Profile from './Profile';
+import {useStore} from '../../containers/StoreContainer';
 
 const {pl15, pr15, row, aiCenter, cGap10} = common;
 
 const UserItem = ({item, onPressFollow, onPressItem}) => {
+  const {
+    store: {
+      authResult: {id},
+    },
+  } = useStore();
+
   return (
     <View style={[row, aiCenter]}>
       <Pressable onPress={onPressItem} style={[row, aiCenter, cGap10]}>
@@ -27,21 +34,26 @@ const UserItem = ({item, onPressFollow, onPressItem}) => {
           <MaterialIcons name="verified" size={16} color="dodgerblue" />
         )}
       </Pressable>
-      <Pressable
-        style={{
-          marginLeft: 'auto',
-          backgroundColor: item.i_following === 0 ? 'dodgerblue' : 'lightgray',
-          borderRadius: 20,
-          paddingVertical: 5,
-          paddingHorizontal: 20,
-        }}
-        onPress={onPressFollow}>
-        {item.i_following === 0 ? (
-          <Text style={{color: 'white'}}>Follow</Text>
-        ) : (
-          <Text style={{color: 'black'}}>Following</Text>
-        )}
-      </Pressable>
+      {item.user_id !== id && (
+        <Pressable
+          style={{
+            marginLeft: 'auto',
+            backgroundColor:
+              item.i_following === 0 ? 'dodgerblue' : 'lightgray',
+            borderRadius: 20,
+            paddingVertical: 5,
+            paddingHorizontal: 20,
+          }}
+          onPress={onPressFollow}>
+          {item.i_following === 1 ? (
+            <Text style={{color: 'black'}}>Following</Text>
+          ) : item.i_following === 2 ? (
+            <Text style={{color: 'black'}}>Requested</Text>
+          ) : (
+            <Text style={{color: 'white'}}>Follow</Text>
+          )}
+        </Pressable>
+      )}
     </View>
   );
 };
@@ -55,12 +67,12 @@ const FollowersList = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const {
-    params: {isFollowing},
+    params: {isFollowing, userId, isAuthUser},
   } = route;
 
   const {data, refetch, isFetching} = isFollowing
-    ? useQuery(getUserFollowing)
-    : useQuery(getUserFollowers);
+    ? useQuery(getUserFollowing, {...(!isAuthUser && {id: userId})})
+    : useQuery(getUserFollowers, {...(!isAuthUser && {id: userId})});
 
   const userList = isFollowing ? data?.following : data?.followers;
 
@@ -145,7 +157,7 @@ const FollowersList = () => {
               onPressItem={() => handlePressItem(item)}
             />
           )}
-          keyExtractor={item => item.user_id}
+          keyExtractor={(item, index) => `${item.user_id}_${index}`}
         />
       ) : (
         <FlatList
@@ -157,7 +169,7 @@ const FollowersList = () => {
               onPressItem={() => handlePressItem(item)}
             />
           )}
-          keyExtractor={item => item.user_id}
+          keyExtractor={(item, index) => `${item.user_id}_${index}`}
           onRefresh={refetch}
           refreshing={isFetching}
         />

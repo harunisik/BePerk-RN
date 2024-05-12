@@ -31,6 +31,7 @@ const UserInfo = ({data, isAuthUser, userId}) => {
                 navigation.navigate(FollowersList.name, {
                   userId,
                   isFollowing: 0,
+                  isAuthUser,
                 })
               }>
               <Text style={[bold, blue]}>{data?.followers}</Text>
@@ -47,6 +48,7 @@ const UserInfo = ({data, isAuthUser, userId}) => {
                 navigation.navigate(FollowersList.name, {
                   userId,
                   isFollowing: 1,
+                  isAuthUser,
                 })
               }>
               <Text style={[bold, blue]}>{data?.following}</Text>
@@ -55,17 +57,23 @@ const UserInfo = ({data, isAuthUser, userId}) => {
           <Text>Following</Text>
         </View>
       </View>
-      <View
-        style={{alignSelf: 'flex-start', paddingHorizontal: 15, rowGap: 10}}>
-        <Text>{data?.comment}</Text>
-        <Text
-          style={{color: 'dodgerblue'}}
-          onPress={() =>
-            navigation.navigate(WebView.name, {uri: data?.webSite})
-          }>
-          {data?.webSite}
-        </Text>
-      </View>
+      {(data?.comment || data?.webSite) && (
+        <View
+          style={{
+            alignSelf: 'flex-start',
+            paddingHorizontal: 15,
+            rowGap: 10,
+          }}>
+          <Text>{data?.comment}</Text>
+          <Text
+            style={{color: 'dodgerblue'}}
+            onPress={() =>
+              navigation.navigate(WebView.name, {uri: data?.webSite})
+            }>
+            {data?.webSite}
+          </Text>
+        </View>
+      )}
     </View>
   );
 };

@@ -9,6 +9,21 @@ import NewPost from './NewPost';
 import {useNavigation} from '@react-navigation/native';
 import {useRef} from 'react';
 
+export const GooglePlacesScreenOptions = ({navigation}) => {
+  return {
+    title: 'Places',
+    animation: 'slide_from_bottom',
+    presentation: 'fullScreenModal',
+    headerLeft: () => (
+      <MaterialCommunityIcons
+        name="close"
+        onPress={() => navigation.goBack()}
+        size={26}
+      />
+    ),
+  };
+};
+
 const GooglePlaces = () => {
   const navigation = useNavigation();
   const ref = useRef<GooglePlacesAutocompleteRef>(null);

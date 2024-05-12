@@ -1,7 +1,6 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Featured from './Featured';
+import Featured, {FeaturedScreenOptions} from './Featured';
 import FeaturedItemDetails from './FeaturedItemDetails';
-import FeaturedScreenOptions from './FeaturedScreenOptions';
 import Comment from '../doves/Comment';
 import UserSearch, {UserSearchScreenOptions} from '../profile/UserSearch';
 import ProfileStack from '../profile/ProfileStack';

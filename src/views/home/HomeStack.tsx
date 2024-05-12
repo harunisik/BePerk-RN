@@ -1,6 +1,5 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Home from './Home';
-import HomeScreenOptions from './HomeScreenOptions';
+import Home, {HomeScreenOptions} from './Home';
 import Search from '../doves/Search';
 import Activity from '../doves/Activity';
 import Comment from '../doves/Comment';

@@ -2,10 +2,9 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import NewPost, {NewPostScreenOptions} from './NewPost';
 import {useRoute} from '@react-navigation/native';
 import UserSearch, {UserSearchScreenOptions} from '../profile/UserSearch';
-import GooglePlaces from './GooglePlaces';
-import GooglePlacesScreenOptions from './GooglePlacesScreenOptions';
 import NewStory, {NewStoryScreenOptions} from './NewStory';
 import PostDove, {PostDoveScreenOptions} from '../doves/PostDove';
+import GooglePlaces, {GooglePlacesScreenOptions} from './GooglePlaces';
 
 const Stack = createNativeStackNavigator();
 

@@ -38,16 +38,18 @@ export const getUserComments = ({queryKey}) => {
     .catch(handleError);
 };
 
-export const getUserFollowing = () => {
+export const getUserFollowing = ({queryKey}) => {
+  const {id} = queryKey[1];
   return axios
-    .get('/user/listFollowing')
+    .get('/user/listFollowing' + (id ? `?id=${id}` : ''))
     .then(handleResponse)
     .catch(handleError);
 };
 
-export const getUserFollowers = () => {
+export const getUserFollowers = ({queryKey}) => {
+  const {id} = queryKey[1];
   return axios
-    .get('/user/listFollowers')
+    .get('/user/listFollowers' + (id ? `?id=${id}` : ''))
     .then(handleResponse)
     .catch(handleError);
 };

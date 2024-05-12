@@ -11,8 +11,40 @@ import Profile from './Profile';
 import StoryView from './StoryView';
 import {useStore} from '../../containers/StoreContainer';
 import FlatList from '../../components/common/FlatList';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const {p10} = common;
+const {flex1, row, aiCenter, bold, cGap5, p10} = common;
+
+export const MessageDetailsScreenOptions = ({navigation, route}) => {
+  const {
+    params: {title, isMultiple},
+  } = route;
+
+  return {
+    title: '',
+    headerLeft: () => (
+      <View style={[row, aiCenter]}>
+        <MaterialIcons
+          name="arrow-back-ios"
+          color="dodgerblue"
+          size={26}
+          onPress={() => navigation.goBack()}
+        />
+
+        <View style={[flex1, row, aiCenter, cGap5]}>
+          <MaterialCommunityIcons
+            name={isMultiple ? 'account-multiple' : 'account-circle'}
+            size={26}
+            color="lightgray"
+          />
+          <Text style={[bold, {width: '70%'}]} numberOfLines={1}>
+            {title}
+          </Text>
+        </View>
+      </View>
+    ),
+  };
+};
 
 export const IMAGE_HEIGHT = 150;
 export const IMAGE_WIDTH = 120;
