@@ -1,4 +1,4 @@
-import {View, Alert, Text} from 'react-native';
+import {View, Alert, Text, Share} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Settings from './settings/Settings';
 import common from '../../styles/sharedStyles';
@@ -17,13 +17,34 @@ const HeaderRight = () => {
     params: {userId, isAuthUser},
   } = route;
 
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message:
+          'You should join BePerk! It is the best christian social media plaform...',
+        url: 'https://itunes.apple.com/app/id1370790950',
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error: any) {
+      Alert.alert(error.message);
+    }
+  };
+
   return (
     <View>
       {isAuthUser ? (
         <View style={[aiCenter, row, jcSpaceAround, cGap15]}>
           <MaterialCommunityIcons
             name="share-variant"
-            onPress={() => Alert.alert('Under construction')}
+            onPress={onShare}
             size={22}
             color="dodgerblue"
           />

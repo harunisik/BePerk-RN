@@ -6,8 +6,13 @@ const ListEmptyComponent = () => {
     <>
       {useMemo(
         () => (
-          <View style={{alignItems: 'center'}}>
-            <Text>No data available</Text>
+          <View
+            style={{
+              alignItems: 'center',
+              justifyContent: 'center',
+              paddingVertical: 10,
+            }}>
+            <Text style={{color: 'gray'}}>No data available</Text>
           </View>
         ),
         [],

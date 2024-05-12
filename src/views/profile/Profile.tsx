@@ -114,7 +114,10 @@ const Profile = () => {
             isAuthUser={isAuthUser}
           />
         </View>
-      )}>
+      )}
+      headerContainerStyle={{
+        shadowOpacity: 0,
+      }}>
       {isPrivate && (
         <Tabs.Tab name="Private Account" label="Private Account">
           <Tabs.ScrollView

@@ -16,6 +16,8 @@ import {
   getUserComments,
   getUserExploring,
   getUserFeed,
+  getUserFollowing,
+  getUserProfile,
   postBookmarks,
   postComment,
   postUserLike,
@@ -32,8 +34,8 @@ const queryMap = {
   [deleteComment.name]: [getUserComments.name],
   [addPerk.name]: [getUserFeed.name, getUserExploring.name],
   [chatShare.name]: [],
-  [addFollowing.name]: [],
-  [deleteFollowing.name]: [],
+  [addFollowing.name]: [getUserFollowing, getUserProfile],
+  [deleteFollowing.name]: [getUserFollowing, getUserProfile],
 };
 
 // getUserHistory

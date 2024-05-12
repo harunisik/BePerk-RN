@@ -11,42 +11,36 @@ import FlatList from '../../components/common/FlatList';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useEffect, useState} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
+import Popup from '../../components/common/Popup';
+import {showMessage} from 'react-native-flash-message';
+import Profile from './Profile';
 
 const {pl15, pr15, row, aiCenter, cGap10} = common;
 
-const UserItem = ({item}) => {
-  const [isFollowing, setIsFollowing] = useState(item.i_following === 0);
-
-  const addFollowingApi = useMutation(addFollowing);
-  const deleteFollowingApi = useMutation(deleteFollowing);
-
-  // useEffect(() => {
-  //   setIsFollowing(item.i_following === 0);
-  // }, [item]);
-
-  const handlePressFollowing = () => {
-    if (isFollowing) {
-      addFollowingApi.mutate(
-        {id: item.user_id},
-        {onSuccess: () => setIsFollowing(true)},
-      );
-    } else {
-      deleteFollowingApi.mutate(
-        {id: item.user_id},
-        {onSuccess: () => setIsFollowing(false)},
-      );
-    }
-  };
-
+const UserItem = ({item, onPressFollow, onPressItem}) => {
   return (
-    <View style={[row, aiCenter, cGap10]}>
-      <MaterialIcons name="account-circle" size={36} color="lightgray" />
-      <Text>{item.fullname}</Text>
-      {item.isVerified === 1 && (
-        <MaterialIcons name="verified" size={16} color="dodgerblue" />
-      )}
-      <Pressable style={{marginLeft: 'auto'}} onPress={handlePressFollowing}>
-        <Text>{isFollowing ? 'Follow' : 'Following'}</Text>
+    <View style={[row, aiCenter]}>
+      <Pressable onPress={onPressItem} style={[row, aiCenter, cGap10]}>
+        <MaterialIcons name="account-circle" size={36} color="lightgray" />
+        <Text>{item.fullname}</Text>
+        {item.isVerified === 1 && (
+          <MaterialIcons name="verified" size={16} color="dodgerblue" />
+        )}
+      </Pressable>
+      <Pressable
+        style={{
+          marginLeft: 'auto',
+          backgroundColor: item.i_following === 0 ? 'dodgerblue' : 'lightgray',
+          borderRadius: 20,
+          paddingVertical: 5,
+          paddingHorizontal: 20,
+        }}
+        onPress={onPressFollow}>
+        {item.i_following === 0 ? (
+          <Text style={{color: 'white'}}>Follow</Text>
+        ) : (
+          <Text style={{color: 'black'}}>Following</Text>
+        )}
       </Pressable>
     </View>
   );
@@ -55,6 +49,9 @@ const UserItem = ({item}) => {
 const FollowersList = () => {
   const [searchText, setSearchText] = useState('');
   const [searchResult, setSearchResult] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedItem, setSelectedItem] = useState();
+
   const navigation = useNavigation();
   const route = useRoute();
   const {
@@ -66,6 +63,54 @@ const FollowersList = () => {
     : useQuery(getUserFollowers);
 
   const userList = isFollowing ? data?.following : data?.followers;
+
+  const addFollowingApi = useMutation(addFollowing);
+  const deleteFollowingApi = useMutation(deleteFollowing);
+
+  const handlePressFollow = item => {
+    setSelectedItem(item);
+    if (item?.i_following === 0) {
+      followOrUnfollow(item);
+    } else {
+      setModalVisible(true);
+    }
+  };
+
+  const followOrUnfollow = item => {
+    if (item?.i_following === 0) {
+      addFollowingApi.mutate(
+        {id: item?.user_id},
+        {
+          onSuccess: () => {
+            setSelectedItem(undefined);
+            setModalVisible(false);
+            showMessage({message: 'User is followed'});
+          },
+        },
+      );
+    } else {
+      deleteFollowingApi.mutate(
+        {id: item?.user_id},
+        {
+          onSuccess: () => {
+            setSelectedItem(undefined);
+            setModalVisible(false);
+            showMessage({message: 'User is unfollowed'});
+          },
+        },
+      );
+    }
+  };
+
+  const handlePressItem = item => {
+    console.log(item);
+    navigation.push(Profile.name, {
+      headerBackVisible: true,
+      userId: item.user_id,
+      username: item.fullname,
+      isAuthUser: false,
+    });
+  };
 
   useEffect(
     () =>
@@ -79,7 +124,7 @@ const FollowersList = () => {
 
   useEffect(() => {
     navigation.setOptions({title: isFollowing ? 'Following' : 'Followers'});
-  }, []);
+  }, [navigation]);
 
   return (
     <View style={[pl15, pr15]}>
@@ -93,18 +138,37 @@ const FollowersList = () => {
       {searchText ? (
         <FlatList
           data={searchResult}
-          renderItem={({item}) => <UserItem item={item} />}
+          renderItem={({item}) => (
+            <UserItem
+              item={item}
+              onPressFollow={() => handlePressFollow(item)}
+              onPressItem={() => handlePressItem(item)}
+            />
+          )}
           keyExtractor={item => item.user_id}
         />
       ) : (
         <FlatList
           data={userList}
-          renderItem={({item}) => <UserItem item={item} />}
+          renderItem={({item}) => (
+            <UserItem
+              item={item}
+              onPressFollow={() => handlePressFollow(item)}
+              onPressItem={() => handlePressItem(item)}
+            />
+          )}
           keyExtractor={item => item.user_id}
           onRefresh={refetch}
           refreshing={isFetching}
         />
       )}
+      <Popup
+        visible={modalVisible}
+        header={selectedItem?.fullname}
+        message="Are you sure you want to unfollow?"
+        onPressOk={() => followOrUnfollow(selectedItem)}
+        onPressCancel={() => setModalVisible(false)}
+      />
     </View>
   );
 };
