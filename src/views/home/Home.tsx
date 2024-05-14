@@ -3,6 +3,7 @@ import ForYouTab from './ForYouTab';
 import FollowingTab from './FollowingTab';
 import {
   Alert,
+  Pressable,
   StyleSheet,
   Text,
   TouchableWithoutFeedback,
@@ -42,18 +43,13 @@ const HeaderRight = () => {
   );
 };
 
-const HeaderTitleButton = ({isSelected, onPress, label}) => {
+const HeaderTitleButton = ({onPress, label, containerStyle, labelStyle}) => {
   return (
-    <TouchableWithoutFeedback>
-      <Text
-        style={[
-          styles.default,
-          isSelected ? styles.selected : styles.nonSelected,
-        ]}
-        onPress={onPress}>
+    <Pressable style={containerStyle}>
+      <Text style={labelStyle} onPress={onPress}>
         {label}
       </Text>
-    </TouchableWithoutFeedback>
+    </Pressable>
   );
 };
 
@@ -66,10 +62,32 @@ const HeaderTitle = () => {
   };
 
   return (
-    <View style={row}>
+    <View
+      style={[
+        {
+          flexDirection: 'row',
+          columnGap: 3,
+          borderWidth: 1,
+          borderColor: 'white',
+          borderRadius: 20,
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 3,
+            height: 3,
+          },
+          shadowOpacity: 0.25,
+          shadowRadius: 5,
+        },
+      ]}>
       <HeaderTitleButton
         label="For You"
-        isSelected={selected[0]}
+        containerStyle={{
+          borderRadius: 20,
+          backgroundColor: selected[0] ? 'dodgerblue' : 'transparent',
+          paddingVertical: 5,
+          paddingHorizontal: 10,
+        }}
+        labelStyle={{color: selected[0] ? 'white' : 'black'}}
         onPress={() => {
           handlePress(0);
           navigation.setOptions({headerTransparent: true});
@@ -78,7 +96,13 @@ const HeaderTitle = () => {
       />
       <HeaderTitleButton
         label="Following"
-        isSelected={selected[1]}
+        containerStyle={{
+          borderRadius: 20,
+          backgroundColor: selected[1] ? 'dodgerblue' : 'transparent',
+          paddingVertical: 5,
+          paddingHorizontal: 10,
+        }}
+        labelStyle={{color: 'white'}}
         onPress={() => {
           handlePress(1);
           navigation.setOptions({headerTransparent: false});

@@ -22,7 +22,13 @@ import {
   postComment,
   postUserLike,
 } from '../services/UserService';
-import {chatShare} from '../services/ChatService';
+import {
+  chatDelete,
+  chatListOpen,
+  chatSend,
+  chatShare,
+  getChat,
+} from '../services/ChatService';
 import {getMy24, postMy24Like} from '../services/My24Service';
 
 const queryMap = {
@@ -34,8 +40,10 @@ const queryMap = {
   [deleteComment.name]: [getUserComments.name],
   [addPerk.name]: [getUserFeed.name, getUserExploring.name],
   [chatShare.name]: [],
-  [addFollowing.name]: [getUserFollowing, getUserProfile],
-  [deleteFollowing.name]: [getUserFollowing, getUserProfile],
+  [chatSend.name]: [getChat.name],
+  [chatDelete.name]: [chatListOpen.name],
+  [addFollowing.name]: [getUserFollowing.name, getUserProfile.name],
+  [deleteFollowing.name]: [getUserFollowing.name, getUserProfile.name],
 };
 
 // getUserHistory

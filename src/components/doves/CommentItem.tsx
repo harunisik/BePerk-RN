@@ -5,7 +5,6 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useState} from 'react';
 import {Swipeable} from 'react-native-gesture-handler';
 import LikeButtton from '../common/buttons/LikeButton';
-import ItemSeperator from '../common/ItemSpearator';
 import FlatList from '../common/FlatList';
 
 const RenderRightActions = ({item, onPress}) => {
@@ -18,12 +17,7 @@ const RenderRightActions = ({item, onPress}) => {
   );
 };
 
-const CommentItem = ({
-  item,
-  isChild = false,
-  onDeleteComment,
-  onPressReply,
-}) => {
+const CommentItem = ({item, isChild = false, onDelete, onPressReply}) => {
   const {
     row,
     rGap5,
@@ -47,10 +41,10 @@ const CommentItem = ({
   };
 
   return (
-    <View>
+    <>
       <Swipeable
         renderRightActions={() => (
-          <RenderRightActions item={item} onPress={onDeleteComment} />
+          <RenderRightActions item={item} onPress={onDelete} />
         )}>
         <View style={[row, cGap10]}>
           <MaterialIcons name="account-circle" size={26} color="lightgray" />
@@ -98,13 +92,13 @@ const CommentItem = ({
               item={item2}
               onPressReply={onPressReply}
               isChild
-              onDeleteComment={onDeleteComment}
+              onDelete={onDelete}
             />
           )}
           style={pl30}
         />
       )}
-    </View>
+    </>
   );
 };
 

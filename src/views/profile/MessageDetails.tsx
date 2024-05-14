@@ -3,8 +3,8 @@ import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {formatDate} from '../../utils/DateUtil';
 import common from '../../styles/sharedStyles';
 import DovesItem from '../../components/doves/DovesItem';
-import {useQuery} from '../../hooks/customHooks';
-import {getChat} from '../../services/ChatService';
+import {useMutation} from '../../hooks/customHooks';
+import {chatAdd, chatSend} from '../../services/ChatService';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FastImage from 'react-native-fast-image';
 import Profile from './Profile';
@@ -12,6 +12,10 @@ import StoryView from './StoryView';
 import {useStore} from '../../containers/StoreContainer';
 import FlatList from '../../components/common/FlatList';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MessageBox2 from '../../components/common/MessageBox2';
+import uuid from 'react-native-uuid';
+import {useEffect, useState} from 'react';
+import {useChatListOpen, useGetChat} from '../../hooks/userHooks';
 
 const {flex1, row, aiCenter, bold, cGap5, p10} = common;
 
@@ -179,44 +183,96 @@ const MessageDetailsItem = ({item}) => {
         )}
       </View>
     </View>
-    // </View>
   );
 };
 
 const MessageDetails = () => {
+  const [data, setData] = useState([]);
+  const [isSending, setIsSending] = useState(false);
   const route = useRoute();
   const {
-    params: {chatId},
+    params: {chatId: chatIdParam, userId},
   } = route;
 
-  const {data, isFetching, refetch} = useQuery(
-    getChat,
-    {chatId, limit: 1000, offset: 0},
-    ({messages}) => {
-      return messages.map(({id, date, type, media, user_id}, index, arr) => {
-        const dateStr = formatDate(date * 1000);
-        const prevDateStr =
-          index <= arr.length - 2
-            ? formatDate(arr[index + 1].date * 1000)
-            : null;
-        return {
-          id,
-          date: dateStr === prevDateStr ? null : dateStr,
-          type,
-          media,
-          user_id,
-        };
+  const [chatId, setChatId] = useState(chatIdParam);
+
+  const chatAddApi = useMutation(chatAdd);
+  const chatSendApi = useMutation(chatSend);
+  const getChatApi = useGetChat({chatId, limit: 1000, offset: 0});
+  const chatListOpenApi = useChatListOpen();
+
+  const sendMessage = (message: string, chat_id: number) => {
+    chatSendApi.mutate(
+      {
+        chat_id,
+        message,
+        uid: uuid.v4(),
+      },
+      {onSuccess: () => setIsSending(false)},
+    );
+  };
+
+  const handlePressSend = (message: string) => {
+    setIsSending(true);
+    if (chatId) {
+      sendMessage(message, chatId);
+    } else {
+      chatAddApi.mutate(
+        {to_users: JSON.stringify([userId])},
+        {
+          onSuccess: ({id}) => {
+            setChatId(id);
+            sendMessage(message, id);
+          },
+        },
+      );
+    }
+  };
+
+  useEffect(() => {
+    if (chatId) {
+      getChatApi().then(({messages}) => {
+        setData(
+          messages.map(({id, date, type, media, user_id}, index, arr) => {
+            const dateStr = formatDate(date * 1000);
+            const prevDateStr =
+              index <= arr.length - 2
+                ? formatDate(arr[index + 1].date * 1000)
+                : null;
+            return {
+              id,
+              date: dateStr === prevDateStr ? null : dateStr,
+              type,
+              media,
+              user_id,
+            };
+          }),
+        );
       });
-    },
-  );
+    } else {
+      chatListOpenApi().then(({chats}) => {
+        const result = chats.find(
+          ({to_users}) =>
+            to_users.length === 2 && to_users.some(({id}) => id === userId),
+        );
+
+        if (result) {
+          setChatId(result.id);
+        }
+      });
+    }
+  }, [chatId, isSending]);
 
   return (
-    <FlatList
-      data={data}
-      renderItem={({item}) => <MessageDetailsItem item={item} />}
-      contentContainerStyle={p10}
-      inverted={data?.length > 0}
-    />
+    <>
+      <FlatList
+        data={data}
+        renderItem={({item}) => <MessageDetailsItem item={item} />}
+        contentContainerStyle={[p10, {marginTop: 10}]}
+        inverted={data?.length > 0}
+      />
+      <MessageBox2 onPressSend={handlePressSend} />
+    </>
   );
 };
 

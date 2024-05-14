@@ -121,6 +121,7 @@ const HEADER_LIST = {
 
 export const UserSearchScreenOptions = ({navigation, route}) => {
   return {
+    title: 'Search users',
     animation: 'slide_from_bottom',
     ...(route.params?.presentation !== 'none' && {
       presentation: 'fullScreenModal',
@@ -142,6 +143,7 @@ const UserSearch = () => {
   const [searchText, setSearchText] = useState('');
   const [searchResult, setSearchResult] = useState([]);
   const [selectedUsers, setSelectedUsers] = useState([]);
+
   const navigation = useNavigation();
   const route = useRoute();
   const {

@@ -6,25 +6,29 @@ import {
   Platform,
 } from 'react-native';
 import common from '../../styles/sharedStyles';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import Emoji from './Emoji';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 
 const {row, jcSpaceBetween, p10, aiCenter} = common;
 
-const MessageBox = ({initialText, onClearText, onPress}) => {
-  const [message, setMessage] = useState(initialText);
+const MessageBox2 = ({onPressSend}) => {
+  const [message, setMessage] = useState('');
   const tabBarHeight = useBottomTabBarHeight();
 
   const handlePress = () => {
-    onPress(message);
+    onPressSend(message);
     setMessage('');
   };
 
-  useEffect(() => {
-    setMessage(initialText);
-  }, [initialText]);
+  const handleChangeText = (text: string) => {
+    setMessage(text);
+    if (!text) {
+      // onClearText();
+    }
+  };
 
   return (
     <KeyboardAvoidingView
@@ -39,26 +43,25 @@ const MessageBox = ({initialText, onClearText, onPress}) => {
           )}
         </View>
         <View style={[row, jcSpaceBetween, aiCenter]}>
-          <MaterialIcons name="account-circle" size={26} color="lightgray" />
+          <AntDesign name="camera" size={26} color="dodgerblue" />
           <TextInput
             placeholder="Message..."
-            onChangeText={text => {
-              setMessage(text);
-              if (!text) {
-                onClearText();
-              }
-            }}
+            onChangeText={handleChangeText}
             value={message}
             style={styles.textInput}
             onSubmitEditing={handlePress}
           />
-          <MaterialCommunityIcons
-            name="share"
-            size={26}
-            color={message ? 'dodgerblue' : 'gray'}
-            onPress={handlePress}
-            disabled={!message}
-          />
+          {message ? (
+            <MaterialCommunityIcons
+              name="share"
+              size={26}
+              color={message ? 'dodgerblue' : 'gray'}
+              onPress={handlePress}
+              disabled={!message}
+            />
+          ) : (
+            <AntDesign name="picture" size={26} color="dodgerblue" />
+          )}
         </View>
       </View>
     </KeyboardAvoidingView>
@@ -68,11 +71,10 @@ const MessageBox = ({initialText, onClearText, onPress}) => {
 const styles = StyleSheet.create({
   shadowProp: {
     shadowColor: '#171717',
-    shadowOffset: {width: 0, height: -4},
+    shadowOffset: {width: 0, height: -1},
     shadowOpacity: 0.2,
-    shadowRadius: 10,
+    shadowRadius: 5,
     backgroundColor: 'white',
-    // height: 100,
   },
   textInput: {
     height: 40,
@@ -83,4 +85,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MessageBox;
+export default MessageBox2;

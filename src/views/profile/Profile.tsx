@@ -28,6 +28,7 @@ import Settings from './settings/Settings';
 import UserProfileModal from '../../components/profile/UserProfileModal';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Popup from '../../components/common/Popup';
+import MessageDetails from './MessageDetails';
 
 const {bold, font16, aiCenter, row, jcSpaceAround, cGap15, jcCenter} = common;
 
@@ -129,6 +130,7 @@ const ButtonGroup = ({
   onPressFollowing,
   pressButtonTitle,
   isAuthUser = true,
+  userId,
 }) => {
   const navigation = useNavigation();
 
@@ -149,7 +151,15 @@ const ButtonGroup = ({
       )}
       <TouchableOpacity
         style={[styles.button, aiCenter, row]}
-        onPress={() => navigation.navigate(Messages.name)}>
+        onPress={() => {
+          isAuthUser
+            ? navigation.navigate(Messages.name)
+            : navigation.navigate(MessageDetails.name, {
+                title: '',
+                isMultiple: false,
+                userId,
+              });
+        }}>
         <Text>Messages</Text>
       </TouchableOpacity>
     </View>
@@ -229,6 +239,7 @@ const Profile = () => {
                     : 'Follow'
               }
               isAuthUser={isAuthUser}
+              userId={userId}
             />
           </View>
         )}

@@ -29,7 +29,7 @@ export function useSearchText(searchText, search, onSearchTextEmpty) {
       } else {
         search();
       }
-    }, 500);
+    }, 300);
 
     return () => clearTimeout(timer);
   }, [searchText]);

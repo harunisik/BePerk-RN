@@ -39,17 +39,17 @@ export const getUserComments = ({queryKey}) => {
 };
 
 export const getUserFollowing = ({queryKey}) => {
-  const {id} = queryKey[1];
+  const params = queryKey[1];
   return axios
-    .get('/user/listFollowing' + (id ? `?id=${id}` : ''))
+    .get('/user/listFollowing' + (params?.id ? `?id=${params.id}` : ''))
     .then(handleResponse)
     .catch(handleError);
 };
 
 export const getUserFollowers = ({queryKey}) => {
-  const {id} = queryKey[1];
+  const params = queryKey[1];
   return axios
-    .get('/user/listFollowers' + (id ? `?id=${id}` : ''))
+    .get('/user/listFollowers' + (params?.id ? `?id=${params.id}` : ''))
     .then(handleResponse)
     .catch(handleError);
 };
