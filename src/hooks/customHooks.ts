@@ -69,8 +69,8 @@ export function useMutation<TData = unknown, TVariables = void>(
         queryClient.invalidateQueries({queryKey: item});
       });
     },
-    onError: ({message}) => {
-      showMessage({message, type: 'danger'});
+    onError: error => {
+      showMessage({message: error.message ?? error, type: 'danger'});
     },
   });
 }

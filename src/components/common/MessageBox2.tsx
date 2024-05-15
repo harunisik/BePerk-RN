@@ -7,20 +7,25 @@ import {
 } from 'react-native';
 import common from '../../styles/sharedStyles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import Emoji from './Emoji';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
+import {launchMediaLibrary} from '../../utils/PermissionUtil';
+import {PERMISSIONS} from 'react-native-permissions';
 
 const {row, jcSpaceBetween, p10, aiCenter} = common;
 
 const MessageBox2 = ({onPressSend}) => {
   const [message, setMessage] = useState('');
+  const [asset, setAsset] = useState();
+
   const tabBarHeight = useBottomTabBarHeight();
 
   const handlePress = () => {
-    onPressSend(message);
+    onPressSend(message, asset);
     setMessage('');
+    setAsset(undefined);
   };
 
   const handleChangeText = (text: string) => {
@@ -29,6 +34,32 @@ const MessageBox2 = ({onPressSend}) => {
       // onClearText();
     }
   };
+
+  const handlePressMediaButton = permission => {
+    launchMediaLibrary(
+      permission,
+      data => {
+        if (data.assets?.length && data.assets.length > 0) {
+          setAsset(
+            data.assets.map(({type, ...rest}) => {
+              return {
+                ...rest,
+                type,
+                mediaType: type.startsWith('image') ? 'photo' : 'video',
+              };
+            }),
+          );
+        }
+      },
+      {mediaType: 'photo'},
+    );
+  };
+
+  useEffect(() => {
+    if (asset) {
+      handlePress();
+    }
+  }, [asset]);
 
   return (
     <KeyboardAvoidingView
@@ -43,7 +74,12 @@ const MessageBox2 = ({onPressSend}) => {
           )}
         </View>
         <View style={[row, jcSpaceBetween, aiCenter]}>
-          <AntDesign name="camera" size={26} color="dodgerblue" />
+          <AntDesign
+            name="camera"
+            size={26}
+            color="dodgerblue"
+            onPress={() => handlePressMediaButton(PERMISSIONS.IOS.CAMERA)}
+          />
           <TextInput
             placeholder="Message..."
             onChangeText={handleChangeText}
@@ -60,7 +96,14 @@ const MessageBox2 = ({onPressSend}) => {
               disabled={!message}
             />
           ) : (
-            <AntDesign name="picture" size={26} color="dodgerblue" />
+            <AntDesign
+              name="picture"
+              size={26}
+              color="dodgerblue"
+              onPress={() =>
+                handlePressMediaButton(PERMISSIONS.IOS.PHOTO_LIBRARY)
+              }
+            />
           )}
         </View>
       </View>

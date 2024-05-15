@@ -8,7 +8,6 @@ import {useCallback} from 'react';
 import {useQuery} from '../../hooks/customHooks';
 import {getUserPerks} from '../../services/UserService';
 import {useGetUserFeed} from '../../hooks/infiniteQueryHooks';
-import FlatList from '../../components/common/FlatList';
 import InfiniteFlatList from '../../components/common/InfiniteFlatList';
 
 const ListHeaderItem = ({item}) => {
@@ -34,7 +33,7 @@ const ListHeaderItem = ({item}) => {
         </View>
         <View>
           <View style={[aiCenter, row, jcSpaceBetween]}>
-            <DovesItemOptions item={item} />
+            <DovesItemOptions item={item} color="white" />
             <MaterialCommunityIcons name="heart" size={22} color="white" />
           </View>
         </View>

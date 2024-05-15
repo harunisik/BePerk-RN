@@ -14,16 +14,13 @@ import {
 const Comment = () => {
   const route = useRoute();
   const {
-    params: {item},
+    params: {id, type, fullname, username, caption, uploadTime},
   } = route;
   const [selectedComment, setSelectedComment] = useState('');
-  const [selectedCommentId, setSelectedCommentId] = useState(item.id);
+  const [selectedCommentId, setSelectedCommentId] = useState(id);
   const {flex1} = common;
 
-  const {data, refetch, isFetching} = useQuery(getUserComments, {
-    id: item.id,
-    type: item.type,
-  });
+  const {data, refetch, isFetching} = useQuery(getUserComments, {id, type});
 
   const postComment = useMutation(userPostComment);
   const deleteComment = useMutation(userDeleteComment);
@@ -35,14 +32,17 @@ const Comment = () => {
 
   const clearSelectedComment = () => {
     setSelectedComment('');
-    setSelectedCommentId(item.id);
+    setSelectedCommentId(id);
   };
 
   return (
     <View style={flex1}>
       <CommentList
         data={data}
-        headerItem={item}
+        fullname={fullname}
+        username={username}
+        caption={caption}
+        uploadTime={uploadTime}
         isFetching={isFetching}
         onRefresh={handleRefresh}
         onPressReply={(message, commentId) => {
@@ -55,7 +55,7 @@ const Comment = () => {
             {onSuccess: () => clearSelectedComment()},
           )
         }
-        isHeaderVisible={item.type === 3}
+        isHeaderVisible={type === 3}
       />
 
       <MessageBox
@@ -65,9 +65,9 @@ const Comment = () => {
             postComment.mutate(
               {
                 comment,
-                id: item.id,
-                type: item.type,
-                ...(item.id !== selectedCommentId && {
+                id,
+                type,
+                ...(id !== selectedCommentId && {
                   comment_id: selectedCommentId,
                 }),
               },

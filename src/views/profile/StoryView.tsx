@@ -2,8 +2,6 @@ import {
   View,
   Text,
   GestureResponderEvent,
-  ImageBackground,
-  TouchableWithoutFeedback,
   useWindowDimensions,
   StyleSheet,
   TextInput,
@@ -21,13 +19,10 @@ import {ProgressBar} from 'react-native-paper';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import UserSearch, {ChatShareHeaderRight} from './UserSearch';
-import {deletePost as userDeletePost} from '../../services/UserService';
+import {deletePost} from '../../services/UserService';
 import {useMutation} from '../../hooks/customHooks';
 import {useStore} from '../../containers/StoreContainer';
-import {
-  chatSend as userChatSend,
-  chatShare as userChatShare,
-} from '../../services/ChatService';
+import {chatSend, chatShare} from '../../services/ChatService';
 import uuid from 'react-native-uuid';
 import {postMy24Like} from '../../services/My24Service';
 import Popup from '../../components/common/Popup';
@@ -37,7 +32,6 @@ import FastImage from 'react-native-fast-image';
 
 const {
   jcSpaceBetween,
-  jcCenter,
   flex1,
   rGap10,
   pv50,
@@ -209,10 +203,10 @@ const StoryView = () => {
   const [liked, setLiked] = useState(data.map(item => item.liked));
   const [duration, setDuration] = useState(DURATION);
 
-  const deletePost = useMutation(userDeletePost);
-  const my24Like = useMutation(postMy24Like);
-  const chatShare = useMutation(userChatShare);
-  const chatSend = useMutation(userChatSend);
+  const deletePostApi = useMutation(deletePost);
+  const my24LikeApi = useMutation(postMy24Like);
+  const chatShareApi = useMutation(chatShare);
+  const chatSendApi = useMutation(chatSend);
 
   const tick = 200; // ms
   const currentItem = data[currentIndex];
@@ -324,7 +318,7 @@ const StoryView = () => {
   };
 
   const handleLike = () => {
-    my24Like.mutate(
+    my24LikeApi.mutate(
       {
         id: currentItem.id,
         type: currentItem.type,
@@ -342,10 +336,10 @@ const StoryView = () => {
   };
 
   const handleSendMessage = message => {
-    chatShare.mutate(
+    chatShareApi.mutate(
       {
         id: currentItem.id,
-        type: currentItem.type,
+        type: '2',
         share_to: JSON.stringify([currentItem.user_id]),
       },
       {
@@ -353,19 +347,12 @@ const StoryView = () => {
           Keyboard.dismiss();
           setPaused(false);
 
-          chatSend.mutate(
-            {
-              chat_id,
-              message,
-              uid: uuid.v4(),
-            },
-            {
-              onSuccess: () => {
-                // navigation.goBack();
-                // showMessage({message: 'Message sent'});
-              },
-            },
-          );
+          const form = new FormData();
+          form.append('chat_id', chat_id);
+          form.append('uid', uuid.v4());
+          form.append('message', message);
+
+          chatSendApi.mutate(form);
         },
       },
     );
@@ -386,7 +373,7 @@ const StoryView = () => {
   };
 
   const handleModalDelete = () => {
-    deletePost.mutate(
+    deletePostApi.mutate(
       {
         items: JSON.stringify([{id: currentItem.id, type: 2}]),
       },

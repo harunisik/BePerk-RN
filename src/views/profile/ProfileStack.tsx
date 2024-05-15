@@ -21,6 +21,8 @@ import MessageDetails, {MessageDetailsScreenOptions} from './MessageDetails';
 import StoryView2 from './StoryView2';
 import FollowersList from './FollowersList';
 import WebView, {WebViewScreenOptions} from '../../components/common/WebView';
+import MediaView, {MediaViewScreenOptions} from './MediaView';
+import PostDetailItemView from './PostDetailsItemView';
 
 const Stack = createNativeStackNavigator();
 
@@ -136,6 +138,16 @@ const ProfileStack = () => {
         name={WebView.name}
         component={WebView}
         options={WebViewScreenOptions}
+      />
+      <Stack.Screen
+        name={MediaView.name}
+        component={MediaView}
+        options={MediaViewScreenOptions}
+      />
+      <Stack.Screen
+        name={PostDetailItemView.name}
+        component={PostDetailItemView}
+        options={{title: 'Post'}}
       />
     </Stack.Navigator>
   );

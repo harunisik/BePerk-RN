@@ -8,9 +8,9 @@ export const chatShare = share => {
     .catch(handleError);
 };
 
-export const chatSend = chat => {
+export const chatSend = formData => {
   return axios
-    .post('/chat/send', {...chat})
+    .post('/chat/send', formData)
     .then(handleResponse)
     .catch(error => {
       const errorMessage = error.response?.data?.error?.[0];

@@ -32,16 +32,42 @@ const PagerItem = ({item, paused = true}) => {
         </View>
         <View style={{rowGap: 25}}>
           <LikeButtton
-            item={item}
+            id={item.id}
+            liked={item.liked}
+            likesCount={item.likes_count}
             type={item.type}
             size={28}
             color="white"
             vertical
           />
-          <CommentButton item={item} size={28} color="white" vertical />
-          <BookmarkButton item={item} size={28} color="white" />
-          <ShareButton item={item} size={28} color="white" />
-          <DotsButton item={item} size={28} color="white" />
+          <CommentButton
+            id={item.id}
+            fullname={item.fullname}
+            username={item.username}
+            caption={item.caption}
+            type={item.type}
+            commentsCount={item.comments_count}
+            uploadTime={item.upload_time}
+            size={28}
+            color="white"
+            vertical
+          />
+          <BookmarkButton
+            id={item.id}
+            type={item.type}
+            isSaved={item.bookmark}
+            size={28}
+            color="white"
+          />
+          <ShareButton id={item.id} type={item.type} size={28} color="white" />
+          <DotsButton
+            id={item.id}
+            type={item.type}
+            userId={item.user_id}
+            username={item.username}
+            size={28}
+            color="white"
+          />
         </View>
       </View>
     </>

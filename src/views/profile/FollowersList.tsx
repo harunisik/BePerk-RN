@@ -115,7 +115,6 @@ const FollowersList = () => {
   };
 
   const handlePressItem = item => {
-    console.log(item);
     navigation.push(Profile.name, {
       headerBackVisible: true,
       userId: item.user_id,

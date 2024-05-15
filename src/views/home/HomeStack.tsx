@@ -7,6 +7,7 @@ import UserSearch, {UserSearchScreenOptions} from '../profile/UserSearch';
 import Explore from './Explore';
 import ExplorePostsDetails from '../profile/ExplorePostsDetails';
 import ProfileStack from '../profile/ProfileStack';
+import StoryView from '../profile/StoryView';
 
 const Stack = createNativeStackNavigator();
 
@@ -40,6 +41,15 @@ const HomeStack = () => {
         name={ProfileStack.name}
         component={ProfileStack}
         options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name={StoryView.name}
+        component={StoryView}
+        options={{
+          animation: 'fade',
+          headerShown: false,
+          presentation: 'fullScreenModal',
+        }}
       />
     </Stack.Navigator>
   );

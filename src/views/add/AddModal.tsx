@@ -5,122 +5,46 @@ import {useNavigation} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-import {check, request, PERMISSIONS, RESULTS} from 'react-native-permissions';
 import AddStack from './AddStack';
 import NewStory from './NewStory';
 import NewPost from './NewPost';
 import BottomModal from '../../components/common/BottomModal';
+import {launchMediaLibrary} from '../../utils/PermissionUtil';
+import {PERMISSIONS} from 'react-native-permissions';
 
 export const ImageVideoSelectionModal = ({visible, onDismiss, navigateTo}) => {
   const navigation = useNavigation();
 
   const handlePressImage = () => {
     onDismiss();
-    check(PERMISSIONS.IOS.PHOTO_LIBRARY)
-      .then(result => {
-        switch (result) {
-          case RESULTS.UNAVAILABLE:
-            console.log(
-              'This feature is not available (on this device / in this context)',
-            );
-            break;
-          case RESULTS.DENIED:
-            console.log(
-              'The permission has not been requested / is denied but requestable',
-            );
-
-            request(PERMISSIONS.IOS.PHOTO_LIBRARY).then(result => {
-              // console.log(result);
-            });
-            break;
-          case RESULTS.LIMITED:
-            console.log('The permission is limited: some actions are possible');
-            break;
-          case RESULTS.GRANTED:
-            console.log('The permission is granted');
-            launchImageLibrary(
-              {
-                mediaType: 'mixed',
-                presentationStyle: 'fullScreen',
-              },
-              data => {
-                if (data.assets?.length && data.assets.length > 0) {
-                  navigation.navigate(AddStack.name, {
-                    screen: navigateTo,
-                    params: {
-                      assets: data.assets.map(({type, ...rest}) => {
-                        return {
-                          ...rest,
-                          mediaType: type.startsWith('image')
-                            ? 'photo'
-                            : 'video',
-                        };
-                      }),
-                    },
-                  });
-                }
-              },
-            );
-            break;
-          case RESULTS.BLOCKED:
-            console.log('The permission is denied and not requestable anymore');
-            break;
-        }
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    launchMediaLibrary(PERMISSIONS.IOS.PHOTO_LIBRARY, data => {
+      if (data.assets?.length && data.assets.length > 0) {
+        navigation.navigate(AddStack.name, {
+          screen: navigateTo,
+          params: {
+            assets: data.assets.map(({type, ...rest}) => {
+              return {
+                ...rest,
+                type,
+                mediaType: type.startsWith('image') ? 'photo' : 'video',
+              };
+            }),
+          },
+        });
+      }
+    });
   };
 
   const handlePressVideo = () => {
     onDismiss();
-    check(PERMISSIONS.IOS.CAMERA)
-      .then(result => {
-        switch (result) {
-          case RESULTS.UNAVAILABLE:
-            console.log(
-              'This feature is not available (on this device / in this context)',
-            );
-            break;
-          case RESULTS.DENIED:
-            console.log(
-              'The permission has not been requested / is denied but requestable',
-            );
-
-            request(PERMISSIONS.IOS.CAMERA).then(result => {
-              console.log(result);
-            });
-            break;
-          case RESULTS.LIMITED:
-            console.log('The permission is limited: some actions are possible');
-            break;
-          case RESULTS.GRANTED:
-            console.log('The permission is granted');
-            launchCamera(
-              {
-                mediaType: 'mixed',
-                presentationStyle: 'fullScreen',
-                durationLimit: 10,
-              },
-              data => {
-                if (data.assets?.length && data.assets.length > 0) {
-                  navigation.navigate(AddStack.name, {
-                    screen: navigateTo,
-                    params: {assets: data.assets},
-                  });
-                }
-              },
-            );
-            break;
-          case RESULTS.BLOCKED:
-            console.log('The permission is denied and not requestable anymore');
-            break;
-        }
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    launchMediaLibrary(PERMISSIONS.IOS.CAMERA, data => {
+      if (data.assets?.length && data.assets.length > 0) {
+        navigation.navigate(AddStack.name, {
+          screen: navigateTo,
+          params: {assets: data.assets},
+        });
+      }
+    });
   };
 
   return (

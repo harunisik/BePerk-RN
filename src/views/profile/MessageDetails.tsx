@@ -16,6 +16,8 @@ import MessageBox2 from '../../components/common/MessageBox2';
 import uuid from 'react-native-uuid';
 import {useEffect, useState} from 'react';
 import {useChatListOpen, useGetChat} from '../../hooks/userHooks';
+import MediaView from './MediaView';
+import PostDetailItemView from './PostDetailsItemView';
 
 const {flex1, row, aiCenter, bold, cGap5, p10} = common;
 
@@ -80,8 +82,29 @@ const MessageDetailsItem = ({item}) => {
     });
   };
 
-  const handlePressMediaPost = () => {
-    // TODO: handlePressMediaPost
+  const handlePressMedia = () => {
+    navigation.navigate(MediaView.name, {
+      uri: item.media,
+      type: 'image',
+    });
+  };
+
+  const handlePressPost = () => {
+    console.log(item.media);
+    navigation.navigate(PostDetailItemView.name, {
+      id: item.media.id,
+      userId: item.media.user_id,
+      username: item.media.username,
+      fullname: item.media.fullname,
+      type: item.media.type,
+      bookmark: item.media.bookmark,
+      liked: item.media.liked,
+      likesCount: item.media.likes_count,
+      commentsCount: item.media.comments_count,
+      filename: item.media.filename,
+      caption: item.media.caption,
+      uploadTime: item.media.upload_time,
+    });
   };
 
   return (
@@ -97,16 +120,25 @@ const MessageDetailsItem = ({item}) => {
           <MaterialIcons name="account-circle" size={30} color="lightgray" />
         )}
 
-        {item.type === 7 ? ( // post
-          <View
-            style={{
-              backgroundColor: 'dodgerblue',
-              borderRadius: 10,
-              paddingVertical: 5,
-              paddingHorizontal: 10,
-            }}>
-            <Text style={{color: 'white'}}>{item.media}</Text>
-          </View>
+        {item.type === 2 ? ( // story
+          <Pressable onPress={handlePressStory}>
+            <View style={{rowGap: 10}}>
+              <Text>{`@${item.media.fullname} story`}</Text>
+              <FastImage
+                style={{
+                  width: IMAGE_WIDTH,
+                  height: IMAGE_HEIGHT,
+                  borderRadius: 10,
+                }}
+                source={{
+                  uri:
+                    item.media.type === 0
+                      ? item.media.cover
+                      : item.media.filename,
+                }}
+              />
+            </View>
+          </Pressable>
         ) : item.type === 3 ? ( // dove
           <View
             style={[
@@ -143,27 +175,31 @@ const MessageDetailsItem = ({item}) => {
               </View>
             </View>
           </Pressable>
-        ) : item.type === 2 ? ( // story
-          <Pressable onPress={handlePressStory}>
-            <View style={{rowGap: 10}}>
-              <Text>{`@${item.media.fullname} story`}</Text>
-              <FastImage
-                style={{
-                  width: IMAGE_WIDTH,
-                  height: IMAGE_HEIGHT,
-                  borderRadius: 10,
-                }}
-                source={{
-                  uri:
-                    item.media.type === 0
-                      ? item.media.cover
-                      : item.media.filename,
-                }}
-              />
-            </View>
+        ) : item.type === 7 ? ( // text message
+          <View
+            style={{
+              backgroundColor: 'dodgerblue',
+              borderRadius: 10,
+              paddingVertical: 5,
+              paddingHorizontal: 10,
+            }}>
+            <Text style={{color: 'white'}}>{item.media}</Text>
+          </View>
+        ) : item.type === 8 ? ( // dm image
+          <Pressable onPress={handlePressMedia}>
+            <FastImage
+              style={{
+                width: IMAGE_WIDTH,
+                height: IMAGE_HEIGHT,
+                borderRadius: 10,
+              }}
+              source={{
+                uri: item.media,
+              }}
+            />
           </Pressable>
         ) : (
-          <Pressable onPress={handlePressMediaPost}>
+          <Pressable onPress={handlePressPost}>
             <View style={{rowGap: 10, alignItems: 'flex-end'}}>
               <Text>{`@${item.media.fullname} post`}</Text>
               <FastImage
@@ -201,28 +237,37 @@ const MessageDetails = () => {
   const getChatApi = useGetChat({chatId, limit: 1000, offset: 0});
   const chatListOpenApi = useChatListOpen();
 
-  const sendMessage = (message: string, chat_id: number) => {
-    chatSendApi.mutate(
-      {
-        chat_id,
-        message,
-        uid: uuid.v4(),
-      },
-      {onSuccess: () => setIsSending(false)},
-    );
+  const sendMessage = (chat_id: number, message?: string, asset?: any) => {
+    const form = new FormData();
+    form.append('chat_id', chat_id);
+    form.append('uid', uuid.v4());
+
+    if (message) {
+      form.append('message', message);
+    }
+
+    if (asset && asset.length > 0) {
+      form.append('media', {
+        name: asset[0].fileName,
+        type: asset[0].type,
+        uri: asset[0].uri,
+      });
+    }
+
+    chatSendApi.mutate(form, {onSuccess: () => setIsSending(false)});
   };
 
-  const handlePressSend = (message: string) => {
+  const handlePressSend = (message?: string, asset?: any) => {
     setIsSending(true);
     if (chatId) {
-      sendMessage(message, chatId);
+      sendMessage(chatId, message, asset);
     } else {
       chatAddApi.mutate(
         {to_users: JSON.stringify([userId])},
         {
           onSuccess: ({id}) => {
             setChatId(id);
-            sendMessage(message, id);
+            sendMessage(id, message, asset);
           },
         },
       );
@@ -233,7 +278,7 @@ const MessageDetails = () => {
     if (chatId) {
       getChatApi().then(({messages}) => {
         setData(
-          messages.map(({id, date, type, media, user_id}, index, arr) => {
+          messages.map(({id, date, type, media, user_id, name}, index, arr) => {
             const dateStr = formatDate(date * 1000);
             const prevDateStr =
               index <= arr.length - 2
@@ -245,6 +290,7 @@ const MessageDetails = () => {
               type,
               media,
               user_id,
+              name,
             };
           }),
         );

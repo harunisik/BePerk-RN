@@ -79,7 +79,12 @@ const CommentItem = ({item, isChild = false, onDelete, onPressReply}) => {
               )}
             </View>
             <View>
-              <LikeButtton item={item} type={4} />
+              <LikeButtton
+                id={item.id}
+                liked={item.liked}
+                likesCount={item.likes_count}
+                type={4}
+              />
             </View>
           </View>
         </View>

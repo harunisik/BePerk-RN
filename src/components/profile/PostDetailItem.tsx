@@ -25,7 +25,37 @@ const {
   rGap10,
 } = common;
 
-const PostDetailItem = ({item, isViewable = false}) => {
+interface PostDetailItemProps {
+  id: number;
+  userId: number;
+  username: string;
+  fullname: string;
+  type: number;
+  bookmark: number;
+  liked: number;
+  likesCount: number;
+  filename: string;
+  caption: string;
+  uploadTime: number;
+  commentsCount: number;
+  isViewable?: boolean;
+}
+
+const PostDetailItem = ({
+  id,
+  userId,
+  username,
+  fullname,
+  type,
+  bookmark,
+  liked,
+  likesCount,
+  filename,
+  caption,
+  uploadTime,
+  commentsCount,
+  isViewable = false,
+}: PostDetailItemProps) => {
   const {width: windowWidth, height: windowHeight} = useWindowDimensions();
 
   return (
@@ -33,40 +63,53 @@ const PostDetailItem = ({item, isViewable = false}) => {
       <View style={[row, aiCenter, jcSpaceBetween, ph15]}>
         <View style={[row, aiCenter, cGap10]}>
           <MaterialIcons name="account-circle" size={30} color="lightgray" />
-          <Text style={bold}>{item.username}</Text>
+          <Text style={bold}>{username}</Text>
         </View>
 
         <View style={[row, cGap10]}>
-          <BookmarkButton item={item} />
-          <DotsButton item={item} />
+          <BookmarkButton id={id} type={type} isSaved={bookmark} />
+          <DotsButton id={id} type={type} userId={userId} username={username} />
         </View>
       </View>
 
-      {item.type === 1 ? (
-        <FastImage uri={item.filename} />
+      {type === 1 ? (
+        <FastImage uri={filename} />
       ) : (
         <View
           style={{
             width: windowWidth,
             height: windowHeight * 0.6,
           }}>
-          <Video uri={item.filename} paused={!isViewable} />
+          <Video uri={filename} paused={!isViewable} />
         </View>
       )}
 
       <View style={[row, jcSpaceAround]}>
-        <LikeButtton item={item} type={item.type} />
-        <CommentButton item={item} />
-        <ShareButton item={item} />
+        <LikeButtton
+          id={id}
+          liked={liked}
+          likesCount={likesCount}
+          type={type}
+        />
+        <CommentButton
+          id={id}
+          type={type}
+          fullname={fullname}
+          username={username}
+          caption={caption}
+          uploadTime={uploadTime}
+          commentsCount={commentsCount}
+        />
+        <ShareButton id={id} type={type} />
       </View>
       <View style={[ph15, rGap5]}>
-        {item.caption && (
+        {caption && (
           <Text>
-            <Text style={bold}>{item.username + ' '}</Text>
-            <Text>{item.caption}</Text>
+            <Text style={bold}>{username + ' '}</Text>
+            <Text>{caption}</Text>
           </Text>
         )}
-        <Text style={[font11, gray]}>{dateDiff(item.upload_time * 1000)}</Text>
+        <Text style={[font11, gray]}>{dateDiff(uploadTime * 1000)}</Text>
       </View>
     </View>
   );

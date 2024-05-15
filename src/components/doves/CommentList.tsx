@@ -32,7 +32,10 @@ const transformCommentList = commentList => {
 };
 
 const CommentList = ({
-  headerItem,
+  fullname,
+  username,
+  caption,
+  uploadTime,
   onPressReply,
   data,
   isFetching,
@@ -49,7 +52,7 @@ const CommentList = ({
       renderItem={({item}) => (
         <CommentItem
           item={item}
-          onDeleteComment={onDeleteItem}
+          onDelete={onDeleteItem}
           onPressReply={onPressReply}
         />
       )}
@@ -57,7 +60,14 @@ const CommentList = ({
       refreshing={isFetching}
       contentContainerStyle={[ph15, pv15]}
       {...(isHeaderVisible && {
-        ListHeaderComponent: <CommentHeaderItem item={headerItem} />,
+        ListHeaderComponent: (
+          <CommentHeaderItem
+            fullname={fullname}
+            username={username}
+            caption={caption}
+            uploadTime={uploadTime}
+          />
+        ),
       })}
     />
   );

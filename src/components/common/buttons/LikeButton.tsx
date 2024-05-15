@@ -8,49 +8,53 @@ import {postUserLike} from '../../../services/UserService';
 const {font12, cGap3, row, aiCenter, rGap5} = common;
 
 interface LikeButtonProps {
-  item: any;
-  type: any;
+  id: number;
+  liked: number;
+  likesCount: number;
+  type: number;
   size?: number;
   color?: string;
   vertical?: boolean;
 }
 
 const LikeButtton = ({
-  item,
+  id,
+  liked,
+  likesCount,
   type,
   size = 18,
   color = 'dodgerblue',
   vertical = false,
 }: LikeButtonProps) => {
-  const [liked, setLiked] = useState(item.liked);
-  const [likesCount, setLikesCount] = useState(item.likes_count);
+  const [likedState, setLikedState] = useState(liked);
+  const [likesCountState, setLikesCountState] = useState(likesCount);
   const userLike = useMutation(postUserLike);
 
   const handlePress = () =>
     userLike.mutate(
-      {id: item.id, type, like: liked ? -1 : 1},
+      {id: id, type, like: likedState ? -1 : 1},
       {
         onSuccess: ([{likes}]) => {
-          setLiked(liked ? 0 : 1);
-          setLikesCount(likes);
+          setLikedState(likedState ? 0 : 1);
+          setLikesCountState(likes);
         },
       },
     );
 
   useEffect(() => {
-    setLiked(item.liked);
-    setLikesCount(item.likes_count);
-  }, [item]);
+    setLikedState(liked);
+    setLikesCountState(likesCount);
+  }, [liked, likesCount]);
 
   return (
     <View style={[aiCenter, ...(vertical ? [rGap5] : [row, cGap3])]}>
       <MaterialCommunityIcons
-        name={liked ? 'heart' : 'heart-outline'}
+        name={likedState ? 'heart' : 'heart-outline'}
         size={size}
         color={color}
         onPress={handlePress}
       />
-      <Text style={[font12, {color}]}>{likesCount}</Text>
+      <Text style={[font12, {color}]}>{likesCountState}</Text>
     </View>
   );
 };

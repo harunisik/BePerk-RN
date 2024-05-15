@@ -50,7 +50,7 @@ const NewStory = () => {
     params: {assets},
   } = route;
   const asset = assets[0];
-  console.log(asset);
+
   const postMy24 = useMutation(userPostMy24);
 
   const getFormData = async () => {

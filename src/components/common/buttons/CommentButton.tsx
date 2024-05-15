@@ -7,14 +7,26 @@ import {useNavigation} from '@react-navigation/native';
 const {font12, cGap3, row, aiCenter, rGap5} = common;
 
 interface CommentButtonProps {
-  item: any;
+  id: number;
+  type: number;
+  fullname: string;
+  username: string;
+  caption: string;
+  uploadTime: number;
+  commentsCount: number;
   size?: number;
   color?: string;
   vertical?: boolean;
 }
 
 const CommentButton = ({
-  item,
+  id,
+  type,
+  fullname,
+  username,
+  caption,
+  uploadTime,
+  commentsCount,
   size = 18,
   color = 'dodgerblue',
   vertical = false,
@@ -27,9 +39,18 @@ const CommentButton = ({
         name="comment-processing-outline"
         size={size}
         color={color}
-        onPress={() => navigation.navigate(Comment.name, {item})}
+        onPress={() =>
+          navigation.navigate(Comment.name, {
+            id,
+            type,
+            fullname,
+            username,
+            caption,
+            uploadTime,
+          })
+        }
       />
-      <Text style={[font12, {color}]}>{item.comments_count}</Text>
+      <Text style={[font12, {color}]}>{commentsCount}</Text>
     </View>
   );
 };

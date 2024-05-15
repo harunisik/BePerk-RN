@@ -23,6 +23,7 @@ const DovesItem = ({item, displayUsername = true}) => {
   const navigation = useNavigation();
 
   const {
+    flex1,
     jcSpaceBetween,
     aiCenter,
     jcCenter,
@@ -43,22 +44,23 @@ const DovesItem = ({item, displayUsername = true}) => {
   return (
     <View style={[rGap15, pr15, pl15]}>
       <View style={[aiCenter, row, jcSpaceBetween]}>
-        <View style={[row, cGap10]}>
+        <View style={[row, cGap10, flex1]}>
           <View style={[jcCenter]}>
             <MaterialIcons name="account-circle" size={30} color="lightgray" />
           </View>
-          <View style={[jcCenter]}>
+          <View style={[jcCenter, flex1]}>
             {displayUsername && (
               <View style={[cGap10, row, aiCenter]}>
                 <Text
-                  style={bold}
+                  style={[bold, flex1]}
                   onPress={() =>
                     navigation.navigate(ProfileStack.name, {
                       headerBackVisible: true,
                       userId: item.user_id,
                       username: item.username,
                     })
-                  }>
+                  }
+                  numberOfLines={1}>
                   {item.username}
                 </Text>
                 {item.isVerified === 1 && (
@@ -83,7 +85,12 @@ const DovesItem = ({item, displayUsername = true}) => {
       <Text>{item.caption}</Text>
       <View style={[aiCenter, row, jcSpaceBetween]}>
         <DovesItemOptions item={item} />
-        <DotsButton item={item} />
+        <DotsButton
+          id={item.id}
+          type={item.type}
+          userId={item.user_id}
+          username={item.username}
+        />
       </View>
     </View>
   );

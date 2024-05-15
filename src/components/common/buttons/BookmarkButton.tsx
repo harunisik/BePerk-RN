@@ -4,24 +4,28 @@ import {useMutation} from '../../../hooks/customHooks';
 import {postBookmarks as userPostBookmarks} from '../../../services/UserService';
 
 interface BookmarkButtonProps {
-  item: any;
+  id: number;
+  type: number;
+  isSaved: number;
   size?: number;
   color?: string;
 }
 
 const BookmarkButton = ({
-  item,
+  id,
+  type,
+  isSaved,
   size = 24,
   color = 'dodgerblue',
 }: BookmarkButtonProps) => {
-  const [bookmark, setBookmark] = useState(item.bookmark);
+  const [bookmark, setBookmark] = useState(isSaved);
   const postBookmarks = useMutation(userPostBookmarks);
 
   const handlePress = () =>
     postBookmarks.mutate(
       {
-        id: item.id,
-        type: item.type,
+        id: id,
+        type: type,
         bookmark: bookmark ? 0 : 1,
       },
       {
@@ -32,8 +36,8 @@ const BookmarkButton = ({
     );
 
   useEffect(() => {
-    setBookmark(item.bookmark);
-  }, [item]);
+    setBookmark(isSaved);
+  }, [isSaved]);
 
   return (
     <MaterialCommunityIcons

@@ -8,7 +8,6 @@ const PostDetailItemList = ({
   isFetching,
   refetch,
   remove,
-  hasNextPage = true,
 }) => {
   const [viewableItem, setViewableItem] = useState(0);
 
@@ -16,7 +15,21 @@ const PostDetailItemList = ({
     <InfiniteFlatList
       data={data}
       renderItem={({item, index}) => (
-        <PostDetailItem item={item} isViewable={index === viewableItem} />
+        <PostDetailItem
+          id={item.id}
+          type={item.type}
+          userId={item.user_id}
+          username={item.username}
+          fullname={item.fullname}
+          caption={item.caption}
+          bookmark={item.bookmark}
+          filename={item.filename}
+          liked={item.liked}
+          likesCount={item.likes_count}
+          commentsCount={item.comments_count}
+          uploadTime={item.upload_time}
+          isViewable={index === viewableItem}
+        />
       )}
       fetchNextPage={fetchNextPage}
       isFetching={isFetching}

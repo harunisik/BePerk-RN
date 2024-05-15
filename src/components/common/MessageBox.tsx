@@ -15,7 +15,7 @@ const {row, jcSpaceBetween, p10, aiCenter} = common;
 
 const MessageBox = ({initialText, onClearText, onPress}) => {
   const [message, setMessage] = useState(initialText);
-  const tabBarHeight = useBottomTabBarHeight();
+  const [height, setHeight] = useState();
 
   const handlePress = () => {
     onPress(message);
@@ -29,8 +29,14 @@ const MessageBox = ({initialText, onClearText, onPress}) => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={tabBarHeight}>
-      <View style={[p10, styles.shadowProp]}>
+      keyboardVerticalOffset={height}>
+      <View
+        style={[p10, styles.shadowProp]}
+        onLayout={({
+          nativeEvent: {
+            layout: {height},
+          },
+        }) => setHeight(height)}>
         <View style={[row, jcSpaceBetween]}>
           {['😌', '🤣', '❤️', '😍', '😱', '✝️', '🙏', '🔥', '😥'].map(
             (item, index) => {

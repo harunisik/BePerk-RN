@@ -94,9 +94,13 @@ const MessageItem = ({item, onDelete}) => {
                     ? 'Story'
                     : item.last_message_type === 3
                       ? 'Dove'
-                      : item.last_message_type === 7
-                        ? item.last_message
-                        : item.last_message_type}
+                      : item.last_message_type === 6
+                        ? 'Profile'
+                        : item.last_message_type === 8
+                          ? 'Image'
+                          : item.last_message_type === 7
+                            ? item.last_message
+                            : item.last_message_type}
               </Text>
             </View>
           </View>

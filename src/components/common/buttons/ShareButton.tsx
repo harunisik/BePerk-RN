@@ -5,13 +5,15 @@ import UserSearch, {
 } from '../../../views/profile/UserSearch';
 
 interface ShareButtonProps {
-  item: any;
+  id: number;
+  type: number;
   size?: number;
   color?: string;
 }
 
 const ShareButton = ({
-  item,
+  id,
+  type,
   size = 26,
   color = 'dodgerblue',
 }: ShareButtonProps) => {
@@ -25,7 +27,7 @@ const ShareButton = ({
       onPress={() =>
         navigation.navigate(UserSearch.name, {
           headerRightComp: ChatShareHeaderRight.name,
-          headerRightProps: {itemId: item.id, type: item.type},
+          headerRightProps: {itemId: id, type},
         })
       }
     />

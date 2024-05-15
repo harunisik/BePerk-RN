@@ -11,12 +11,28 @@ import Button from './Button';
 import BottomModal from '../BottomModal';
 import Popup from '../Popup';
 
-const ItemModal = ({item, visible, onDismiss}) => {
+interface ItemModalProps {
+  id: number;
+  type: number;
+  userId: number;
+  username: string;
+  visible: boolean;
+  onDismiss: () => void;
+}
+
+const ItemModal = ({
+  id,
+  type,
+  userId,
+  username,
+  visible,
+  onDismiss,
+}: ItemModalProps) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const {
     store: {
-      authResult: {id, username},
+      authResult: {id: idParam, username: usernameParam},
     },
   } = useStore();
 
@@ -25,17 +41,17 @@ const ItemModal = ({item, visible, onDismiss}) => {
   const handlePressCopyLink = () => {
     onDismiss();
     showMessage({message: 'Link copied'});
-    if (item.type === 1 || item.type === 0) {
-      Clipboard.setString(`beperk://post?id=${item.id}&type=${item.type}`);
+    if (type === 1 || type === 0) {
+      Clipboard.setString(`beperk://post?id=${id}&type=${type}`);
     } else {
-      Clipboard.setString(`beperk://dove?id=${item.id}`);
+      Clipboard.setString(`beperk://dove?id=${id}`);
     }
   };
 
   const handlePressDelete = () =>
     deletePost.mutate(
       {
-        items: JSON.stringify([{id: item.id, type: item.type}]),
+        items: JSON.stringify([{id: id, type: type}]),
       },
       {
         onSuccess: () => {
@@ -52,7 +68,7 @@ const ItemModal = ({item, visible, onDismiss}) => {
         title="Copy Link"
         icon="content-copy"
       />
-      {id === item.user_id || username === item.username ? (
+      {idParam === userId || usernameParam === username ? (
         <>
           <Button
             title="Delete"
@@ -93,13 +109,19 @@ const ItemModal = ({item, visible, onDismiss}) => {
 };
 
 interface DotsButtonProps {
-  item: any;
+  id: number;
+  type: number;
+  userId: number;
+  username: string;
   size?: number;
   color?: string;
 }
 
 const DotsButton = ({
-  item,
+  id,
+  type,
+  userId,
+  username,
   size = 24,
   color = 'dodgerblue',
 }: DotsButtonProps) => {
@@ -116,7 +138,10 @@ const DotsButton = ({
         }}
       />
       <ItemModal
-        item={item}
+        id={id}
+        type={type}
+        userId={userId}
+        username={username}
         visible={modalVisible}
         onDismiss={() => setModalVisible(false)}
       />
