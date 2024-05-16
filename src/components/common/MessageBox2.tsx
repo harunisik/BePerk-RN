@@ -11,7 +11,7 @@ import {useEffect, useState} from 'react';
 import Emoji from './Emoji';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
-import {launchMediaLibrary} from '../../utils/PermissionUtil';
+import {launchMediaLibrary} from '../../utils/MediaUtil';
 import {PERMISSIONS} from 'react-native-permissions';
 
 const {row, jcSpaceBetween, p10, aiCenter} = common;

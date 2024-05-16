@@ -4,6 +4,7 @@ import common from '../../styles/sharedStyles';
 import {useNavigation} from '@react-navigation/native';
 import FollowersList from '../../views/profile/FollowersList';
 import WebView from '../common/WebView';
+import FastImage from 'react-native-fast-image';
 
 const {aiCenter, row, jcCenter, bold, blue, cGap50} = common;
 
@@ -13,7 +14,14 @@ const UserInfo = ({data, isAuthUser, userId}) => {
   return (
     <View style={[aiCenter, jcCenter, {rowGap: 20}]}>
       <View style={[aiCenter]}>
-        <MaterialIcons name="account-circle" size={56} color="lightgray" />
+        {data?.photo ? (
+          <FastImage
+            source={{uri: data?.photo}}
+            style={{width: 100, height: 100}}
+          />
+        ) : (
+          <MaterialIcons name="account-circle" size={56} color="lightgray" />
+        )}
         <Text style={bold}>{data?.fullname}</Text>
       </View>
 

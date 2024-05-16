@@ -169,9 +169,9 @@ export const postBookmarks = bookmark => {
     .catch(handleError);
 };
 
-export const postProfile = profile => {
+export const postProfile = formData => {
   return axios
-    .post('/user/profile', {...profile})
+    .post('/user/profile', formData)
     .then(handleResponse)
     .catch(handleError);
 };

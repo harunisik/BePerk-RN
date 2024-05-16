@@ -9,7 +9,7 @@ import AddStack from './AddStack';
 import NewStory from './NewStory';
 import NewPost from './NewPost';
 import BottomModal from '../../components/common/BottomModal';
-import {launchMediaLibrary} from '../../utils/PermissionUtil';
+import {launchMediaLibrary} from '../../utils/MediaUtil';
 import {PERMISSIONS} from 'react-native-permissions';
 
 export const ImageVideoSelectionModal = ({visible, onDismiss, navigateTo}) => {
