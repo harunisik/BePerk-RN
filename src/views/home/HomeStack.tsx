@@ -8,6 +8,7 @@ import Explore from './Explore';
 import ExplorePostsDetails from '../profile/ExplorePostsDetails';
 import ProfileStack from '../profile/ProfileStack';
 import StoryView from '../profile/StoryView';
+import Messages, {MessagesScreenOptions} from '../profile/Messages';
 
 const Stack = createNativeStackNavigator();
 
@@ -50,6 +51,11 @@ const HomeStack = () => {
           headerShown: false,
           presentation: 'fullScreenModal',
         }}
+      />
+      <Stack.Screen
+        name={Messages.name}
+        component={Messages}
+        options={MessagesScreenOptions}
       />
     </Stack.Navigator>
   );

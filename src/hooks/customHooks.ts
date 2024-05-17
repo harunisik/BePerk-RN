@@ -40,7 +40,7 @@ const queryMap = {
   [deleteComment.name]: [getUserComments.name],
   [addPerk.name]: [getUserFeed.name, getUserExploring.name],
   [chatShare.name]: [],
-  [chatSend.name]: [getChat.name],
+  [chatSend.name]: [getChat.name, chatListOpen.name],
   [chatDelete.name]: [chatListOpen.name],
   [addFollowing.name]: [getUserFollowing.name, getUserProfile.name],
   [deleteFollowing.name]: [getUserFollowing.name, getUserProfile.name],

@@ -9,6 +9,8 @@ import FlatList from '../../components/common/FlatList';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Swipeable} from 'react-native-gesture-handler';
 import {useStore} from '../../containers/StoreContainer';
+import {useEffect} from 'react';
+import UserSearch, {MessagesHeaderRight} from './UserSearch';
 
 const {
   row,
@@ -24,14 +26,19 @@ const {
   flex1,
 } = common;
 
-export const MessagesScreenOptions = ({}) => {
+export const MessagesScreenOptions = ({navigation}) => {
   return {
     headerRight: () => (
       <MaterialCommunityIcons
         name="file-document-edit-outline"
         size={26}
         color="dodgerblue"
-        onPress={() => Alert.alert('under construction')}
+        onPress={() =>
+          navigation.navigate(UserSearch.name, {
+            headerRightComp: MessagesHeaderRight.name,
+            headerRightProps: {},
+          })
+        }
       />
     ),
   };

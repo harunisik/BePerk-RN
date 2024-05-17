@@ -11,7 +11,7 @@ export interface AuthResult {
 
 interface AuthAction {
   type: AuthActionType;
-  authResult?: AuthResult;
+  authResult: AuthResult;
 }
 
 export default AuthAction;
