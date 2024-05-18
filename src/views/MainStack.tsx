@@ -5,15 +5,52 @@ import SignIn from './auth/SignIn';
 import BottomTab from './BottomTab';
 import CreateNewAccount from './profile/settings/CreateNewAccount';
 import AddStack from './add/AddStack';
+import * as Keychain from 'react-native-keychain';
+import BootSplash from 'react-native-bootsplash';
+import {useEffect} from 'react';
+import {oneSignalToken} from '../services/AuthService';
+import {useMutation} from '../hooks/customHooks';
+import {AuthActionType} from '../containers/AuthAction';
 
 const Stack = createNativeStackNavigator();
 
 const MainStack = () => {
-  const {store} = useStore();
+  const {store, dispatch} = useStore();
+
+  const oneSignalTokenApi = useMutation(oneSignalToken);
+
+  useEffect(() => {
+    const init = async () => {
+      try {
+        // Retrieve the credentials
+        const credentials = await Keychain.getGenericPassword();
+        if (credentials) {
+          const authResult = JSON.parse(credentials.password);
+
+          oneSignalTokenApi.mutate(authResult.token, {
+            onSuccess: () => {
+              dispatch({
+                type: AuthActionType.SIGN_IN,
+                authResult,
+              });
+            },
+          });
+        } else {
+          console.log('No credentials stored');
+        }
+      } catch (error) {
+        console.log("Keychain couldn't be accessed!", error);
+      }
+    };
+
+    init().finally(async () => {
+      await BootSplash.hide({fade: true});
+    });
+  }, []);
 
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Navigator screenOptions={{headerShown: false, animation: 'fade'}}>
         {!store.authResult ? (
           <>
             <Stack.Screen name={SignIn.name} component={SignIn} />

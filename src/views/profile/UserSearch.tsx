@@ -16,9 +16,10 @@ import {getUserFollowing} from '../../services/UserService';
 import FlatList from '../../components/common/FlatList';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {showMessage} from 'react-native-flash-message';
-import {chatShare} from '../../services/ChatService';
+import {chatAdd, chatShare} from '../../services/ChatService';
 import NewPost from '../add/NewPost';
 import {postMy24} from '../../services/My24Service';
+import MessageDetails from './MessageDetails';
 
 const {bold, font16, pl15, pr15, pb10, pt10} = common;
 
@@ -75,6 +76,41 @@ export const NewPostHeaderRight = ({selectedUsers}) => {
   );
 };
 
+export const MessagesHeaderRight = ({selectedUsers}) => {
+  const navigation = useNavigation();
+
+  const chatAddApi = useMutation(chatAdd);
+
+  const handlePressChat = () => {
+    if (!selectedUsers || selectedUsers.length === 0) {
+      showMessage({message: 'Please select users', type: 'warning'});
+    } else {
+      chatAddApi.mutate(
+        {to_users: JSON.stringify(selectedUsers.map(({user_id}) => user_id))},
+        {
+          onSuccess: ({id}) => {
+            navigation.goBack(),
+              navigation.navigate({
+                name: MessageDetails.name,
+                params: {
+                  chatId: id,
+                  title: selectedUsers.map(({fullname}) => fullname).join(', '),
+                  isMultiple: selectedUsers.length > 1,
+                },
+              });
+          },
+        },
+      );
+    }
+  };
+
+  return (
+    <Text style={{color: 'dodgerblue'}} onPress={handlePressChat}>
+      Chat
+    </Text>
+  );
+};
+
 export const ChatShareHeaderRight = ({
   itemId,
   type,
@@ -117,6 +153,7 @@ const HEADER_LIST = {
   [ChatShareHeaderRight.name]: ChatShareHeaderRight,
   [NewPostHeaderRight.name]: NewPostHeaderRight,
   [NewStoryHeaderRight.name]: NewStoryHeaderRight,
+  [MessagesHeaderRight.name]: MessagesHeaderRight,
 };
 
 export const UserSearchScreenOptions = ({navigation, route}) => {

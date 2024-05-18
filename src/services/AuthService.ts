@@ -36,3 +36,13 @@ export const deleteUser = user => {
     .then(handleResponse)
     .catch(handleError);
 };
+
+export const oneSignalToken = token => {
+  return axios
+    .post('/user/oneSignalToken', null, {headers: {'X-BEPERK-TOKEN': token}})
+    .then(handleResponse)
+    .catch(response => {
+      console.log(JSON.stringify(response));
+      return;
+    });
+};

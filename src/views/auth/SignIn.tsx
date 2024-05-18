@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   SafeAreaView,
+  Image,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -49,7 +50,10 @@ const Signin = () => {
       <LinearGradient colors={['dodgerblue', 'white']} style={{height: '30%'}}>
         <SafeAreaView>
           <View style={[aiCenter, {paddingTop: 40}]}>
-            <MaterialIcons name="account-circle" size={80} color="dodgerblue" />
+            <Image
+              style={{width: 80, height: 80}}
+              source={require('../../assets/beperk_logo.png')}
+            />
           </View>
         </SafeAreaView>
       </LinearGradient>

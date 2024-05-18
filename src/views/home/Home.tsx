@@ -19,6 +19,7 @@ import {useNavigation} from '@react-navigation/native';
 import Activity from '../doves/Activity';
 import {useState} from 'react';
 import Explore from './Explore';
+import Messages from '../profile/Messages';
 
 const {row, cGap15} = common;
 
@@ -35,7 +36,7 @@ const HeaderRight = () => {
       />
       <FontAwesome6
         name="envelope"
-        onPress={() => Alert.alert('Under construction!')}
+        onPress={() => navigation.navigate(Messages.name)}
         size={22}
         color="dodgerblue"
       />

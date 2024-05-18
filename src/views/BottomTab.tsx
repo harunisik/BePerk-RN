@@ -1,7 +1,7 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Text, View} from 'react-native';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import HomeStack from './home/HomeStack';
 import FeaturedStack from './featured/FeaturedStack';
 import DovesStack from './doves/DovesStack';
@@ -9,6 +9,7 @@ import ProfileStack from './profile/ProfileStack';
 import {useStore} from '../containers/StoreContainer';
 import AddModal from './add/AddModal';
 import AddStack from './add/AddStack';
+import BootSplash from 'react-native-bootsplash';
 
 const routeIcons = {
   [HomeStack.name]: 'home',
@@ -58,6 +59,10 @@ const BottomTab = () => {
       authResult: {id, username},
     },
   } = useStore();
+
+  useEffect(() => {
+    // BootSplash.hide({fade: true});
+  }, []);
 
   return (
     <>

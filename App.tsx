@@ -37,7 +37,6 @@ if (process.env.APP_DEBUG === 'true') {
 
   axios.interceptors.response.use(response => {
     const {
-      data,
       status,
       request: {responseURL, _method},
     } = response;
@@ -59,9 +58,9 @@ if (process.env.APP_DEBUG === 'true') {
 
 // navigator.geolocation = require('@react-native-community/geolocation');
 
-function App(): React.JSX.Element {
-  const {flex1} = common;
+const {flex1} = common;
 
+function App(): React.JSX.Element {
   return (
     <QueryClientProvider client={queryClient}>
       <StoreContainer>
