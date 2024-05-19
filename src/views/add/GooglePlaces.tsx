@@ -28,11 +28,6 @@ const GooglePlaces = () => {
   const navigation = useNavigation();
   const ref = useRef<GooglePlacesAutocompleteRef>(null);
 
-  // Geolocation.getCurrentPosition(({coords: {latitude, longitude}}) => {
-  //   ref.current?.setAddressText('Woking');
-  //   ref.current?.focus();
-  // });
-
   return (
     <GooglePlacesAutocomplete
       ref={ref}

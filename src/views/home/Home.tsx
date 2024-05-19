@@ -1,30 +1,52 @@
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import ForYouTab from './ForYouTab';
 import FollowingTab from './FollowingTab';
-import {
-  Alert,
-  Pressable,
-  StyleSheet,
-  Text,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import common from '../../styles/sharedStyles';
 import Search from '../doves/Search';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import Activity from '../doves/Activity';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import Explore from './Explore';
 import Messages from '../profile/Messages';
+import notifee from '@notifee/react-native';
+import {badgeCount} from '../../services/UserService';
+import {useQuery} from '../../hooks/customHooks';
+import Badge from '../../components/common/Badge';
 
 const {row, cGap15} = common;
 
+const HeaderLeft = () => {
+  const navigation = useNavigation();
+
+  return (
+    <View style={[row, cGap15]}>
+      <MaterialIcons
+        name="search"
+        onPress={() => navigation.navigate(Search.name)}
+        size={26}
+        color="dodgerblue"
+      />
+      <Ionicons
+        name="earth"
+        onPress={() => navigation.navigate(Explore.name)}
+        size={24}
+        color="dodgerblue"
+      />
+    </View>
+  );
+};
+
 const HeaderRight = () => {
   const navigation = useNavigation();
+  const route = useRoute();
+  const {
+    params: {badgeCount},
+  } = route;
 
   return (
     <View style={[row, cGap15]}>
@@ -34,12 +56,10 @@ const HeaderRight = () => {
         size={22}
         color="dodgerblue"
       />
-      <FontAwesome6
-        name="envelope"
-        onPress={() => navigation.navigate(Messages.name)}
-        size={22}
-        color="dodgerblue"
-      />
+      <Pressable onPress={() => navigation.navigate(Messages.name)}>
+        <FontAwesome6 name="envelope" size={22} color="dodgerblue" />
+        {badgeCount > 0 && <Badge value={badgeCount} />}
+      </Pressable>
     </View>
   );
 };
@@ -114,26 +134,11 @@ const HeaderTitle = () => {
   );
 };
 
-export const HomeScreenOptions = ({navigation}) => {
+export const HomeScreenOptions = () => {
   return {
     headerTransparent: true,
     headerTitle: HeaderTitle,
-    headerLeft: () => (
-      <View style={[row, cGap15]}>
-        <MaterialIcons
-          name="search"
-          onPress={() => navigation.navigate(Search.name)}
-          size={26}
-          color="dodgerblue"
-        />
-        <Ionicons
-          name="earth"
-          onPress={() => navigation.navigate(Explore.name)}
-          size={24}
-          color="dodgerblue"
-        />
-      </View>
-    ),
+    headerLeft: HeaderLeft,
     headerRight: HeaderRight,
   };
 };
@@ -141,6 +146,16 @@ export const HomeScreenOptions = ({navigation}) => {
 const Tab = createMaterialTopTabNavigator();
 
 const Home = () => {
+  const navigation = useNavigation();
+  const {data} = useQuery(badgeCount);
+
+  useEffect(() => {
+    if (data?.messages_unread) {
+      notifee.setBadgeCount(data?.messages_unread);
+      navigation.setParams({badgeCount: data?.messages_unread});
+    }
+  }, [data]);
+
   return (
     <Tab.Navigator
       screenOptions={{

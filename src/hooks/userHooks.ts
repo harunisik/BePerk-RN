@@ -4,6 +4,7 @@ import {useStore} from '../containers/StoreContainer';
 import {AuthActionType} from '../containers/AuthAction';
 import {signIn} from '../services/AuthService';
 import {chatListOpen, getChat} from '../services/ChatService';
+import {badgeCount} from '../services/UserService';
 
 // MUTATION requests
 
@@ -16,7 +17,7 @@ export function useSignIn(data) {
   return () => {
     queryClient
       .fetchQuery({
-        queryKey: ['signin'],
+        queryKey: [signIn.name],
         queryFn: () => signIn(data),
       })
       .then(result => {

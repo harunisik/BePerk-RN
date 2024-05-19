@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@notifee/react-native": "^7.8.2",
     "@react-native-clipboard/clipboard": "^1.13.2",
     "@react-navigation/bottom-tabs": "^6.5.19",
     "@react-navigation/material-top-tabs": "^6.6.12",

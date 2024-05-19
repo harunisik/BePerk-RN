@@ -19,6 +19,7 @@ const HomeStack = () => {
         name={Home.name}
         component={Home}
         options={HomeScreenOptions}
+        initialParams={{badgeCount: 0}}
       />
       <Stack.Screen name={Search.name} component={Search} />
       <Stack.Screen name={Activity.name} component={Activity} />

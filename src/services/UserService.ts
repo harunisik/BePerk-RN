@@ -101,6 +101,10 @@ export const getFeaturedFeed = (limit: number, offset: number) => {
     .catch(handleError);
 };
 
+export const badgeCount = () => {
+  return axios.get('badge/count').then(handleResponse).catch(handleError);
+};
+
 // POST requests
 
 export interface UserLikeProps {

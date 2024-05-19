@@ -23,6 +23,7 @@ const updateStore = (store: StoreData, action: StoreAction) => {
         'authResult',
         JSON.stringify(action.authResult),
       );
+
       return {
         ...store,
         authResult: action.authResult,
@@ -30,6 +31,7 @@ const updateStore = (store: StoreData, action: StoreAction) => {
     case AuthActionType.SIGN_OUT:
       delete axios.defaults.headers.common['X-BEPERK-TOKEN'];
       Keychain.resetGenericPassword();
+
       return {
         ...store,
         authResult: undefined,
