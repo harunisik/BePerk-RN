@@ -11,6 +11,7 @@ import {Swipeable} from 'react-native-gesture-handler';
 import {useStore} from '../../containers/StoreContainer';
 import {useEffect} from 'react';
 import UserSearch, {MessagesHeaderRight} from './UserSearch';
+import AccountCard from '../../components/common/AccountCard';
 
 const {
   row,
@@ -84,7 +85,14 @@ const MessageItem = ({item, onDelete}) => {
       <Pressable onPress={handlePress}>
         <View style={[row, jcSpaceBetween, aiCenter]}>
           <View style={[flex1, row, cGap10, aiCenter]}>
-            <MaterialIcons name="account-circle" size={40} color="lightgray" />
+            <AccountCard
+              userId={item.user_id}
+              username={item.username}
+              photo={item.photo}
+              displayUsername={false}
+              size={16}
+              usePush
+            />
             <View style={[flex1, rGap3]}>
               <View style={[row, cGap3, {width: '90%'}]}>
                 <Text style={[bold]} numberOfLines={1}>

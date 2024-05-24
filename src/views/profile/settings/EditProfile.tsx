@@ -25,6 +25,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import {launchMediaLibrary} from '../../../utils/MediaUtil';
 import {PERMISSIONS} from 'react-native-permissions';
 import FastImage from 'react-native-fast-image';
+import AccountCard from '../../../components/common/AccountCard';
 
 const {row, flex1, flex3, aiCenter, jcSpaceBetween, p15, gray, mb15, cGap10} =
   common;
@@ -176,14 +177,12 @@ const EditProfile = () => {
       <View style={p15}>
         {showIndicator && <ActivityIndicator />}
         <View style={[aiCenter, mb15]}>
-          {photo ? (
-            <FastImage
-              source={{uri: photo}}
-              style={{width: 100, height: 100}}
-            />
-          ) : (
-            <MaterialIcons name="account-circle" size={76} color="lightgray" />
-          )}
+          <AccountCard
+            userId={id}
+            photo={photo}
+            displayUsername={false}
+            size={70}
+          />
           <Text
             style={{color: 'dodgerblue'}}
             onPress={() => setModalVisible(true)}>

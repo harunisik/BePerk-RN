@@ -29,15 +29,14 @@ import Popup from '../../components/common/Popup';
 // import FastImage from '../../components/common/FastImage';
 import Video from '../../components/common/Video';
 import FastImage from 'react-native-fast-image';
+import AccountCard from '../../components/common/AccountCard';
 
 const {
   jcSpaceBetween,
   flex1,
   rGap10,
-  pv50,
   ph15,
   cGap3,
-  font11,
   cGap5,
   aiCenter,
   row,
@@ -81,11 +80,16 @@ const Header = ({item}) => {
   return (
     <View style={[row, jcSpaceBetween, aiCenter]}>
       <View style={[row, cGap5, aiCenter]}>
-        <MaterialIcons name="account-circle" size={30} color="white" />
-        <Text style={white}>{item.fullname}</Text>
-        <Text style={[font11, white]}>{dateDiff(item.upload_time * 1000)}</Text>
+        <AccountCard
+          userId={item.user_id}
+          username={item.fullname}
+          photo={item.photo}
+          size={20}
+          labelColor="white"
+          goBack
+        />
+        <Text style={[white]}>{dateDiff(item.upload_time * 1000)}</Text>
       </View>
-      {/* <Text style={white}>Left</Text> */}
       <MaterialIcons
         name="close"
         size={30}

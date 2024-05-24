@@ -31,6 +31,7 @@ import {
 import uuid from 'react-native-uuid';
 import {postMy24Like} from '../../services/My24Service';
 import Popup from '../../components/common/Popup';
+import AccountCard from '../../components/common/AccountCard';
 
 const {
   jcSpaceBetween,
@@ -76,8 +77,14 @@ const Header = ({item}) => {
   return (
     <View style={[row, jcSpaceBetween, aiCenter]}>
       <View style={[row, cGap5, aiCenter]}>
-        <MaterialIcons name="account-circle" size={30} color="white" />
-        <Text style={white}>{item.fullname}</Text>
+        <AccountCard
+          userId={item.user_id}
+          username={item.fullname}
+          photo={item.photo}
+          size={20}
+          labelColor="white"
+          goBack
+        />
         <Text style={[font11, white]}>{dateDiff(item.upload_time * 1000)}</Text>
       </View>
       <MaterialIcons

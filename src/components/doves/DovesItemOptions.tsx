@@ -4,9 +4,9 @@ import LikeButtton from '../common/buttons/LikeButton';
 import CommentButton from '../common/buttons/CommentButton';
 import ShareButton from '../common/buttons/ShareButton';
 
-const DovesItemOptions = ({item, color = 'dodgerblue'}) => {
-  const {aiCenter, row, cGap15} = common;
+const {aiCenter, row, cGap15} = common;
 
+const DovesItemOptions = ({item, color = 'dodgerblue'}) => {
   return (
     <View style={[cGap15, row, aiCenter]}>
       <LikeButtton
@@ -20,6 +20,7 @@ const DovesItemOptions = ({item, color = 'dodgerblue'}) => {
         id={item.id}
         fullname={item.fullname}
         username={item.username}
+        userId={item.user_id}
         caption={item.caption}
         type={item.type}
         commentsCount={item.comments_count}

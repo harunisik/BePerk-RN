@@ -8,7 +8,7 @@ const ProfilePostsDetails = () => {
     params: {userId: id},
   } = route;
 
-  const {data, fetchNextPage, isFetching, refetch, remove, hasNextPage} =
+  const {data, fetchNextPage, isFetching, refetch, remove} =
     useGetUserPhotoVideo(id, 35);
 
   return (
@@ -18,7 +18,6 @@ const ProfilePostsDetails = () => {
       isFetching={isFetching}
       refetch={refetch}
       remove={remove}
-      hasNextPage={hasNextPage}
     />
   );
 };

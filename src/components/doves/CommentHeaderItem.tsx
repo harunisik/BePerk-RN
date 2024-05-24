@@ -1,13 +1,15 @@
 import {View, Text, StyleSheet} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {dateDiff} from '../../utils/DateUtil';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import AccountCard from '../common/AccountCard';
+import {useNavigation} from '@react-navigation/native';
 
 const {row, rGap15, cGap10, bold, font11, gray, pr10, flex1} = common;
 
 interface CommentHeaderItemProps {
   fullname: string;
   username: string;
+  userId: string;
   caption: string;
   uploadTime: number;
 }
@@ -15,14 +17,16 @@ interface CommentHeaderItemProps {
 const CommentHeaderItem = ({
   fullname,
   username,
+  userId,
   caption,
   uploadTime,
 }: CommentHeaderItemProps) => {
+  const navigation = useNavigation();
+
   return (
-    <View style={[styles.headerContainer, row, cGap10]}>
-      <View>
-        <MaterialIcons name="account-circle" size={26} color="lightgray" />
-      </View>
+    <View
+      style={[styles.headerContainer, row, cGap10, {alignItems: 'flex-start'}]}>
+      <AccountCard size={15} userId={userId} displayUsername={false} goBack />
       <View style={[rGap15, flex1]}>
         <Text style={pr10}>
           <Text style={bold}>{(fullname ?? username) + ' '}</Text>

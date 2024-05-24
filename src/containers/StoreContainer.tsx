@@ -19,11 +19,15 @@ const updateStore = (store: StoreData, action: StoreAction) => {
     case AuthActionType.SIGN_IN:
       axios.defaults.headers.common['X-BEPERK-TOKEN'] =
         action.authResult?.token;
+      action.authResult = {
+        ...action.authResult,
+        photo:
+          'https://beperk-app.nyc3.cdn.digitaloceanspaces.com/video/172495/453924eb-d665-44b6-aa34-fa097e31f92b.jpg',
+      };
       Keychain.setGenericPassword(
         'authResult',
         JSON.stringify(action.authResult),
       );
-
       return {
         ...store,
         authResult: action.authResult,
@@ -31,7 +35,6 @@ const updateStore = (store: StoreData, action: StoreAction) => {
     case AuthActionType.SIGN_OUT:
       delete axios.defaults.headers.common['X-BEPERK-TOKEN'];
       Keychain.resetGenericPassword();
-
       return {
         ...store,
         authResult: undefined,

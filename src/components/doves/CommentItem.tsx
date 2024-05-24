@@ -1,11 +1,11 @@
 import {View, Text, TouchableOpacity, Animated, StyleSheet} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {dateDiff} from '../../utils/DateUtil';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useState} from 'react';
 import {Swipeable} from 'react-native-gesture-handler';
 import LikeButtton from '../common/buttons/LikeButton';
 import FlatList from '../common/FlatList';
+import AccountCard from '../common/AccountCard';
 
 const RenderRightActions = ({item, onPress}) => {
   return (
@@ -46,8 +46,13 @@ const CommentItem = ({item, isChild = false, onDelete, onPressReply}) => {
         renderRightActions={() => (
           <RenderRightActions item={item} onPress={onDelete} />
         )}>
-        <View style={[row, cGap10]}>
-          <MaterialIcons name="account-circle" size={26} color="lightgray" />
+        <View style={[row, cGap10, {alignItems: 'flex-start'}]}>
+          <AccountCard
+            size={15}
+            userId={item.user_id}
+            displayUsername={false}
+            goBack
+          />
           <View style={[row, jcSpaceBetween, flex1, cGap10]}>
             <View style={[rGap15, flex1]}>
               <View style={[rGap5]}>

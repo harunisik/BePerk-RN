@@ -3,9 +3,8 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {dateDiff} from '../../utils/DateUtil';
 import common from '../../styles/sharedStyles';
 import DovesItemOptions from './DovesItemOptions';
-import {useNavigation} from '@react-navigation/native';
 import DotsButton from '../common/buttons/DotsButton';
-import ProfileStack from '../../views/profile/ProfileStack';
+import AccountCard from '../common/AccountCard';
 
 enum DoveType {
   Dove,
@@ -20,8 +19,6 @@ const DoveTypes = {
 };
 
 const DovesItem = ({item, displayUsername = true}) => {
-  const navigation = useNavigation();
-
   const {
     flex1,
     jcSpaceBetween,
@@ -45,23 +42,16 @@ const DovesItem = ({item, displayUsername = true}) => {
     <View style={[rGap15, pr15, pl15]}>
       <View style={[aiCenter, row, jcSpaceBetween]}>
         <View style={[row, cGap10, flex1]}>
-          <View style={[jcCenter]}>
-            <MaterialIcons name="account-circle" size={30} color="lightgray" />
-          </View>
+          <AccountCard
+            size={15}
+            userId={item.user_id}
+            displayUsername={false}
+          />
           <View style={[jcCenter, flex1]}>
             {displayUsername && (
               <View style={[cGap10, row, aiCenter]}>
-                <Text
-                  style={[bold, flex1]}
-                  onPress={() =>
-                    navigation.navigate(ProfileStack.name, {
-                      headerBackVisible: true,
-                      userId: item.user_id,
-                      username: item.username,
-                    })
-                  }
-                  numberOfLines={1}>
-                  {item.username}
+                <Text style={[bold, flex1]} numberOfLines={1}>
+                  {item.fullname ?? item.username}
                 </Text>
                 {item.isVerified === 1 && (
                   <MaterialIcons name="verified" size={16} color="dodgerblue" />

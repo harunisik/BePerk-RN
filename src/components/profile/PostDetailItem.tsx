@@ -9,6 +9,7 @@ import BookmarkButton from '../common/buttons/BookmarkButton';
 import DotsButton from '../common/buttons/DotsButton';
 import ShareButton from '../common/buttons/ShareButton';
 import Video from '../common/Video';
+import AccountCard from '../common/AccountCard';
 
 const {
   jcSpaceBetween,
@@ -61,10 +62,7 @@ const PostDetailItem = ({
   return (
     <View style={[rGap10, pv10]}>
       <View style={[row, aiCenter, jcSpaceBetween, ph15]}>
-        <View style={[row, aiCenter, cGap10]}>
-          <MaterialIcons name="account-circle" size={30} color="lightgray" />
-          <Text style={bold}>{username}</Text>
-        </View>
+        <AccountCard size={15} userId={userId} username={username} />
 
         <View style={[row, cGap10]}>
           <BookmarkButton id={id} type={type} isSaved={bookmark} />

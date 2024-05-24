@@ -11,6 +11,7 @@ interface CommentButtonProps {
   type: number;
   fullname: string;
   username: string;
+  userId: string;
   caption: string;
   uploadTime: number;
   commentsCount: number;
@@ -24,6 +25,7 @@ const CommentButton = ({
   type,
   fullname,
   username,
+  userId,
   caption,
   uploadTime,
   commentsCount,
@@ -45,6 +47,7 @@ const CommentButton = ({
             type,
             fullname,
             username,
+            userId,
             caption,
             uploadTime,
           })

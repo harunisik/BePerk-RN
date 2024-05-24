@@ -7,6 +7,7 @@ export interface AuthResult {
   id: number;
   token: string;
   username: string;
+  photo: string;
 }
 
 interface AuthAction {

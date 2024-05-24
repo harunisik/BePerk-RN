@@ -249,7 +249,12 @@ const UserSearch = () => {
         <FlatList
           data={searchResult}
           renderItem={({item}) => (
-            <UserItem item={item} onPress={handlePressUserItem} selectable />
+            <UserItem
+              item={item}
+              onPress={handlePressUserItem}
+              selectable
+              disableNavigation
+            />
           )}
           keyExtractor={item => item.user_id}
         />
@@ -257,7 +262,12 @@ const UserSearch = () => {
         <FlatList
           data={data?.following}
           renderItem={({item}) => (
-            <UserItem item={item} onPress={handlePressUserItem} selectable />
+            <UserItem
+              item={item}
+              onPress={handlePressUserItem}
+              selectable
+              disableNavigation
+            />
           )}
           keyExtractor={item => item.user_id}
           onRefresh={refetch}

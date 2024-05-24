@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   SafeAreaView,
+  Image,
 } from 'react-native';
 import common from '../../../styles/sharedStyles';
 import {useNavigation} from '@react-navigation/native';
@@ -57,10 +58,10 @@ export const CreateNewAccountListItem = () => {
 };
 
 const CreateNewAccount = () => {
-  const [username, setUsername] = useState('harun1');
-  const [email, setEmail] = useState('harun1712@gmail.com');
-  const [password, setPassword] = useState('123');
-  const [confirmPassword, setConfirmPassword] = useState('123');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const navigation = useNavigation();
   const {
     dispatch,
@@ -144,8 +145,11 @@ const CreateNewAccount = () => {
     <>
       <LinearGradient colors={['dodgerblue', 'white']} style={{height: '30%'}}>
         <SafeAreaView>
-          <View style={[aiCenter, {paddingTop: 40}]}>
-            <MaterialIcons name="account-circle" size={80} color="dodgerblue" />
+          <View style={[aiCenter, {paddingTop: 20}]}>
+            <Image
+              style={{width: 80, height: 80}}
+              source={require('../../../assets/beperk_logo.png')}
+            />
           </View>
         </SafeAreaView>
       </LinearGradient>

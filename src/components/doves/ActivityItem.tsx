@@ -3,6 +3,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import {dateDiff} from '../../utils/DateUtil';
 import common from '../../styles/sharedStyles';
+import AccountCard from '../common/AccountCard';
 
 enum HistoryItemType {
   Video,
@@ -46,17 +47,16 @@ const ActivityItem = ({item}) => {
     shrink1,
   } = common;
 
-  const {fullname, history_type, type, date_time} = item;
+  const {user_id, fullname, history_type, type, date_time} = item;
   const historyType = HistoryTypes[history_type];
   const historyTypeStr = historyType ? historyType.label : '';
   const historyItemTypeStr = HistoryItemType[type] ? HistoryItemType[type] : '';
 
   return (
     <View style={[row, cGap10, jcSpaceBetween]}>
-      <View style={[flex1, row, cGap10, aiCenter]}>
-        <MaterialIcons name="account-circle" size={26} color="lightgray" />
+      <View style={[flex1, row, aiCenter, {columnGap: 5}]}>
+        <AccountCard size={15} userId={user_id} username={fullname} />
         <Text style={shrink1}>
-          <Text style={bold}>{fullname + ' '}</Text>
           <Text>{`${historyTypeStr} ${historyItemTypeStr}. `}</Text>
           <Text style={[font11, gray]}>{dateDiff(date_time * 1000)}</Text>
         </Text>

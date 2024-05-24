@@ -34,6 +34,7 @@ const transformCommentList = commentList => {
 const CommentList = ({
   fullname,
   username,
+  userId,
   caption,
   uploadTime,
   onPressReply,
@@ -64,6 +65,7 @@ const CommentList = ({
           <CommentHeaderItem
             fullname={fullname}
             username={username}
+            userId={userId}
             caption={caption}
             uploadTime={uploadTime}
           />

@@ -1,4 +1,4 @@
-import {View} from 'react-native';
+import {SafeAreaView, View} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {useState} from 'react';
 import MessageBox from '../../components/common/MessageBox';
@@ -14,7 +14,7 @@ import {
 const Comment = () => {
   const route = useRoute();
   const {
-    params: {id, type, fullname, username, caption, uploadTime},
+    params: {id, type, fullname, username, userId, caption, uploadTime},
   } = route;
   const [selectedComment, setSelectedComment] = useState('');
   const [selectedCommentId, setSelectedCommentId] = useState(id);
@@ -36,11 +36,12 @@ const Comment = () => {
   };
 
   return (
-    <View style={flex1}>
+    <SafeAreaView style={flex1}>
       <CommentList
         data={data}
         fullname={fullname}
         username={username}
+        userId={userId}
         caption={caption}
         uploadTime={uploadTime}
         isFetching={isFetching}
@@ -77,7 +78,7 @@ const Comment = () => {
         }}
         onClearText={clearSelectedComment}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 

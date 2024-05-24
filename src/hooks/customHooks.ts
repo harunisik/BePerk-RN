@@ -6,6 +6,7 @@ import {
   useMutation as useRQMutation,
   useQuery as useRQQuery,
   useQueryClient,
+  UseQueryOptions,
 } from 'react-query';
 import {
   addFollowing,
@@ -79,12 +80,17 @@ export function useMutation<TData = unknown, TVariables = void>(
 
 export function useQuery<
   TQueryFnData = unknown,
+  TError = unknown,
+  TData = TQueryFnData,
   TQueryKey extends QueryKey = QueryKey,
 >(
   queryFn: QueryFunction<TQueryFnData, TQueryKey>,
   data?: TQueryFnData,
-  select?: (data: TQueryFnData) => TQueryFnData,
+  options?: Omit<
+    UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>,
+    'queryKey' | 'queryFn'
+  >,
 ) {
   const queryKey = data ? [queryFn.name, data] : [queryFn.name];
-  return useRQQuery({queryKey, queryFn, select});
+  return useRQQuery(queryKey, queryFn, options);
 }

@@ -1,10 +1,9 @@
 import {View, Text, Pressable} from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import common from '../../styles/sharedStyles';
 import {useNavigation} from '@react-navigation/native';
 import FollowersList from '../../views/profile/FollowersList';
 import WebView from '../common/WebView';
-import FastImage from 'react-native-fast-image';
+import AccountCard from '../common/AccountCard';
 
 const {aiCenter, row, jcCenter, bold, blue, cGap50} = common;
 
@@ -13,17 +12,13 @@ const UserInfo = ({data, isAuthUser, userId}) => {
 
   return (
     <View style={[aiCenter, jcCenter, {rowGap: 20}]}>
-      <View style={[aiCenter]}>
-        {data?.photo ? (
-          <FastImage
-            source={{uri: data?.photo}}
-            style={{width: 100, height: 100}}
-          />
-        ) : (
-          <MaterialIcons name="account-circle" size={56} color="lightgray" />
-        )}
-        <Text style={bold}>{data?.fullname}</Text>
-      </View>
+      <AccountCard
+        userId={userId}
+        username={data?.username}
+        photo={data?.photo}
+        vertical
+        size={60}
+      />
 
       <View style={[aiCenter, row, jcCenter, cGap50]}>
         <View style={[aiCenter]}>

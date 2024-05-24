@@ -18,6 +18,7 @@ import {useEffect, useState} from 'react';
 import {useChatListOpen, useGetChat} from '../../hooks/userHooks';
 import MediaView from './MediaView';
 import PostDetailItemView from './PostDetailsItemView';
+import AccountCard from '../../components/common/AccountCard';
 
 const {flex1, row, aiCenter, bold, cGap5, p10} = common;
 
@@ -90,7 +91,6 @@ const MessageDetailsItem = ({item}) => {
   };
 
   const handlePressPost = () => {
-    console.log(item.media);
     navigation.navigate(PostDetailItemView.name, {
       id: item.media.id,
       userId: item.media.user_id,
@@ -117,7 +117,14 @@ const MessageDetailsItem = ({item}) => {
           columnGap: 10,
         }}>
         {!isAuthUser && (
-          <MaterialIcons name="account-circle" size={30} color="lightgray" />
+          <AccountCard
+            userId={item.user_id}
+            username={item.username}
+            photo={item.photo}
+            displayUsername={false}
+            size={16}
+            usePush
+          />
         )}
 
         {item.type === 2 ? ( // story
@@ -158,14 +165,17 @@ const MessageDetailsItem = ({item}) => {
                 styles.card,
                 {
                   flexDirection: 'row',
-                  columnGap: 10,
-                  paddingHorizontal: 5,
+                  columnGap: 5,
+                  paddingHorizontal: 10,
                 },
               ]}>
-              <MaterialIcons
-                name="account-circle"
-                size={26}
-                color="lightgray"
+              <AccountCard
+                userId={item.media.id}
+                username={item.media.fullname}
+                photo={item.media.photo}
+                displayUsername={false}
+                usePush
+                size={18}
               />
               <View>
                 <Text>{item.media.username}</Text>

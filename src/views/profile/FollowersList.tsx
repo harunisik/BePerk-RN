@@ -8,17 +8,16 @@ import {
 } from '../../services/UserService';
 import {useMutation, useQuery} from '../../hooks/customHooks';
 import FlatList from '../../components/common/FlatList';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useEffect, useState} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import Popup from '../../components/common/Popup';
 import {showMessage} from 'react-native-flash-message';
-import Profile from './Profile';
 import {useStore} from '../../containers/StoreContainer';
+import AccountCard from '../../components/common/AccountCard';
 
-const {pl15, pr15, row, aiCenter, cGap10} = common;
+const {pl15, pr15, row, aiCenter} = common;
 
-const UserItem = ({item, onPressFollow, onPressItem}) => {
+const UserItem = ({item, onPressFollow}) => {
   const {
     store: {
       authResult: {id},
@@ -27,13 +26,12 @@ const UserItem = ({item, onPressFollow, onPressItem}) => {
 
   return (
     <View style={[row, aiCenter]}>
-      <Pressable onPress={onPressItem} style={[row, aiCenter, cGap10]}>
-        <MaterialIcons name="account-circle" size={36} color="lightgray" />
-        <Text>{item.fullname}</Text>
-        {item.isVerified === 1 && (
-          <MaterialIcons name="verified" size={16} color="dodgerblue" />
-        )}
-      </Pressable>
+      <AccountCard
+        userId={item.user_id}
+        username={item.fullname}
+        photo={item.photo}
+        usePush
+      />
       {item.user_id !== id && (
         <Pressable
           style={{
@@ -114,15 +112,6 @@ const FollowersList = () => {
     }
   };
 
-  const handlePressItem = item => {
-    navigation.push(Profile.name, {
-      headerBackVisible: true,
-      userId: item.user_id,
-      username: item.fullname,
-      isAuthUser: false,
-    });
-  };
-
   useEffect(
     () =>
       setSearchResult(
@@ -153,7 +142,6 @@ const FollowersList = () => {
             <UserItem
               item={item}
               onPressFollow={() => handlePressFollow(item)}
-              onPressItem={() => handlePressItem(item)}
             />
           )}
           keyExtractor={(item, index) => `${item.user_id}_${index}`}
@@ -165,7 +153,6 @@ const FollowersList = () => {
             <UserItem
               item={item}
               onPressFollow={() => handlePressFollow(item)}
-              onPressItem={() => handlePressItem(item)}
             />
           )}
           keyExtractor={(item, index) => `${item.user_id}_${index}`}
