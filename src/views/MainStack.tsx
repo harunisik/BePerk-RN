@@ -50,7 +50,7 @@ const MainStack = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown: false, animation: 'fade'}}>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
         {!store.authResult ? (
           <>
             <Stack.Screen name={SignIn.name} component={SignIn} />
@@ -61,7 +61,11 @@ const MainStack = () => {
           </>
         ) : (
           <>
-            <Stack.Screen name={BottomTab.name} component={BottomTab} />
+            <Stack.Screen
+              name={BottomTab.name}
+              component={BottomTab}
+              options={{animation: 'fade'}}
+            />
             <Stack.Screen
               name={AddStack.name}
               component={AddStack}

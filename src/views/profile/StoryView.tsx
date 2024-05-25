@@ -417,22 +417,34 @@ const StoryView = () => {
         onPressOut={handlePressOut}
         // onStartShouldSetResponderCapture={_event => true}
       >
-        {currentItem.type === 1 ? (
-          <FastImage
-            source={{uri: currentItem.filename}}
-            style={{width: '100%', height: '100%'}}
-            // resizeMode="stretch"
-          />
-        ) : (
-          <Video
-            uri={currentItem.filename}
-            paused={paused}
-            onLoad={event => {
-              setDuration(event.duration * 1000);
-            }}
-            // resizeMode="stretch"
-          />
-        )}
+        <View
+          style={{
+            justifyContent: 'center',
+            flex: 1,
+            backgroundColor: 'black',
+          }}>
+          {currentItem.type === 1 ? (
+            <FastImage
+              source={{uri: currentItem.filename}}
+              style={{
+                width: windowWidth,
+                aspectRatio: currentItem.height
+                  ? currentItem.width / currentItem.height
+                  : 1,
+              }}
+              resizeMode="contain"
+            />
+          ) : (
+            <Video
+              uri={currentItem.filename}
+              paused={paused}
+              onLoad={event => {
+                setDuration(event.duration * 1000);
+              }}
+              // resizeMode="stretch"
+            />
+          )}
+        </View>
         <SafeAreaView
           style={{
             position: 'absolute',

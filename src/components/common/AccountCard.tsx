@@ -1,4 +1,4 @@
-import {Image, Pressable, Text, View} from 'react-native';
+import {Pressable, Text, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import common from '../../styles/sharedStyles';
 import ProfileStack from '../../views/profile/ProfileStack';
@@ -6,6 +6,7 @@ import CircleGradientBorder from './CircleGradientBorder';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useStore} from '../../containers/StoreContainer';
 import Profile from '../../views/profile/Profile';
+import FastImage from 'react-native-fast-image';
 
 const {row, aiCenter, rGap5, bold} = common;
 
@@ -90,7 +91,7 @@ const AccountCard = ({
         }}>
         <CircleGradientBorder disabled={!bordered}>
           {_photo ? (
-            <Image
+            <FastImage
               source={{uri: _photo}}
               style={{
                 width: size * 1.5,

@@ -9,8 +9,10 @@ const Explore = () => {
     useGetUserExploring(1, null, 50);
 
   const handlePressItem = index => {
-    navigation.navigate(ExplorePostsDetails.name);
+    navigation.navigate(ExplorePostsDetails.name, {index});
   };
+
+  console.log(data);
 
   return (
     <PostItemList

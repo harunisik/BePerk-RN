@@ -1,43 +1,42 @@
 import {StyleSheet, TouchableWithoutFeedback, View} from 'react-native';
 import common from '../../styles/sharedStyles';
 import FastImage from 'react-native-fast-image';
-import {Fragment} from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-const {flex1, p1} = common;
+const {p1} = common;
 
 export const VIDEO_HEIGHT = 240;
-export const IMAGE_HEIGHT = 119;
+export const IMAGE_HEIGHT = 120;
 
-const PostItem = ({item, onPress}) => {
+interface PostItemProps {
+  item: any;
+  onPress: () => void;
+  imageHeight?: number;
+  videoHeight?: number;
+}
+
+const PostItem = ({
+  item,
+  onPress,
+  imageHeight = IMAGE_HEIGHT,
+  videoHeight = VIDEO_HEIGHT,
+}: PostItemProps) => {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       <View style={[p1]}>
-        {item.type === 1 ? (
-          <FastImage
-            style={{height: VIDEO_HEIGHT}}
-            source={{
-              uri: item.filename,
-            }}
+        <FastImage
+          style={{height: item.type === 1 ? imageHeight : videoHeight}}
+          source={{
+            uri: item.type === 1 ? item.filename : item.cover,
+          }}
+        />
+        {item.type === 0 && (
+          <MaterialIcons
+            name="ondemand-video"
+            size={20}
+            style={styles.videoIcon}
+            color="white"
           />
-        ) : item.type === 0 ? (
-          <View style={flex1}>
-            {/* <Video source={{uri: item.filename}} paused style={flex1} /> */}
-            <FastImage
-              style={{height: VIDEO_HEIGHT}}
-              source={{
-                uri: item.cover,
-              }}
-            />
-            <MaterialIcons
-              name="ondemand-video"
-              size={20}
-              style={styles.videoIcon}
-              color="white"
-            />
-          </View>
-        ) : (
-          <Fragment />
         )}
       </View>
     </TouchableWithoutFeedback>

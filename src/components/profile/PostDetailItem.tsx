@@ -1,15 +1,14 @@
 import {Text, View, useWindowDimensions} from 'react-native';
 import common from '../../styles/sharedStyles';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import LikeButtton from '../common/buttons/LikeButton';
 import CommentButton from '../common/buttons/CommentButton';
 import {dateDiff} from '../../utils/DateUtil';
-import FastImage from '../common/FastImage';
 import BookmarkButton from '../common/buttons/BookmarkButton';
 import DotsButton from '../common/buttons/DotsButton';
 import ShareButton from '../common/buttons/ShareButton';
 import Video from '../common/Video';
 import AccountCard from '../common/AccountCard';
+import FastImage from 'react-native-fast-image';
 
 const {
   jcSpaceBetween,
@@ -61,7 +60,7 @@ const PostDetailItem = ({
   height,
   width,
 }: PostDetailItemProps) => {
-  const {width: windowWidth, height: windowHeight} = useWindowDimensions();
+  const {width: windowWidth} = useWindowDimensions();
 
   return (
     <View style={[rGap10, pv10]}>
@@ -75,12 +74,16 @@ const PostDetailItem = ({
       </View>
 
       {type === 1 ? (
-        <FastImage uri={filename} />
+        <FastImage
+          source={{uri: filename}}
+          style={{width: windowWidth, aspectRatio: height ? width / height : 1}}
+          resizeMode="contain"
+        />
       ) : (
         <View
           style={{
             width: windowWidth,
-            height: windowHeight * 0.6,
+            aspectRatio: height ? width / height : 1,
           }}>
           <Video uri={filename} paused={!isViewable} />
         </View>

@@ -118,7 +118,7 @@ const CreateNewAccount = () => {
           } else {
             dispatch({
               type: AuthActionType.SIGN_IN,
-              authResult: {id: user_id, token, username},
+              authResult: {id: user_id, token, username, photo: ''},
             });
             // if (navigation.canGoBack()) {
             //   navigation.goBack();
@@ -145,7 +145,7 @@ const CreateNewAccount = () => {
     <>
       <LinearGradient colors={['dodgerblue', 'white']} style={{height: '30%'}}>
         <SafeAreaView>
-          <View style={[aiCenter, {paddingTop: 20}]}>
+          <View style={[aiCenter, {paddingTop: 40}]}>
             <Image
               style={{width: 80, height: 80}}
               source={require('../../../assets/beperk_logo.png')}

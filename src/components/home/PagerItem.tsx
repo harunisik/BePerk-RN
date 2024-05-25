@@ -31,7 +31,7 @@ const PagerItem = ({item, paused = true}) => {
           <AccountCard
             userId={item.user_id}
             username={item.fullname}
-            photo={item.cover}
+            // photo={item.cover}
             color="white"
             labelColor="white"
             size={30}
