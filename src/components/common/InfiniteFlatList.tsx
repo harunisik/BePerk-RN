@@ -29,6 +29,7 @@ const InfiniteFlatList = ({
       }}
       refreshing={isFetching}
       onEndReached={() => !isFetching && fetchNextPage()}
+      onScrollToIndexFailed={() => {}}
       {...rest}
     />
   );

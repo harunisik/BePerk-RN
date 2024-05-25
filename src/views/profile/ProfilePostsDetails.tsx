@@ -5,7 +5,7 @@ import {useGetUserPhotoVideo} from '../../hooks/infiniteQueryHooks';
 const ProfilePostsDetails = () => {
   const route = useRoute();
   const {
-    params: {userId: id},
+    params: {userId: id, index},
   } = route;
 
   const {data, fetchNextPage, isFetching, refetch, remove} =
@@ -18,6 +18,7 @@ const ProfilePostsDetails = () => {
       isFetching={isFetching}
       refetch={refetch}
       remove={remove}
+      initialScrollIndex={index}
     />
   );
 };

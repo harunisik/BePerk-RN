@@ -8,6 +8,7 @@ const PostDetailItemList = ({
   isFetching,
   refetch,
   remove,
+  ...rest
 }) => {
   const [viewableItem, setViewableItem] = useState(0);
 
@@ -29,6 +30,8 @@ const PostDetailItemList = ({
           commentsCount={item.comments_count}
           uploadTime={item.upload_time}
           isViewable={index === viewableItem}
+          width={item.width}
+          height={item.height}
         />
       )}
       fetchNextPage={fetchNextPage}
@@ -43,6 +46,7 @@ const PostDetailItemList = ({
           }
         }
       }}
+      {...rest}
     />
   );
 };

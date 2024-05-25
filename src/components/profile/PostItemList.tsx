@@ -21,14 +21,7 @@ const PostItemList = ({
     <ListComp
       data={data}
       renderItem={({item, index}) => (
-        <PostItem
-          item={item}
-          onPress={() => {
-            if (data.length > index) {
-              onPressItem(index);
-            }
-          }}
-        />
+        <PostItem item={item} onPress={() => onPressItem(index)} />
       )}
       keyExtractor={item => item.id}
       onRefresh={() => {

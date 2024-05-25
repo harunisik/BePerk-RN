@@ -8,8 +8,8 @@ const PostsTab = ({userId, onRefresh}) => {
   const {data, fetchNextPage, isFetching, refetch, remove, hasNextPage} =
     useGetUserPhotoVideo(userId, 35);
 
-  const handlePressItem = _index => {
-    navigation.navigate(ProfilePostsDetails.name, {userId});
+  const handlePressItem = index => {
+    navigation.navigate(ProfilePostsDetails.name, {userId, index});
   };
 
   return (

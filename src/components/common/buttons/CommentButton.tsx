@@ -11,7 +11,7 @@ interface CommentButtonProps {
   type: number;
   fullname: string;
   username: string;
-  userId: string;
+  userId: number;
   caption: string;
   uploadTime: number;
   commentsCount: number;

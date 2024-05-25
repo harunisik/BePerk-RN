@@ -40,6 +40,8 @@ interface PostDetailItemProps {
   uploadTime: number;
   commentsCount: number;
   isViewable?: boolean;
+  height: number;
+  width: number;
 }
 
 const PostDetailItem = ({
@@ -56,6 +58,8 @@ const PostDetailItem = ({
   uploadTime,
   commentsCount,
   isViewable = false,
+  height,
+  width,
 }: PostDetailItemProps) => {
   const {width: windowWidth, height: windowHeight} = useWindowDimensions();
 
@@ -92,6 +96,7 @@ const PostDetailItem = ({
         <CommentButton
           id={id}
           type={type}
+          userId={userId}
           fullname={fullname}
           username={username}
           caption={caption}
