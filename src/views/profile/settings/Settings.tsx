@@ -3,7 +3,7 @@ import {Text, SectionList} from 'react-native';
 import {EditProfileListItem} from './EditProfile';
 import {ChangePasswordListItem} from './ChangePassword';
 import {InviteListItem} from './Invite';
-import {CreateNewAccountListItem} from './CreateNewAccount';
+import {CreateNewAccountListItem} from '../../auth/CreateNewAccount';
 import {RequestVerificationListItem} from './ReuqestVerification';
 import {DeleteAccountListItem} from './DeleteAccount';
 import DarkMode from './DarkMode';

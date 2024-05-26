@@ -6,7 +6,7 @@ import ChangePassword from './settings/ChangePassword';
 import Invite from './settings/Invite';
 import CreateNewAccount, {
   CreateNewAccountScreenOptions,
-} from './settings/CreateNewAccount';
+} from '../auth/CreateNewAccount';
 import RequestVerification from './settings/ReuqestVerification';
 import DeleteAccount from './settings/DeleteAccount';
 import Comment from '../doves/Comment';

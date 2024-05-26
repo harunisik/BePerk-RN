@@ -3,7 +3,7 @@ import {useStore} from '../containers/StoreContainer';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SignIn from './auth/SignIn';
 import BottomTab from './BottomTab';
-import CreateNewAccount from './profile/settings/CreateNewAccount';
+import CreateNewAccount from './auth/CreateNewAccount';
 import AddStack from './add/AddStack';
 import * as Keychain from 'react-native-keychain';
 import BootSplash from 'react-native-bootsplash';
@@ -11,6 +11,7 @@ import {useEffect} from 'react';
 import {oneSignalToken} from '../services/AuthService';
 import {useMutation} from '../hooks/customHooks';
 import {AuthActionType} from '../containers/AuthAction';
+import ForgotPassword from './auth/ForgotPassword';
 
 const Stack = createNativeStackNavigator();
 
@@ -54,6 +55,10 @@ const MainStack = () => {
         {!store.authResult ? (
           <>
             <Stack.Screen name={SignIn.name} component={SignIn} />
+            <Stack.Screen
+              name={ForgotPassword.name}
+              component={ForgotPassword}
+            />
             <Stack.Screen
               name={CreateNewAccount.name}
               component={CreateNewAccount}

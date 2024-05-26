@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {handleError, handleResponse} from './ApiUtils';
+import {printJSON} from '../utils/TestUtil';
 
 // GET requests
 
@@ -8,8 +9,8 @@ export const signIn = ({username, password}) =>
     .get(`/user?username=${username}&password=${password}`)
     .then(handleResponse)
     .catch(response => {
-      if (response.status === 401) {
-        return Promise.reject('User not found');
+      if (response.message === 'Request failed with status code 401') {
+        return Promise.reject({message: 'User not found'});
       }
       return handleError(response);
     });
@@ -44,5 +45,17 @@ export const oneSignalToken = token => {
     .catch(response => {
       console.log(JSON.stringify(response));
       return;
+    });
+};
+
+export const recoverUser = user => {
+  return axios
+    .post('/user/recovery', {...user})
+    .then(handleResponse)
+    .catch(response => {
+      if (response.message === 'Request failed with status code 401') {
+        return Promise.reject({message: 'User not found'});
+      }
+      return handleError(response);
     });
 };

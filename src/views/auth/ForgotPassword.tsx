@@ -7,43 +7,63 @@ import {
   SafeAreaView,
   Image,
 } from 'react-native';
+import common from '../../styles/sharedStyles';
 import {useNavigation} from '@react-navigation/native';
 import {useState} from 'react';
+import {useMutation} from '../../hooks/customHooks';
+import {recoverUser} from '../../services/AuthService';
 import {showMessage} from 'react-native-flash-message';
-import LinearGradient from 'react-native-linear-gradient';
-import common from '../../styles/sharedStyles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import LinearGradient from 'react-native-linear-gradient';
+import Signin from './SignIn';
 import CreateNewAccount from './CreateNewAccount';
-import {useSignIn} from '../../hooks/userHooks';
-import ForgotPassword from './ForgotPassword';
 
 const {row, flex1, aiCenter, rGap30, white} = common;
 
-const Signin = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+export const ForgotPasswordScreenOptions = ({navigation}) => {
+  return {
+    title: '',
+    headerTransparent: true,
+    animation: 'slide_from_bottom',
+    presentation: 'fullScreenModal',
+    headerLeft: () => (
+      <MaterialCommunityIcons
+        name="close"
+        onPress={() => navigation.goBack()}
+        size={26}
+        color="white"
+      />
+    ),
+  };
+};
 
+const ForgotPassword = () => {
+  const [email, setEmail] = useState('');
   const navigation = useNavigation();
-  const signIn = useSignIn({username, password});
 
-  const handlePressLogin = () => {
-    if (!username) {
+  const recoverUserApi = useMutation(recoverUser);
+
+  const handlePressResetPassword = () => {
+    if (!email) {
       showMessage({
-        message: 'Username is empty',
+        message: 'Email is empty',
         type: 'warning',
       });
       return;
     }
 
-    if (!password) {
-      showMessage({
-        message: 'Password is empty',
-        type: 'warning',
-      });
-      return;
-    }
-
-    signIn();
+    recoverUserApi.mutate(
+      {email},
+      {
+        onSuccess: () => {
+          showMessage({message: 'We sent you an email to reset your password'});
+          navigation.navigate(Signin.name);
+        },
+        onError: error => {
+          showMessage({message: error.message, type: 'warning'});
+        },
+      },
+    );
   };
 
   return (
@@ -60,22 +80,12 @@ const Signin = () => {
       </LinearGradient>
       <View style={[flex1, aiCenter, rGap30, {backgroundColor: 'white'}]}>
         <View style={{width: '75%'}}>
-          <Text>Username</Text>
+          <Text>E-mail</Text>
           <TextInput
-            placeholder="Tap to enter username"
-            onChangeText={setUsername}
-            value={username}
+            placeholder="Tap to enter e-mail"
+            onChangeText={setEmail}
+            value={email}
             style={[styles.textInput, styles.line]}
-          />
-        </View>
-        <View style={{width: '75%'}}>
-          <Text>Password</Text>
-          <TextInput
-            placeholder="Tap to enter password"
-            onChangeText={setPassword}
-            value={password}
-            style={[styles.textInput, styles.line]}
-            secureTextEntry
           />
         </View>
         <TouchableOpacity
@@ -88,8 +98,8 @@ const Signin = () => {
             },
             aiCenter,
           ]}
-          onPress={handlePressLogin}>
-          <Text style={white}>Log In</Text>
+          onPress={handlePressResetPassword}>
+          <Text style={white}>Reset Password</Text>
         </TouchableOpacity>
         <Text>Or</Text>
         <View style={row}>
@@ -104,11 +114,6 @@ const Signin = () => {
             onPress={() => navigation.navigate(CreateNewAccount.name)}>
             Registration
           </Text>
-        </Text>
-        <Text
-          style={{color: 'dodgerblue', textDecorationLine: 'underline'}}
-          onPress={() => navigation.navigate(ForgotPassword.name)}>
-          Forgot password?
         </Text>
       </View>
     </>
@@ -125,4 +130,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Signin;
+export default ForgotPassword;

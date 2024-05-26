@@ -8,19 +8,19 @@ import {
   SafeAreaView,
   Image,
 } from 'react-native';
-import common from '../../../styles/sharedStyles';
+import common from '../../styles/sharedStyles';
 import {useNavigation} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useState} from 'react';
-import {useMutation} from '../../../hooks/customHooks';
-import {createUser as userCreateUser} from '../../../services/AuthService';
+import {useMutation} from '../../hooks/customHooks';
+import {createUser as userCreateUser} from '../../services/AuthService';
 import {showMessage} from 'react-native-flash-message';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import LinearGradient from 'react-native-linear-gradient';
-import {useStore} from '../../../containers/StoreContainer';
-import {AuthActionType} from '../../../containers/AuthAction';
-import Signin from '../../auth/SignIn';
-import EditProfile from './EditProfile';
+import {useStore} from '../../containers/StoreContainer';
+import {AuthActionType} from '../../containers/AuthAction';
+import Signin from './SignIn';
+import EditProfile from '../profile/settings/EditProfile';
 
 const {row, flex1, aiCenter, rGap30, jcSpaceBetween, white, font11, bold} =
   common;
@@ -148,7 +148,7 @@ const CreateNewAccount = () => {
           <View style={[aiCenter, {paddingTop: 40}]}>
             <Image
               style={{width: 80, height: 80}}
-              source={require('../../../assets/beperk_logo.png')}
+              source={require('../../assets/beperk_logo.png')}
             />
           </View>
         </SafeAreaView>
