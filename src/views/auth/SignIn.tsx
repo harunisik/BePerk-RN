@@ -65,7 +65,7 @@ const Signin = () => {
             placeholder="Tap to enter username"
             onChangeText={setUsername}
             value={username}
-            style={[styles.textInput, styles.line]}
+            style={[styles.line]}
           />
         </View>
         <View style={{width: '75%'}}>
@@ -74,7 +74,7 @@ const Signin = () => {
             placeholder="Tap to enter password"
             onChangeText={setPassword}
             value={password}
-            style={[styles.textInput, styles.line]}
+            style={[styles.line]}
             secureTextEntry
           />
         </View>
@@ -116,9 +116,6 @@ const Signin = () => {
 };
 
 const styles = StyleSheet.create({
-  textInput: {
-    height: 30,
-  },
   line: {
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: 'gray',

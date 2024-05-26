@@ -9,42 +9,59 @@ import AddStack from './AddStack';
 import NewStory from './NewStory';
 import NewPost from './NewPost';
 import BottomModal from '../../components/common/BottomModal';
-import {launchMediaLibrary} from '../../utils/MediaUtil';
+import {
+  launchCamera,
+  launchImageLibrary,
+  launchMediaLibrary,
+} from '../../utils/MediaUtil';
 import {PERMISSIONS} from 'react-native-permissions';
+import {Platform} from 'react-native';
 
 export const ImageVideoSelectionModal = ({visible, onDismiss, navigateTo}) => {
   const navigation = useNavigation();
 
+  const processPhoto = data => {
+    if (data.assets?.length && data.assets.length > 0) {
+      navigation.navigate(AddStack.name, {
+        screen: navigateTo,
+        params: {
+          assets: data.assets.map(({type, ...rest}) => {
+            return {
+              ...rest,
+              type,
+              mediaType: type.startsWith('image') ? 'photo' : 'video',
+            };
+          }),
+        },
+      });
+    }
+  };
+
+  const processCamera = data => {
+    if (data.assets?.length && data.assets.length > 0) {
+      navigation.navigate(AddStack.name, {
+        screen: navigateTo,
+        params: {assets: data.assets},
+      });
+    }
+  };
+
   const handlePressImage = () => {
     onDismiss();
-    launchMediaLibrary(PERMISSIONS.IOS.PHOTO_LIBRARY, data => {
-      if (data.assets?.length && data.assets.length > 0) {
-        navigation.navigate(AddStack.name, {
-          screen: navigateTo,
-          params: {
-            assets: data.assets.map(({type, ...rest}) => {
-              return {
-                ...rest,
-                type,
-                mediaType: type.startsWith('image') ? 'photo' : 'video',
-              };
-            }),
-          },
-        });
-      }
-    });
+    if (Platform.OS === 'ios') {
+      launchMediaLibrary(PERMISSIONS.IOS.PHOTO_LIBRARY, processPhoto);
+    } else {
+      launchImageLibrary(processPhoto);
+    }
   };
 
   const handlePressVideo = () => {
     onDismiss();
-    launchMediaLibrary(PERMISSIONS.IOS.CAMERA, data => {
-      if (data.assets?.length && data.assets.length > 0) {
-        navigation.navigate(AddStack.name, {
-          screen: navigateTo,
-          params: {assets: data.assets},
-        });
-      }
-    });
+    if (Platform.OS === 'ios') {
+      launchMediaLibrary(PERMISSIONS.IOS.CAMERA, processCamera);
+    } else {
+      launchCamera(processCamera);
+    }
   };
 
   return (

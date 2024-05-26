@@ -137,6 +137,7 @@ const HeaderTitle = () => {
 export const HomeScreenOptions = () => {
   return {
     headerTransparent: true,
+    headerTitleAlign: 'center',
     headerTitle: HeaderTitle,
     headerLeft: HeaderLeft,
     headerRight: HeaderRight,

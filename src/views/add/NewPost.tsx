@@ -134,6 +134,10 @@ const NewPost = () => {
           showMessage({message: 'New post sent'});
           navigation.goBack();
         },
+        onError: error => {
+          showMessage({message: error.message});
+          navigation.goBack();
+        },
       });
     } else {
       try {
@@ -153,6 +157,10 @@ const NewPost = () => {
       uploadVideo.mutate(form, {
         onSuccess: () => {
           showMessage({message: 'New post sent'});
+          navigation.goBack();
+        },
+        onError: error => {
+          showMessage({message: error.message});
           navigation.goBack();
         },
       });

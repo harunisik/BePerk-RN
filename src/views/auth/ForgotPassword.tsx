@@ -85,7 +85,7 @@ const ForgotPassword = () => {
             placeholder="Tap to enter e-mail"
             onChangeText={setEmail}
             value={email}
-            style={[styles.textInput, styles.line]}
+            style={[styles.line]}
           />
         </View>
         <TouchableOpacity
@@ -121,9 +121,6 @@ const ForgotPassword = () => {
 };
 
 const styles = StyleSheet.create({
-  textInput: {
-    height: 30,
-  },
   line: {
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: 'gray',

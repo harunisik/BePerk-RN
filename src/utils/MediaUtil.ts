@@ -1,7 +1,40 @@
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-import {check, request, PERMISSIONS, RESULTS} from 'react-native-permissions';
+import * as imagePicker from 'react-native-image-picker';
+import {
+  check,
+  request,
+  PERMISSIONS,
+  RESULTS,
+  Permission,
+} from 'react-native-permissions';
 
-export function launchMediaLibrary(permission, callback, options = undefined) {
+export function launchImageLibrary(callback: any, options = undefined) {
+  imagePicker.launchImageLibrary(
+    {
+      mediaType: 'mixed',
+      presentationStyle: 'fullScreen',
+      ...(options ? options : {}),
+    },
+    callback,
+  );
+}
+
+export function launchCamera(callback: any, options = undefined) {
+  imagePicker.launchCamera(
+    {
+      mediaType: 'mixed',
+      presentationStyle: 'fullScreen',
+      durationLimit: 30,
+      ...(options ? options : {}),
+    },
+    callback,
+  );
+}
+
+export function launchMediaLibrary(
+  permission: Permission,
+  callback: any,
+  options = undefined,
+) {
   check(permission)
     .then(result => {
       switch (result) {
@@ -24,24 +57,9 @@ export function launchMediaLibrary(permission, callback, options = undefined) {
         case RESULTS.GRANTED:
           console.log('The permission is granted');
           if (permission === PERMISSIONS.IOS.PHOTO_LIBRARY) {
-            launchImageLibrary(
-              {
-                mediaType: 'mixed',
-                presentationStyle: 'fullScreen',
-                ...(options ? options : {}),
-              },
-              callback,
-            );
+            launchImageLibrary(callback, options);
           } else if (permission === PERMISSIONS.IOS.CAMERA) {
-            launchCamera(
-              {
-                mediaType: 'mixed',
-                presentationStyle: 'fullScreen',
-                durationLimit: 30,
-                ...(options ? options : {}),
-              },
-              callback,
-            );
+            launchCamera(callback, options);
           }
           break;
         case RESULTS.BLOCKED:

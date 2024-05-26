@@ -160,7 +160,7 @@ const CreateNewAccount = () => {
             placeholder="Tap to enter username"
             onChangeText={setUsername}
             value={username}
-            style={[styles.textInput, styles.line]}
+            style={[styles.line]}
           />
         </View>
         <View style={{width: '75%'}}>
@@ -169,7 +169,7 @@ const CreateNewAccount = () => {
             placeholder="Tap to enter e-mail"
             onChangeText={setEmail}
             value={email}
-            style={[styles.textInput, styles.line]}
+            style={[styles.line]}
           />
         </View>
         <View style={{width: '75%'}}>
@@ -178,7 +178,7 @@ const CreateNewAccount = () => {
             placeholder="Tap to enter password"
             onChangeText={setPassword}
             value={password}
-            style={[styles.textInput, styles.line]}
+            style={[styles.line]}
             secureTextEntry
           />
         </View>
@@ -188,7 +188,7 @@ const CreateNewAccount = () => {
             placeholder="Tap to confirm password"
             onChangeText={setConfirmPassword}
             value={confirmPassword}
-            style={[styles.textInput, styles.line]}
+            style={[styles.line]}
             secureTextEntry
           />
         </View>
@@ -240,9 +240,6 @@ const CreateNewAccount = () => {
 };
 
 const styles = StyleSheet.create({
-  textInput: {
-    height: 30,
-  },
   line: {
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: 'gray',

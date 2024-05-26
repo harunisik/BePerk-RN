@@ -42,6 +42,7 @@ const Video = ({
         }}
         // resizeMode="stretch"
         paused={videoPaused}
+        // controls
         {...rest}
       />
       {videoPaused && (
