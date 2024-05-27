@@ -86,7 +86,7 @@ const NewStory = () => {
           uri: response.path,
         });
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     }
 

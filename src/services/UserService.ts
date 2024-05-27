@@ -176,7 +176,7 @@ export const postBookmarks = bookmark => {
 
 export const postProfile = formData => {
   return axios
-    .post('/user/profile', formData)
+    .postForm('/user/profile', formData)
     .then(handleResponse)
     .catch(handleError);
 };
@@ -190,14 +190,14 @@ export const postSettings = settings => {
 
 export const uploadPhoto = formData => {
   return axios
-    .post('/user/upload_photo', formData)
+    .postForm('/user/upload_photo', formData)
     .then(handleResponse)
     .catch(handleError);
 };
 
 export const uploadVideo = formData => {
   return axios
-    .post('/user/upload_video', formData)
+    .postForm('/user/upload_video', formData)
     .then(handleResponse)
     .catch(handleError);
 };

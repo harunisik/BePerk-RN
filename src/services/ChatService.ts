@@ -10,7 +10,7 @@ export const chatShare = share => {
 
 export const chatSend = formData => {
   return axios
-    .post('/chat/send', formData)
+    .postForm('/chat/send', formData)
     .then(handleResponse)
     .catch(error => {
       const errorMessage = error.response?.data?.error?.[0];

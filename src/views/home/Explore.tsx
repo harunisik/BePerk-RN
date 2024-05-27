@@ -12,8 +12,6 @@ const Explore = () => {
     navigation.navigate(ExplorePostsDetails.name, {index});
   };
 
-  console.log(data);
-
   return (
     <PostItemList
       data={data}

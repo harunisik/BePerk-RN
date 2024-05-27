@@ -13,10 +13,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {SegmentedButtons} from 'react-native-paper';
 import {useEffect, useState} from 'react';
-import {
-  uploadVideo as userUploadVideo,
-  uploadPhoto as userUploadPhoto,
-} from '../../services/UserService';
+import {uploadPhoto, uploadVideo} from '../../services/UserService';
 import {useMutation} from '../../hooks/customHooks';
 import {showMessage} from 'react-native-flash-message';
 import {toNumber} from '../../utils/BooleanUtil';
@@ -63,8 +60,8 @@ const NewPost = () => {
   } = route;
   const asset = assets[0];
 
-  const uploadPhoto = useMutation(userUploadPhoto);
-  const uploadVideo = useMutation(userUploadVideo);
+  const uploadPhotoApi = useMutation(uploadPhoto);
+  const uploadVideoApi = useMutation(uploadVideo);
 
   useEffect(() => {
     if (selectedUsers) {
@@ -129,7 +126,7 @@ const NewPost = () => {
     });
 
     if (asset.mediaType === 'photo') {
-      uploadPhoto.mutate(form, {
+      uploadPhotoApi.mutate(form, {
         onSuccess: () => {
           showMessage({message: 'New post sent'});
           navigation.goBack();
@@ -151,10 +148,10 @@ const NewPost = () => {
           uri: response.path,
         });
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
 
-      uploadVideo.mutate(form, {
+      uploadVideoApi.mutate(form, {
         onSuccess: () => {
           showMessage({message: 'New post sent'});
           navigation.goBack();

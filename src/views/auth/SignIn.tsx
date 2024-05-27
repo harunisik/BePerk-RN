@@ -20,8 +20,8 @@ import ForgotPassword from './ForgotPassword';
 const {row, flex1, aiCenter, rGap30, white} = common;
 
 const Signin = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('harun-local');
+  const [password, setPassword] = useState('123');
 
   const navigation = useNavigation();
   const signIn = useSignIn({username, password});

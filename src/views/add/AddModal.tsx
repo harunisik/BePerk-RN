@@ -14,54 +14,54 @@ import {
   launchImageLibrary,
   launchMediaLibrary,
 } from '../../utils/MediaUtil';
-import {PERMISSIONS} from 'react-native-permissions';
-import {Platform} from 'react-native';
 
 export const ImageVideoSelectionModal = ({visible, onDismiss, navigateTo}) => {
   const navigation = useNavigation();
 
-  const processPhoto = data => {
-    if (data.assets?.length && data.assets.length > 0) {
-      navigation.navigate(AddStack.name, {
-        screen: navigateTo,
-        params: {
-          assets: data.assets.map(({type, ...rest}) => {
-            return {
-              ...rest,
-              type,
-              mediaType: type.startsWith('image') ? 'photo' : 'video',
-            };
-          }),
-        },
-      });
-    }
-  };
+  const processPhoto = () =>
+    launchImageLibrary(data => {
+      if (data.assets?.length && data.assets.length > 0) {
+        navigation.navigate(AddStack.name, {
+          screen: navigateTo,
+          params: {
+            assets: data.assets.map(({type, ...rest}) => {
+              return {
+                ...rest,
+                type,
+                mediaType: type.startsWith('image') ? 'photo' : 'video',
+              };
+            }),
+          },
+        });
+      }
+    });
 
-  const processCamera = data => {
-    if (data.assets?.length && data.assets.length > 0) {
-      navigation.navigate(AddStack.name, {
-        screen: navigateTo,
-        params: {assets: data.assets},
-      });
-    }
-  };
+  const processCamera = () =>
+    launchCamera(data => {
+      if (data.assets?.length && data.assets.length > 0) {
+        navigation.navigate(AddStack.name, {
+          screen: navigateTo,
+          params: {
+            assets: data.assets.map(({type, ...rest}) => {
+              return {
+                ...rest,
+                type,
+                mediaType: type.startsWith('image') ? 'photo' : 'video',
+              };
+            }),
+          },
+        });
+      }
+    });
 
   const handlePressImage = () => {
     onDismiss();
-    if (Platform.OS === 'ios') {
-      launchMediaLibrary(PERMISSIONS.IOS.PHOTO_LIBRARY, processPhoto);
-    } else {
-      launchImageLibrary(processPhoto);
-    }
+    launchMediaLibrary(processPhoto, 'image');
   };
 
   const handlePressVideo = () => {
     onDismiss();
-    if (Platform.OS === 'ios') {
-      launchMediaLibrary(PERMISSIONS.IOS.CAMERA, processCamera);
-    } else {
-      launchCamera(processCamera);
-    }
+    launchMediaLibrary(processCamera, 'camera');
   };
 
   return (

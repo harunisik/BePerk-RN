@@ -19,5 +19,8 @@ export const postMy24Like = like => {
 };
 
 export const postMy24 = formData => {
-  return axios.post('/my24', formData).then(handleResponse).catch(handleError);
+  return axios
+    .postForm('/my24', formData)
+    .then(handleResponse)
+    .catch(handleError);
 };
