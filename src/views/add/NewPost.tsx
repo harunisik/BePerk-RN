@@ -1,6 +1,5 @@
 import {
   View,
-  Text,
   TextInput,
   StyleSheet,
   Switch,
@@ -21,6 +20,7 @@ import UserSearch, {NewPostHeaderRight} from '../profile/UserSearch';
 import GooglePlaces from './GooglePlaces';
 import Video from '../../components/common/Video';
 import {createThumbnail} from 'react-native-create-thumbnail';
+import Text from '../../components/common/Text';
 
 const PostButton = ({onPress}) => {
   return (

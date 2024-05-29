@@ -1,6 +1,5 @@
 import {
   View,
-  Text,
   Pressable,
   TextInput,
   StyleSheet,
@@ -25,6 +24,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import {launchMediaLibrary} from '../../../utils/MediaUtil';
 import {PERMISSIONS} from 'react-native-permissions';
 import AccountCard from '../../../components/common/AccountCard';
+import Text from '../../../components/common/Text';
 
 const {row, flex1, flex3, aiCenter, jcSpaceBetween, p15, gray, mb15, cGap10} =
   common;

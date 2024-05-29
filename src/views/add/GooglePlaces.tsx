@@ -1,4 +1,3 @@
-import {Text} from 'react-native';
 import {showMessage} from 'react-native-flash-message';
 import {
   GooglePlacesAutocomplete,
@@ -8,6 +7,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import NewPost from './NewPost';
 import {useNavigation} from '@react-navigation/native';
 import {useRef} from 'react';
+import Text from '../../components/common/Text';
 
 export const GooglePlacesScreenOptions = ({navigation}) => {
   return {

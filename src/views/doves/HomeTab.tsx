@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import common from '../../styles/sharedStyles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import DovesItem from '../../components/doves/DovesItem';
@@ -9,6 +9,7 @@ import {useQuery} from '../../hooks/customHooks';
 import {getUserPerks} from '../../services/UserService';
 import {useGetUserFeed} from '../../hooks/infiniteQueryHooks';
 import InfiniteFlatList from '../../components/common/InfiniteFlatList';
+import Text from '../../components/common/Text';
 
 const ListHeaderItem = ({item}) => {
   const {jcSpaceBetween, aiCenter, row, rGap15, pt20, p15, bold, white} =

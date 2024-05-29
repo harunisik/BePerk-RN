@@ -1,6 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import {Alert, Modal, StyleSheet, Text, Pressable, View} from 'react-native';
+import {Alert, Modal, StyleSheet, Pressable, View} from 'react-native';
+import Text from './Text';
 
 const ModalDemo = ({visible}) => {
   const [modalVisible, setModalVisible] = useState(visible);

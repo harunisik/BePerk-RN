@@ -1,4 +1,4 @@
-import {View, Text, TouchableOpacity, Animated, StyleSheet} from 'react-native';
+import {View, TouchableOpacity, Animated, StyleSheet} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {dateDiff} from '../../utils/DateUtil';
 import {useState} from 'react';
@@ -6,6 +6,7 @@ import {Swipeable} from 'react-native-gesture-handler';
 import LikeButtton from '../common/buttons/LikeButton';
 import FlatList from '../common/FlatList';
 import AccountCard from '../common/AccountCard';
+import Text from '../common/Text';
 
 const RenderRightActions = ({item, onPress}) => {
   return (

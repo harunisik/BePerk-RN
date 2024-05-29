@@ -1,5 +1,5 @@
 import {useCallback, useMemo} from 'react';
-import {Text, SectionList} from 'react-native';
+import {SectionList} from 'react-native';
 import {EditProfileListItem} from './EditProfile';
 import {ChangePasswordListItem} from './ChangePassword';
 import {InviteListItem} from './Invite';
@@ -23,6 +23,7 @@ import ItemSeperator from '../../../components/common/ItemSpearator';
 import common from '../../../styles/sharedStyles';
 import {useQuery} from '../../../hooks/customHooks';
 import {getUserSettings} from '../../../services/UserService';
+import Text from '../../../components/common/Text';
 
 const {gray, p15} = common;
 

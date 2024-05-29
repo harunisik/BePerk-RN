@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  ActivityIndicator,
-} from 'react-native';
+import {View, TextInput, StyleSheet, ActivityIndicator} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {useEffect, useState} from 'react';
 import UserItem from '../../components/profile/UserItem';
@@ -20,6 +14,7 @@ import {chatAdd, chatShare} from '../../services/ChatService';
 import NewPost from '../add/NewPost';
 import {postMy24} from '../../services/My24Service';
 import MessageDetails from './MessageDetails';
+import Text from '../../components/common/Text';
 
 const {bold, font16, pl15, pr15, pb10, pt10} = common;
 

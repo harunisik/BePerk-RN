@@ -1,8 +1,9 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {dateDiff} from '../../utils/DateUtil';
 import AccountCard from '../common/AccountCard';
 import {useNavigation} from '@react-navigation/native';
+import Text from '../common/Text';
 
 const {row, rGap15, cGap10, bold, font11, gray, pr10, flex1} = common;
 

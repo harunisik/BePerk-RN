@@ -1,4 +1,4 @@
-import {Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
+import {Pressable, StyleSheet, TextInput, View} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {
   addFollowing,
@@ -14,6 +14,7 @@ import Popup from '../../components/common/Popup';
 import {showMessage} from 'react-native-flash-message';
 import {useStore} from '../../containers/StoreContainer';
 import AccountCard from '../../components/common/AccountCard';
+import Text from '../../components/common/Text';
 
 const {pl15, pr15, row, aiCenter} = common;
 

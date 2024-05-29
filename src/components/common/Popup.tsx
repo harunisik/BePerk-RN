@@ -1,7 +1,8 @@
 import React from 'react';
-import {StyleSheet, Pressable, View, Text} from 'react-native';
+import {StyleSheet, Pressable, View} from 'react-native';
 import common from '../../styles/sharedStyles';
 import Modal from './Modal';
+import Text from './Text';
 
 const {bold, font16} = common;
 

@@ -1,4 +1,4 @@
-import {Text, Pressable} from 'react-native';
+import {Pressable} from 'react-native';
 import common from '../../../styles/sharedStyles';
 import {useNavigation} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -9,6 +9,7 @@ import {useStore} from '../../../containers/StoreContainer';
 import {AuthActionType} from '../../../containers/AuthAction';
 import {showMessage} from 'react-native-flash-message';
 import Popup from '../../../components/common/Popup';
+import Text from '../../../components/common/Text';
 
 const {row, aiCenter, jcSpaceBetween, bold, font16} = common;
 

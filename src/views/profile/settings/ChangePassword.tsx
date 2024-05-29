@@ -1,6 +1,5 @@
 import {
   View,
-  Text,
   Pressable,
   TextInput,
   StyleSheet,
@@ -13,6 +12,7 @@ import {useState} from 'react';
 import {useMutation} from '../../../hooks/customHooks';
 import {changePassword as userPostPassword} from '../../../services/AuthService';
 import {showMessage} from 'react-native-flash-message';
+import Text from '../../../components/common/Text';
 
 const {row, gray, aiCenter, rGap30, jcSpaceBetween, white} = common;
 

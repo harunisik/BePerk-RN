@@ -1,8 +1,9 @@
-import {Text, Pressable} from 'react-native';
+import {Pressable} from 'react-native';
 import common from '../../../styles/sharedStyles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useStore} from '../../../containers/StoreContainer';
 import {AuthActionType} from '../../../containers/AuthAction';
+import Text from '../../../components/common/Text';
 
 const {row, aiCenter, jcSpaceBetween} = common;
 

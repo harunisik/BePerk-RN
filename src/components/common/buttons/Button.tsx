@@ -1,7 +1,8 @@
-import {Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {TouchableOpacity, StyleSheet} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import common from '../../../styles/sharedStyles';
 import {ReactElement} from 'react';
+import Text from '../Text';
 
 interface ButtonProps {
   title: string;

@@ -1,8 +1,9 @@
-import {useWindowDimensions, Text} from 'react-native';
+import {useWindowDimensions} from 'react-native';
 import {useState} from 'react';
 import {TabBar, TabView} from 'react-native-tab-view';
 import PostsTab from '../../views/profile/PostsTab';
 import StoriesTab from '../../views/profile/StoriesTab';
+import Text from '../common/Text';
 
 const renderScene = ({route, userId}) => {
   switch (route.key) {

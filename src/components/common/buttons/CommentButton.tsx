@@ -1,8 +1,9 @@
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import common from '../../../styles/sharedStyles';
 import Comment from '../../../views/doves/Comment';
 import {useNavigation} from '@react-navigation/native';
+import Text from '../Text';
 
 const {font12, cGap3, row, aiCenter, rGap5} = common;
 

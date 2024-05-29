@@ -1,4 +1,4 @@
-import {Pressable, Text, View} from 'react-native';
+import {Pressable, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import common from '../../styles/sharedStyles';
 import ProfileStack from '../../views/profile/ProfileStack';
@@ -7,6 +7,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {useStore} from '../../containers/StoreContainer';
 import Profile from '../../views/profile/Profile';
 import FastImage from 'react-native-fast-image';
+import Text from './Text';
 
 const {row, aiCenter, rGap5, bold} = common;
 

@@ -1,6 +1,5 @@
 import {
   View,
-  Text,
   GestureResponderEvent,
   ImageBackground,
   TouchableWithoutFeedback,
@@ -32,6 +31,7 @@ import uuid from 'react-native-uuid';
 import {postMy24Like} from '../../services/My24Service';
 import Popup from '../../components/common/Popup';
 import AccountCard from '../../components/common/AccountCard';
+import Text from '../../components/common/Text';
 
 const {
   jcSpaceBetween,

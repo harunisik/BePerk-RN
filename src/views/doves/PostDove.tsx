@@ -2,7 +2,6 @@ import {
   ActivityIndicator,
   StyleSheet,
   Switch,
-  Text,
   TextInput,
   View,
 } from 'react-native';
@@ -13,6 +12,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {showMessage} from 'react-native-flash-message';
 import {useMutation} from '../../hooks/customHooks';
 import {addPerk as userAddPerk} from '../../services/UserService';
+import Text from '../../components/common/Text';
 
 const PostButton = ({onPress}) => {
   return (

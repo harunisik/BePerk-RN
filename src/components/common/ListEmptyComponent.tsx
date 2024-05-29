@@ -1,5 +1,6 @@
 import {useMemo} from 'react';
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
+import Text from './Text';
 
 const ListEmptyComponent = () => {
   return (

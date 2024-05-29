@@ -1,5 +1,5 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, View} from 'react-native';
 import {formatDate} from '../../utils/DateUtil';
 import common from '../../styles/sharedStyles';
 import DovesItem from '../../components/doves/DovesItem';
@@ -19,6 +19,7 @@ import {useChatListOpen, useGetChat} from '../../hooks/userHooks';
 import MediaView from './MediaView';
 import PostDetailItemView from './PostDetailsItemView';
 import AccountCard from '../../components/common/AccountCard';
+import Text from '../../components/common/Text';
 
 const {flex1, row, aiCenter, bold, cGap5, p10} = common;
 

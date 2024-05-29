@@ -1,8 +1,9 @@
-import {Text, Pressable} from 'react-native';
+import {Pressable} from 'react-native';
 import common from '../../../styles/sharedStyles';
 import {useNavigation} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import WebView from '../../../components/common/WebView';
+import Text from '../../../components/common/Text';
 
 const {row, aiCenter, jcSpaceBetween} = common;
 

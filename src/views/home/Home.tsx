@@ -1,7 +1,7 @@
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import ForYouTab from './ForYouTab';
 import FollowingTab from './FollowingTab';
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -17,6 +17,7 @@ import notifee from '@notifee/react-native';
 import {badgeCount} from '../../services/UserService';
 import {useQuery} from '../../hooks/customHooks';
 import Badge from '../../components/common/Badge';
+import Text from '../../components/common/Text';
 
 const {row, cGap15} = common;
 

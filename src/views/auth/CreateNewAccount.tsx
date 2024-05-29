@@ -1,6 +1,5 @@
 import {
   View,
-  Text,
   Pressable,
   TextInput,
   StyleSheet,
@@ -21,6 +20,7 @@ import {useStore} from '../../containers/StoreContainer';
 import {AuthActionType} from '../../containers/AuthAction';
 import Signin from './SignIn';
 import EditProfile from '../profile/settings/EditProfile';
+import Text from '../../components/common/Text';
 
 const {row, flex1, aiCenter, rGap30, jcSpaceBetween, white, font11, bold} =
   common;

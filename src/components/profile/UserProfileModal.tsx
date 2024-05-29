@@ -1,4 +1,4 @@
-import {Text, StyleSheet, TouchableOpacity, Alert} from 'react-native';
+import {StyleSheet, TouchableOpacity, Alert} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import common from '../../styles/sharedStyles';
@@ -7,6 +7,7 @@ import Clipboard from '@react-native-clipboard/clipboard';
 import UserSearch, {ChatShareHeaderRight} from '../../views/profile/UserSearch';
 import {useNavigation} from '@react-navigation/native';
 import BottomModal from '../common/BottomModal';
+import Text from '../common/Text';
 
 const {aiCenter, cGap15, row} = common;
 

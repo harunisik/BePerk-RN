@@ -1,5 +1,5 @@
-import {Text} from 'react-native';
 import common from '../../styles/sharedStyles';
+import Text from './Text';
 
 const Emoji = ({emoji, onPress}) => {
   const {font20} = common;

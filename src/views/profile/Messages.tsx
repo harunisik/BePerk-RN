@@ -1,4 +1,4 @@
-import {Alert, Animated, Pressable, StyleSheet, Text, View} from 'react-native';
+import {Animated, Pressable, StyleSheet, View} from 'react-native';
 import {useMutation, useQuery} from '../../hooks/customHooks';
 import {chatDelete, chatListOpen} from '../../services/ChatService';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -9,9 +9,9 @@ import FlatList from '../../components/common/FlatList';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Swipeable} from 'react-native-gesture-handler';
 import {useStore} from '../../containers/StoreContainer';
-import {useEffect} from 'react';
 import UserSearch, {MessagesHeaderRight} from './UserSearch';
 import AccountCard from '../../components/common/AccountCard';
+import Text from '../../components/common/Text';
 
 const {
   row,

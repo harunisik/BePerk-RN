@@ -1,4 +1,4 @@
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
 import Video from '../common/Video';
 import LikeButtton from '../common/buttons/LikeButton';
 import CommentButton from '../common/buttons/CommentButton';
@@ -6,6 +6,7 @@ import BookmarkButton from '../common/buttons/BookmarkButton';
 import ShareButton from '../common/buttons/ShareButton';
 import DotsButton from '../common/buttons/DotsButton';
 import AccountCard from '../common/AccountCard';
+import Text from '../common/Text';
 
 const PagerItem = ({item, paused = true}) => {
   return (

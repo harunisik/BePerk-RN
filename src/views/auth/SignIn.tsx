@@ -1,6 +1,5 @@
 import {
   View,
-  Text,
   TextInput,
   StyleSheet,
   TouchableOpacity,
@@ -16,6 +15,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import CreateNewAccount from './CreateNewAccount';
 import {useSignIn} from '../../hooks/userHooks';
 import ForgotPassword from './ForgotPassword';
+import Text from '../../components/common/Text';
 
 const {row, flex1, aiCenter, rGap30, white} = common;
 

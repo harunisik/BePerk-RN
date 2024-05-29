@@ -1,15 +1,10 @@
-import {
-  View,
-  TextInput,
-  StyleSheet,
-  useWindowDimensions,
-  Text,
-} from 'react-native';
+import {View, TextInput, StyleSheet, useWindowDimensions} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {useState} from 'react';
 import SearchProfilesTab from './SearchProfilesTab';
 import {TabBar, TabView} from 'react-native-tab-view';
 import SearchTagsTab from './SearchTagsTab';
+import Text from '../../components/common/Text';
 
 const renderScene = ({route, searchText}) => {
   switch (route.key) {

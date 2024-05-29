@@ -1,9 +1,9 @@
-import {Alert, Text} from 'react-native';
+import {Alert} from 'react-native';
 import {useState} from 'react';
 import {useSearchHashTagCount, useSearchText} from '../../hooks/searchHooks';
-import ItemSeperator from '../../components/common/ItemSpearator';
 import common from '../../styles/sharedStyles';
 import FlatList from '../../components/common/FlatList';
+import Text from '../../components/common/Text';
 
 const SearchTagsTab = ({searchText}) => {
   const [searchResult, setSearchResult] = useState([]);

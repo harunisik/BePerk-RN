@@ -1,5 +1,6 @@
-import {View, Text, ScrollView} from 'react-native';
+import {View, ScrollView} from 'react-native';
 import common from '../../styles/sharedStyles';
+import Text from '../common/Text';
 
 const SelectedUsers = ({data}) => {
   const {p10, radius6, white, font11, row, cGap5} = common;

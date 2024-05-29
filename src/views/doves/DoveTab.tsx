@@ -1,4 +1,4 @@
-import {TouchableOpacity, StyleSheet, Text} from 'react-native';
+import {TouchableOpacity, StyleSheet} from 'react-native';
 import common from '../../styles/sharedStyles';
 import DovesItem from '../../components/doves/DovesItem';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -8,6 +8,7 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import {useCallback} from 'react';
 import {useGetUserExploring} from '../../hooks/infiniteQueryHooks';
 import InfiniteFlatList from '../../components/common/InfiniteFlatList';
+import Text from '../../components/common/Text';
 
 const ListHeaderComponent = () => {
   const navigation = useNavigation();

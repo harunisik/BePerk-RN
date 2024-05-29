@@ -1,6 +1,5 @@
 import {
   View,
-  Text,
   GestureResponderEvent,
   useWindowDimensions,
   StyleSheet,
@@ -30,6 +29,7 @@ import Popup from '../../components/common/Popup';
 import Video from '../../components/common/Video';
 import FastImage from 'react-native-fast-image';
 import AccountCard from '../../components/common/AccountCard';
+import Text from '../../components/common/Text';
 
 const {
   jcSpaceBetween,

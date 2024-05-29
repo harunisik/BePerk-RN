@@ -11,14 +11,7 @@ import {MaterialTabBar, Tabs} from 'react-native-collapsible-tab-view';
 import PostsTab from './PostsTab';
 import StoriesTab from './StoriesTab';
 import DovesTab from './DovesTab';
-import {
-  Alert,
-  RefreshControl,
-  Share,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {Alert, RefreshControl, Share, StyleSheet, View} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {TouchableOpacity} from 'react-native';
 import EditProfile from './settings/EditProfile';
@@ -29,6 +22,7 @@ import UserProfileModal from '../../components/profile/UserProfileModal';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Popup from '../../components/common/Popup';
 import MessageDetails from './MessageDetails';
+import Text from '../../components/common/Text';
 
 const {bold, font16, aiCenter, row, jcSpaceAround, cGap15, jcCenter} = common;
 
