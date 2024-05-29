@@ -19,6 +19,7 @@ const FeaturedStack = () => {
         name={FeaturedItemDetails.name}
         component={FeaturedItemDetails}
         options={{
+          animation: 'fade',
           headerTransparent: true,
           title: '',
           headerBackTitleVisible: false,

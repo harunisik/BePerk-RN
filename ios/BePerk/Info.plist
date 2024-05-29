@@ -32,17 +32,25 @@
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>78.151.18.33</key>
+			<key>92.12.66.194</key>
 			<dict>
-				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSIncludesSubdomains</key>
 				<true/>
 			</dict>
 		</dict>
 	</dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera Access</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string></string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string></string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Microphone Access</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Photo Library Access</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
@@ -64,6 +72,20 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
+		<string>Karla-Bold.ttf</string>
+		<string>Karla-BoldItalic.ttf</string>
+		<string>Karla-ExtraBold.ttf</string>
+		<string>Karla-ExtraBoldItalic.ttf</string>
+		<string>Karla-ExtraLight.ttf</string>
+		<string>Karla-ExtraLightItalic.ttf</string>
+		<string>Karla-Italic.ttf</string>
+		<string>Karla-Light.ttf</string>
+		<string>Karla-LightItalic.ttf</string>
+		<string>Karla-Medium.ttf</string>
+		<string>Karla-MediumItalic.ttf</string>
+		<string>Karla-Regular.ttf</string>
+		<string>Karla-SemiBold.ttf</string>
+		<string>Karla-SemiBoldItalic.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>BootSplash</string>
@@ -79,11 +101,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Photo Library Access</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Camera Access</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Microphone Access</string>
 </dict>
 </plist>

@@ -9,8 +9,8 @@ import AccountCard from '../common/AccountCard';
 
 const PagerItem = ({item, paused = true}) => {
   return (
-    <>
-      <Video uri={item.filename} paused={paused} fullscreen />
+    <View>
+      <Video uri={item.filename} paused={paused} />
       <View
         style={{
           position: 'absolute',
@@ -80,7 +80,7 @@ const PagerItem = ({item, paused = true}) => {
           />
         </View>
       </View>
-    </>
+    </View>
   );
 };
 

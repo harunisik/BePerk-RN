@@ -47,7 +47,7 @@ const ForYouTab = () => {
               onPageSelected={handlePageSelected}>
               {newData.map((item, index) => {
                 return (
-                  <View key={item.id} collapsable={false}>
+                  <View key={item.id}>
                     <PagerItem item={item} paused={page !== index} />
                   </View>
                 );

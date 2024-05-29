@@ -10,15 +10,9 @@ const {absolute, jcCenter, aiCenter} = common;
 interface VideoProps extends ReactVideoProps {
   uri: string;
   paused?: boolean;
-  fullscreen?: boolean;
 }
 
-const Video = ({
-  uri,
-  paused = true,
-  fullscreen = false,
-  ...rest
-}: VideoProps) => {
+const Video = ({uri, paused = true, ...rest}: VideoProps) => {
   const [videoPaused, setVideoPaused] = useState(paused);
   const [width, setWidth] = useState<number>(0);
 

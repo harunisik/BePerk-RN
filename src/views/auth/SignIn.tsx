@@ -55,6 +55,7 @@ const Signin = () => {
               style={{width: 80, height: 80}}
               source={require('../../assets/beperk_logo.png')}
             />
+            <Text>{process.env.API_URL}</Text>
           </View>
         </SafeAreaView>
       </LinearGradient>

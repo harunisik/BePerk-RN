@@ -8,10 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* BePerkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* BePerkTests.m */; };
+		095CBF02BE18404A95286878 /* Karla-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57EFA8B3A2D34B80B42D14C3 /* Karla-SemiBoldItalic.ttf */; };
+		0C7DADB37C4A4D5685725272 /* Karla-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C9850099487C414E9BC136B0 /* Karla-SemiBold.ttf */; };
 		0C80B921A6F3F58F76C31292 /* libPods-BePerk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-BePerk.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		21385267121148469C1EEB4F /* Karla-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4510F484BB19479B85CC723A /* Karla-Bold.ttf */; };
+		29D699C0D41C41C495A8D5DE /* Karla-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD4D49E5AD634D47B71BA2BB /* Karla-Light.ttf */; };
 		47EE1B1A2B4B82BD00BD0C8B /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47EE1B072B4B7E9F00BD0C8B /* Fontisto.ttf */; };
 		47EE1B1B2B4B82BD00BD0C8B /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47EE1B082B4B7E9F00BD0C8B /* Octicons.ttf */; };
 		47EE1B1C2B4B82BD00BD0C8B /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47EE1B092B4B7E9F00BD0C8B /* Feather.ttf */; };
@@ -31,9 +35,19 @@
 		47EE1B2A2B4B82BD00BD0C8B /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47EE1B172B4B7EA000BD0C8B /* SimpleLineIcons.ttf */; };
 		47EE1B2B2B4B82BD00BD0C8B /* FontAwesome6_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47EE1B182B4B7EA000BD0C8B /* FontAwesome6_Brands.ttf */; };
 		47EE1B2C2B4B82BD00BD0C8B /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47EE1B192B4B7EA000BD0C8B /* MaterialIcons.ttf */; };
+		5003792E474B45C08E577335 /* Karla-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EF45FB54ED3B4C4E8F32E77A /* Karla-ExtraBold.ttf */; };
+		576C52168C674B899529D166 /* Karla-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 40E55422B9F241BCADE62B80 /* Karla-ExtraLightItalic.ttf */; };
+		5D702631AA3E41FCA3B6CF64 /* Karla-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9836AA096AFF4958B1435581 /* Karla-Medium.ttf */; };
+		5F30768D214A47BA842C001F /* Karla-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3279462C6958452F997F284E /* Karla-MediumItalic.ttf */; };
 		7577329D50FA41EEB8E0C123 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E5409FF0198444AB1B4C9CD /* BootSplash.storyboard */; };
 		7699B88040F8A987B510C191 /* libPods-BePerk-BePerkTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-BePerk-BePerkTests.a */; };
+		7933C412243A41ADA569E81B /* Karla-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C8D77482D0142B2A008EE2D /* Karla-ExtraLight.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		95B2BB15DB3F4FDAAD10EDFC /* Karla-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8F0BEF843954ECDB781A619 /* Karla-ExtraBoldItalic.ttf */; };
+		AFFB90C31AEC4AA9AF1BFF8A /* Karla-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D01C4338736F447FB534BCD9 /* Karla-LightItalic.ttf */; };
+		C9674E4C6BB847B6AD908778 /* Karla-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 56D1FEAD7FEA463C95E692E6 /* Karla-Italic.ttf */; };
+		E788C95FECAD45CC9F424433 /* Karla-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 91EB23350CD546C29163670A /* Karla-Regular.ttf */; };
+		F5157178AF454CE2A812FF0A /* Karla-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BF37852BF21C49D0B275386E /* Karla-BoldItalic.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +71,10 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = BePerk/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = BePerk/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-BePerk-BePerkTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BePerk-BePerkTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3279462C6958452F997F284E /* Karla-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Karla-MediumItalic.ttf"; path = "../assets/fonts/Karla-MediumItalic.ttf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-BePerk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BePerk.debug.xcconfig"; path = "Target Support Files/Pods-BePerk/Pods-BePerk.debug.xcconfig"; sourceTree = "<group>"; };
+		40E55422B9F241BCADE62B80 /* Karla-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Karla-ExtraLightItalic.ttf"; path = "../assets/fonts/Karla-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		4510F484BB19479B85CC723A /* Karla-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Karla-Bold.ttf"; path = "../assets/fonts/Karla-Bold.ttf"; sourceTree = "<group>"; };
 		47EE1B072B4B7E9F00BD0C8B /* Fontisto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fontisto.ttf; sourceTree = "<group>"; };
 		47EE1B082B4B7E9F00BD0C8B /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
 		47EE1B092B4B7E9F00BD0C8B /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Feather.ttf; sourceTree = "<group>"; };
@@ -77,13 +94,24 @@
 		47EE1B172B4B7EA000BD0C8B /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
 		47EE1B182B4B7EA000BD0C8B /* FontAwesome6_Brands.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome6_Brands.ttf; sourceTree = "<group>"; };
 		47EE1B192B4B7EA000BD0C8B /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
+		56D1FEAD7FEA463C95E692E6 /* Karla-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Karla-Italic.ttf"; path = "../assets/fonts/Karla-Italic.ttf"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-BePerk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BePerk.release.xcconfig"; path = "Target Support Files/Pods-BePerk/Pods-BePerk.release.xcconfig"; sourceTree = "<group>"; };
+		57EFA8B3A2D34B80B42D14C3 /* Karla-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Karla-SemiBoldItalic.ttf"; path = "../assets/fonts/Karla-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-BePerk-BePerkTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BePerk-BePerkTests.debug.xcconfig"; path = "Target Support Files/Pods-BePerk-BePerkTests/Pods-BePerk-BePerkTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-BePerk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BePerk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6E5409FF0198444AB1B4C9CD /* BootSplash.storyboard */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = BootSplash.storyboard; path = BePerk/BootSplash.storyboard; sourceTree = "<group>"; };
+		6C8D77482D0142B2A008EE2D /* Karla-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Karla-ExtraLight.ttf"; path = "../assets/fonts/Karla-ExtraLight.ttf"; sourceTree = "<group>"; };
+		6E5409FF0198444AB1B4C9CD /* BootSplash.storyboard */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = BootSplash.storyboard; path = BePerk/BootSplash.storyboard; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = BePerk/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-BePerk-BePerkTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BePerk-BePerkTests.release.xcconfig"; path = "Target Support Files/Pods-BePerk-BePerkTests/Pods-BePerk-BePerkTests.release.xcconfig"; sourceTree = "<group>"; };
+		91EB23350CD546C29163670A /* Karla-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Karla-Regular.ttf"; path = "../assets/fonts/Karla-Regular.ttf"; sourceTree = "<group>"; };
+		9836AA096AFF4958B1435581 /* Karla-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Karla-Medium.ttf"; path = "../assets/fonts/Karla-Medium.ttf"; sourceTree = "<group>"; };
+		BF37852BF21C49D0B275386E /* Karla-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Karla-BoldItalic.ttf"; path = "../assets/fonts/Karla-BoldItalic.ttf"; sourceTree = "<group>"; };
+		C9850099487C414E9BC136B0 /* Karla-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Karla-SemiBold.ttf"; path = "../assets/fonts/Karla-SemiBold.ttf"; sourceTree = "<group>"; };
+		D01C4338736F447FB534BCD9 /* Karla-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Karla-LightItalic.ttf"; path = "../assets/fonts/Karla-LightItalic.ttf"; sourceTree = "<group>"; };
+		D8F0BEF843954ECDB781A619 /* Karla-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Karla-ExtraBoldItalic.ttf"; path = "../assets/fonts/Karla-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		DD4D49E5AD634D47B71BA2BB /* Karla-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Karla-Light.ttf"; path = "../assets/fonts/Karla-Light.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		EF45FB54ED3B4C4E8F32E77A /* Karla-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Karla-ExtraBold.ttf"; path = "../assets/fonts/Karla-ExtraBold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +149,27 @@
 				00E356F11AD99517003FC87E /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		09CD8A69FBA545F4A270877E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4510F484BB19479B85CC723A /* Karla-Bold.ttf */,
+				BF37852BF21C49D0B275386E /* Karla-BoldItalic.ttf */,
+				EF45FB54ED3B4C4E8F32E77A /* Karla-ExtraBold.ttf */,
+				D8F0BEF843954ECDB781A619 /* Karla-ExtraBoldItalic.ttf */,
+				6C8D77482D0142B2A008EE2D /* Karla-ExtraLight.ttf */,
+				40E55422B9F241BCADE62B80 /* Karla-ExtraLightItalic.ttf */,
+				56D1FEAD7FEA463C95E692E6 /* Karla-Italic.ttf */,
+				DD4D49E5AD634D47B71BA2BB /* Karla-Light.ttf */,
+				D01C4338736F447FB534BCD9 /* Karla-LightItalic.ttf */,
+				9836AA096AFF4958B1435581 /* Karla-Medium.ttf */,
+				3279462C6958452F997F284E /* Karla-MediumItalic.ttf */,
+				91EB23350CD546C29163670A /* Karla-Regular.ttf */,
+				C9850099487C414E9BC136B0 /* Karla-SemiBold.ttf */,
+				57EFA8B3A2D34B80B42D14C3 /* Karla-SemiBoldItalic.ttf */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		13B07FAE1A68108700A75B9A /* BePerk */ = {
@@ -191,6 +240,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				09CD8A69FBA545F4A270877E /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -332,6 +382,20 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				7577329D50FA41EEB8E0C123 /* BootSplash.storyboard in Resources */,
+				21385267121148469C1EEB4F /* Karla-Bold.ttf in Resources */,
+				F5157178AF454CE2A812FF0A /* Karla-BoldItalic.ttf in Resources */,
+				5003792E474B45C08E577335 /* Karla-ExtraBold.ttf in Resources */,
+				95B2BB15DB3F4FDAAD10EDFC /* Karla-ExtraBoldItalic.ttf in Resources */,
+				7933C412243A41ADA569E81B /* Karla-ExtraLight.ttf in Resources */,
+				576C52168C674B899529D166 /* Karla-ExtraLightItalic.ttf in Resources */,
+				C9674E4C6BB847B6AD908778 /* Karla-Italic.ttf in Resources */,
+				29D699C0D41C41C495A8D5DE /* Karla-Light.ttf in Resources */,
+				AFFB90C31AEC4AA9AF1BFF8A /* Karla-LightItalic.ttf in Resources */,
+				5D702631AA3E41FCA3B6CF64 /* Karla-Medium.ttf in Resources */,
+				5F30768D214A47BA842C001F /* Karla-MediumItalic.ttf in Resources */,
+				E788C95FECAD45CC9F424433 /* Karla-Regular.ttf in Resources */,
+				0C7DADB37C4A4D5685725272 /* Karla-SemiBold.ttf in Resources */,
+				095CBF02BE18404A95286878 /* Karla-SemiBoldItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,7 +566,7 @@
 			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-BePerk-BePerkTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = 2ZJFZHMEU8;
+				DEVELOPMENT_TEAM = RCX5H46Z9F;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -519,7 +583,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.beperk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.BePerk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BePerk.app/BePerk";
 			};
@@ -531,7 +595,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = 2ZJFZHMEU8;
+				DEVELOPMENT_TEAM = RCX5H46Z9F;
 				INFOPLIST_FILE = BePerkTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -544,7 +608,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.beperk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.BePerk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BePerk.app/BePerk";
 			};
@@ -556,21 +620,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2ZJFZHMEU8;
+				CURRENT_PROJECT_VERSION = 190;
+				DEVELOPMENT_TEAM = RCX5H46Z9F;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = BePerk/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.8.6;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.beperk.174;
+				PRODUCT_BUNDLE_IDENTIFIER = com.BePerk;
 				PRODUCT_NAME = BePerk;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -584,20 +648,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2ZJFZHMEU8;
+				CURRENT_PROJECT_VERSION = 190;
+				DEVELOPMENT_TEAM = RCX5H46Z9F;
 				INFOPLIST_FILE = BePerk/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.8.6;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.beperk.174;
+				PRODUCT_BUNDLE_IDENTIFIER = com.BePerk;
 				PRODUCT_NAME = BePerk;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
