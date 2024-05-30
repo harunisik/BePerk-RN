@@ -1,9 +1,9 @@
-import React from 'react';
-import {StyleSheet, Pressable} from 'react-native';
+import {Pressable} from 'react-native';
 import common from '../../styles/sharedStyles';
 import Modal from './Modal';
 import Text from './Text';
 import View from './View';
+import HR from './HR';
 
 const {bold, font16} = common;
 
@@ -35,22 +35,20 @@ const Popup = ({
             <Text style={[bold, font16]}>{header}</Text>
             <Text>{message}</Text>
           </View>
+          <HR />
           <View style={{width: '100%'}}>
             <Pressable
               style={{
                 paddingVertical: 15,
-                borderTopWidth: StyleSheet.hairlineWidth,
-                borderTopColor: 'gray',
                 alignItems: 'center',
               }}
               onPress={onPressOk}>
               <Text style={{color: 'red'}}>{okButtonText}</Text>
             </Pressable>
+            <HR />
             <Pressable
               style={{
                 paddingVertical: 15,
-                borderTopWidth: StyleSheet.hairlineWidth,
-                borderTopColor: 'gray',
                 alignItems: 'center',
               }}
               onPress={onPressCancel}>

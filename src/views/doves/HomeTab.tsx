@@ -11,21 +11,14 @@ import {useGetUserFeed} from '../../hooks/infiniteQueryHooks';
 import InfiniteFlatList from '../../components/common/InfiniteFlatList';
 import Text from '../../components/common/Text';
 import View from '../../components/common/View';
+import HR from '../../components/common/HR';
 
 const ListHeaderItem = ({item}) => {
-  const {jcSpaceBetween, aiCenter, row, rGap15, pt20, p15, bold, white} =
+  const {jcSpaceBetween, aiCenter, row, rGap15, pv20, p15, bold, white} =
     common;
 
   return (
-    <View
-      style={[
-        p15,
-        {
-          borderBottomWidth: StyleSheet.hairlineWidth,
-          borderBottomColor: 'gray',
-          marginBottom: 15,
-        },
-      ]}>
+    <View style={[p15]}>
       <View style={[styles.itemContainer, rGap15]}>
         <View>
           <Text style={[white]}>BePerk's Dove of the Day:</Text>
@@ -40,9 +33,10 @@ const ListHeaderItem = ({item}) => {
           </View>
         </View>
       </View>
-      <View style={[pt20]}>
+      <View style={[pv20]}>
         <Text style={[bold]}>Friend's Activity</Text>
       </View>
+      <HR />
     </View>
   );
 };

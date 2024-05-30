@@ -21,6 +21,7 @@ import Signin from './SignIn';
 import EditProfile from '../profile/settings/EditProfile';
 import Text from '../../components/common/Text';
 import View from '../../components/common/View';
+import HR from '../../components/common/HR';
 
 const {row, flex1, aiCenter, rGap30, jcSpaceBetween, white, font11, bold} =
   common;
@@ -160,8 +161,8 @@ const CreateNewAccount = () => {
             placeholder="Tap to enter username"
             onChangeText={setUsername}
             value={username}
-            style={[styles.line]}
           />
+          <HR />
         </View>
         <View style={{width: '75%'}}>
           <Text>E-mail</Text>
@@ -169,8 +170,8 @@ const CreateNewAccount = () => {
             placeholder="Tap to enter e-mail"
             onChangeText={setEmail}
             value={email}
-            style={[styles.line]}
           />
+          <HR />
         </View>
         <View style={{width: '75%'}}>
           <Text>Password</Text>
@@ -178,9 +179,9 @@ const CreateNewAccount = () => {
             placeholder="Tap to enter password"
             onChangeText={setPassword}
             value={password}
-            style={[styles.line]}
             secureTextEntry
           />
+          <HR />
         </View>
         <View style={{width: '75%'}}>
           <Text>Confirm new password</Text>
@@ -188,9 +189,9 @@ const CreateNewAccount = () => {
             placeholder="Tap to confirm password"
             onChangeText={setConfirmPassword}
             value={confirmPassword}
-            style={[styles.line]}
             secureTextEntry
           />
+          <HR />
         </View>
         <TouchableOpacity
           style={[
@@ -207,7 +208,6 @@ const CreateNewAccount = () => {
         </TouchableOpacity>
         <View
           style={[
-            styles.line,
             {
               width: '55%',
               paddingBottom: 10,
@@ -238,12 +238,5 @@ const CreateNewAccount = () => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  line: {
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: 'gray',
-  },
-});
 
 export default CreateNewAccount;

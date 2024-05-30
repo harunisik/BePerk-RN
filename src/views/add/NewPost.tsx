@@ -16,6 +16,7 @@ import Video from '../../components/common/Video';
 import {createThumbnail} from 'react-native-create-thumbnail';
 import Text from '../../components/common/Text';
 import View from '../../components/common/View';
+import HR from '../../components/common/HR';
 
 const PostButton = ({onPress}) => {
   return (
@@ -201,9 +202,6 @@ const NewPost = () => {
         style={{
           flexDirection: 'row',
           columnGap: 10,
-          borderBottomColor: 'gray',
-          borderBottomWidth: StyleSheet.hairlineWidth,
-          paddingBottom: 15,
           alignItems: 'center',
         }}>
         <MaterialIcons name="account-circle" size={30} color="dodgerblue" />
@@ -225,13 +223,11 @@ const NewPost = () => {
           />
         )}
       </View>
+      <HR />
       <View
         style={{
           flexDirection: 'row',
           columnGap: 10,
-          borderBottomColor: 'gray',
-          borderBottomWidth: StyleSheet.hairlineWidth,
-          paddingBottom: 15,
           alignItems: 'center',
         }}>
         <MaterialIcons name="location-pin" size={30} color="dodgerblue" />
@@ -251,6 +247,7 @@ const NewPost = () => {
           />
         )}
       </View>
+      <HR />
       <View
         style={{
           flexDirection: 'row',

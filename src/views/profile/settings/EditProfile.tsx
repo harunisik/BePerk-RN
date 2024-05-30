@@ -1,10 +1,4 @@
-import {
-  Pressable,
-  TextInput,
-  StyleSheet,
-  Switch,
-  ActivityIndicator,
-} from 'react-native';
+import {Pressable, TextInput, Switch, ActivityIndicator} from 'react-native';
 import common from '../../../styles/sharedStyles';
 import {useNavigation} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -25,6 +19,7 @@ import {PERMISSIONS} from 'react-native-permissions';
 import AccountCard from '../../../components/common/AccountCard';
 import Text from '../../../components/common/Text';
 import View from '../../../components/common/View';
+import HR from '../../../components/common/HR';
 
 const {row, flex1, flex3, aiCenter, jcSpaceBetween, p15, gray, mb15, cGap10} =
   common;
@@ -188,42 +183,46 @@ const EditProfile = () => {
             Change profile photo
           </Text>
         </View>
-        <View style={[row, aiCenter, styles.line]}>
+        <View style={[row, aiCenter]}>
           <Text style={[gray, flex1]}>Name</Text>
           <TextInput
             placeholder="Tap to enter name"
             onChangeText={setFullname}
             value={fullname}
-            style={[styles.textInput, flex3]}
+            style={[flex3]}
           />
+          <HR />
         </View>
-        <View style={[row, aiCenter, styles.line]}>
+        <View style={[row, aiCenter]}>
           <Text style={[gray, flex1]}>Username</Text>
           <TextInput
             placeholder="Tap to enter username"
             onChangeText={setUsername}
             value={username}
-            style={[styles.textInput, flex3]}
+            style={[, flex3]}
           />
+          <HR />
         </View>
-        <View style={[row, aiCenter, styles.line]}>
+        <View style={[row, aiCenter]}>
           <Text style={[gray, flex1]}>Bio</Text>
           <TextInput
             placeholder="Tap to enter bio"
             onChangeText={setComment}
             value={comment}
-            style={[flex3, styles.textInput]}
+            style={[flex3]}
             multiline
           />
+          <HR />
         </View>
-        <View style={[row, aiCenter, styles.line, {marginBottom: 40}]}>
+        <View style={[row, aiCenter, {marginBottom: 40}]}>
           <Text style={[gray, flex1]}>Website</Text>
           <TextInput
             placeholder="Tap to enter website"
             onChangeText={setWebSite}
             value={webSite}
-            style={[styles.textInput, flex3]}
+            style={[, flex3]}
           />
+          <HR />
         </View>
         <View style={[row, jcSpaceBetween, aiCenter, mb15]}>
           <Text>Hide followers</Text>
@@ -264,18 +263,5 @@ const EditProfile = () => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  textInput: {
-    margin: 10,
-    padding: 10,
-    minHeight: 40,
-    maxHeight: 100,
-  },
-  line: {
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: 'gray',
-  },
-});
 
 export default EditProfile;

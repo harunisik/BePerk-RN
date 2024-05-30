@@ -8,6 +8,7 @@ import {changePassword as userPostPassword} from '../../../services/AuthService'
 import {showMessage} from 'react-native-flash-message';
 import Text from '../../../components/common/Text';
 import View from '../../../components/common/View';
+import HR from '../../../components/common/HR';
 
 const {row, gray, aiCenter, rGap30, jcSpaceBetween, white} = common;
 
@@ -100,9 +101,9 @@ const ChangePassword = () => {
           placeholder="Tap to enter confirm password"
           onChangeText={setConfirmNewPassword}
           value={confirmNewPassword}
-          style={[styles.textInput, styles.line]}
           secureTextEntry
         />
+        <HR />
       </View>
       <TouchableOpacity
         style={[
@@ -120,15 +121,5 @@ const ChangePassword = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  textInput: {
-    height: 30,
-  },
-  line: {
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: 'gray',
-  },
-});
 
 export default ChangePassword;

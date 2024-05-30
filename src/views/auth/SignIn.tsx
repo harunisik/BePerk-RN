@@ -16,6 +16,7 @@ import {useSignIn} from '../../hooks/queryClientHooks';
 import ForgotPassword from './ForgotPassword';
 import Text from '../../components/common/Text';
 import View from '../../components/common/View';
+import HR from '../../components/common/HR';
 
 const {row, flex1, aiCenter, rGap30, white} = common;
 
@@ -66,8 +67,8 @@ const Signin = () => {
             placeholder="Tap to enter username"
             onChangeText={setUsername}
             value={username}
-            style={[styles.line]}
           />
+          <HR />
         </View>
         <View style={{width: '75%'}}>
           <Text>Password</Text>
@@ -75,9 +76,9 @@ const Signin = () => {
             placeholder="Tap to enter password"
             onChangeText={setPassword}
             value={password}
-            style={[styles.line]}
             secureTextEntry
           />
+          <HR />
         </View>
         <TouchableOpacity
           style={[
@@ -115,12 +116,5 @@ const Signin = () => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  line: {
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: 'gray',
-  },
-});
 
 export default Signin;

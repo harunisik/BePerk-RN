@@ -17,6 +17,7 @@ import Signin from './SignIn';
 import CreateNewAccount from './CreateNewAccount';
 import Text from '../../components/common/Text';
 import View from '../../components/common/View';
+import HR from '../../components/common/HR';
 
 const {row, flex1, aiCenter, rGap30, white} = common;
 
@@ -85,8 +86,8 @@ const ForgotPassword = () => {
             placeholder="Tap to enter e-mail"
             onChangeText={setEmail}
             value={email}
-            style={[styles.line]}
           />
+          <HR />
         </View>
         <TouchableOpacity
           style={[
@@ -119,12 +120,5 @@ const ForgotPassword = () => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  line: {
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: 'gray',
-  },
-});
 
 export default ForgotPassword;

@@ -5,6 +5,7 @@ import AccountCard from '../common/AccountCard';
 import {useNavigation} from '@react-navigation/native';
 import Text from '../common/Text';
 import View from '../common/View';
+import HR from '../common/HR';
 
 const {row, rGap15, cGap10, bold, font11, gray, pr10, flex1} = common;
 
@@ -36,14 +37,13 @@ const CommentHeaderItem = ({
         </Text>
         <Text style={[font11, gray]}>{dateDiff(uploadTime * 1000)}</Text>
       </View>
+      <HR />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   headerContainer: {
-    borderBottomColor: 'lightgray',
-    borderBottomWidth: 1,
     paddingBottom: 15,
     marginBottom: 15,
   },
