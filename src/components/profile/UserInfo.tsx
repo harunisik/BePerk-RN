@@ -1,10 +1,11 @@
-import {View, Pressable} from 'react-native';
+import {Pressable} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {useNavigation} from '@react-navigation/native';
 import FollowersList from '../../views/profile/FollowersList';
 import WebView from '../common/WebView';
 import AccountCard from '../common/AccountCard';
 import Text from '../common/Text';
+import View from '../common/View';
 
 const {aiCenter, row, jcCenter, bold, blue, cGap50} = common;
 

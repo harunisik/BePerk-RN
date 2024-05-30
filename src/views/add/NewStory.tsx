@@ -1,12 +1,7 @@
-import {
-  ActivityIndicator,
-  ImageBackground,
-  SafeAreaView,
-  View,
-} from 'react-native';
+import {ActivityIndicator, ImageBackground, SafeAreaView} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useMutation} from '../../hooks/customHooks';
+import {useMutation} from '../../hooks/reactQueryHooks';
 import {showMessage} from 'react-native-flash-message';
 import {postMy24 as userPostMy24} from '../../services/My24Service';
 import common from '../../styles/sharedStyles';
@@ -15,6 +10,7 @@ import UserSearch, {NewStoryHeaderRight} from '../profile/UserSearch';
 import Video from '../../components/common/Video';
 import {createThumbnail} from 'react-native-create-thumbnail';
 import {useState} from 'react';
+import View from '../../components/common/View';
 
 const {flex1} = common;
 

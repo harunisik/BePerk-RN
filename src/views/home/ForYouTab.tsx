@@ -1,10 +1,11 @@
-import {Animated, View} from 'react-native';
+import {Animated} from 'react-native';
 import common from '../../styles/sharedStyles';
 import PagerView from 'react-native-pager-view';
 import {getVideoFeed} from '../../services/UserService';
 import {useMemo, useState} from 'react';
 import PagerItem from '../../components/home/PagerItem';
 import {useInfiniteQuery} from 'react-query';
+import View from '../../components/common/View';
 
 const {flex1} = common;
 

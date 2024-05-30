@@ -1,6 +1,5 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {View} from 'react-native';
 import {useState} from 'react';
 import HomeStack from './home/HomeStack';
 import FeaturedStack from './featured/FeaturedStack';
@@ -10,6 +9,7 @@ import {useStore} from '../containers/StoreContainer';
 import AddModal from './add/AddModal';
 import AddStack from './add/AddStack';
 import Text from '../components/common/Text';
+import View from '../components/common/View';
 
 const routeIcons = {
   [HomeStack.name]: 'home',

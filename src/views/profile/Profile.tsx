@@ -1,7 +1,7 @@
 import UserInfo from '../../components/profile/UserInfo';
 import {useEffect, useState} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {useQuery, useMutation} from '../../hooks/customHooks';
+import {useQuery, useMutation} from '../../hooks/reactQueryHooks';
 import {
   deleteFollowing,
   addFollowing,
@@ -11,7 +11,7 @@ import {MaterialTabBar, Tabs} from 'react-native-collapsible-tab-view';
 import PostsTab from './PostsTab';
 import StoriesTab from './StoriesTab';
 import DovesTab from './DovesTab';
-import {Alert, RefreshControl, Share, StyleSheet, View} from 'react-native';
+import {Alert, RefreshControl, Share, StyleSheet} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {TouchableOpacity} from 'react-native';
 import EditProfile from './settings/EditProfile';
@@ -23,6 +23,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Popup from '../../components/common/Popup';
 import MessageDetails from './MessageDetails';
 import Text from '../../components/common/Text';
+import View from '../../components/common/View';
 
 const {bold, font16, aiCenter, row, jcSpaceAround, cGap15, jcCenter} = common;
 

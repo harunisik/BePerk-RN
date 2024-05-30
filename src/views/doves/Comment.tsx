@@ -1,10 +1,10 @@
-import {SafeAreaView, View} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {useState} from 'react';
 import MessageBox from '../../components/common/MessageBox';
 import CommentList from '../../components/doves/CommentList';
 import {useRoute} from '@react-navigation/native';
-import {useQuery, useMutation} from '../../hooks/customHooks';
+import {useQuery, useMutation} from '../../hooks/reactQueryHooks';
 import {
   getUserComments,
   deleteComment as userDeleteComment,

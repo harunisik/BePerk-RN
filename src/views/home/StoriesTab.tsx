@@ -1,5 +1,5 @@
-import {View, Pressable} from 'react-native';
-import {useQuery} from '../../hooks/customHooks';
+import {Pressable} from 'react-native';
+import {useQuery} from '../../hooks/reactQueryHooks';
 import common from '../../styles/sharedStyles';
 import {useMemo} from 'react';
 import {useNavigation} from '@react-navigation/native';
@@ -8,6 +8,7 @@ import {useStore} from '../../containers/StoreContainer';
 import {getMy24} from '../../services/My24Service';
 import FlatList from '../../components/common/FlatList';
 import AccountCard from '../../components/common/AccountCard';
+import View from '../../components/common/View';
 
 const COL_NUM = 4;
 

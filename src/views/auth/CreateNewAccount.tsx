@@ -1,5 +1,4 @@
 import {
-  View,
   Pressable,
   TextInput,
   StyleSheet,
@@ -11,7 +10,7 @@ import common from '../../styles/sharedStyles';
 import {useNavigation} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useState} from 'react';
-import {useMutation} from '../../hooks/customHooks';
+import {useMutation} from '../../hooks/reactQueryHooks';
 import {createUser as userCreateUser} from '../../services/AuthService';
 import {showMessage} from 'react-native-flash-message';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -21,6 +20,7 @@ import {AuthActionType} from '../../containers/AuthAction';
 import Signin from './SignIn';
 import EditProfile from '../profile/settings/EditProfile';
 import Text from '../../components/common/Text';
+import View from '../../components/common/View';
 
 const {row, flex1, aiCenter, rGap30, jcSpaceBetween, white, font11, bold} =
   common;

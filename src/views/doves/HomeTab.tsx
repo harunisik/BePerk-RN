@@ -1,15 +1,16 @@
-import {View, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import common from '../../styles/sharedStyles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import DovesItem from '../../components/doves/DovesItem';
 import DovesItemOptions from '../../components/doves/DovesItemOptions';
 import ItemSeperator from '../../components/common/ItemSpearator';
 import {useCallback} from 'react';
-import {useQuery} from '../../hooks/customHooks';
+import {useQuery} from '../../hooks/reactQueryHooks';
 import {getUserPerks} from '../../services/UserService';
 import {useGetUserFeed} from '../../hooks/infiniteQueryHooks';
 import InfiniteFlatList from '../../components/common/InfiniteFlatList';
 import Text from '../../components/common/Text';
+import View from '../../components/common/View';
 
 const ListHeaderItem = ({item}) => {
   const {jcSpaceBetween, aiCenter, row, rGap15, pt20, p15, bold, white} =

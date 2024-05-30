@@ -1,7 +1,7 @@
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useRoute} from '@react-navigation/native';
-import {View} from 'react-native';
 import FastImage from 'react-native-fast-image';
+import View from '../../components/common/View';
 
 export const MediaViewScreenOptions = ({navigation}) => {
   return {

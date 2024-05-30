@@ -1,6 +1,6 @@
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useEffect, useState} from 'react';
-import {useMutation} from '../../../hooks/customHooks';
+import {useMutation} from '../../../hooks/reactQueryHooks';
 import {postBookmarks as userPostBookmarks} from '../../../services/UserService';
 
 interface BookmarkButtonProps {

@@ -21,7 +21,7 @@ import {SwitchAccountListItem} from './SwitchAccount';
 import LogOut from './LogOut';
 import ItemSeperator from '../../../components/common/ItemSpearator';
 import common from '../../../styles/sharedStyles';
-import {useQuery} from '../../../hooks/customHooks';
+import {useQuery} from '../../../hooks/reactQueryHooks';
 import {getUserSettings} from '../../../services/UserService';
 import Text from '../../../components/common/Text';
 

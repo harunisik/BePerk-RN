@@ -9,7 +9,7 @@ import * as Keychain from 'react-native-keychain';
 import BootSplash from 'react-native-bootsplash';
 import {useEffect} from 'react';
 import {oneSignalToken} from '../services/AuthService';
-import {useMutation} from '../hooks/customHooks';
+import {useMutation} from '../hooks/reactQueryHooks';
 import {AuthActionType} from '../containers/AuthAction';
 import ForgotPassword from './auth/ForgotPassword';
 

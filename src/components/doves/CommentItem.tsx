@@ -1,4 +1,4 @@
-import {View, TouchableOpacity, Animated, StyleSheet} from 'react-native';
+import {TouchableOpacity, Animated, StyleSheet} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {dateDiff} from '../../utils/DateUtil';
 import {useState} from 'react';
@@ -7,6 +7,7 @@ import LikeButtton from '../common/buttons/LikeButton';
 import FlatList from '../common/FlatList';
 import AccountCard from '../common/AccountCard';
 import Text from '../common/Text';
+import View from '../common/View';
 
 const RenderRightActions = ({item, onPress}) => {
   return (

@@ -1,8 +1,9 @@
-import {View, TouchableWithoutFeedback} from 'react-native';
+import {TouchableWithoutFeedback} from 'react-native';
 import common from '../../styles/sharedStyles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useState} from 'react';
 import AccountCard from '../common/AccountCard';
+import View from '../common/View';
 
 const {aiCenter, row, jcSpaceBetween} = common;
 

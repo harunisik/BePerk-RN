@@ -1,5 +1,4 @@
 import {
-  View,
   GestureResponderEvent,
   ImageBackground,
   TouchableWithoutFeedback,
@@ -21,7 +20,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import UserSearch, {ChatShareHeaderRight} from './UserSearch';
 import {deletePost as userDeletePost} from '../../services/UserService';
-import {useMutation} from '../../hooks/customHooks';
+import {useMutation} from '../../hooks/reactQueryHooks';
 import {useStore} from '../../containers/StoreContainer';
 import {
   chatSend as userChatSend,
@@ -32,6 +31,7 @@ import {postMy24Like} from '../../services/My24Service';
 import Popup from '../../components/common/Popup';
 import AccountCard from '../../components/common/AccountCard';
 import Text from '../../components/common/Text';
+import View from '../../components/common/View';
 
 const {
   jcSpaceBetween,

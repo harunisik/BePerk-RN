@@ -1,7 +1,8 @@
-import {View, Switch} from 'react-native';
+import {Switch} from 'react-native';
 import common from '../../../styles/sharedStyles';
 import {useState} from 'react';
 import Text from '../../../components/common/Text';
+import View from '../../../components/common/View';
 
 const DarkMode = () => {
   const [isEnabled, setIsEnabled] = useState(false);

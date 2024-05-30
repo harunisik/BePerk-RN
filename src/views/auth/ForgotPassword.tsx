@@ -1,5 +1,4 @@
 import {
-  View,
   TextInput,
   StyleSheet,
   TouchableOpacity,
@@ -9,7 +8,7 @@ import {
 import common from '../../styles/sharedStyles';
 import {useNavigation} from '@react-navigation/native';
 import {useState} from 'react';
-import {useMutation} from '../../hooks/customHooks';
+import {useMutation} from '../../hooks/reactQueryHooks';
 import {recoverUser} from '../../services/AuthService';
 import {showMessage} from 'react-native-flash-message';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -17,6 +16,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import Signin from './SignIn';
 import CreateNewAccount from './CreateNewAccount';
 import Text from '../../components/common/Text';
+import View from '../../components/common/View';
 
 const {row, flex1, aiCenter, rGap30, white} = common;
 

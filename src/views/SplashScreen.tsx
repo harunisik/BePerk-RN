@@ -1,4 +1,5 @@
-import {Image, View} from 'react-native';
+import {Image} from 'react-native';
+import View from '../components/common/View';
 
 const SplashScreen = () => {
   return (

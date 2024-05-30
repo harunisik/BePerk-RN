@@ -1,6 +1,6 @@
 import React from 'react';
-import {View} from 'react-native';
 import Text from './Text';
+import View from './View';
 
 const Badge = ({value}) => {
   return (

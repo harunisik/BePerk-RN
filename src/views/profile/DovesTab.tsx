@@ -1,12 +1,12 @@
-import {View} from 'react-native';
 import DovesItem from '../../components/doves/DovesItem';
 import ItemSeperator from '../../components/common/ItemSpearator';
 import common from '../../styles/sharedStyles';
-import {useQuery} from '../../hooks/customHooks';
+import {useQuery} from '../../hooks/reactQueryHooks';
 import {getUserPerks} from '../../services/UserService';
 import {Tabs} from 'react-native-collapsible-tab-view';
 import ListEmptyComponent from '../../components/common/ListEmptyComponent';
 import {useCallback} from 'react';
+import View from '../../components/common/View';
 
 const {pt15} = common;
 

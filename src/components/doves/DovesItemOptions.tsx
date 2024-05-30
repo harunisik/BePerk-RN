@@ -1,8 +1,8 @@
-import {View} from 'react-native';
 import common from '../../styles/sharedStyles';
 import LikeButtton from '../common/buttons/LikeButton';
 import CommentButton from '../common/buttons/CommentButton';
 import ShareButton from '../common/buttons/ShareButton';
+import View from '../common/View';
 
 const {aiCenter, row, cGap15} = common;
 

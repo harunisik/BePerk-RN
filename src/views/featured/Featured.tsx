@@ -2,11 +2,11 @@ import {useNavigation} from '@react-navigation/native';
 import FeaturedItemDetails from './FeaturedItemDetails';
 import {useGetFeaturedFeed} from '../../hooks/infiniteQueryHooks';
 import PostItemList from '../../components/profile/PostItemList';
-import {View} from 'react-native';
 import {AddDoveModal} from '../add/AddModal';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import common from '../../styles/sharedStyles';
 import {useState} from 'react';
+import View from '../../components/common/View';
 
 const {row, cGap15} = common;
 

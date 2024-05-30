@@ -2,8 +2,8 @@ import {Pressable} from 'react-native';
 import common from '../../../styles/sharedStyles';
 import {useNavigation} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {View} from 'react-native';
 import Text from '../../../components/common/Text';
+import View from '../../../components/common/View';
 
 const {flex1, jcCenter, row, aiCenter, jcSpaceBetween} = common;
 

@@ -3,7 +3,7 @@ import common from '../../../styles/sharedStyles';
 import {useNavigation} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useState} from 'react';
-import {useMutation} from '../../../hooks/customHooks';
+import {useMutation} from '../../../hooks/reactQueryHooks';
 import {deleteUser as userDeleteUser} from '../../../services/AuthService';
 import {useStore} from '../../../containers/StoreContainer';
 import {AuthActionType} from '../../../containers/AuthAction';

@@ -1,4 +1,4 @@
-import {View, useWindowDimensions} from 'react-native';
+import {useWindowDimensions} from 'react-native';
 import common from '../../styles/sharedStyles';
 import LikeButtton from '../common/buttons/LikeButton';
 import CommentButton from '../common/buttons/CommentButton';
@@ -10,6 +10,7 @@ import Video from '../common/Video';
 import AccountCard from '../common/AccountCard';
 import FastImage from 'react-native-fast-image';
 import Text from '../common/Text';
+import View from '../common/View';
 
 const {
   jcSpaceBetween,

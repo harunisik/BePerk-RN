@@ -1,5 +1,4 @@
 import {
-  View,
   Pressable,
   TextInput,
   StyleSheet,
@@ -9,7 +8,7 @@ import {
 import common from '../../../styles/sharedStyles';
 import {useNavigation} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {useMutation, useQuery} from '../../../hooks/customHooks';
+import {useMutation, useQuery} from '../../../hooks/reactQueryHooks';
 import {
   getUserProfile,
   postProfile,
@@ -25,6 +24,7 @@ import {launchMediaLibrary} from '../../../utils/MediaUtil';
 import {PERMISSIONS} from 'react-native-permissions';
 import AccountCard from '../../../components/common/AccountCard';
 import Text from '../../../components/common/Text';
+import View from '../../../components/common/View';
 
 const {row, flex1, flex3, aiCenter, jcSpaceBetween, p15, gray, mb15, cGap10} =
   common;

@@ -1,4 +1,5 @@
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet} from 'react-native';
+import View from './View';
 
 const ItemSeperator = ({
   lineVisible = false,
@@ -11,26 +12,26 @@ const ItemSeperator = ({
         large
           ? styles.spaceLarge
           : medium
-          ? styles.spaceMedium
-          : styles.spaceSmall,
-        ...(lineVisible ? [styles.line] : []),
-      ]}
-    />
+            ? styles.spaceMedium
+            : styles.spaceSmall,
+      ]}>
+      <View style={[...(lineVisible ? [styles.line] : [])]} />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   spaceSmall: {
-    marginBottom: 5,
-    marginTop: 5,
+    paddingBottom: 5,
+    paddingTop: 5,
   },
   spaceMedium: {
-    marginBottom: 10,
-    marginTop: 10,
+    paddingBottom: 10,
+    paddingTop: 10,
   },
   spaceLarge: {
-    marginBottom: 15,
-    marginTop: 15,
+    paddingBottom: 15,
+    paddingTop: 15,
   },
   line: {
     borderBottomWidth: StyleSheet.hairlineWidth,

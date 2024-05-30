@@ -1,4 +1,3 @@
-import {View} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {dateDiff} from '../../utils/DateUtil';
 import common from '../../styles/sharedStyles';
@@ -6,6 +5,7 @@ import DovesItemOptions from './DovesItemOptions';
 import DotsButton from '../common/buttons/DotsButton';
 import AccountCard from '../common/AccountCard';
 import Text from '../common/Text';
+import View from '../common/View';
 
 enum DoveType {
   Dove,

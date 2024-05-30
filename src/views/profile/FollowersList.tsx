@@ -1,4 +1,4 @@
-import {Pressable, StyleSheet, TextInput, View} from 'react-native';
+import {Pressable, StyleSheet, TextInput} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {
   addFollowing,
@@ -6,7 +6,7 @@ import {
   getUserFollowers,
   getUserFollowing,
 } from '../../services/UserService';
-import {useMutation, useQuery} from '../../hooks/customHooks';
+import {useMutation, useQuery} from '../../hooks/reactQueryHooks';
 import FlatList from '../../components/common/FlatList';
 import {useEffect, useState} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
@@ -15,6 +15,7 @@ import {showMessage} from 'react-native-flash-message';
 import {useStore} from '../../containers/StoreContainer';
 import AccountCard from '../../components/common/AccountCard';
 import Text from '../../components/common/Text';
+import View from '../../components/common/View';
 
 const {pl15, pr15, row, aiCenter} = common;
 

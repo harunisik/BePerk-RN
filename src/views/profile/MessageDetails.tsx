@@ -1,9 +1,9 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {Pressable, StyleSheet, View} from 'react-native';
+import {Pressable, StyleSheet} from 'react-native';
 import {formatDate} from '../../utils/DateUtil';
 import common from '../../styles/sharedStyles';
 import DovesItem from '../../components/doves/DovesItem';
-import {useMutation} from '../../hooks/customHooks';
+import {useMutation} from '../../hooks/reactQueryHooks';
 import {chatAdd, chatSend} from '../../services/ChatService';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FastImage from 'react-native-fast-image';
@@ -15,11 +15,12 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import MessageBox2 from '../../components/common/MessageBox2';
 import uuid from 'react-native-uuid';
 import {useEffect, useState} from 'react';
-import {useChatListOpen, useGetChat} from '../../hooks/userHooks';
+import {useChatListOpen, useGetChat} from '../../hooks/queryClientHooks';
 import MediaView from './MediaView';
 import PostDetailItemView from './PostDetailsItemView';
 import AccountCard from '../../components/common/AccountCard';
 import Text from '../../components/common/Text';
+import View from '../../components/common/View';
 
 const {flex1, row, aiCenter, bold, cGap5, p10} = common;
 

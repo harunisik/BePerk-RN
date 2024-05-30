@@ -1,7 +1,6 @@
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import HomeTab from './HomeTab';
 import DoveTab from './DoveTab';
-import {View} from 'react-native';
 import {AddDoveModal} from '../add/AddModal';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -10,6 +9,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useState} from 'react';
 import Search from './Search';
 import Activity from './Activity';
+import View from '../../components/common/View';
 
 const {row, cGap15} = common;
 

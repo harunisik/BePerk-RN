@@ -1,5 +1,4 @@
 import {
-  View,
   GestureResponderEvent,
   useWindowDimensions,
   StyleSheet,
@@ -19,7 +18,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import UserSearch, {ChatShareHeaderRight} from './UserSearch';
 import {deletePost} from '../../services/UserService';
-import {useMutation} from '../../hooks/customHooks';
+import {useMutation} from '../../hooks/reactQueryHooks';
 import {useStore} from '../../containers/StoreContainer';
 import {chatSend, chatShare} from '../../services/ChatService';
 import uuid from 'react-native-uuid';
@@ -30,6 +29,7 @@ import Video from '../../components/common/Video';
 import FastImage from 'react-native-fast-image';
 import AccountCard from '../../components/common/AccountCard';
 import Text from '../../components/common/Text';
+import View from '../../components/common/View';
 
 const {
   jcSpaceBetween,

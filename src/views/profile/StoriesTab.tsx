@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import {useQuery} from '../../hooks/customHooks';
+import {useQuery} from '../../hooks/reactQueryHooks';
 import StoryView from './StoryView';
 import {getMy24} from '../../services/My24Service';
 import PostItemList from '../../components/profile/PostItemList';

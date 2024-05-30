@@ -1,10 +1,4 @@
-import {
-  View,
-  TextInput,
-  StyleSheet,
-  Switch,
-  ActivityIndicator,
-} from 'react-native';
+import {TextInput, StyleSheet, Switch, ActivityIndicator} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FastImage from 'react-native-fast-image';
@@ -13,7 +7,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {SegmentedButtons} from 'react-native-paper';
 import {useEffect, useState} from 'react';
 import {uploadPhoto, uploadVideo} from '../../services/UserService';
-import {useMutation} from '../../hooks/customHooks';
+import {useMutation} from '../../hooks/reactQueryHooks';
 import {showMessage} from 'react-native-flash-message';
 import {toNumber} from '../../utils/BooleanUtil';
 import UserSearch, {NewPostHeaderRight} from '../profile/UserSearch';
@@ -21,6 +15,7 @@ import GooglePlaces from './GooglePlaces';
 import Video from '../../components/common/Video';
 import {createThumbnail} from 'react-native-create-thumbnail';
 import Text from '../../components/common/Text';
+import View from '../../components/common/View';
 
 const PostButton = ({onPress}) => {
   return (

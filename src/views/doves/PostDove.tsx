@@ -1,18 +1,13 @@
-import {
-  ActivityIndicator,
-  StyleSheet,
-  Switch,
-  TextInput,
-  View,
-} from 'react-native';
+import {ActivityIndicator, StyleSheet, Switch, TextInput} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {useEffect, useState} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {showMessage} from 'react-native-flash-message';
-import {useMutation} from '../../hooks/customHooks';
+import {useMutation} from '../../hooks/reactQueryHooks';
 import {addPerk as userAddPerk} from '../../services/UserService';
 import Text from '../../components/common/Text';
+import View from '../../components/common/View';
 
 const PostButton = ({onPress}) => {
   return (

@@ -1,5 +1,5 @@
-import {Animated, Pressable, StyleSheet, View} from 'react-native';
-import {useMutation, useQuery} from '../../hooks/customHooks';
+import {Animated, Pressable, StyleSheet} from 'react-native';
+import {useMutation, useQuery} from '../../hooks/reactQueryHooks';
 import {chatDelete, chatListOpen} from '../../services/ChatService';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import common from '../../styles/sharedStyles';
@@ -12,6 +12,7 @@ import {useStore} from '../../containers/StoreContainer';
 import UserSearch, {MessagesHeaderRight} from './UserSearch';
 import AccountCard from '../../components/common/AccountCard';
 import Text from '../../components/common/Text';
+import View from '../../components/common/View';
 
 const {
   row,

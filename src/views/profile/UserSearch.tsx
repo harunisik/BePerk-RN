@@ -1,11 +1,11 @@
-import {View, TextInput, StyleSheet, ActivityIndicator} from 'react-native';
+import {TextInput, StyleSheet, ActivityIndicator} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {useEffect, useState} from 'react';
 import UserItem from '../../components/profile/UserItem';
 import SelectedUsers from '../../components/profile/SelectedUsers';
 import {useSearchText, useSearchUsers} from '../../hooks/searchHooks';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {useMutation, useQuery} from '../../hooks/customHooks';
+import {useMutation, useQuery} from '../../hooks/reactQueryHooks';
 import {getUserFollowing} from '../../services/UserService';
 import FlatList from '../../components/common/FlatList';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -15,6 +15,7 @@ import NewPost from '../add/NewPost';
 import {postMy24} from '../../services/My24Service';
 import MessageDetails from './MessageDetails';
 import Text from '../../components/common/Text';
+import View from '../../components/common/View';
 
 const {bold, font16, pl15, pr15, pb10, pt10} = common;
 

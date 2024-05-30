@@ -1,10 +1,11 @@
-import {Animated, View} from 'react-native';
+import {Animated} from 'react-native';
 import common from '../../styles/sharedStyles';
 import PagerView from 'react-native-pager-view';
 import {useEffect, useMemo, useState} from 'react';
 import PagerItem from '../../components/home/PagerItem';
 import {useRoute} from '@react-navigation/native';
 import {useGetFeaturedFeed} from '../../hooks/infiniteQueryHooks';
+import View from '../../components/common/View';
 
 const {flex1} = common;
 const WINDOW_SIZE = 5;

@@ -1,15 +1,16 @@
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useState} from 'react';
-import {Alert, View} from 'react-native';
+import {Alert} from 'react-native';
 import {showMessage} from 'react-native-flash-message';
 import Clipboard from '@react-native-clipboard/clipboard';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {deletePost as userDeletePost} from '../../../services/UserService';
-import {useMutation} from '../../../hooks/customHooks';
+import {useMutation} from '../../../hooks/reactQueryHooks';
 import {useStore} from '../../../containers/StoreContainer';
 import Button from './Button';
 import BottomModal from '../BottomModal';
 import Popup from '../Popup';
+import View from '../View';
 
 interface ItemModalProps {
   id: number;

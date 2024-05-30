@@ -1,6 +1,7 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 import Modal from './Modal';
+import View from './View';
 
 const BottomModal = ({visible, onDismiss = undefined, children}) => {
   return (

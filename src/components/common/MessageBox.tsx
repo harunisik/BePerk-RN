@@ -1,5 +1,4 @@
 import {
-  View,
   StyleSheet,
   TextInput,
   KeyboardAvoidingView,
@@ -10,6 +9,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {useEffect, useState} from 'react';
 import Emoji from './Emoji';
 import AccountCard from './AccountCard';
+import View from './View';
 
 const {row, jcSpaceBetween, p10, aiCenter} = common;
 
