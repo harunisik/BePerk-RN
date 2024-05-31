@@ -8,7 +8,6 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import {useMutation, useQuery} from '../../hooks/reactQueryHooks';
 import {getUserFollowing} from '../../services/UserService';
 import FlatList from '../../components/common/FlatList';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {showMessage} from 'react-native-flash-message';
 import {chatAdd, chatShare} from '../../services/ChatService';
 import NewPost from '../add/NewPost';
@@ -16,6 +15,7 @@ import {postMy24} from '../../services/My24Service';
 import MessageDetails from './MessageDetails';
 import Text from '../../components/common/Text';
 import View from '../../components/common/View';
+import {CloseIcon} from '../../components/common/Icons';
 
 const {bold, pl15, pr15, pb10, pt10} = common;
 
@@ -160,13 +160,7 @@ export const UserSearchScreenOptions = ({navigation, route}) => {
       presentation: 'fullScreenModal',
     }),
     headerShown: true,
-    headerLeft: () => (
-      <MaterialCommunityIcons
-        name="close"
-        onPress={() => navigation.goBack()}
-        size={26}
-      />
-    ),
+    headerLeft: () => <CloseIcon onPress={() => navigation.goBack()} />,
     headerRight: () => <Text style={{color: 'dodgerblue'}}>Sent</Text>,
   };
 };

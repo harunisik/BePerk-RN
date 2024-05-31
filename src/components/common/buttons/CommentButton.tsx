@@ -1,9 +1,9 @@
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import common from '../../../styles/sharedStyles';
 import Comment from '../../../views/doves/Comment';
 import {useNavigation} from '@react-navigation/native';
 import Text from '../Text';
 import View from '../View';
+import {CommentIcon} from '../Icons';
 
 const {cGap3, row, aiCenter, rGap5} = common;
 
@@ -45,10 +45,7 @@ const CommentButton = ({
         backgroundColor && {backgroundColor},
         ...(vertical ? [rGap5] : [row, cGap3]),
       ]}>
-      <MaterialCommunityIcons
-        name="comment-processing-outline"
-        size={size}
-        color={color}
+      <CommentIcon
         onPress={() =>
           navigation.navigate(Comment.name, {
             id,

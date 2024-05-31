@@ -59,29 +59,19 @@ const PagerItem = ({item, paused = true}) => {
             commentsCount={item.comments_count}
             uploadTime={item.upload_time}
             size={28}
-            // color="white"
             vertical
           />
           <BookmarkButton
             id={item.id}
             type={item.type}
             isSaved={item.bookmark}
-            size={28}
-            // color="white"
           />
-          <ShareButton
-            id={item.id}
-            type={item.type}
-            size={28}
-            // color="white"
-          />
+          <ShareButton id={item.id} type={item.type} />
           <DotsButton
             id={item.id}
             type={item.type}
             userId={item.user_id}
             username={item.username}
-            size={28}
-            // color="white"
           />
         </View>
       </View>

@@ -1,7 +1,7 @@
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useRoute} from '@react-navigation/native';
 import FastImage from 'react-native-fast-image';
 import View from '../../components/common/View';
+import {CloseIcon} from '../../components/common/Icons';
 
 export const MediaViewScreenOptions = ({navigation}) => {
   return {
@@ -9,14 +9,7 @@ export const MediaViewScreenOptions = ({navigation}) => {
     animation: 'fade',
     presentation: 'fullScreenModal',
     headerTransparent: true,
-    headerLeft: () => (
-      <MaterialIcons
-        name="close"
-        color="dodgerblue"
-        size={26}
-        onPress={() => navigation.goBack()}
-      />
-    ),
+    headerLeft: () => <CloseIcon onPress={() => navigation.goBack()} />,
   };
 };
 

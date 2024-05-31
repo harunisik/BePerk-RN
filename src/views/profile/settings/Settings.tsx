@@ -1,5 +1,5 @@
 import {useCallback, useMemo} from 'react';
-import {SectionList} from 'react-native';
+import {Pressable, SectionList} from 'react-native';
 import {EditProfileListItem} from './EditProfile';
 import {ChangePasswordListItem} from './ChangePassword';
 import {InviteListItem} from './Invite';
@@ -24,8 +24,18 @@ import common from '../../../styles/sharedStyles';
 import {useQuery} from '../../../hooks/reactQueryHooks';
 import {getUserSettings} from '../../../services/UserService';
 import Text from '../../../components/common/Text';
+import {ArrowIcon} from '../../../components/common/Icons';
 
-const {gray, p15} = common;
+const {gray, p15, row, jcSpaceBetween, aiCenter} = common;
+
+export const SettingsListItem1 = ({onPress, title}) => {
+  return (
+    <Pressable style={[row, jcSpaceBetween, aiCenter]} onPress={onPress}>
+      <Text>{title}</Text>
+      <ArrowIcon />
+    </Pressable>
+  );
+};
 
 const Settings = () => {
   const MENU_LIST = {

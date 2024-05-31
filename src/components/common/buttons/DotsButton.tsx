@@ -1,4 +1,3 @@
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useState} from 'react';
 import {Alert} from 'react-native';
 import {showMessage} from 'react-native-flash-message';
@@ -11,6 +10,7 @@ import Button from './Button';
 import BottomModal from '../BottomModal';
 import Popup from '../Popup';
 import View from '../View';
+import {DotsIcon} from '../Icons';
 
 interface ItemModalProps {
   id: number;
@@ -114,26 +114,14 @@ interface DotsButtonProps {
   type: number;
   userId: number;
   username: string;
-  size?: number;
-  color?: string;
 }
 
-const DotsButton = ({
-  id,
-  type,
-  userId,
-  username,
-  size = 24,
-  color,
-}: DotsButtonProps) => {
+const DotsButton = ({id, type, userId, username}: DotsButtonProps) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <>
-      <MaterialCommunityIcons
-        name="dots-horizontal"
-        size={size}
-        color={color}
+      <DotsIcon
         onPress={() => {
           setModalVisible(true);
         }}

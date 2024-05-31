@@ -1,19 +1,10 @@
-import {
-  Pressable,
-  TextInput,
-  StyleSheet,
-  TouchableOpacity,
-  SafeAreaView,
-  Image,
-} from 'react-native';
+import {TextInput, TouchableOpacity, SafeAreaView, Image} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {useNavigation} from '@react-navigation/native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useState} from 'react';
 import {useMutation} from '../../hooks/reactQueryHooks';
 import {createUser as userCreateUser} from '../../services/AuthService';
 import {showMessage} from 'react-native-flash-message';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import LinearGradient from 'react-native-linear-gradient';
 import {useStore} from '../../containers/StoreContainer';
 import {AuthActionType} from '../../containers/AuthAction';
@@ -22,8 +13,10 @@ import EditProfile from '../profile/settings/EditProfile';
 import Text from '../../components/common/Text';
 import View from '../../components/common/View';
 import HR from '../../components/common/HR';
+import {SettingsListItem1} from '../profile/settings/Settings';
+import {CloseIcon} from '../../components/common/Icons';
 
-const {row, flex1, aiCenter, rGap30, jcSpaceBetween, bold} = common;
+const {flex1, aiCenter, rGap30, bold} = common;
 
 const pageTitle = 'Create a new account';
 
@@ -33,14 +26,7 @@ export const CreateNewAccountScreenOptions = ({navigation}) => {
     headerTransparent: true,
     animation: 'slide_from_bottom',
     presentation: 'fullScreenModal',
-    headerLeft: () => (
-      <MaterialCommunityIcons
-        name="close"
-        onPress={() => navigation.goBack()}
-        size={26}
-        // color="white"
-      />
-    ),
+    headerLeft: () => <CloseIcon onPress={() => navigation.goBack()} />,
   };
 };
 
@@ -48,12 +34,10 @@ export const CreateNewAccountListItem = () => {
   const navigation = useNavigation();
 
   return (
-    <Pressable
+    <SettingsListItem1
       onPress={() => navigation.navigate(CreateNewAccount.name)}
-      style={[row, jcSpaceBetween, aiCenter]}>
-      <Text>{pageTitle}</Text>
-      <MaterialIcons name="arrow-forward-ios" color="gray" size={20} />
-    </Pressable>
+      title={pageTitle}
+    />
   );
 };
 

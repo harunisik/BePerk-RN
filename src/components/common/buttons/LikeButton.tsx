@@ -1,10 +1,10 @@
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import common from '../../../styles/sharedStyles';
 import {useEffect, useState} from 'react';
 import {useMutation} from '../../../hooks/reactQueryHooks';
 import {postUserLike} from '../../../services/UserService';
 import Text from '../Text';
 import View from '../View';
+import {HeartIcon} from '../Icons';
 
 const {cGap3, row, aiCenter, rGap5} = common;
 
@@ -56,12 +56,7 @@ const LikeButtton = ({
         backgroundColor && {backgroundColor},
         ...(vertical ? [rGap5] : [row, cGap3]),
       ]}>
-      <MaterialCommunityIcons
-        name={likedState ? 'heart' : 'heart-outline'}
-        size={size}
-        color={color}
-        onPress={handlePress}
-      />
+      <HeartIcon onPress={handlePress} />
       <Text style={{...(color && {color})}}>{likesCountState}</Text>
     </View>
   );

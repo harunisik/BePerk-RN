@@ -1,23 +1,15 @@
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useEffect, useState} from 'react';
 import {useMutation} from '../../../hooks/reactQueryHooks';
 import {postBookmarks as userPostBookmarks} from '../../../services/UserService';
+import {BookmarkIcon} from '../Icons';
 
 interface BookmarkButtonProps {
   id: number;
   type: number;
   isSaved: number;
-  size?: number;
-  color?: string;
 }
 
-const BookmarkButton = ({
-  id,
-  type,
-  isSaved,
-  size = 24,
-  color = 'dodgerblue',
-}: BookmarkButtonProps) => {
+const BookmarkButton = ({id, type, isSaved}: BookmarkButtonProps) => {
   const [bookmark, setBookmark] = useState(isSaved);
   const postBookmarks = useMutation(userPostBookmarks);
 
@@ -39,14 +31,7 @@ const BookmarkButton = ({
     setBookmark(isSaved);
   }, [isSaved]);
 
-  return (
-    <MaterialCommunityIcons
-      name={bookmark ? 'bookmark' : 'bookmark-outline'}
-      size={size}
-      color={color}
-      onPress={handlePress}
-    />
-  );
+  return <BookmarkIcon onPress={handlePress} />;
 };
 
 export default BookmarkButton;

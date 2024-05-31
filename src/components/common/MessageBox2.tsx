@@ -5,14 +5,13 @@ import {
   Platform,
 } from 'react-native';
 import common from '../../styles/sharedStyles';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useEffect, useState} from 'react';
 import Emoji from './Emoji';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 import {launchMediaLibrary} from '../../utils/MediaUtil';
 import {PERMISSIONS} from 'react-native-permissions';
 import View from './View';
+import {CameraIcon, PictureIcon, ShareIcon} from './Icons';
 
 const {row, jcSpaceBetween, p10, aiCenter} = common;
 
@@ -74,10 +73,7 @@ const MessageBox2 = ({onPressSend}) => {
           )}
         </View>
         <View style={[row, jcSpaceBetween, aiCenter]}>
-          <AntDesign
-            name="camera"
-            size={26}
-            color="dodgerblue"
+          <CameraIcon
             onPress={() => handlePressMediaButton(PERMISSIONS.IOS.CAMERA)}
           />
           <TextInput
@@ -88,18 +84,9 @@ const MessageBox2 = ({onPressSend}) => {
             onSubmitEditing={handlePress}
           />
           {message ? (
-            <MaterialCommunityIcons
-              name="share"
-              size={26}
-              color={message ? 'dodgerblue' : 'gray'}
-              onPress={handlePress}
-              disabled={!message}
-            />
+            <ShareIcon onPress={handlePress} disabled={!message} />
           ) : (
-            <AntDesign
-              name="picture"
-              size={26}
-              color="dodgerblue"
+            <PictureIcon
               onPress={() =>
                 handlePressMediaButton(PERMISSIONS.IOS.PHOTO_LIBRARY)
               }

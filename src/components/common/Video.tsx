@@ -3,7 +3,7 @@ import RNVideo, {ReactVideoProps} from 'react-native-video';
 import common from '../../styles/sharedStyles';
 import {useCallback, useState} from 'react';
 import {useFocusEffect} from '@react-navigation/native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {PlayIcon} from './Icons';
 
 const {absolute, jcCenter, aiCenter} = common;
 
@@ -39,14 +39,7 @@ const Video = ({uri, paused = true, ...rest}: VideoProps) => {
         // controls
         {...rest}
       />
-      {videoPaused && (
-        <MaterialIcons
-          name="play-arrow"
-          size={width / 3}
-          color="rgba(255, 255, 255, 0.6)"
-          style={absolute}
-        />
-      )}
+      {videoPaused && <PlayIcon size={width / 3} style={absolute} />}
     </Pressable>
   );
 };

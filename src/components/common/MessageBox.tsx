@@ -5,11 +5,11 @@ import {
   Platform,
 } from 'react-native';
 import common from '../../styles/sharedStyles';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useEffect, useState} from 'react';
 import Emoji from './Emoji';
 import AccountCard from './AccountCard';
 import View from './View';
+import {ShareIcon} from './Icons';
 
 const {row, jcSpaceBetween, p10, aiCenter} = common;
 
@@ -70,13 +70,7 @@ const MessageBox = ({initialText, onClearText, onPress}) => {
               borderRadius: 20,
               padding: 5,
             }}>
-            <MaterialCommunityIcons
-              name="share"
-              size={26}
-              color={message ? 'dodgerblue' : 'gray'}
-              onPress={handlePress}
-              disabled={!message}
-            />
+            <ShareIcon onPress={handlePress} disabled={!message} />
           </View>
         </View>
       </View>

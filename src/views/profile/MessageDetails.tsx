@@ -5,13 +5,11 @@ import common from '../../styles/sharedStyles';
 import DovesItem from '../../components/doves/DovesItem';
 import {useMutation} from '../../hooks/reactQueryHooks';
 import {chatAdd, chatSend} from '../../services/ChatService';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FastImage from 'react-native-fast-image';
 import Profile from './Profile';
 import StoryView from './StoryView';
 import {useStore} from '../../containers/StoreContainer';
 import FlatList from '../../components/common/FlatList';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MessageBox2 from '../../components/common/MessageBox2';
 import uuid from 'react-native-uuid';
 import {useEffect, useState} from 'react';
@@ -21,6 +19,8 @@ import PostDetailItemView from './PostDetailsItemView';
 import AccountCard from '../../components/common/AccountCard';
 import Text from '../../components/common/Text';
 import View from '../../components/common/View';
+import {ArrowIcon} from '../../components/common/Icons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const {flex1, row, aiCenter, bold, cGap5, p10} = common;
 
@@ -33,13 +33,7 @@ export const MessageDetailsScreenOptions = ({navigation, route}) => {
     title: '',
     headerLeft: () => (
       <View style={[row, aiCenter]}>
-        <MaterialIcons
-          name="arrow-back-ios"
-          color="dodgerblue"
-          size={26}
-          onPress={() => navigation.goBack()}
-        />
-
+        <ArrowIcon onPress={() => navigation.goBack()} />
         <View style={[flex1, row, aiCenter, cGap5]}>
           <MaterialCommunityIcons
             name={isMultiple ? 'account-multiple' : 'account-circle'}

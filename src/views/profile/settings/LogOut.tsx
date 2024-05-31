@@ -1,11 +1,6 @@
-import {Pressable} from 'react-native';
-import common from '../../../styles/sharedStyles';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useStore} from '../../../containers/StoreContainer';
 import {AuthActionType} from '../../../containers/AuthAction';
-import Text from '../../../components/common/Text';
-
-const {row, aiCenter, jcSpaceBetween} = common;
+import {SettingsListItem1} from './Settings';
 
 const pageTitle = 'Log out';
 
@@ -13,12 +8,10 @@ export const Logout = () => {
   const {dispatch} = useStore();
 
   return (
-    <Pressable
+    <SettingsListItem1
       onPress={() => dispatch({type: AuthActionType.SIGN_OUT})}
-      style={[row, jcSpaceBetween, aiCenter]}>
-      <Text>{pageTitle}</Text>
-      <MaterialIcons name="arrow-forward-ios" color="gray" size={20} />
-    </Pressable>
+      title={pageTitle}
+    />
   );
 };
 

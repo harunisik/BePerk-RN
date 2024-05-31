@@ -1,7 +1,7 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {WebView as RNWebView} from 'react-native-webview';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import common from '../../styles/sharedStyles';
+import {CloseIcon} from './Icons';
 
 const {flex1} = common;
 
@@ -12,14 +12,7 @@ export const WebViewScreenOptions = ({navigation}) => {
     title: defaultTitle,
     animation: 'slide_from_bottom',
     presentation: 'fullScreenModal',
-    headerLeft: () => (
-      <MaterialCommunityIcons
-        name="close"
-        onPress={() => navigation.goBack()}
-        size={26}
-        color="dodgerblue"
-      />
-    ),
+    headerLeft: () => <CloseIcon onPress={() => navigation.goBack()} />,
   };
 };
 

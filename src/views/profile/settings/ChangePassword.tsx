@@ -1,7 +1,6 @@
-import {Pressable, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
+import {TextInput, TouchableOpacity} from 'react-native';
 import common from '../../../styles/sharedStyles';
 import {useNavigation} from '@react-navigation/native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useState} from 'react';
 import {useMutation} from '../../../hooks/reactQueryHooks';
 import {changePassword as userPostPassword} from '../../../services/AuthService';
@@ -9,8 +8,9 @@ import {showMessage} from 'react-native-flash-message';
 import Text from '../../../components/common/Text';
 import View from '../../../components/common/View';
 import HR from '../../../components/common/HR';
+import {SettingsListItem1} from './Settings';
 
-const {row, gray, aiCenter, rGap30, jcSpaceBetween} = common;
+const {gray, aiCenter, rGap30} = common;
 
 const pageTitle = 'Change password';
 
@@ -18,12 +18,10 @@ export const ChangePasswordListItem = () => {
   const navigation = useNavigation();
 
   return (
-    <Pressable
+    <SettingsListItem1
       onPress={() => navigation.navigate(ChangePassword.name)}
-      style={[row, jcSpaceBetween, aiCenter]}>
-      <Text>{pageTitle}</Text>
-      <MaterialIcons name="arrow-forward-ios" color="gray" size={20} />
-    </Pressable>
+      title={pageTitle}
+    />
   );
 };
 

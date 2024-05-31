@@ -1,11 +1,10 @@
-import {Pressable} from 'react-native';
 import common from '../../../styles/sharedStyles';
-import {useNavigation} from '@react-navigation/native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Text from '../../../components/common/Text';
 import View from '../../../components/common/View';
+import {SettingsListItem1} from './Settings';
+import {useNavigation} from '@react-navigation/native';
 
-const {flex1, jcCenter, row, aiCenter, jcSpaceBetween} = common;
+const {flex1, jcCenter, aiCenter} = common;
 
 const pageTitle = 'Switch account';
 
@@ -13,12 +12,10 @@ export const SwitchAccountListItem = () => {
   const navigation = useNavigation();
 
   return (
-    <Pressable
+    <SettingsListItem1
       onPress={() => navigation.navigate(SwitchAccount.name)}
-      style={[row, jcSpaceBetween, aiCenter]}>
-      <Text>{pageTitle}</Text>
-      <MaterialIcons name="arrow-forward-ios" color="gray" size={20} />
-    </Pressable>
+      title={pageTitle}
+    />
   );
 };
 

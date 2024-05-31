@@ -12,10 +12,14 @@ import {useColors} from '../../hooks/customHooks';
 const Stack = createNativeStackNavigator();
 
 const DovesStack = () => {
-  const {backgroundColor} = useColors();
+  const {color, backgroundColor} = useColors();
 
   return (
-    <Stack.Navigator screenOptions={{headerStyle: {backgroundColor}}}>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {backgroundColor},
+        headerTitleStyle: {color},
+      }}>
       <Stack.Screen
         name={Doves.name}
         component={Doves}

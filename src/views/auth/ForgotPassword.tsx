@@ -11,13 +11,13 @@ import {useState} from 'react';
 import {useMutation} from '../../hooks/reactQueryHooks';
 import {recoverUser} from '../../services/AuthService';
 import {showMessage} from 'react-native-flash-message';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import LinearGradient from 'react-native-linear-gradient';
 import Signin from './SignIn';
 import CreateNewAccount from './CreateNewAccount';
 import Text from '../../components/common/Text';
 import View from '../../components/common/View';
 import HR from '../../components/common/HR';
+import {CloseIcon} from '../../components/common/Icons';
 
 const {row, flex1, aiCenter, rGap30} = common;
 
@@ -27,14 +27,7 @@ export const ForgotPasswordScreenOptions = ({navigation}) => {
     headerTransparent: true,
     animation: 'slide_from_bottom',
     presentation: 'fullScreenModal',
-    headerLeft: () => (
-      <MaterialCommunityIcons
-        name="close"
-        onPress={() => navigation.goBack()}
-        size={26}
-        // color="white"
-      />
-    ),
+    headerLeft: () => <CloseIcon onPress={() => navigation.goBack()} />,
   };
 };
 

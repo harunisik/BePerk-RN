@@ -3,10 +3,10 @@ import FeaturedItemDetails from './FeaturedItemDetails';
 import {useGetFeaturedFeed} from '../../hooks/infiniteQueryHooks';
 import PostItemList from '../../components/profile/PostItemList';
 import {AddDoveModal} from '../add/AddModal';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import common from '../../styles/sharedStyles';
 import {useState} from 'react';
 import View from '../../components/common/View';
+import {PlusIcon} from '../../components/common/Icons';
 
 const {row, cGap15} = common;
 
@@ -15,10 +15,7 @@ const HeaderRight = () => {
 
   return (
     <View style={[row, cGap15]}>
-      <MaterialCommunityIcons
-        name="plus-circle"
-        size={26}
-        color="dodgerblue"
+      <PlusIcon
         onPress={() => {
           setModalVisible(true);
         }}

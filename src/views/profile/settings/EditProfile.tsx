@@ -1,7 +1,6 @@
-import {Pressable, TextInput, Switch, ActivityIndicator} from 'react-native';
+import {TextInput, Switch, ActivityIndicator} from 'react-native';
 import common from '../../../styles/sharedStyles';
 import {useNavigation} from '@react-navigation/native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useMutation, useQuery} from '../../../hooks/reactQueryHooks';
 import {
   getUserProfile,
@@ -20,6 +19,7 @@ import AccountCard from '../../../components/common/AccountCard';
 import Text from '../../../components/common/Text';
 import View from '../../../components/common/View';
 import HR from '../../../components/common/HR';
+import {SettingsListItem1} from './Settings';
 
 const {row, flex1, flex3, aiCenter, jcSpaceBetween, p15, gray, mb15, cGap10} =
   common;
@@ -46,12 +46,10 @@ export const EditProfileListItem = () => {
   const navigation = useNavigation();
 
   return (
-    <Pressable
+    <SettingsListItem1
       onPress={() => navigation.navigate(EditProfile.name)}
-      style={[row, jcSpaceBetween, aiCenter]}>
-      <Text>{pageTitle}</Text>
-      <MaterialIcons name="arrow-forward-ios" color="gray" size={20} />
-    </Pressable>
+      title={pageTitle}
+    />
   );
 };
 

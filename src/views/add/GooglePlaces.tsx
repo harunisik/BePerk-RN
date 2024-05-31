@@ -3,24 +3,18 @@ import {
   GooglePlacesAutocomplete,
   GooglePlacesAutocompleteRef,
 } from 'react-native-google-places-autocomplete';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import NewPost from './NewPost';
 import {useNavigation} from '@react-navigation/native';
 import {useRef} from 'react';
 import Text from '../../components/common/Text';
+import {CloseIcon} from '../../components/common/Icons';
 
 export const GooglePlacesScreenOptions = ({navigation}) => {
   return {
     title: 'Places',
     animation: 'slide_from_bottom',
     presentation: 'fullScreenModal',
-    headerLeft: () => (
-      <MaterialCommunityIcons
-        name="close"
-        onPress={() => navigation.goBack()}
-        size={26}
-      />
-    ),
+    headerLeft: () => <CloseIcon onPress={() => navigation.goBack()} />,
   };
 };
 

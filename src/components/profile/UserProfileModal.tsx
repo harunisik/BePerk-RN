@@ -1,5 +1,4 @@
 import {StyleSheet, TouchableOpacity, Alert} from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import common from '../../styles/sharedStyles';
 import {showMessage} from 'react-native-flash-message';
@@ -8,6 +7,7 @@ import UserSearch, {ChatShareHeaderRight} from '../../views/profile/UserSearch';
 import {useNavigation} from '@react-navigation/native';
 import BottomModal from '../common/BottomModal';
 import Text from '../common/Text';
+import {ShareIcon} from '../common/Icons';
 
 const {aiCenter, cGap15, row} = common;
 
@@ -41,7 +41,7 @@ const UserProfileModal = ({userId, visible, onDismiss}) => {
             headerRightProps: {itemId: userId, type: 6},
           });
         }}>
-        <MaterialCommunityIcons name="share" size={26} color="dodgerblue" />
+        <ShareIcon />
         <Text>Share This Profile</Text>
       </TouchableOpacity>
 

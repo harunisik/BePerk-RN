@@ -1,8 +1,8 @@
 import {StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import common from '../../styles/sharedStyles';
 import FastImage from 'react-native-fast-image';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import View from '../common/View';
+import {VideoIcon} from '../common/Icons';
 
 const {p1} = common;
 
@@ -31,14 +31,7 @@ const PostItem = ({
             uri: item.type === 1 ? item.filename : item.cover,
           }}
         />
-        {item.type === 0 && (
-          <MaterialIcons
-            name="ondemand-video"
-            size={20}
-            style={styles.videoIcon}
-            // color="white"
-          />
-        )}
+        {item.type === 0 && <VideoIcon style={styles.videoIcon} />}
       </View>
     </TouchableWithoutFeedback>
   );

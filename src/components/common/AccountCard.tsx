@@ -3,12 +3,12 @@ import {useNavigation} from '@react-navigation/native';
 import common from '../../styles/sharedStyles';
 import ProfileStack from '../../views/profile/ProfileStack';
 import CircleGradientBorder from './CircleGradientBorder';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useStore} from '../../containers/StoreContainer';
 import Profile from '../../views/profile/Profile';
 import FastImage from 'react-native-fast-image';
 import Text from './Text';
 import View from './View';
+import {AccountIcon} from './Icons';
 
 const {row, aiCenter, rGap5, bold} = common;
 
@@ -34,7 +34,6 @@ const AccountCard = ({
   username,
   photo,
   size = 26,
-  color = 'dodgerblue',
   labelColor = 'black',
   vertical = false,
   bordered = false,
@@ -102,12 +101,7 @@ const AccountCard = ({
               }}
             />
           ) : (
-            <MaterialCommunityIcons
-              name="account"
-              size={size}
-              color={color}
-              style={{padding: size / 4}}
-            />
+            <AccountIcon size={size} style={{padding: size / 4}} />
           )}
         </CircleGradientBorder>
       </View>

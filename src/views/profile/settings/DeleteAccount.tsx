@@ -1,7 +1,4 @@
-import {Pressable} from 'react-native';
-import common from '../../../styles/sharedStyles';
 import {useNavigation} from '@react-navigation/native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useState} from 'react';
 import {useMutation} from '../../../hooks/reactQueryHooks';
 import {deleteUser as userDeleteUser} from '../../../services/AuthService';
@@ -9,9 +6,7 @@ import {useStore} from '../../../containers/StoreContainer';
 import {AuthActionType} from '../../../containers/AuthAction';
 import {showMessage} from 'react-native-flash-message';
 import Popup from '../../../components/common/Popup';
-import Text from '../../../components/common/Text';
-
-const {row, aiCenter, jcSpaceBetween} = common;
+import {SettingsListItem1} from './Settings';
 
 const pageTitle = 'Delete account';
 
@@ -19,12 +14,10 @@ export const DeleteAccountListItem = () => {
   const navigation = useNavigation();
 
   return (
-    <Pressable
+    <SettingsListItem1
       onPress={() => navigation.navigate(DeleteAccount.name)}
-      style={[row, jcSpaceBetween, aiCenter]}>
-      <Text>{pageTitle}</Text>
-      <MaterialIcons name="arrow-forward-ios" color="gray" size={20} />
-    </Pressable>
+      title={pageTitle}
+    />
   );
 };
 

@@ -30,6 +30,7 @@ import FastImage from 'react-native-fast-image';
 import AccountCard from '../../components/common/AccountCard';
 import Text from '../../components/common/Text';
 import View from '../../components/common/View';
+import {CloseIcon} from '../../components/common/Icons';
 
 const {
   jcSpaceBetween,
@@ -89,12 +90,7 @@ const Header = ({item}) => {
         />
         <Text>{dateDiff(item.upload_time * 1000)}</Text>
       </View>
-      <MaterialIcons
-        name="close"
-        size={30}
-        // color="white"
-        onPress={() => navigation.goBack()}
-      />
+      <CloseIcon onPress={() => navigation.goBack()} />
     </View>
   );
 };

@@ -16,14 +16,18 @@ import common from '../../styles/sharedStyles';
 import {TouchableOpacity} from 'react-native';
 import EditProfile from './settings/EditProfile';
 import Messages from './Messages';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Settings from './settings/Settings';
 import UserProfileModal from '../../components/profile/UserProfileModal';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Popup from '../../components/common/Popup';
 import MessageDetails from './MessageDetails';
 import Text from '../../components/common/Text';
 import View from '../../components/common/View';
+import {
+  BookmarkIcon,
+  CogIcon,
+  DotsIcon,
+  ShareVariantIcon,
+} from '../../components/common/Icons';
 
 const {bold, aiCenter, row, jcSpaceAround, cGap15, jcCenter} = common;
 
@@ -60,32 +64,13 @@ const HeaderRight = () => {
     <View>
       {isAuthUser ? (
         <View style={[aiCenter, row, jcSpaceAround, cGap15]}>
-          <MaterialCommunityIcons
-            name="share-variant"
-            onPress={onShare}
-            size={22}
-            color="dodgerblue"
-          />
-          <MaterialCommunityIcons
-            name="bookmark"
-            onPress={() => Alert.alert('Under construction')}
-            size={22}
-            color="dodgerblue"
-          />
-          <MaterialCommunityIcons
-            name="cog"
-            onPress={() => navigation.navigate(Settings.name)}
-            size={22}
-            color="dodgerblue"
-          />
+          <ShareVariantIcon onPress={onShare} />
+          <BookmarkIcon onPress={() => Alert.alert('Under construction')} />
+          <CogIcon onPress={() => navigation.navigate(Settings.name)} />
         </View>
       ) : (
         <>
-          <MaterialCommunityIcons
-            name="dots-horizontal"
-            size={26}
-            onPress={() => setModalVisible(true)}
-          />
+          <DotsIcon onPress={() => setModalVisible(true)} />
           <UserProfileModal
             userId={userId}
             visible={modalVisible}

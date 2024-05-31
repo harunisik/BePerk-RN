@@ -1,7 +1,6 @@
-import {TouchableOpacity, StyleSheet, Pressable} from 'react-native';
+import {StyleSheet, Pressable} from 'react-native';
 import common from '../../styles/sharedStyles';
 import DovesItem from '../../components/doves/DovesItem';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import PostDove from './PostDove';
 import ItemSeperator from '../../components/common/ItemSpearator';
 import {useNavigation, useRoute} from '@react-navigation/native';
@@ -11,6 +10,7 @@ import InfiniteFlatList from '../../components/common/InfiniteFlatList';
 import Text from '../../components/common/Text';
 import View from '../../components/common/View';
 import HR from '../../components/common/HR';
+import {FileIcon} from '../../components/common/Icons';
 
 const ListHeaderComponent = () => {
   const navigation = useNavigation();
@@ -31,11 +31,7 @@ const ListHeaderComponent = () => {
             title,
           })
         }>
-        <MaterialCommunityIcons
-          name="file-document-edit-outline"
-          size={26}
-          color="dodgerblue"
-        />
+        <FileIcon />
         <Text>{buttonText}</Text>
       </Pressable>
       <HR />

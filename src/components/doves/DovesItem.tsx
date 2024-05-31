@@ -1,4 +1,3 @@
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {dateDiff} from '../../utils/DateUtil';
 import common from '../../styles/sharedStyles';
 import DovesItemOptions from './DovesItemOptions';
@@ -6,6 +5,7 @@ import DotsButton from '../common/buttons/DotsButton';
 import AccountCard from '../common/AccountCard';
 import Text from '../common/Text';
 import View from '../common/View';
+import {VerifiedIcon} from '../common/Icons';
 
 enum DoveType {
   Dove,
@@ -51,9 +51,7 @@ const DovesItem = ({item, displayUsername = true}) => {
                 <Text style={[bold, flex1]} numberOfLines={1}>
                   {item.fullname ?? item.username}
                 </Text>
-                {item.isVerified === 1 && (
-                  <MaterialIcons name="verified" size={16} color="dodgerblue" />
-                )}
+                {item.isVerified === 1 && <VerifiedIcon />}
               </View>
             )}
             <Text style={[gray]}>{dateDiff(item.upload_time * 1000)}</Text>

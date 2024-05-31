@@ -1,18 +1,17 @@
 import {Animated, Pressable, StyleSheet} from 'react-native';
 import {useMutation, useQuery} from '../../hooks/reactQueryHooks';
 import {chatDelete, chatListOpen} from '../../services/ChatService';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import common from '../../styles/sharedStyles';
 import {useNavigation} from '@react-navigation/native';
 import MessageDetails from './MessageDetails';
 import FlatList from '../../components/common/FlatList';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Swipeable} from 'react-native-gesture-handler';
 import {useStore} from '../../containers/StoreContainer';
 import UserSearch, {MessagesHeaderRight} from './UserSearch';
 import AccountCard from '../../components/common/AccountCard';
 import Text from '../../components/common/Text';
 import View from '../../components/common/View';
+import {FileIcon, VerifiedIcon} from '../../components/common/Icons';
 
 const {
   row,
@@ -30,10 +29,7 @@ const {
 export const MessagesScreenOptions = ({navigation}) => {
   return {
     headerRight: () => (
-      <MaterialCommunityIcons
-        name="file-document-edit-outline"
-        size={26}
-        color="dodgerblue"
+      <FileIcon
         onPress={() =>
           navigation.navigate(UserSearch.name, {
             headerRightComp: MessagesHeaderRight.name,
@@ -98,9 +94,7 @@ const MessageItem = ({item, onDelete}) => {
                 <Text style={[bold]} numberOfLines={1}>
                   {title}
                 </Text>
-                {!isMultiple && item.isVerified === 1 && (
-                  <MaterialIcons name="verified" size={16} color="dodgerblue" />
-                )}
+                {!isMultiple && item.isVerified === 1 && <VerifiedIcon />}
               </View>
               <Text style={[gray]}>
                 {item.last_message_type === 0 || item.last_message_type === 1

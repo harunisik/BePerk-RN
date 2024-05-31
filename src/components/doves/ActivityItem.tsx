@@ -1,10 +1,9 @@
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import {dateDiff} from '../../utils/DateUtil';
 import common from '../../styles/sharedStyles';
 import AccountCard from '../common/AccountCard';
 import Text from '../common/Text';
 import View from '../common/View';
+import {PictureIcon} from '../common/Icons';
 
 enum HistoryItemType {
   Video,
@@ -52,7 +51,7 @@ const ActivityItem = ({item}) => {
           <Text style={[gray]}>{dateDiff(date_time * 1000)}</Text>
         </Text>
       </View>
-      {item.media?.type === 1 && <SimpleLineIcons name="picture" size={26} />}
+      {item.media?.type === 1 && <PictureIcon />}
     </View>
   );
 };

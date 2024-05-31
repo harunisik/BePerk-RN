@@ -2,8 +2,6 @@ import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs
 import HomeTab from './HomeTab';
 import DoveTab from './DoveTab';
 import {AddDoveModal} from '../add/AddModal';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import common from '../../styles/sharedStyles';
 import {useNavigation} from '@react-navigation/native';
 import {useState} from 'react';
@@ -11,6 +9,7 @@ import Search from './Search';
 import Activity from './Activity';
 import View from '../../components/common/View';
 import {useColors} from '../../hooks/customHooks';
+import {BellIcon, PlusIcon} from '../../components/common/Icons';
 
 const {row, cGap15} = common;
 
@@ -20,18 +19,12 @@ const HeaderRight = () => {
 
   return (
     <View style={[row, cGap15]}>
-      <MaterialCommunityIcons
-        name="plus-circle"
-        size={22}
+      <PlusIcon
         onPress={() => {
           setModalVisible(true);
         }}
       />
-      <MaterialCommunityIcons
-        name="bell"
-        onPress={() => navigation.navigate(Activity.name)}
-        size={22}
-      />
+      <BellIcon onPress={() => navigation.navigate(Activity.name)} />
       <AddDoveModal
         visible={modalVisible}
         onDismiss={() => setModalVisible(false)}
@@ -44,11 +37,7 @@ export const DovesScreenOptions = ({navigation}) => {
   return {
     title: '',
     headerLeft: () => (
-      <MaterialIcons
-        name="search"
-        onPress={() => navigation.navigate(Search.name)}
-        size={26}
-      />
+      <Search onPress={() => navigation.navigate(Search.name)} />
     ),
     headerRight: HeaderRight,
   };

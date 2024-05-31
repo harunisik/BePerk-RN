@@ -4,12 +4,19 @@ import FeaturedItemDetails from './FeaturedItemDetails';
 import Comment from '../doves/Comment';
 import UserSearch, {UserSearchScreenOptions} from '../profile/UserSearch';
 import ProfileStack from '../profile/ProfileStack';
+import {useColors} from '../../hooks/customHooks';
 
 const Stack = createNativeStackNavigator();
 
 const FeaturedStack = () => {
+  const {color, backgroundColor} = useColors();
+
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {backgroundColor},
+        headerTitleStyle: {color},
+      }}>
       <Stack.Screen
         name={Featured.name}
         component={Featured}

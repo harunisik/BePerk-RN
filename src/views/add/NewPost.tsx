@@ -1,9 +1,6 @@
 import {TextInput, StyleSheet, Switch, ActivityIndicator} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FastImage from 'react-native-fast-image';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import {SegmentedButtons} from 'react-native-paper';
 import {useEffect, useState} from 'react';
 import {uploadPhoto, uploadVideo} from '../../services/UserService';
@@ -17,6 +14,12 @@ import {createThumbnail} from 'react-native-create-thumbnail';
 import Text from '../../components/common/Text';
 import View from '../../components/common/View';
 import HR from '../../components/common/HR';
+import {
+  AccountIcon,
+  CloseIcon,
+  LocationIcon,
+  TimerIcon,
+} from '../../components/common/Icons';
 
 const PostButton = ({onPress}) => {
   return (
@@ -29,13 +32,7 @@ const PostButton = ({onPress}) => {
 export const NewPostScreenOptions = ({navigation}) => {
   return {
     title: 'New Post',
-    headerLeft: () => (
-      <MaterialCommunityIcons
-        name="close"
-        onPress={() => navigation.goBack()}
-        size={26}
-      />
-    ),
+    headerLeft: () => <CloseIcon onPress={() => navigation.goBack()} />,
     headerRight: PostButton,
   };
 };
@@ -204,7 +201,7 @@ const NewPost = () => {
           columnGap: 10,
           alignItems: 'center',
         }}>
-        <MaterialIcons name="account-circle" size={30} color="dodgerblue" />
+        <AccountIcon />
         <Text
           style={{flex: 1}}
           onPress={handlePressTagPeople}
@@ -214,10 +211,7 @@ const NewPost = () => {
             : 'Tag people'}
         </Text>
         {attachedUsers?.length > 0 && (
-          <MaterialIcons
-            name="close"
-            size={20}
-            color="gray"
+          <CloseIcon
             onPress={() => setAttachedUsers([])}
             style={{marginLeft: 'auto'}}
           />
@@ -230,7 +224,7 @@ const NewPost = () => {
           columnGap: 10,
           alignItems: 'center',
         }}>
-        <MaterialIcons name="location-pin" size={30} color="dodgerblue" />
+        <LocationIcon />
         <Text
           style={{flex: 1}}
           onPress={() => navigation.navigate(GooglePlaces.name)}
@@ -238,10 +232,7 @@ const NewPost = () => {
           {location ? location.location_address : 'Tag location'}
         </Text>
         {location && (
-          <MaterialIcons
-            name="close"
-            size={20}
-            color="gray"
+          <CloseIcon
             onPress={() => setLocation(undefined)}
             style={{marginLeft: 'auto'}}
           />
@@ -256,7 +247,7 @@ const NewPost = () => {
         }}>
         <View
           style={{flexDirection: 'row', alignItems: 'center', columnGap: 10}}>
-          <Ionicons name="timer" size={30} color="dodgerblue" />
+          <TimerIcon />
           <Text>Timer</Text>
         </View>
         <View
