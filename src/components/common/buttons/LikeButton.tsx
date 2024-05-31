@@ -6,7 +6,7 @@ import {postUserLike} from '../../../services/UserService';
 import Text from '../Text';
 import View from '../View';
 
-const {font12, cGap3, row, aiCenter, rGap5} = common;
+const {cGap3, row, aiCenter, rGap5} = common;
 
 interface LikeButtonProps {
   id: number;
@@ -15,6 +15,7 @@ interface LikeButtonProps {
   type: number;
   size?: number;
   color?: string;
+  backgroundColor?: string;
   vertical?: boolean;
 }
 
@@ -25,6 +26,7 @@ const LikeButtton = ({
   type,
   size = 18,
   color = 'dodgerblue',
+  backgroundColor,
   vertical = false,
 }: LikeButtonProps) => {
   const [likedState, setLikedState] = useState(liked);
@@ -48,14 +50,19 @@ const LikeButtton = ({
   }, [liked, likesCount]);
 
   return (
-    <View style={[aiCenter, ...(vertical ? [rGap5] : [row, cGap3])]}>
+    <View
+      style={[
+        aiCenter,
+        backgroundColor && {backgroundColor},
+        ...(vertical ? [rGap5] : [row, cGap3]),
+      ]}>
       <MaterialCommunityIcons
         name={likedState ? 'heart' : 'heart-outline'}
         size={size}
         color={color}
         onPress={handlePress}
       />
-      <Text style={[font12, {color}]}>{likesCountState}</Text>
+      <Text style={[{color}]}>{likesCountState}</Text>
     </View>
   );
 };

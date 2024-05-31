@@ -28,8 +28,6 @@ const DovesItem = ({item, displayUsername = true}) => {
     row,
     cGap10,
     rGap15,
-    font11,
-    font12,
     white,
     gray,
     bold,
@@ -59,9 +57,7 @@ const DovesItem = ({item, displayUsername = true}) => {
                 )}
               </View>
             )}
-            <Text style={[gray, font12]}>
-              {dateDiff(item.upload_time * 1000)}
-            </Text>
+            <Text style={[gray]}>{dateDiff(item.upload_time * 1000)}</Text>
           </View>
         </View>
         <View
@@ -70,7 +66,7 @@ const DovesItem = ({item, displayUsername = true}) => {
             p5,
             {backgroundColor: DoveTypes[item.subtype].color},
           ]}>
-          <Text style={[white, font11]}>{DoveTypes[item.subtype].label}</Text>
+          <Text style={[white]}>{DoveTypes[item.subtype].label}</Text>
         </View>
       </View>
       <Text>{item.caption}</Text>

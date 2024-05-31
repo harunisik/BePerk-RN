@@ -25,7 +25,7 @@ import MessageDetails from './MessageDetails';
 import Text from '../../components/common/Text';
 import View from '../../components/common/View';
 
-const {bold, font16, aiCenter, row, jcSpaceAround, cGap15, jcCenter} = common;
+const {bold, aiCenter, row, jcSpaceAround, cGap15, jcCenter} = common;
 
 const HeaderRight = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -114,7 +114,7 @@ export const ProfileScreenOptions = ({route, navigation}) => {
             onPress={() => navigation.goBack()}
           />
         )}
-        <Text style={[bold, font16]}>{username}</Text>
+        <Text style={[bold]}>{username}</Text>
       </View>
     ),
     headerRight: HeaderRight,

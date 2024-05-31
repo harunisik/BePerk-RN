@@ -7,7 +7,7 @@ import Text from '../common/Text';
 import View from '../common/View';
 import HR from '../common/HR';
 
-const {row, rGap15, cGap10, bold, font11, gray, pr10, flex1} = common;
+const {row, rGap15, cGap10, bold, gray, pr10, flex1} = common;
 
 interface CommentHeaderItemProps {
   fullname: string;
@@ -35,7 +35,7 @@ const CommentHeaderItem = ({
           <Text style={bold}>{(fullname ?? username) + ' '}</Text>
           <Text>{caption}</Text>
         </Text>
-        <Text style={[font11, gray]}>{dateDiff(uploadTime * 1000)}</Text>
+        <Text style={[gray]}>{dateDiff(uploadTime * 1000)}</Text>
       </View>
       <HR />
     </View>

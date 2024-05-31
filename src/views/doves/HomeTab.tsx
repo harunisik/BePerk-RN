@@ -1,6 +1,5 @@
-import {StyleSheet} from 'react-native';
+import {Image, StyleSheet} from 'react-native';
 import common from '../../styles/sharedStyles';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import DovesItem from '../../components/doves/DovesItem';
 import DovesItemOptions from '../../components/doves/DovesItemOptions';
 import ItemSeperator from '../../components/common/ItemSpearator';
@@ -13,24 +12,34 @@ import Text from '../../components/common/Text';
 import View from '../../components/common/View';
 import HR from '../../components/common/HR';
 
-const ListHeaderItem = ({item}) => {
-  const {jcSpaceBetween, aiCenter, row, rGap15, pv20, p15, bold, white} =
-    common;
+const {jcSpaceBetween, aiCenter, row, rGap10, pv20, p15, bold, white} = common;
 
+const ListHeaderItem = ({item}) => {
   return (
     <View style={[p15]}>
-      <View style={[styles.itemContainer, rGap15]}>
-        <View>
-          <Text style={[white]}>BePerk's Dove of the Day:</Text>
+      <View style={[styles.itemContainer, rGap10]}>
+        <View style={{backgroundColor: 'dodgerblue'}}>
+          <Text style={[white, bold]}>BePerk's Dove of the Day:</Text>
         </View>
-        <View>
+        <View style={{backgroundColor: 'dodgerblue'}}>
           <Text style={[white]}>{item.caption}</Text>
         </View>
-        <View>
-          <View style={[aiCenter, row, jcSpaceBetween]}>
-            <DovesItemOptions item={item} color="white" />
-            <MaterialCommunityIcons name="heart" size={22} color="white" />
-          </View>
+        <View
+          style={[
+            aiCenter,
+            row,
+            jcSpaceBetween,
+            {backgroundColor: 'dodgerblue'},
+          ]}>
+          <DovesItemOptions
+            item={item}
+            color="white"
+            backgroundColor="dodgerblue"
+          />
+          <Image
+            style={{width: 40, height: 40}}
+            source={require('../../assets/beperk_logo.png')}
+          />
         </View>
       </View>
       <View style={[pv20]}>

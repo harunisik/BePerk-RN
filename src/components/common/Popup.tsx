@@ -5,7 +5,7 @@ import Text from './Text';
 import View from './View';
 import HR from './HR';
 
-const {bold, font16} = common;
+const {bold} = common;
 
 const Popup = ({
   visible,
@@ -32,7 +32,7 @@ const Popup = ({
             shadowOpacity: 0.25,
           }}>
           <View style={{alignItems: 'center', padding: 20, rowGap: 5}}>
-            <Text style={[bold, font16]}>{header}</Text>
+            <Text style={[bold]}>{header}</Text>
             <Text>{message}</Text>
           </View>
           <HR />

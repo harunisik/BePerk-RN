@@ -181,9 +181,7 @@ const MessageDetailsItem = ({item}) => {
               />
               <View>
                 <Text>{item.media.username}</Text>
-                <Text style={{color: 'gray', fontSize: 12}}>
-                  {item.media.fullname}
-                </Text>
+                <Text style={{color: 'gray'}}>{item.media.fullname}</Text>
               </View>
             </View>
           </Pressable>

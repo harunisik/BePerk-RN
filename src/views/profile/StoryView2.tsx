@@ -41,7 +41,6 @@ const {
   pv50,
   ph15,
   cGap3,
-  font11,
   cGap5,
   aiCenter,
   row,
@@ -85,7 +84,7 @@ const Header = ({item}) => {
           labelColor="white"
           goBack
         />
-        <Text style={[font11, white]}>{dateDiff(item.upload_time * 1000)}</Text>
+        <Text style={[white]}>{dateDiff(item.upload_time * 1000)}</Text>
       </View>
       <MaterialIcons
         name="close"

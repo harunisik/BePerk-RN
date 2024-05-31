@@ -36,17 +36,7 @@ const HistoryTypes = {
 };
 
 const ActivityItem = ({item}) => {
-  const {
-    flex1,
-    row,
-    cGap10,
-    font11,
-    gray,
-    bold,
-    jcSpaceBetween,
-    aiCenter,
-    shrink1,
-  } = common;
+  const {flex1, row, cGap10, gray, jcSpaceBetween, aiCenter, shrink1} = common;
 
   const {user_id, fullname, history_type, type, date_time} = item;
   const historyType = HistoryTypes[history_type];
@@ -59,7 +49,7 @@ const ActivityItem = ({item}) => {
         <AccountCard size={15} userId={user_id} username={fullname} />
         <Text style={shrink1}>
           <Text>{`${historyTypeStr} ${historyItemTypeStr}. `}</Text>
-          <Text style={[font11, gray]}>{dateDiff(date_time * 1000)}</Text>
+          <Text style={[gray]}>{dateDiff(date_time * 1000)}</Text>
         </Text>
       </View>
       {item.media?.type === 1 && <SimpleLineIcons name="picture" size={26} />}

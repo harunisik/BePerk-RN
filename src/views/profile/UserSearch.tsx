@@ -17,7 +17,7 @@ import MessageDetails from './MessageDetails';
 import Text from '../../components/common/Text';
 import View from '../../components/common/View';
 
-const {bold, font16, pl15, pr15, pb10, pt10} = common;
+const {bold, pl15, pr15, pb10, pt10} = common;
 
 export const NewStoryHeaderRight = ({formData, selectedUsers, onPress}) => {
   const navigation = useNavigation();
@@ -269,7 +269,7 @@ const UserSearch = () => {
           onRefresh={refetch}
           refreshing={isFetching}
           ListHeaderComponent={
-            <Text style={[bold, font16, pb10, pt10]}>Suggested</Text>
+            <Text style={[bold, pb10, pt10]}>Suggested</Text>
           }
         />
       )}

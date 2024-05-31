@@ -23,8 +23,7 @@ import Text from '../../components/common/Text';
 import View from '../../components/common/View';
 import HR from '../../components/common/HR';
 
-const {row, flex1, aiCenter, rGap30, jcSpaceBetween, white, font11, bold} =
-  common;
+const {row, flex1, aiCenter, rGap30, jcSpaceBetween, white, bold} = common;
 
 const pageTitle = 'Create a new account';
 
@@ -214,7 +213,7 @@ const CreateNewAccount = () => {
               alignItems: 'center',
             },
           ]}>
-          <Text style={[font11, {width: '85%'}]}>
+          <Text style={[{width: '85%'}]}>
             By clicking Register, you agree to our{' '}
             <Text style={bold}>Terms</Text> and{' '}
             <Text style={bold}>Privacy Policy</Text>

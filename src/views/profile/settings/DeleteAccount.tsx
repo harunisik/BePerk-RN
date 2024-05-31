@@ -11,7 +11,7 @@ import {showMessage} from 'react-native-flash-message';
 import Popup from '../../../components/common/Popup';
 import Text from '../../../components/common/Text';
 
-const {row, aiCenter, jcSpaceBetween, bold, font16} = common;
+const {row, aiCenter, jcSpaceBetween} = common;
 
 const pageTitle = 'Delete account';
 

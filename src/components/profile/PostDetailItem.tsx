@@ -21,7 +21,6 @@ const {
   ph15,
   pv10,
   bold,
-  font11,
   gray,
   rGap5,
   rGap10,
@@ -117,7 +116,7 @@ const PostDetailItem = ({
             <Text>{caption}</Text>
           </Text>
         )}
-        <Text style={[font11, gray]}>{dateDiff(uploadTime * 1000)}</Text>
+        <Text style={[gray]}>{dateDiff(uploadTime * 1000)}</Text>
       </View>
     </View>
   );

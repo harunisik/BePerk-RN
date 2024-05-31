@@ -27,7 +27,6 @@ const CommentItem = ({item, isChild = false, onDelete, onPressReply}) => {
     cGap5,
     cGap10,
     bold,
-    font11,
     gray,
     jcSpaceBetween,
     flex1,
@@ -63,11 +62,9 @@ const CommentItem = ({item, isChild = false, onDelete, onPressReply}) => {
                   <Text>{item.comment}</Text>
                 </Text>
                 <View style={[row, cGap5]}>
-                  <Text style={[font11, gray]}>
-                    {dateDiff(item.date * 1000)}
-                  </Text>
+                  <Text style={[gray]}>{dateDiff(item.date * 1000)}</Text>
                   <Text
-                    style={[font11, gray]}
+                    style={[gray]}
                     onPress={() => {
                       onPressReply(`@${item.username}`, item.id);
                     }}>
@@ -77,7 +74,7 @@ const CommentItem = ({item, isChild = false, onDelete, onPressReply}) => {
               </View>
               {!isChild && item.childList?.length > 0 && (
                 <TouchableOpacity onPress={handleViewReply}>
-                  <Text style={[font11, gray, mb15]}>
+                  <Text style={[gray, mb15]}>
                     {showReplies
                       ? 'Hide replies'
                       : `View ${item.childList.length} replies`}

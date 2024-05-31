@@ -37,7 +37,7 @@ const screenOptions = ({route}) => ({
       <View style={{alignItems: 'center'}}>
         <MaterialCommunityIcons name={iconName} size={26} color={color} />
         {route.name !== AddStack.name && (
-          <Text style={{fontSize: 11, color}}>{tabBarLabels[route.name]}</Text>
+          <Text style={{color}}>{tabBarLabels[route.name]}</Text>
         )}
       </View>
     );
