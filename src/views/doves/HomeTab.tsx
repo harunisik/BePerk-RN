@@ -19,10 +19,10 @@ const ListHeaderItem = ({item}) => {
     <View style={[p15]}>
       <View style={[styles.itemContainer, rGap10]}>
         <View style={{backgroundColor: 'dodgerblue'}}>
-          <Text style={[white, bold]}>BePerk's Dove of the Day:</Text>
+          <Text style={[bold, white]}>BePerk's Dove of the Day:</Text>
         </View>
         <View style={{backgroundColor: 'dodgerblue'}}>
-          <Text style={[white]}>{item.caption}</Text>
+          <Text style={white}>{item.caption}</Text>
         </View>
         <View
           style={[

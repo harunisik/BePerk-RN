@@ -23,7 +23,7 @@ export const NewStoryScreenOptions = ({navigation}) => {
         name="close"
         onPress={() => navigation.goBack()}
         size={26}
-        color="white"
+        // color="white"
       />
     ),
   };

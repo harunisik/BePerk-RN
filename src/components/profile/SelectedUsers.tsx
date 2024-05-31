@@ -4,7 +4,7 @@ import Text from '../common/Text';
 import View from '../common/View';
 
 const SelectedUsers = ({data}) => {
-  const {p10, radius6, white, row, cGap5} = common;
+  const {p10, radius6, row, cGap5} = common;
 
   return (
     <ScrollView>
@@ -14,7 +14,7 @@ const SelectedUsers = ({data}) => {
             <View
               key={item.user_id}
               style={[radius6, p10, {backgroundColor: 'dodgerblue'}]}>
-              <Text style={[white]}>{item.fullname}</Text>
+              <Text>{item.fullname}</Text>
             </View>
           );
         })}

@@ -10,6 +10,7 @@ import AddModal from './add/AddModal';
 import AddStack from './add/AddStack';
 import Text from '../components/common/Text';
 import View from '../components/common/View';
+import {useColors} from '../hooks/customHooks';
 
 const routeIcons = {
   [HomeStack.name]: 'home',
@@ -27,28 +28,33 @@ const tabBarLabels = {
   [ProfileStack.name]: 'Profile',
 };
 
-const screenOptions = ({route}) => ({
-  lazy: true,
-  headerShown: false,
-  tabBarIcon: ({color}) => {
-    const iconName = routeIcons[route.name] ?? 'minus';
+const BottomTabScreenOptions = ({route}) => {
+  const {backgroundColor} = useColors();
 
-    return (
-      <View style={{alignItems: 'center'}}>
-        <MaterialCommunityIcons name={iconName} size={26} color={color} />
-        {route.name !== AddStack.name && (
-          <Text style={{color}}>{tabBarLabels[route.name]}</Text>
-        )}
-      </View>
-    );
-  },
-  tabBarShowLabel: false,
-  // tabBarStyle: {
-  //   display:
-  //     getFocusedRouteNameFromRoute(route) === StoryView.name ? 'none' : 'flex',
-  // },
-  // https://stackoverflow.com/questions/51352081/react-navigation-how-to-hide-tabbar-from-inside-stack-navigation
-});
+  return {
+    lazy: true,
+    headerShown: false,
+    tabBarIcon: ({color}) => {
+      const iconName = routeIcons[route.name] ?? 'minus';
+
+      return (
+        <View style={{alignItems: 'center'}}>
+          <MaterialCommunityIcons name={iconName} size={26} color={color} />
+          {route.name !== AddStack.name && (
+            <Text style={{color}}>{tabBarLabels[route.name]}</Text>
+          )}
+        </View>
+      );
+    },
+    tabBarShowLabel: false,
+    tabBarStyle: {
+      backgroundColor,
+      //   display:
+      //     getFocusedRouteNameFromRoute(route) === StoryView.name ? 'none' : 'flex',
+    },
+    // https://stackoverflow.com/questions/51352081/react-navigation-how-to-hide-tabbar-from-inside-stack-navigation
+  };
+};
 
 const Tab = createBottomTabNavigator();
 
@@ -62,7 +68,7 @@ const BottomTab = () => {
 
   return (
     <>
-      <Tab.Navigator screenOptions={screenOptions}>
+      <Tab.Navigator screenOptions={BottomTabScreenOptions}>
         <Tab.Screen name={HomeStack.name} component={HomeStack} />
         <Tab.Screen name={FeaturedStack.name} component={FeaturedStack} />
         <Tab.Screen

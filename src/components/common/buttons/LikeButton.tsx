@@ -25,7 +25,7 @@ const LikeButtton = ({
   likesCount,
   type,
   size = 18,
-  color = 'dodgerblue',
+  color,
   backgroundColor,
   vertical = false,
 }: LikeButtonProps) => {
@@ -62,7 +62,7 @@ const LikeButtton = ({
         color={color}
         onPress={handlePress}
       />
-      <Text style={[{color}]}>{likesCountState}</Text>
+      <Text style={{...(color && {color})}}>{likesCountState}</Text>
     </View>
   );
 };

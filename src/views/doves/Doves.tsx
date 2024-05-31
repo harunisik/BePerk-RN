@@ -10,6 +10,7 @@ import {useState} from 'react';
 import Search from './Search';
 import Activity from './Activity';
 import View from '../../components/common/View';
+import {useColors} from '../../hooks/customHooks';
 
 const {row, cGap15} = common;
 
@@ -22,7 +23,6 @@ const HeaderRight = () => {
       <MaterialCommunityIcons
         name="plus-circle"
         size={22}
-        color="dodgerblue"
         onPress={() => {
           setModalVisible(true);
         }}
@@ -31,7 +31,6 @@ const HeaderRight = () => {
         name="bell"
         onPress={() => navigation.navigate(Activity.name)}
         size={22}
-        color="dodgerblue"
       />
       <AddDoveModal
         visible={modalVisible}
@@ -58,9 +57,15 @@ export const DovesScreenOptions = ({navigation}) => {
 const Tab = createMaterialTopTabNavigator();
 
 const Doves = () => {
+  const {color, backgroundColor} = useColors();
+
   return (
     <Tab.Navigator
-      screenOptions={{lazy: true, tabBarLabelStyle: {textTransform: 'none'}}}>
+      screenOptions={{
+        lazy: true,
+        tabBarLabelStyle: {textTransform: 'none', fontWeight: 'bold', color},
+        tabBarStyle: {backgroundColor},
+      }}>
       <Tab.Screen
         name={HomeTab.name}
         component={HomeTab}

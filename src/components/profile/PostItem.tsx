@@ -36,7 +36,7 @@ const PostItem = ({
             name="ondemand-video"
             size={20}
             style={styles.videoIcon}
-            color="white"
+            // color="white"
           />
         )}
       </View>

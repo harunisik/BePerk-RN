@@ -24,7 +24,6 @@ const {
   gray,
   p10,
   rGap3,
-  white,
   flex1,
 } = common;
 
@@ -133,7 +132,7 @@ const MessageItem = ({item, onDelete}) => {
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}>
-                <Text style={[white]}>{item.not_read}</Text>
+                <Text>{item.not_read}</Text>
               </View>
             )}
           </View>

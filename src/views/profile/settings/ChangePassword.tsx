@@ -10,7 +10,7 @@ import Text from '../../../components/common/Text';
 import View from '../../../components/common/View';
 import HR from '../../../components/common/HR';
 
-const {row, gray, aiCenter, rGap30, jcSpaceBetween, white} = common;
+const {row, gray, aiCenter, rGap30, jcSpaceBetween} = common;
 
 const pageTitle = 'Change password';
 
@@ -116,7 +116,7 @@ const ChangePassword = () => {
           aiCenter,
         ]}
         onPress={handlePressSave}>
-        <Text style={white}>Save</Text>
+        <Text>Save</Text>
       </TouchableOpacity>
     </View>
   );

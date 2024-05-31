@@ -124,7 +124,7 @@ const DotsButton = ({
   userId,
   username,
   size = 24,
-  color = 'dodgerblue',
+  color,
 }: DotsButtonProps) => {
   const [modalVisible, setModalVisible] = useState(false);
 

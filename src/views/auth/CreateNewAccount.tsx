@@ -23,7 +23,7 @@ import Text from '../../components/common/Text';
 import View from '../../components/common/View';
 import HR from '../../components/common/HR';
 
-const {row, flex1, aiCenter, rGap30, jcSpaceBetween, white, bold} = common;
+const {row, flex1, aiCenter, rGap30, jcSpaceBetween, bold} = common;
 
 const pageTitle = 'Create a new account';
 
@@ -38,7 +38,7 @@ export const CreateNewAccountScreenOptions = ({navigation}) => {
         name="close"
         onPress={() => navigation.goBack()}
         size={26}
-        color="white"
+        // color="white"
       />
     ),
   };
@@ -153,7 +153,7 @@ const CreateNewAccount = () => {
           </View>
         </SafeAreaView>
       </LinearGradient>
-      <View style={[flex1, aiCenter, rGap30, {backgroundColor: 'white'}]}>
+      <View style={[flex1, aiCenter, rGap30]}>
         <View style={{width: '75%'}}>
           <Text>Username</Text>
           <TextInput
@@ -203,7 +203,7 @@ const CreateNewAccount = () => {
             aiCenter,
           ]}
           onPress={handlePressRegister}>
-          <Text style={white}>Register</Text>
+          <Text>Register</Text>
         </TouchableOpacity>
         <View
           style={[

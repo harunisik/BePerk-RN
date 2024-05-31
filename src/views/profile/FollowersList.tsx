@@ -46,11 +46,11 @@ const UserItem = ({item, onPressFollow}) => {
           }}
           onPress={onPressFollow}>
           {item.i_following === 1 ? (
-            <Text style={{color: 'black'}}>Following</Text>
+            <Text>Following</Text>
           ) : item.i_following === 2 ? (
-            <Text style={{color: 'black'}}>Requested</Text>
+            <Text>Requested</Text>
           ) : (
-            <Text style={{color: 'white'}}>Follow</Text>
+            <Text>Follow</Text>
           )}
         </Pressable>
       )}

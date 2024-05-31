@@ -26,7 +26,6 @@ const Popup = ({
         }}>
         <View
           style={{
-            backgroundColor: 'white',
             borderRadius: 20,
             marginHorizontal: 40,
             shadowOpacity: 0.25,

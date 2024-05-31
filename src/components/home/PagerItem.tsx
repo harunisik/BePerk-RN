@@ -33,12 +33,12 @@ const PagerItem = ({item, paused = true}) => {
             userId={item.user_id}
             username={item.fullname}
             // photo={item.cover}
-            color="white"
-            labelColor="white"
+            // color="white"
+            // labelColor="white"
             size={30}
             vertical
           />
-          <Text style={{color: 'white'}}>{item.caption}</Text>
+          <Text>{item.caption}</Text>
         </View>
         <View style={{rowGap: 25}}>
           <LikeButtton
@@ -47,7 +47,6 @@ const PagerItem = ({item, paused = true}) => {
             likesCount={item.likes_count}
             type={item.type}
             size={28}
-            color="white"
             vertical
           />
           <CommentButton
@@ -60,7 +59,7 @@ const PagerItem = ({item, paused = true}) => {
             commentsCount={item.comments_count}
             uploadTime={item.upload_time}
             size={28}
-            color="white"
+            // color="white"
             vertical
           />
           <BookmarkButton
@@ -68,16 +67,21 @@ const PagerItem = ({item, paused = true}) => {
             type={item.type}
             isSaved={item.bookmark}
             size={28}
-            color="white"
+            // color="white"
           />
-          <ShareButton id={item.id} type={item.type} size={28} color="white" />
+          <ShareButton
+            id={item.id}
+            type={item.type}
+            size={28}
+            // color="white"
+          />
           <DotsButton
             id={item.id}
             type={item.type}
             userId={item.user_id}
             username={item.username}
             size={28}
-            color="white"
+            // color="white"
           />
         </View>
       </View>

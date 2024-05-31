@@ -19,7 +19,7 @@ import Text from '../../components/common/Text';
 import View from '../../components/common/View';
 import HR from '../../components/common/HR';
 
-const {row, flex1, aiCenter, rGap30, white} = common;
+const {row, flex1, aiCenter, rGap30} = common;
 
 export const ForgotPasswordScreenOptions = ({navigation}) => {
   return {
@@ -32,7 +32,7 @@ export const ForgotPasswordScreenOptions = ({navigation}) => {
         name="close"
         onPress={() => navigation.goBack()}
         size={26}
-        color="white"
+        // color="white"
       />
     ),
   };
@@ -79,7 +79,7 @@ const ForgotPassword = () => {
           </View>
         </SafeAreaView>
       </LinearGradient>
-      <View style={[flex1, aiCenter, rGap30, {backgroundColor: 'white'}]}>
+      <View style={[flex1, aiCenter, rGap30]}>
         <View style={{width: '75%'}}>
           <Text>E-mail</Text>
           <TextInput
@@ -100,7 +100,7 @@ const ForgotPassword = () => {
             aiCenter,
           ]}
           onPress={handlePressResetPassword}>
-          <Text style={white}>Reset Password</Text>
+          <Text>Reset Password</Text>
         </TouchableOpacity>
         <Text>Or</Text>
         <View style={row}>

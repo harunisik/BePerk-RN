@@ -213,7 +213,7 @@ const Profile = () => {
                 marginVertical: 5,
               }}
               contentContainerStyle={{paddingHorizontal: 70}}
-              activeColor="white"
+              // activeColor="white"
               indicatorStyle={{display: 'none'}}
               labelStyle={{
                 fontWeight: 'bold',

@@ -193,7 +193,7 @@ const MessageDetailsItem = ({item}) => {
               paddingVertical: 5,
               paddingHorizontal: 10,
             }}>
-            <Text style={{color: 'white'}}>{item.media}</Text>
+            <Text>{item.media}</Text>
           </View>
         ) : item.type === 8 ? ( // dm image
           <Pressable onPress={handlePressMedia}>
@@ -341,7 +341,6 @@ const styles = StyleSheet.create({
   },
   card: {
     borderRadius: 10,
-    backgroundColor: 'white',
     paddingVertical: 10,
   },
 });

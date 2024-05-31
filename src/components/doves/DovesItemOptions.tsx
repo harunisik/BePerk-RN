@@ -6,7 +6,17 @@ import View from '../common/View';
 
 const {aiCenter, row, cGap15} = common;
 
-const DovesItemOptions = ({item, color = 'dodgerblue', backgroundColor}) => {
+interface DovesItemOptionsProps {
+  item: any;
+  color?: string;
+  backgroundColor?: string;
+}
+
+const DovesItemOptions = ({
+  item,
+  color,
+  backgroundColor,
+}: DovesItemOptionsProps) => {
   return (
     <View style={[cGap15, row, aiCenter, backgroundColor && {backgroundColor}]}>
       <LikeButtton

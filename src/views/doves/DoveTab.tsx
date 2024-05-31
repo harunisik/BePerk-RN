@@ -1,4 +1,4 @@
-import {TouchableOpacity, StyleSheet} from 'react-native';
+import {TouchableOpacity, StyleSheet, Pressable} from 'react-native';
 import common from '../../styles/sharedStyles';
 import DovesItem from '../../components/doves/DovesItem';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -9,6 +9,8 @@ import {useCallback} from 'react';
 import {useGetUserExploring} from '../../hooks/infiniteQueryHooks';
 import InfiniteFlatList from '../../components/common/InfiniteFlatList';
 import Text from '../../components/common/Text';
+import View from '../../components/common/View';
+import HR from '../../components/common/HR';
 
 const ListHeaderComponent = () => {
   const navigation = useNavigation();
@@ -19,22 +21,25 @@ const ListHeaderComponent = () => {
   } = route;
 
   return (
-    <TouchableOpacity
-      style={[styles.button, aiCenter, jcCenter, row, cGap10]}
-      onPress={() =>
-        navigation.navigate(PostDove.name, {
-          subtype,
-          inputTextPlaceHolder,
-          title,
-        })
-      }>
-      <MaterialCommunityIcons
-        name="file-document-edit-outline"
-        size={26}
-        color="dodgerblue"
-      />
-      <Text>{buttonText}</Text>
-    </TouchableOpacity>
+    <View style={{padding: 10}}>
+      <Pressable
+        style={[styles.button, aiCenter, jcCenter, row, cGap10]}
+        onPress={() =>
+          navigation.navigate(PostDove.name, {
+            subtype,
+            inputTextPlaceHolder,
+            title,
+          })
+        }>
+        <MaterialCommunityIcons
+          name="file-document-edit-outline"
+          size={26}
+          color="dodgerblue"
+        />
+        <Text>{buttonText}</Text>
+      </Pressable>
+      <HR />
+    </View>
   );
 };
 
@@ -70,7 +75,7 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: '#DDDDDD',
     padding: 10,
-    margin: 10,
+    marginBottom: 20,
   },
 });
 

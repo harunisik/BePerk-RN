@@ -7,12 +7,15 @@ import Activity from './Activity';
 import Search from './Search';
 import StoryView from '../profile/StoryView';
 import ProfileStack from '../profile/ProfileStack';
+import {useColors} from '../../hooks/customHooks';
 
 const Stack = createNativeStackNavigator();
 
 const DovesStack = () => {
+  const {backgroundColor} = useColors();
+
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{headerStyle: {backgroundColor}}}>
       <Stack.Screen
         name={Doves.name}
         component={Doves}

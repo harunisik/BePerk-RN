@@ -32,7 +32,7 @@ const CommentButton = ({
   uploadTime,
   commentsCount,
   size = 18,
-  color = 'dodgerblue',
+  color,
   backgroundColor,
   vertical = false,
 }: CommentButtonProps) => {
@@ -61,7 +61,7 @@ const CommentButton = ({
           })
         }
       />
-      <Text style={[{color}]}>{commentsCount}</Text>
+      <Text style={{...(color && {color})}}>{commentsCount}</Text>
     </View>
   );
 };

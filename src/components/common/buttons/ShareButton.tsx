@@ -11,19 +11,14 @@ interface ShareButtonProps {
   color?: string;
 }
 
-const ShareButton = ({
-  id,
-  type,
-  size = 26,
-  color = 'dodgerblue',
-}: ShareButtonProps) => {
+const ShareButton = ({id, type, size = 26, color}: ShareButtonProps) => {
   const navigation = useNavigation();
 
   return (
     <MaterialCommunityIcons
       name="share-outline"
       size={size}
-      color={color}
+      {...(color && {color})}
       onPress={() =>
         navigation.navigate(UserSearch.name, {
           headerRightComp: ChatShareHeaderRight.name,

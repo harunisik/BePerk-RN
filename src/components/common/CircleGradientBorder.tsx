@@ -10,8 +10,8 @@ const InnerView = ({borderRadius, children}) => {
     <View
       style={{
         borderRadius,
-        backgroundColor: 'lightgray',
-        borderColor: 'white',
+        // backgroundColor: 'lightgray',
+        // borderColor: 'white',
         borderWidth: BORDER_WIDTH,
       }}>
       {children}

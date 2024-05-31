@@ -28,7 +28,6 @@ const DovesItem = ({item, displayUsername = true}) => {
     row,
     cGap10,
     rGap15,
-    white,
     gray,
     bold,
     p5,
@@ -66,7 +65,7 @@ const DovesItem = ({item, displayUsername = true}) => {
             p5,
             {backgroundColor: DoveTypes[item.subtype].color},
           ]}>
-          <Text style={[white]}>{DoveTypes[item.subtype].label}</Text>
+          <Text>{DoveTypes[item.subtype].label}</Text>
         </View>
       </View>
       <Text>{item.caption}</Text>

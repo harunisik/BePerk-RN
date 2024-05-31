@@ -18,7 +18,7 @@ import Text from '../../components/common/Text';
 import View from '../../components/common/View';
 import HR from '../../components/common/HR';
 
-const {row, flex1, aiCenter, rGap30, white} = common;
+const {row, flex1, aiCenter, rGap30} = common;
 
 const Signin = () => {
   const [username, setUsername] = useState('harun-local');
@@ -60,7 +60,7 @@ const Signin = () => {
           </View>
         </SafeAreaView>
       </LinearGradient>
-      <View style={[flex1, aiCenter, rGap30, {backgroundColor: 'white'}]}>
+      <View style={[flex1, aiCenter, rGap30]}>
         <View style={{width: '75%'}}>
           <Text>Username</Text>
           <TextInput
@@ -91,7 +91,7 @@ const Signin = () => {
             aiCenter,
           ]}
           onPress={handlePressLogin}>
-          <Text style={white}>Log In</Text>
+          <Text>Log In</Text>
         </TouchableOpacity>
         <Text>Or</Text>
         <View style={row}>

@@ -91,7 +91,7 @@ const HeaderTitle = () => {
           flexDirection: 'row',
           columnGap: 3,
           borderWidth: 1,
-          borderColor: 'white',
+          // borderColor: 'white',
           borderRadius: 20,
           shadowColor: '#000',
           shadowOffset: {
@@ -110,7 +110,7 @@ const HeaderTitle = () => {
           paddingVertical: 5,
           paddingHorizontal: 10,
         }}
-        labelStyle={{color: selected[0] ? 'white' : 'black'}}
+        // labelStyle={{color: selected[0] ? 'white' : 'black'}}
         onPress={() => {
           handlePress(0);
           navigation.setOptions({headerTransparent: true});
@@ -125,7 +125,7 @@ const HeaderTitle = () => {
           paddingVertical: 5,
           paddingHorizontal: 10,
         }}
-        labelStyle={{color: 'white'}}
+        // labelStyle={{color: 'white'}}
         onPress={() => {
           handlePress(1);
           navigation.setOptions({headerTransparent: false});
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
   default: {
     color: 'dodgerblue',
     borderWidth: 1,
-    borderColor: 'white',
+    // borderColor: 'white',
     borderRadius: 18,
   },
   selected: {

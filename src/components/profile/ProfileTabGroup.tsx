@@ -20,7 +20,7 @@ const renderTabBar = props => (
   <TabBar
     {...props}
     indicatorStyle={{backgroundColor: 'dodgerblue'}}
-    style={{backgroundColor: 'white', marginBottom: 20}}
+    style={{marginBottom: 20}}
     renderLabel={({route}) => (
       <Text style={{color: 'dodgerblue'}}>{route.title}</Text>
     )}

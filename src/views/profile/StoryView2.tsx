@@ -45,7 +45,6 @@ const {
   aiCenter,
   row,
   cGap10,
-  white,
 } = common;
 
 const ProgressBarSet = ({length, currentIndex, progress, duration}) => {
@@ -81,15 +80,15 @@ const Header = ({item}) => {
           username={item.fullname}
           photo={item.photo}
           size={20}
-          labelColor="white"
+          // labelColor="white"
           goBack
         />
-        <Text style={[white]}>{dateDiff(item.upload_time * 1000)}</Text>
+        <Text>{dateDiff(item.upload_time * 1000)}</Text>
       </View>
       <MaterialIcons
         name="close"
         size={30}
-        color="white"
+        // color="white"
         onPress={() => navigation.goBack()}
       />
     </View>
@@ -121,7 +120,7 @@ const Footer = ({item, onShare, onDelete}) => {
   return (
     <View style={[row, jcSpaceBetween]}>
       <View style={styles.viewed}>
-        <Text style={white}>{`Viewed: ${item.views_count}`}</Text>
+        <Text>{`Viewed: ${item.views_count}`}</Text>
       </View>
       <View style={[row, cGap10]}>
         {/* <FooterIcon
@@ -485,7 +484,7 @@ const StoryView2 = () => {
 const styles = StyleSheet.create({
   viewed: {
     borderWidth: 1,
-    borderColor: 'white',
+    // borderColor: 'white',
     borderRadius: 20,
     paddingVertical: 10,
     paddingHorizontal: 15,
@@ -493,8 +492,7 @@ const styles = StyleSheet.create({
   },
   footerIcon: {
     borderWidth: 1,
-    borderColor: 'white',
-    backgroundColor: 'white',
+    // borderColor: 'white',
     borderRadius: 18,
     padding: 5,
     opacity: 0.7,
