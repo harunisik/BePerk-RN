@@ -9,7 +9,7 @@ import Search from './Search';
 import Activity from './Activity';
 import View from '../../components/common/View';
 import {useColors} from '../../hooks/customHooks';
-import {BellIcon, PlusIcon} from '../../components/common/Icons';
+import {BellIcon, PlusIcon, SearchIcon} from '../../components/common/Icons';
 
 const {row, cGap15} = common;
 
@@ -37,7 +37,7 @@ export const DovesScreenOptions = ({navigation}) => {
   return {
     title: '',
     headerLeft: () => (
-      <Search onPress={() => navigation.navigate(Search.name)} />
+      <SearchIcon onPress={() => navigation.navigate(Search.name)} />
     ),
     headerRight: HeaderRight,
   };

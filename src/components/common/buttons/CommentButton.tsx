@@ -16,7 +16,6 @@ interface CommentButtonProps {
   caption: string;
   uploadTime: number;
   commentsCount: number;
-  size?: number;
   color?: string;
   backgroundColor?: string;
   vertical?: boolean;
@@ -31,7 +30,6 @@ const CommentButton = ({
   caption,
   uploadTime,
   commentsCount,
-  size = 18,
   color,
   backgroundColor,
   vertical = false,
@@ -46,6 +44,7 @@ const CommentButton = ({
         ...(vertical ? [rGap5] : [row, cGap3]),
       ]}>
       <CommentIcon
+        color={color}
         onPress={() =>
           navigation.navigate(Comment.name, {
             id,

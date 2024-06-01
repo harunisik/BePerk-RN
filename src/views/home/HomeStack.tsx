@@ -9,12 +9,19 @@ import ExplorePostsDetails from '../profile/ExplorePostsDetails';
 import ProfileStack from '../profile/ProfileStack';
 import StoryView from '../profile/StoryView';
 import Messages, {MessagesScreenOptions} from '../profile/Messages';
+import {useColors} from '../../hooks/customHooks';
 
 const Stack = createNativeStackNavigator();
 
 const HomeStack = () => {
+  const {color, backgroundColor} = useColors();
+
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {backgroundColor},
+        headerTitleStyle: {color},
+      }}>
       <Stack.Screen
         name={Home.name}
         component={Home}

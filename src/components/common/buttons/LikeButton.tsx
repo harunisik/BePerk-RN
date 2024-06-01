@@ -13,7 +13,6 @@ interface LikeButtonProps {
   liked: number;
   likesCount: number;
   type: number;
-  size?: number;
   color?: string;
   backgroundColor?: string;
   vertical?: boolean;
@@ -24,7 +23,6 @@ const LikeButtton = ({
   liked,
   likesCount,
   type,
-  size = 18,
   color,
   backgroundColor,
   vertical = false,
@@ -56,7 +54,11 @@ const LikeButtton = ({
         backgroundColor && {backgroundColor},
         ...(vertical ? [rGap5] : [row, cGap3]),
       ]}>
-      <HeartIcon onPress={handlePress} />
+      <HeartIcon
+        onPress={handlePress}
+        isOutlined={likedState === 0}
+        color={color}
+      />
       <Text style={{...(color && {color})}}>{likesCountState}</Text>
     </View>
   );

@@ -31,7 +31,7 @@ const BookmarkButton = ({id, type, isSaved}: BookmarkButtonProps) => {
     setBookmark(isSaved);
   }, [isSaved]);
 
-  return <BookmarkIcon onPress={handlePress} />;
+  return <BookmarkIcon onPress={handlePress} isOutlined={bookmark === 0} />;
 };
 
 export default BookmarkButton;

@@ -23,6 +23,7 @@ import FollowersList from './FollowersList';
 import WebView, {WebViewScreenOptions} from '../../components/common/WebView';
 import MediaView, {MediaViewScreenOptions} from './MediaView';
 import PostDetailItemView from './PostDetailsItemView';
+import {useColors} from '../../hooks/customHooks';
 
 const Stack = createNativeStackNavigator();
 
@@ -37,8 +38,14 @@ const ProfileStack = () => {
     },
   } = useStore();
 
+  const {color, backgroundColor} = useColors();
+
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {backgroundColor},
+        headerTitleStyle: {color},
+      }}>
       <Stack.Screen
         name={Profile.name}
         component={Profile}

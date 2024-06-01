@@ -19,7 +19,6 @@ interface AccountCardProps {
   photo?: string;
   size?: number;
   color?: string;
-  labelColor?: string;
   vertical?: boolean;
   bordered?: boolean;
   displayUsername?: boolean;
@@ -34,7 +33,6 @@ const AccountCard = ({
   username,
   photo,
   size = 26,
-  labelColor = 'black',
   vertical = false,
   bordered = false,
   displayUsername = true,
@@ -84,7 +82,7 @@ const AccountCard = ({
 
   return (
     <Pressable
-      style={[...(vertical ? [rGap5] : [row, aiCenter, {columnGap: 5}])]}
+      style={[...(vertical ? [rGap5] : [row, aiCenter, {columnGap: 10}])]}
       onPress={handlePress}>
       <View
         style={{
@@ -107,7 +105,7 @@ const AccountCard = ({
       </View>
       <View style={{alignItems: 'center'}}>
         {displayUsername && _username && (
-          <Text style={[bold, {color: labelColor}]} numberOfLines={1}>
+          <Text style={bold} numberOfLines={1}>
             {_username}
           </Text>
         )}

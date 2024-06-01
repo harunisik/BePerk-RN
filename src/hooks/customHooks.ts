@@ -4,10 +4,12 @@ const colors = {
   dark: {
     color: 'white',
     backgroundColor: 'black',
+    theme: 'dark',
   },
   default: {
     color: 'black',
     backgroundColor: 'white',
+    theme: 'default',
   },
 };
 

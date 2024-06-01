@@ -7,7 +7,11 @@ import {
   addFollowing,
   getUserProfile,
 } from '../../services/UserService';
-import {MaterialTabBar, Tabs} from 'react-native-collapsible-tab-view';
+import {
+  MaterialTabBar,
+  MaterialTabItem,
+  Tabs,
+} from 'react-native-collapsible-tab-view';
 import PostsTab from './PostsTab';
 import StoriesTab from './StoriesTab';
 import DovesTab from './DovesTab';
@@ -23,11 +27,15 @@ import MessageDetails from './MessageDetails';
 import Text from '../../components/common/Text';
 import View from '../../components/common/View';
 import {
+  BirdIcon,
   BookmarkIcon,
   CogIcon,
   DotsIcon,
+  HomeIcon,
   ShareVariantIcon,
+  VideoIcon,
 } from '../../components/common/Icons';
+import {useColors} from '../../hooks/customHooks';
 
 const {bold, aiCenter, row, jcSpaceAround, cGap15, jcCenter} = common;
 
@@ -148,7 +156,11 @@ const ButtonGroup = ({
 
 const Profile = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const {color, backgroundColor} = useColors();
+
   const [following, setFollowing] = useState(0);
+  const [tabColors, setTabColors] = useState([color, 'gray', 'gray']);
+
   const route = useRoute();
   const {
     params: {userId, isAuthUser},
@@ -186,26 +198,6 @@ const Profile = () => {
     <>
       <Tabs.Container
         lazy
-        renderTabBar={props => {
-          return (
-            <MaterialTabBar
-              {...props}
-              tabStyle={{
-                backgroundColor: 'dodgerblue',
-                borderRadius: 20,
-                height: 30,
-                marginHorizontal: 2,
-                marginVertical: 5,
-              }}
-              contentContainerStyle={{paddingHorizontal: 70}}
-              // activeColor="white"
-              indicatorStyle={{display: 'none'}}
-              labelStyle={{
-                fontWeight: 'bold',
-              }}
-            />
-          );
-        }}
         renderHeader={() => (
           <View style={{rowGap: 10}}>
             <UserInfo data={data} isAuthUser={isAuthUser} userId={userId} />
@@ -223,8 +215,48 @@ const Profile = () => {
             />
           </View>
         )}
+        onIndexChange={index =>
+          setTabColors([
+            index === 0 ? color : 'gray',
+            index === 1 ? color : 'gray',
+            index === 2 ? color : 'gray',
+          ])
+        }
+        renderTabBar={props => {
+          return (
+            <MaterialTabBar
+              {...props}
+              TabItemComponent={props => {
+                return (
+                  <MaterialTabItem
+                    {...props}
+                    label={props => {
+                      return (
+                        <>
+                          {props.index === 0 ? (
+                            <HomeIcon color={tabColors[0]} />
+                          ) : props.index === 1 ? (
+                            <VideoIcon color={tabColors[1]} />
+                          ) : (
+                            <BirdIcon color={tabColors[2]} />
+                          )}
+                        </>
+                      );
+                    }}
+                  />
+                );
+              }}
+              indicatorStyle={{backgroundColor: color}}
+              labelStyle={{
+                color,
+                fontWeight: 'bold',
+              }}
+            />
+          );
+        }}
+        containerStyle={{backgroundColor}}
         headerContainerStyle={{
-          shadowOpacity: 0,
+          backgroundColor,
         }}>
         {isPrivate && (
           <Tabs.Tab name="Private Account" label="Private Account">

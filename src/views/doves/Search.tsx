@@ -1,4 +1,4 @@
-import {TextInput, StyleSheet, useWindowDimensions} from 'react-native';
+import {useWindowDimensions} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {useState} from 'react';
 import SearchProfilesTab from './SearchProfilesTab';
@@ -6,6 +6,10 @@ import {TabBar, TabView} from 'react-native-tab-view';
 import SearchTagsTab from './SearchTagsTab';
 import Text from '../../components/common/Text';
 import View from '../../components/common/View';
+import TextInput from '../../components/common/TextInput';
+import {useColors} from '../../hooks/customHooks';
+
+const {p15, flex1} = common;
 
 const renderScene = ({route, searchText}) => {
   switch (route.key) {
@@ -18,17 +22,18 @@ const renderScene = ({route, searchText}) => {
   }
 };
 
-const renderTabBar = props => (
-  <TabBar
-    {...props}
-    indicatorStyle={{backgroundColor: 'dodgerblue'}}
-    style={{marginBottom: 20}}
-    renderLabel={({route}) => (
-      <Text style={{color: 'dodgerblue'}}>{route.title}</Text>
-    )}
-  />
-);
+const renderTabBar = props => {
+  const {color, backgroundColor} = useColors();
 
+  return (
+    <TabBar
+      {...props}
+      indicatorStyle={{backgroundColor: color}}
+      style={{marginBottom: 20, backgroundColor}}
+      renderLabel={({route}) => <Text>{route.title}</Text>}
+    />
+  );
+};
 const SearchTabGroup = ({searchText}) => {
   const layout = useWindowDimensions();
   const [index, setIndex] = useState(0);
@@ -51,30 +56,18 @@ const SearchTabGroup = ({searchText}) => {
 
 const Search = () => {
   const [searchText, setSearchText] = useState('');
-  const {pl15, pr15, flex1} = common;
 
   return (
-    <View style={[pl15, pr15, flex1]}>
+    <View style={[p15, flex1, {rowGap: 15}]}>
       <TextInput
         placeholder="Search"
         onChangeText={setSearchText}
         value={searchText}
-        style={styles.textInput}
       />
 
       <SearchTabGroup searchText={searchText} />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  textInput: {
-    height: 40,
-    marginTop: 12,
-    marginBottom: 12,
-    borderWidth: 1,
-    padding: 10,
-  },
-});
 
 export default Search;
