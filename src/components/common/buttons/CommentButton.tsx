@@ -40,7 +40,8 @@ const CommentButton = ({
     <View
       style={[
         aiCenter,
-        backgroundColor && {backgroundColor},
+        {backgroundColor: 'transparent'},
+        // backgroundColor && {backgroundColor},
         ...(vertical ? [rGap5] : [row, cGap3]),
       ]}>
       <CommentIcon

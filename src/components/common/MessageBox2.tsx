@@ -10,8 +10,9 @@ import Emoji from './Emoji';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 import {launchMediaLibrary} from '../../utils/MediaUtil';
 import {PERMISSIONS} from 'react-native-permissions';
-import View from './View';
+// import View from './View';
 import {CameraIcon, PictureIcon, ShareIcon} from './Icons';
+import {View} from 'react-native';
 
 const {row, jcSpaceBetween, p10, aiCenter} = common;
 
@@ -64,7 +65,7 @@ const MessageBox2 = ({onPressSend}) => {
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       keyboardVerticalOffset={tabBarHeight}>
-      <View style={[p10, styles.shadowProp]}>
+      <View style={[p10, styles.shadowProp, {rowGap: 10}]}>
         <View style={[row, jcSpaceBetween]}>
           {['😌', '🤣', '❤️', '😍', '😱', '✝️', '🙏', '🔥', '😥'].map(
             (item, index) => {
@@ -72,7 +73,7 @@ const MessageBox2 = ({onPressSend}) => {
             },
           )}
         </View>
-        <View style={[row, jcSpaceBetween, aiCenter]}>
+        <View style={[row, jcSpaceBetween, aiCenter, {columnGap: 20}]}>
           <CameraIcon
             onPress={() => handlePressMediaButton(PERMISSIONS.IOS.CAMERA)}
           />
@@ -80,7 +81,12 @@ const MessageBox2 = ({onPressSend}) => {
             placeholder="Message..."
             onChangeText={handleChangeText}
             value={message}
-            style={styles.textInput}
+            style={{
+              backgroundColor: 'lightgray',
+              borderRadius: 20,
+              padding: 10,
+              flex: 1,
+            }}
             onSubmitEditing={handlePress}
           />
           {message ? (
@@ -104,13 +110,7 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 0, height: -1},
     shadowOpacity: 0.2,
     shadowRadius: 5,
-  },
-  textInput: {
-    height: 40,
-    width: 200,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
+    backgroundColor: 'rgb(40, 40, 40)',
   },
 });
 

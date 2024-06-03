@@ -148,15 +148,17 @@ const Messages = () => {
   };
 
   return (
-    <FlatList
-      data={data?.chats}
-      renderItem={({item}) => (
-        <MessageItem item={item} onDelete={handleDeleteItem} />
-      )}
-      onRefresh={refetch}
-      refreshing={isFetching}
-      contentContainerStyle={p10}
-    />
+    <View style={{flex: 1}}>
+      <FlatList
+        data={data?.chats}
+        renderItem={({item}) => (
+          <MessageItem item={item} onDelete={handleDeleteItem} />
+        )}
+        onRefresh={refetch}
+        refreshing={isFetching}
+        contentContainerStyle={p10}
+      />
+    </View>
   );
 };
 

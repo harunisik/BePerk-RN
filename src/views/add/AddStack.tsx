@@ -5,6 +5,7 @@ import UserSearch, {UserSearchScreenOptions} from '../profile/UserSearch';
 import NewStory, {NewStoryScreenOptions} from './NewStory';
 import PostDove, {PostDoveScreenOptions} from '../doves/PostDove';
 import GooglePlaces, {GooglePlacesScreenOptions} from './GooglePlaces';
+import {useColors} from '../../hooks/customHooks';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,8 +15,14 @@ const AddStack = () => {
     params: {assets},
   } = route;
 
+  const {color, backgroundColor} = useColors();
+
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {backgroundColor},
+        headerTitleStyle: {color},
+      }}>
       <Stack.Screen
         name={NewPost.name}
         component={NewPost}

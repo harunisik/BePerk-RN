@@ -1,7 +1,7 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Featured, {FeaturedScreenOptions} from './Featured';
 import FeaturedItemDetails from './FeaturedItemDetails';
-import Comment from '../doves/Comment';
+import Comment, {CommentScreenOptions} from '../doves/Comment';
 import UserSearch, {UserSearchScreenOptions} from '../profile/UserSearch';
 import ProfileStack from '../profile/ProfileStack';
 import {useColors} from '../../hooks/customHooks';
@@ -35,7 +35,7 @@ const FeaturedStack = () => {
       <Stack.Screen
         name={Comment.name}
         component={Comment}
-        options={{presentation: 'formSheet'}}
+        options={CommentScreenOptions}
       />
       <Stack.Screen
         name={UserSearch.name}

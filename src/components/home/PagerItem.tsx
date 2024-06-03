@@ -6,7 +6,8 @@ import ShareButton from '../common/buttons/ShareButton';
 import DotsButton from '../common/buttons/DotsButton';
 import AccountCard from '../common/AccountCard';
 import Text from '../common/Text';
-import View from '../common/View';
+import {View} from 'react-native';
+// imports View from '../common/View';
 
 const PagerItem = ({item, paused = true}) => {
   return (
@@ -46,7 +47,6 @@ const PagerItem = ({item, paused = true}) => {
             liked={item.liked}
             likesCount={item.likes_count}
             type={item.type}
-            size={28}
             vertical
           />
           <CommentButton
@@ -58,7 +58,6 @@ const PagerItem = ({item, paused = true}) => {
             type={item.type}
             commentsCount={item.comments_count}
             uploadTime={item.upload_time}
-            size={28}
             vertical
           />
           <BookmarkButton

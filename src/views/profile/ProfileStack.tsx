@@ -9,7 +9,7 @@ import CreateNewAccount, {
 } from '../auth/CreateNewAccount';
 import RequestVerification from './settings/ReuqestVerification';
 import DeleteAccount from './settings/DeleteAccount';
-import Comment from '../doves/Comment';
+import Comment, {CommentScreenOptions} from '../doves/Comment';
 import UserSearch, {UserSearchScreenOptions} from './UserSearch';
 import Profile, {ProfileScreenOptions} from './Profile';
 import ProfilePostsDetails from './ProfilePostsDetails';
@@ -96,7 +96,7 @@ const ProfileStack = () => {
       <Stack.Screen
         name={Comment.name}
         component={Comment}
-        options={{presentation: 'formSheet'}}
+        options={CommentScreenOptions}
       />
       <Stack.Screen
         name={UserSearch.name}

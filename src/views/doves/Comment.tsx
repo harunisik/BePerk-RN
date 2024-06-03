@@ -10,6 +10,14 @@ import {
   deleteComment as userDeleteComment,
   postComment as userPostComment,
 } from '../../services/UserService';
+import View from '../../components/common/View';
+
+export const CommentScreenOptions = () => {
+  return {
+    presentation: 'formSheet',
+    headerStyle: {backgroundColor: 'lightgray'},
+  };
+};
 
 const Comment = () => {
   const route = useRoute();
@@ -37,47 +45,49 @@ const Comment = () => {
 
   return (
     <SafeAreaView style={flex1}>
-      <CommentList
-        data={data}
-        fullname={fullname}
-        username={username}
-        userId={userId}
-        caption={caption}
-        uploadTime={uploadTime}
-        isFetching={isFetching}
-        onRefresh={handleRefresh}
-        onPressReply={(message, commentId) => {
-          setSelectedComment(message);
-          setSelectedCommentId(commentId);
-        }}
-        onDeleteItem={({id}) =>
-          deleteComment.mutate(
-            {id, isMy24: 0},
-            {onSuccess: () => clearSelectedComment()},
-          )
-        }
-        isHeaderVisible={type === 3}
-      />
-
-      <MessageBox
-        initialText={selectedComment}
-        onPress={comment => {
-          if (comment) {
-            postComment.mutate(
-              {
-                comment,
-                id,
-                type,
-                ...(id !== selectedCommentId && {
-                  comment_id: selectedCommentId,
-                }),
-              },
+      <View style={flex1}>
+        <CommentList
+          data={data}
+          fullname={fullname}
+          username={username}
+          userId={userId}
+          caption={caption}
+          uploadTime={uploadTime}
+          isFetching={isFetching}
+          onRefresh={handleRefresh}
+          onPressReply={(message, commentId) => {
+            setSelectedComment(message);
+            setSelectedCommentId(commentId);
+          }}
+          onDeleteItem={({id}) =>
+            deleteComment.mutate(
+              {id, isMy24: 0},
               {onSuccess: () => clearSelectedComment()},
-            );
+            )
           }
-        }}
-        onClearText={clearSelectedComment}
-      />
+          isHeaderVisible={type === 3}
+        />
+
+        <MessageBox
+          initialText={selectedComment}
+          onPress={comment => {
+            if (comment) {
+              postComment.mutate(
+                {
+                  comment,
+                  id,
+                  type,
+                  ...(id !== selectedCommentId && {
+                    comment_id: selectedCommentId,
+                  }),
+                },
+                {onSuccess: () => clearSelectedComment()},
+              );
+            }
+          }}
+          onClearText={clearSelectedComment}
+        />
+      </View>
     </SafeAreaView>
   );
 };

@@ -1,6 +1,6 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Doves, {DovesScreenOptions} from './Doves';
-import Comment from './Comment';
+import Comment, {CommentScreenOptions} from './Comment';
 import UserSearch, {UserSearchScreenOptions} from '../profile/UserSearch';
 import PostDove, {PostDoveScreenOptions} from './PostDove';
 import Activity from './Activity';
@@ -28,7 +28,7 @@ const DovesStack = () => {
       <Stack.Screen
         name={Comment.name}
         component={Comment}
-        options={{presentation: 'formSheet'}}
+        options={CommentScreenOptions}
       />
       <Stack.Screen
         name={UserSearch.name}

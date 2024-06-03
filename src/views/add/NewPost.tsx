@@ -1,4 +1,4 @@
-import {TextInput, StyleSheet, Switch, ActivityIndicator} from 'react-native';
+import {Switch, ActivityIndicator} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import FastImage from 'react-native-fast-image';
 import {SegmentedButtons} from 'react-native-paper';
@@ -20,6 +20,7 @@ import {
   LocationIcon,
   TimerIcon,
 } from '../../components/common/Icons';
+import TextInput from '../../components/common/TextInput';
 
 const PostButton = ({onPress}) => {
   return (
@@ -164,7 +165,7 @@ const NewPost = () => {
   };
 
   return (
-    <View style={{padding: 10, rowGap: 15}}>
+    <View style={{padding: 10, rowGap: 15, flex: 1}}>
       {showIndicator && <ActivityIndicator />}
       <View style={{flexDirection: 'row', columnGap: 15, marginBottom: 15}}>
         {asset.mediaType === 'photo' ? (

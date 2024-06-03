@@ -19,7 +19,7 @@ import PostDetailItemView from './PostDetailsItemView';
 import AccountCard from '../../components/common/AccountCard';
 import Text from '../../components/common/Text';
 import View from '../../components/common/View';
-import {ArrowIcon} from '../../components/common/Icons';
+import {ArrowBackIcon, ArrowIcon} from '../../components/common/Icons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const {flex1, row, aiCenter, bold, cGap5, p10} = common;
@@ -33,7 +33,7 @@ export const MessageDetailsScreenOptions = ({navigation, route}) => {
     title: '',
     headerLeft: () => (
       <View style={[row, aiCenter]}>
-        <ArrowIcon onPress={() => navigation.goBack()} />
+        <ArrowBackIcon onPress={() => navigation.goBack()} />
         <View style={[flex1, row, aiCenter, cGap5]}>
           <MaterialCommunityIcons
             name={isMultiple ? 'account-multiple' : 'account-circle'}
@@ -314,7 +314,7 @@ const MessageDetails = () => {
   }, [chatId, isSending]);
 
   return (
-    <>
+    <View style={{flex: 1}}>
       <FlatList
         data={data}
         renderItem={({item}) => <MessageDetailsItem item={item} />}
@@ -322,7 +322,7 @@ const MessageDetails = () => {
         inverted={data?.length > 0}
       />
       <MessageBox2 onPressSend={handlePressSend} />
-    </>
+    </View>
   );
 };
 

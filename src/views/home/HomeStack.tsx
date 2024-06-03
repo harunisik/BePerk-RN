@@ -2,7 +2,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home, {HomeScreenOptions} from './Home';
 import Search from '../doves/Search';
 import Activity from '../doves/Activity';
-import Comment from '../doves/Comment';
+import Comment, {CommentScreenOptions} from '../doves/Comment';
 import UserSearch, {UserSearchScreenOptions} from '../profile/UserSearch';
 import Explore from './Explore';
 import ExplorePostsDetails from '../profile/ExplorePostsDetails';
@@ -10,6 +10,9 @@ import ProfileStack from '../profile/ProfileStack';
 import StoryView from '../profile/StoryView';
 import Messages, {MessagesScreenOptions} from '../profile/Messages';
 import {useColors} from '../../hooks/customHooks';
+import MessageDetails, {
+  MessageDetailsScreenOptions,
+} from '../profile/MessageDetails';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,7 +36,7 @@ const HomeStack = () => {
       <Stack.Screen
         name={Comment.name}
         component={Comment}
-        options={{presentation: 'formSheet'}}
+        options={CommentScreenOptions}
       />
       <Stack.Screen
         name={UserSearch.name}
@@ -64,6 +67,11 @@ const HomeStack = () => {
         name={Messages.name}
         component={Messages}
         options={MessagesScreenOptions}
+      />
+      <Stack.Screen
+        name={MessageDetails.name}
+        component={MessageDetails}
+        options={MessageDetailsScreenOptions}
       />
     </Stack.Navigator>
   );

@@ -6,8 +6,9 @@ import {
 import NewPost from './NewPost';
 import {useNavigation} from '@react-navigation/native';
 import {useRef} from 'react';
-import Text from '../../components/common/Text';
 import {CloseIcon} from '../../components/common/Icons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {Text} from 'react-native';
 
 export const GooglePlacesScreenOptions = ({navigation}) => {
   return {
