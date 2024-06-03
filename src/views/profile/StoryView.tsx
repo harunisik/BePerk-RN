@@ -88,7 +88,7 @@ const Header = ({item}) => {
           // labelColor="white"
           goBack
         />
-        <Text>{dateDiff(item.upload_time * 1000)}</Text>
+        {/* <Text>{dateDiff(item.upload_time * 1000)}</Text> */}
       </View>
       <CloseIcon onPress={() => navigation.goBack()} />
     </View>

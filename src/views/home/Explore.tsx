@@ -2,6 +2,7 @@ import {useGetUserExploring} from '../../hooks/infiniteQueryHooks';
 import PostItemList from '../../components/profile/PostItemList';
 import {useNavigation} from '@react-navigation/native';
 import ExplorePostsDetails from '../profile/ExplorePostsDetails';
+import View from '../../components/common/View';
 
 const Explore = () => {
   const navigation = useNavigation();
@@ -13,14 +14,16 @@ const Explore = () => {
   };
 
   return (
-    <PostItemList
-      data={data}
-      fetchNextPage={fetchNextPage}
-      isFetching={isFetching}
-      refetch={refetch}
-      remove={remove}
-      onPressItem={handlePressItem}
-    />
+    <View>
+      <PostItemList
+        data={data}
+        fetchNextPage={fetchNextPage}
+        isFetching={isFetching}
+        refetch={refetch}
+        remove={remove}
+        onPressItem={handlePressItem}
+      />
+    </View>
   );
 };
 

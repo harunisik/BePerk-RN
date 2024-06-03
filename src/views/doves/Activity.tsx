@@ -1,12 +1,19 @@
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import ActivityTab from './ActivityTab';
+import {useColors} from '../../hooks/customHooks';
 
 const Tab = createMaterialTopTabNavigator();
 
 const Activity = () => {
+  const {color, backgroundColor} = useColors();
+
   return (
     <Tab.Navigator
-      screenOptions={{lazy: true, tabBarLabelStyle: {textTransform: 'none'}}}>
+      screenOptions={{
+        lazy: true,
+        tabBarLabelStyle: {textTransform: 'none', fontWeight: 'bold', color},
+        tabBarStyle: {backgroundColor},
+      }}>
       <Tab.Screen
         name="Activity.All"
         component={ActivityTab}

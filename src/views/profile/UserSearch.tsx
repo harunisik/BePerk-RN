@@ -1,4 +1,4 @@
-import {TextInput, StyleSheet, ActivityIndicator} from 'react-native';
+import {ActivityIndicator} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {useEffect, useState} from 'react';
 import UserItem from '../../components/profile/UserItem';
@@ -16,8 +16,10 @@ import MessageDetails from './MessageDetails';
 import Text from '../../components/common/Text';
 import View from '../../components/common/View';
 import {CloseIcon} from '../../components/common/Icons';
+import {useColors} from '../../hooks/customHooks';
+import TextInput from '../../components/common/TextInput';
 
-const {bold, pl15, pr15, pb10, pt10} = common;
+const {bold, pl15, pr15, pb20, rGap20, pv10} = common;
 
 export const NewStoryHeaderRight = ({formData, selectedUsers, onPress}) => {
   const navigation = useNavigation();
@@ -171,6 +173,7 @@ const UserSearch = () => {
   const [searchResult, setSearchResult] = useState([]);
   const [selectedUsers, setSelectedUsers] = useState([]);
 
+  const {theme} = useColors();
   const navigation = useNavigation();
   const route = useRoute();
   const {
@@ -224,16 +227,23 @@ const UserSearch = () => {
   );
 
   return (
-    <View style={[pl15, pr15]}>
+    <View style={[pv10, {paddingHorizontal: 15, rowGap: 15, flex: 1}]}>
       {showIndicator && <ActivityIndicator />}
       <TextInput
         placeholder="Search"
         onChangeText={setSearchText}
         value={searchText}
-        style={styles.textInput}
+        style={{
+          backgroundColor:
+            theme === 'dark'
+              ? 'rgba(255, 255, 255, 0.1)'
+              : 'rgba(211, 211, 211, 0.5)',
+          borderRadius: 20,
+          padding: 15,
+        }}
       />
 
-      <SelectedUsers data={selectedUsers} />
+      {selectedUsers?.length > 0 && <SelectedUsers data={selectedUsers} />}
 
       {searchText ? (
         <FlatList
@@ -262,23 +272,11 @@ const UserSearch = () => {
           keyExtractor={item => item.user_id}
           onRefresh={refetch}
           refreshing={isFetching}
-          ListHeaderComponent={
-            <Text style={[bold, pb10, pt10]}>Suggested</Text>
-          }
+          ListHeaderComponent={<Text style={[bold, pb20]}>Suggested</Text>}
         />
       )}
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  textInput: {
-    height: 40,
-    marginTop: 12,
-    marginBottom: 12,
-    borderWidth: 1,
-    padding: 10,
-  },
-});
 
 export default UserSearch;

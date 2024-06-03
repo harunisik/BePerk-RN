@@ -45,14 +45,16 @@ const Featured = () => {
   };
 
   return (
-    <PostItemList
-      data={data}
-      fetchNextPage={fetchNextPage}
-      isFetching={isFetching}
-      refetch={refetch}
-      remove={remove}
-      onPressItem={handlePressItem}
-    />
+    <View style={{flex: 1}}>
+      <PostItemList
+        data={data}
+        fetchNextPage={fetchNextPage}
+        isFetching={isFetching}
+        refetch={refetch}
+        remove={remove}
+        onPressItem={handlePressItem}
+      />
+    </View>
   );
 };
 

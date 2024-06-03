@@ -1,49 +1,47 @@
-import {TouchableOpacity, StyleSheet} from 'react-native';
+import {Pressable, ViewStyle} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import common from '../../../styles/sharedStyles';
-import {ReactElement} from 'react';
+import {ReactElement, isValidElement} from 'react';
 import Text from '../Text';
+import {useColors} from '../../../hooks/customHooks';
+
+const {aiCenter, cGap15, row, p10} = common;
 
 interface ButtonProps {
   title: string;
-  icon?: string;
-  iconColor?: string;
-  onPress: () => void;
-  iconComponent?: ReactElement;
+  icon?: string | ReactElement;
+  onPress?: () => void;
+  style?: ViewStyle;
 }
 
-const Button = ({
-  title,
-  icon,
-  iconColor = 'dodgerblue',
-  onPress = () => {},
-  iconComponent,
-}: ButtonProps) => {
-  const {aiCenter, cGap15, row} = common;
+const Button = ({title, icon, onPress = () => {}, style}: ButtonProps) => {
+  const {color2: color, backgroundColor2: backgroundColor} = useColors();
 
   return (
-    <TouchableOpacity
-      style={[styles.button, aiCenter, row, cGap15]}
+    <Pressable
+      style={[
+        row,
+        aiCenter,
+        cGap15,
+        p10,
+        {
+          backgroundColor: backgroundColor,
+          borderRadius: 20,
+          justifyContent: 'center',
+        },
+        style,
+      ]}
       onPress={onPress}>
-      {iconComponent ? (
-        iconComponent
-      ) : icon ? (
-        <MaterialCommunityIcons name={icon} size={26} color={iconColor} />
+      {isValidElement(icon) ? (
+        icon
+      ) : typeof icon === 'string' ? (
+        <MaterialCommunityIcons name={icon} size={26} color={color} />
       ) : (
         ''
       )}
-      <Text>{title}</Text>
-    </TouchableOpacity>
+      <Text style={{color}}>{title}</Text>
+    </Pressable>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    backgroundColor: '#DDDDDD',
-    padding: 10,
-    // paddingLeft: 70,
-    margin: 10,
-  },
-});
 
 export default Button;

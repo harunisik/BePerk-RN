@@ -1,4 +1,4 @@
-import {TextInput, TouchableOpacity} from 'react-native';
+import {TouchableOpacity} from 'react-native';
 import common from '../../../styles/sharedStyles';
 import {useNavigation} from '@react-navigation/native';
 import {useState} from 'react';
@@ -9,6 +9,7 @@ import Text from '../../../components/common/Text';
 import View from '../../../components/common/View';
 import HR from '../../../components/common/HR';
 import {SettingsListItem1} from './Settings';
+import TextInput from '../../../components/common/TextInput';
 
 const {gray, aiCenter, rGap30} = common;
 
@@ -72,28 +73,28 @@ const ChangePassword = () => {
   };
 
   return (
-    <View style={[aiCenter, rGap30, {paddingVertical: 40}]}>
-      <View style={{width: '75%'}}>
+    <View style={[aiCenter, rGap30, {paddingVertical: 30, flex: 1}]}>
+      <View style={{width: '75%', rowGap: 10}}>
         <Text style={gray}>Old password</Text>
         <TextInput
           placeholder="Tap to enter old password"
           onChangeText={setOldPassword}
           value={oldPassword}
-          style={[styles.textInput, styles.line]}
           secureTextEntry
         />
+        <HR />
       </View>
-      <View style={{width: '75%'}}>
+      <View style={{width: '75%', rowGap: 10}}>
         <Text style={gray}>New password</Text>
         <TextInput
           placeholder="Tap to enter new password"
           onChangeText={setNewPassword}
           value={newPassword}
-          style={[styles.textInput, styles.line]}
           secureTextEntry
         />
+        <HR />
       </View>
-      <View style={{width: '75%'}}>
+      <View style={{width: '75%', rowGap: 10}}>
         <Text style={gray}>Confirm new password</Text>
         <TextInput
           placeholder="Tap to enter confirm password"

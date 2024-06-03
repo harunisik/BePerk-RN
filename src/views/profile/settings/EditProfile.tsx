@@ -1,4 +1,4 @@
-import {TextInput, Switch, ActivityIndicator} from 'react-native';
+import {Switch, ActivityIndicator} from 'react-native';
 import common from '../../../styles/sharedStyles';
 import {useNavigation} from '@react-navigation/native';
 import {useMutation, useQuery} from '../../../hooks/reactQueryHooks';
@@ -20,6 +20,8 @@ import Text from '../../../components/common/Text';
 import View from '../../../components/common/View';
 import HR from '../../../components/common/HR';
 import {SettingsListItem1} from './Settings';
+import TextInput from '../../../components/common/TextInput';
+import {useColors} from '../../../hooks/customHooks';
 
 const {row, flex1, flex3, aiCenter, jcSpaceBetween, p15, gray, mb15, cGap10} =
   common;
@@ -164,9 +166,11 @@ const EditProfile = () => {
     asset,
   ]);
 
+  const {theme, backgroundColor} = useColors();
+
   return (
     <>
-      <View style={p15}>
+      <View style={[p15, {flex: 1}]}>
         {showIndicator && <ActivityIndicator />}
         <View style={[aiCenter, mb15]}>
           <AccountCard
@@ -187,41 +191,41 @@ const EditProfile = () => {
             placeholder="Tap to enter name"
             onChangeText={setFullname}
             value={fullname}
-            style={[flex3]}
+            style={[flex3, {padding: 15}]}
           />
-          <HR />
         </View>
+        <HR />
         <View style={[row, aiCenter]}>
           <Text style={[gray, flex1]}>Username</Text>
           <TextInput
             placeholder="Tap to enter username"
             onChangeText={setUsername}
             value={username}
-            style={[, flex3]}
+            style={[flex3, {padding: 15}]}
           />
-          <HR />
         </View>
+        <HR />
         <View style={[row, aiCenter]}>
           <Text style={[gray, flex1]}>Bio</Text>
           <TextInput
             placeholder="Tap to enter bio"
             onChangeText={setComment}
             value={comment}
-            style={[flex3]}
+            style={[flex3, {padding: 15}]}
             multiline
           />
-          <HR />
         </View>
-        <View style={[row, aiCenter, {marginBottom: 40}]}>
+        <HR />
+        <View style={[row, aiCenter]}>
           <Text style={[gray, flex1]}>Website</Text>
           <TextInput
             placeholder="Tap to enter website"
             onChangeText={setWebSite}
             value={webSite}
-            style={[, flex3]}
+            style={[flex3, {padding: 15}]}
           />
-          <HR />
         </View>
+        <HR style={[{marginBottom: 40}]} />
         <View style={[row, jcSpaceBetween, aiCenter, mb15]}>
           <Text>Hide followers</Text>
           <View style={[row, aiCenter, cGap10]}>
@@ -241,21 +245,18 @@ const EditProfile = () => {
           <Switch onValueChange={setPrivateAccount} value={privateAccount} />
         </View>
       </View>
-      <BottomModal visible={modalVisible}>
+      <BottomModal
+        visible={modalVisible}
+        onDismiss={() => setModalVisible(false)}>
         <Button
           title="Photo Library"
           onPress={() => handlePressMedia(PERMISSIONS.IOS.PHOTO_LIBRARY)}
-          iconComponent={
-            <AntDesign name="picture" size={26} color="dodgerblue" />
-          }
+          icon={<AntDesign name="picture" size={26} color="white" />}
         />
-
         <Button
           title="Camera"
           onPress={() => handlePressMedia(PERMISSIONS.IOS.CAMERA)}
-          iconComponent={
-            <AntDesign name="camera" size={26} color="dodgerblue" />
-          }
+          icon={<AntDesign name="camera" size={26} color="white" />}
         />
       </BottomModal>
     </>

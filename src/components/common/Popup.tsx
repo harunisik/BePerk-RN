@@ -1,9 +1,10 @@
-import {Pressable} from 'react-native';
+import {View as RNView, Pressable} from 'react-native';
 import common from '../../styles/sharedStyles';
 import Modal from './Modal';
 import Text from './Text';
 import View from './View';
 import HR from './HR';
+import {useColors} from '../../hooks/customHooks';
 
 const {bold} = common;
 
@@ -16,26 +17,30 @@ const Popup = ({
   okButtonText = 'Ok',
   cancelButtonText = 'Cancel',
 }) => {
+  const {theme, backgroundColor} = useColors();
+
   return (
     <Modal visible={visible} dismissable={false} animationType="fade">
       <View
         style={{
           flex: 1,
           justifyContent: 'center',
-          backgroundColor: 'rgba(0, 0, 0, 0.4)',
+          backgroundColor: 'rgba(0, 0, 0, 0.6)',
         }}>
         <View
           style={{
             borderRadius: 20,
             marginHorizontal: 40,
             shadowOpacity: 0.25,
+            backgroundColor:
+              theme === 'dark' ? 'rgb(40, 40, 40)' : backgroundColor,
           }}>
-          <View style={{alignItems: 'center', padding: 20, rowGap: 5}}>
+          <RNView style={{alignItems: 'center', padding: 20, rowGap: 5}}>
             <Text style={[bold]}>{header}</Text>
             <Text>{message}</Text>
-          </View>
+          </RNView>
           <HR />
-          <View style={{width: '100%'}}>
+          <RNView style={{width: '100%'}}>
             <Pressable
               style={{
                 paddingVertical: 15,
@@ -53,7 +58,7 @@ const Popup = ({
               onPress={onPressCancel}>
               <Text style={{color: 'dodgerblue'}}>{cancelButtonText}</Text>
             </Pressable>
-          </View>
+          </RNView>
         </View>
       </View>
     </Modal>

@@ -1,25 +1,29 @@
-import {ScrollView} from 'react-native';
 import common from '../../styles/sharedStyles';
 import Text from '../common/Text';
 import View from '../common/View';
 
-const SelectedUsers = ({data}) => {
-  const {p10, radius6, row, cGap5} = common;
+const {ph10, pv5, radius6, row, cGap5, jcCenter} = common;
 
+const SelectedUsers = ({data}) => {
   return (
-    <ScrollView>
-      <View style={[row, cGap5]}>
-        {data?.map(item => {
-          return (
-            <View
-              key={item.user_id}
-              style={[radius6, p10, {backgroundColor: 'dodgerblue'}]}>
-              <Text>{item.fullname}</Text>
-            </View>
-          );
-        })}
-      </View>
-    </ScrollView>
+    <View
+      style={[row, cGap5, {flexWrap: 'wrap', rowGap: 10, paddingVertical: 10}]}>
+      {data?.map(item => {
+        return (
+          <View
+            key={item.user_id}
+            style={[
+              jcCenter,
+              radius6,
+              ph10,
+              pv5,
+              {backgroundColor: 'dodgerblue'},
+            ]}>
+            <Text>{item.fullname}</Text>
+          </View>
+        );
+      })}
+    </View>
   );
 };
 

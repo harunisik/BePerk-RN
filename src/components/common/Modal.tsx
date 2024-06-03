@@ -6,7 +6,7 @@ const {flex1} = common;
 
 const Modal = ({
   visible,
-  onDismiss = undefined,
+  onDismiss,
   children,
   dismissable = true,
   animationType = 'slide',

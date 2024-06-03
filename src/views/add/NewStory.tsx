@@ -89,8 +89,12 @@ const NewStory = () => {
 
     postMy24.mutate(form, {
       onSuccess: () => {
-        navigation.goBack();
         showMessage({message: 'New post sent'});
+        navigation.goBack();
+      },
+      onError: error => {
+        showMessage({message: error.message});
+        navigation.goBack();
       },
     });
   };

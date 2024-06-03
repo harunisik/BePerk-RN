@@ -2,6 +2,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import {IconProps as IconPropsRN} from 'react-native-vector-icons/Icon';
 import {useColors} from '../../hooks/customHooks';
 
@@ -214,6 +215,19 @@ export const BirdIcon = ({size = 26, color, ...rest}: IconProps) => {
   );
 };
 
+export const CopyIcon = ({size = 26, color, ...rest}: IconProps) => {
+  const {color: themeColor} = useColors();
+
+  return (
+    <MaterialCommunityIcons
+      name="content-copy"
+      size={size}
+      color={color ?? themeColor}
+      {...rest}
+    />
+  );
+};
+
 // AntDesign
 
 export const PictureIcon = ({size = 26, color, ...rest}: IconProps) => {
@@ -307,6 +321,19 @@ export const LocationIcon = ({size = 26, color, ...rest}: IconProps) => {
   );
 };
 
+export const ArrowBackIcon = ({size = 26, color, ...rest}: IconProps) => {
+  const {color: themeColor} = useColors();
+
+  return (
+    <MaterialIcons
+      name="arrow-back-ios"
+      size={size}
+      color={color ?? themeColor}
+      {...rest}
+    />
+  );
+};
+
 export const SearchIcon = ({size = 26, color, ...rest}: IconProps) => {
   const {color: themeColor} = useColors();
 
@@ -327,5 +354,28 @@ export const TimerIcon = ({size = 26, color, ...rest}: IconProps) => {
 
   return (
     <Ionicons name="timer" size={size} color={color ?? themeColor} {...rest} />
+  );
+};
+
+export const EarthIcon = ({size = 26, color, ...rest}: IconProps) => {
+  const {color: themeColor} = useColors();
+
+  return (
+    <Ionicons name="earth" size={size} color={color ?? themeColor} {...rest} />
+  );
+};
+
+// FontAwesome6
+
+export const EnvelopeIcon = ({size = 26, color, ...rest}: IconProps) => {
+  const {color: themeColor} = useColors();
+
+  return (
+    <FontAwesome6
+      name="envelope"
+      size={size}
+      color={color ?? themeColor}
+      {...rest}
+    />
   );
 };

@@ -1,38 +1,30 @@
-import {StyleSheet, TouchableOpacity, Alert} from 'react-native';
+import {StyleSheet, Alert} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import common from '../../styles/sharedStyles';
 import {showMessage} from 'react-native-flash-message';
 import Clipboard from '@react-native-clipboard/clipboard';
 import UserSearch, {ChatShareHeaderRight} from '../../views/profile/UserSearch';
 import {useNavigation} from '@react-navigation/native';
 import BottomModal from '../common/BottomModal';
-import Text from '../common/Text';
-import {ShareIcon} from '../common/Icons';
-
-const {aiCenter, cGap15, row} = common;
+import {CopyIcon, ShareIcon} from '../common/Icons';
+import Button from '../common/buttons/Button';
 
 const UserProfileModal = ({userId, visible, onDismiss}) => {
   const navigation = useNavigation();
 
   return (
     <BottomModal visible={visible} onDismiss={onDismiss}>
-      <TouchableOpacity
-        style={[styles.button, aiCenter, row, cGap15]}
+      <Button
+        title="Copy Link"
         onPress={() => {
           onDismiss();
           showMessage({message: 'Link copied'});
           Clipboard.setString(`beperk://profile?id=${userId}`);
-        }}>
-        <MaterialCommunityIcons
-          name="content-copy"
-          size={26}
-          color="dodgerblue"
-        />
-        <Text>Copy Link</Text>
-      </TouchableOpacity>
+        }}
+        icon={<CopyIcon />}
+      />
 
-      <TouchableOpacity
-        style={[styles.button, aiCenter, row, cGap15]}
+      <Button
+        title="Share This Profile"
         onPress={() => {
           onDismiss();
           navigation.navigate(UserSearch.name, {
@@ -40,24 +32,23 @@ const UserProfileModal = ({userId, visible, onDismiss}) => {
             headerRightComp: ChatShareHeaderRight.name,
             headerRightProps: {itemId: userId, type: 6},
           });
-        }}>
-        <ShareIcon />
-        <Text>Share This Profile</Text>
-      </TouchableOpacity>
+        }}
+        icon={<ShareIcon />}
+      />
 
-      <TouchableOpacity
-        style={[styles.button, aiCenter, row, cGap15]}
-        onPress={() => Alert.alert('under construction')}>
-        <MaterialIcons name="report-gmailerrorred" size={26} color="red" />
-        <Text>Report</Text>
-      </TouchableOpacity>
+      <Button
+        title="Report"
+        onPress={() => Alert.alert('under construction')}
+        icon={
+          <MaterialIcons name="report-gmailerrorred" size={26} color="red" />
+        }
+      />
 
-      <TouchableOpacity
-        style={[styles.button, aiCenter, row, cGap15]}
-        onPress={() => Alert.alert('under construction')}>
-        <MaterialIcons name="block" size={26} color="red" />
-        <Text>Block</Text>
-      </TouchableOpacity>
+      <Button
+        title="Block"
+        onPress={() => Alert.alert('under construction')}
+        icon={<MaterialIcons name="block" size={26} color="red" />}
+      />
     </BottomModal>
   );
 };

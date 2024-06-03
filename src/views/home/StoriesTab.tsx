@@ -12,7 +12,7 @@ import View from '../../components/common/View';
 
 const COL_NUM = 4;
 
-const {p5, aiCenter} = common;
+const {flex1, p5, aiCenter} = common;
 
 const transformMy24List = (data, func) => {
   if (!data) return null;
@@ -74,21 +74,23 @@ const StoriesTab = () => {
   };
 
   return (
-    <FlatList
-      data={result}
-      renderItem={({item}) => (
-        <StoriesItem
-          item={item}
-          onPress={() => handlePressItem(item)}
-          isMyStory={item.user_id === userId}
-        />
-      )}
-      keyExtractor={item => item.user_id}
-      onRefresh={refetch}
-      refreshing={isFetching}
-      numColumns={COL_NUM}
-      contentContainerStyle={p5}
-    />
+    <View style={flex1}>
+      <FlatList
+        data={result}
+        renderItem={({item}) => (
+          <StoriesItem
+            item={item}
+            onPress={() => handlePressItem(item)}
+            isMyStory={item.user_id === userId}
+          />
+        )}
+        keyExtractor={item => item.user_id}
+        onRefresh={refetch}
+        refreshing={isFetching}
+        numColumns={COL_NUM}
+        contentContainerStyle={p5}
+      />
+    </View>
   );
 };
 

@@ -1,6 +1,5 @@
 import {
-  TextInput,
-  StyleSheet,
+  View as RNView,
   TouchableOpacity,
   SafeAreaView,
   Image,
@@ -18,6 +17,9 @@ import Text from '../../components/common/Text';
 import View from '../../components/common/View';
 import HR from '../../components/common/HR';
 import {CloseIcon} from '../../components/common/Icons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import TextInput from '../../components/common/TextInput';
+import {useColors} from '../../hooks/customHooks';
 
 const {row, flex1, aiCenter, rGap30} = common;
 
@@ -34,7 +36,7 @@ export const ForgotPasswordScreenOptions = ({navigation}) => {
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const navigation = useNavigation();
-
+  const {backgroundColor} = useColors();
   const recoverUserApi = useMutation(recoverUser);
 
   const handlePressResetPassword = () => {
@@ -62,18 +64,20 @@ const ForgotPassword = () => {
 
   return (
     <>
-      <LinearGradient colors={['dodgerblue', 'white']} style={{height: '30%'}}>
+      <LinearGradient
+        colors={['dodgerblue', backgroundColor]}
+        style={{height: '30%'}}>
         <SafeAreaView>
-          <View style={[aiCenter, {paddingTop: 40}]}>
+          <RNView style={[aiCenter, {paddingTop: 40}]}>
             <Image
               style={{width: 80, height: 80}}
               source={require('../../assets/beperk_logo.png')}
             />
-          </View>
+          </RNView>
         </SafeAreaView>
       </LinearGradient>
       <View style={[flex1, aiCenter, rGap30]}>
-        <View style={{width: '75%'}}>
+        <View style={{width: '75%', rowGap: 10}}>
           <Text>E-mail</Text>
           <TextInput
             placeholder="Tap to enter e-mail"
@@ -97,9 +101,13 @@ const ForgotPassword = () => {
         </TouchableOpacity>
         <Text>Or</Text>
         <View style={row}>
-          <MaterialCommunityIcons name="apple" size={50} />
-          <MaterialCommunityIcons name="facebook" size={50} />
-          <MaterialCommunityIcons name="twitter" size={50} />
+          <MaterialCommunityIcons name="apple" size={50} color="dodgerblue" />
+          <MaterialCommunityIcons
+            name="facebook"
+            size={50}
+            color="dodgerblue"
+          />
+          <MaterialCommunityIcons name="twitter" size={50} color="dodgerblue" />
         </View>
         <Text>
           Do not have account?{' '}

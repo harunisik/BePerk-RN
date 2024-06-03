@@ -25,6 +25,8 @@ import {useQuery} from '../../../hooks/reactQueryHooks';
 import {getUserSettings} from '../../../services/UserService';
 import Text from '../../../components/common/Text';
 import {ArrowIcon} from '../../../components/common/Icons';
+import {useColors} from '../../../hooks/customHooks';
+import View from '../../../components/common/View';
 
 const {gray, p15, row, jcSpaceBetween, aiCenter} = common;
 
@@ -87,16 +89,18 @@ const Settings = () => {
   );
 
   return (
-    <SectionList
-      sections={SECTIONS}
-      renderItem={({item: {Comp}}) => <Comp settings={data} />}
-      renderSectionHeader={({section: {title}}) => (
-        <Text style={gray}>{title}</Text>
-      )}
-      ItemSeparatorComponent={ItemSeparatorComponent}
-      SectionSeparatorComponent={SectionSeparatorComponent}
-      contentContainerStyle={p15}
-    />
+    <View>
+      <SectionList
+        sections={SECTIONS}
+        renderItem={({item: {Comp}}) => <Comp settings={data} />}
+        renderSectionHeader={({section: {title}}) => (
+          <Text style={gray}>{title}</Text>
+        )}
+        ItemSeparatorComponent={ItemSeparatorComponent}
+        SectionSeparatorComponent={SectionSeparatorComponent}
+        contentContainerStyle={[p15]}
+      />
+    </View>
   );
 };
 

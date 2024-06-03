@@ -1,6 +1,5 @@
 import {
-  TextInput,
-  StyleSheet,
+  View as RNView,
   TouchableOpacity,
   SafeAreaView,
   Image,
@@ -15,14 +14,18 @@ import CreateNewAccount from './CreateNewAccount';
 import {useSignIn} from '../../hooks/queryClientHooks';
 import ForgotPassword from './ForgotPassword';
 import Text from '../../components/common/Text';
-import View from '../../components/common/View';
 import HR from '../../components/common/HR';
+import TextInput from '../../components/common/TextInput';
+import View from '../../components/common/View';
+import {useColors} from '../../hooks/customHooks';
 
-const {row, flex1, aiCenter, rGap30} = common;
+const {row, gray, flex1, aiCenter, rGap30} = common;
 
 const Signin = () => {
   const [username, setUsername] = useState('harun-local');
   const [password, setPassword] = useState('123');
+
+  const {backgroundColor} = useColors();
 
   const navigation = useNavigation();
   const signIn = useSignIn({username, password});
@@ -49,20 +52,21 @@ const Signin = () => {
 
   return (
     <>
-      <LinearGradient colors={['dodgerblue', 'white']} style={{height: '30%'}}>
+      <LinearGradient
+        colors={['dodgerblue', backgroundColor]}
+        style={{height: '30%'}}>
         <SafeAreaView>
-          <View style={[aiCenter, {paddingTop: 40}]}>
+          <RNView style={[aiCenter, {paddingTop: 40}]}>
             <Image
               style={{width: 80, height: 80}}
               source={require('../../assets/beperk_logo.png')}
             />
-            <Text>{process.env.API_URL}</Text>
-          </View>
+          </RNView>
         </SafeAreaView>
       </LinearGradient>
       <View style={[flex1, aiCenter, rGap30]}>
-        <View style={{width: '75%'}}>
-          <Text>Username</Text>
+        <View style={{width: '75%', rowGap: 10}}>
+          <Text style={gray}>Username</Text>
           <TextInput
             placeholder="Tap to enter username"
             onChangeText={setUsername}
@@ -70,8 +74,8 @@ const Signin = () => {
           />
           <HR />
         </View>
-        <View style={{width: '75%'}}>
-          <Text>Password</Text>
+        <View style={{width: '75%', rowGap: 10}}>
+          <Text style={gray}>Password</Text>
           <TextInput
             placeholder="Tap to enter password"
             onChangeText={setPassword}
@@ -95,9 +99,13 @@ const Signin = () => {
         </TouchableOpacity>
         <Text>Or</Text>
         <View style={row}>
-          <MaterialCommunityIcons name="apple" size={50} />
-          <MaterialCommunityIcons name="facebook" size={50} />
-          <MaterialCommunityIcons name="twitter" size={50} />
+          <MaterialCommunityIcons name="apple" size={50} color="dodgerblue" />
+          <MaterialCommunityIcons
+            name="facebook"
+            size={50}
+            color="dodgerblue"
+          />
+          <MaterialCommunityIcons name="twitter" size={50} color="dodgerblue" />
         </View>
         <Text>
           Do not have account?{' '}

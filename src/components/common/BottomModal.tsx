@@ -1,20 +1,36 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import {SafeAreaView, StyleSheet} from 'react-native';
 import Modal from './Modal';
+import {useColors} from '../../hooks/customHooks';
 import View from './View';
 
-const BottomModal = ({visible, onDismiss = undefined, children}) => {
+const BottomModal = ({visible, onDismiss, children}) => {
+  const {theme, backgroundColor} = useColors();
+  const _backgroundColor =
+    theme === 'dark' ? 'rgb(30, 30, 30)' : backgroundColor;
+
   return (
     <Modal animationType="slide" visible={visible} onDismiss={onDismiss}>
-      <View style={styles.modalView}>{children}</View>
+      <SafeAreaView
+        style={[styles.modalView, {backgroundColor: _backgroundColor}]}>
+        <View
+          style={[
+            {
+              rowGap: 20,
+              paddingTop: 20,
+              paddingHorizontal: 40,
+              backgroundColor: _backgroundColor,
+            },
+          ]}>
+          {children}
+        </View>
+      </SafeAreaView>
     </Modal>
   );
 };
 
 const styles = StyleSheet.create({
   modalView: {
-    paddingVertical: 20,
-    paddingHorizontal: 10,
     marginTop: 'auto',
     borderRadius: 20,
     shadowColor: '#000',

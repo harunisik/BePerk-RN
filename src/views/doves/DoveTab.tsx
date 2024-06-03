@@ -1,5 +1,4 @@
-import {StyleSheet, Pressable} from 'react-native';
-import common from '../../styles/sharedStyles';
+import {StyleSheet} from 'react-native';
 import DovesItem from '../../components/doves/DovesItem';
 import PostDove from './PostDove';
 import ItemSeperator from '../../components/common/ItemSpearator';
@@ -7,33 +6,32 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import {useCallback} from 'react';
 import {useGetUserExploring} from '../../hooks/infiniteQueryHooks';
 import InfiniteFlatList from '../../components/common/InfiniteFlatList';
-import Text from '../../components/common/Text';
 import View from '../../components/common/View';
 import HR from '../../components/common/HR';
 import {FileIcon} from '../../components/common/Icons';
+import Button from '../../components/common/buttons/Button';
 
 const ListHeaderComponent = () => {
   const navigation = useNavigation();
   const route = useRoute();
-  const {row, jcCenter, aiCenter, cGap10} = common;
   const {
     params: {subtype, buttonText, inputTextPlaceHolder, title},
   } = route;
 
   return (
-    <View style={{padding: 10}}>
-      <Pressable
-        style={[styles.button, aiCenter, jcCenter, row, cGap10]}
+    <View style={{rowGap: 20, paddingVertical: 20}}>
+      <Button
+        title={buttonText}
         onPress={() =>
           navigation.navigate(PostDove.name, {
             subtype,
             inputTextPlaceHolder,
             title,
           })
-        }>
-        <FileIcon />
-        <Text>{buttonText}</Text>
-      </Pressable>
+        }
+        icon={<FileIcon size={22} />}
+        style={{alignSelf: 'center'}}
+      />
       <HR />
     </View>
   );
@@ -54,16 +52,18 @@ const DoveTab = () => {
   );
 
   return (
-    <InfiniteFlatList
-      data={data}
-      renderItem={({item}) => <DovesItem item={item} />}
-      fetchNextPage={fetchNextPage}
-      isFetching={isFetching}
-      refetch={refetch}
-      remove={remove}
-      ListHeaderComponent={ListHeaderComponent}
-      ItemSeparatorComponent={ItemSeparatorComponent}
-    />
+    <View style={{flex: 1}}>
+      <InfiniteFlatList
+        data={data}
+        renderItem={({item}) => <DovesItem item={item} />}
+        fetchNextPage={fetchNextPage}
+        isFetching={isFetching}
+        refetch={refetch}
+        remove={remove}
+        ListHeaderComponent={ListHeaderComponent}
+        ItemSeparatorComponent={ItemSeparatorComponent}
+      />
+    </View>
   );
 };
 

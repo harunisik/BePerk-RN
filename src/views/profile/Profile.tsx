@@ -27,6 +27,7 @@ import MessageDetails from './MessageDetails';
 import Text from '../../components/common/Text';
 import View from '../../components/common/View';
 import {
+  ArrowBackIcon,
   BirdIcon,
   BookmarkIcon,
   CogIcon,
@@ -36,8 +37,9 @@ import {
   VideoIcon,
 } from '../../components/common/Icons';
 import {useColors} from '../../hooks/customHooks';
+import Button from '../../components/common/buttons/Button';
 
-const {bold, aiCenter, row, jcSpaceAround, cGap15, jcCenter} = common;
+const {bold, aiCenter, row, jcSpaceAround, cGap10, cGap15, jcCenter} = common;
 
 const HeaderRight = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -73,7 +75,10 @@ const HeaderRight = () => {
       {isAuthUser ? (
         <View style={[aiCenter, row, jcSpaceAround, cGap15]}>
           <ShareVariantIcon onPress={onShare} />
-          <BookmarkIcon onPress={() => Alert.alert('Under construction')} />
+          <BookmarkIcon
+            isOutlined
+            onPress={() => Alert.alert('Under construction')}
+          />
           <CogIcon onPress={() => navigation.navigate(Settings.name)} />
         </View>
       ) : (
@@ -100,12 +105,7 @@ export const ProfileScreenOptions = ({route, navigation}) => {
     headerLeft: () => (
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
         {headerBackVisible && (
-          <MaterialIcons
-            name="arrow-back-ios"
-            color="dodgerblue"
-            size={26}
-            onPress={() => navigation.goBack()}
-          />
+          <ArrowBackIcon onPress={() => navigation.goBack()} />
         )}
         <Text style={[bold]}>{username}</Text>
       </View>
@@ -123,22 +123,22 @@ const ButtonGroup = ({
   const navigation = useNavigation();
 
   return (
-    <View style={[aiCenter, row, jcCenter]}>
+    <View style={[aiCenter, row, jcCenter, cGap10]}>
       {isAuthUser ? (
-        <TouchableOpacity
-          style={[styles.button, aiCenter, row]}
-          onPress={() => navigation.navigate(EditProfile.name)}>
-          <Text>Edit Profile</Text>
-        </TouchableOpacity>
+        <Button
+          title="Edit Profile"
+          onPress={() => navigation.navigate(EditProfile.name)}
+          style={{paddingHorizontal: 45, paddingVertical: 7}}
+        />
       ) : (
-        <TouchableOpacity
-          style={[styles.button, aiCenter, row]}
-          onPress={onPressFollowing}>
-          <Text>{pressButtonTitle}</Text>
-        </TouchableOpacity>
+        <Button
+          title={pressButtonTitle}
+          onPress={onPressFollowing}
+          style={{paddingHorizontal: 45, paddingVertical: 7}}
+        />
       )}
-      <TouchableOpacity
-        style={[styles.button, aiCenter, row]}
+      <Button
+        title="Messages"
         onPress={() => {
           isAuthUser
             ? navigation.navigate(Messages.name)
@@ -147,9 +147,9 @@ const ButtonGroup = ({
                 isMultiple: false,
                 userId,
               });
-        }}>
-        <Text>Messages</Text>
-      </TouchableOpacity>
+        }}
+        style={{paddingHorizontal: 45, paddingVertical: 7}}
+      />
     </View>
   );
 };
@@ -199,7 +199,7 @@ const Profile = () => {
       <Tabs.Container
         lazy
         renderHeader={() => (
-          <View style={{rowGap: 10}}>
+          <View style={{rowGap: 20, marginBottom: 15}}>
             <UserInfo data={data} isAuthUser={isAuthUser} userId={userId} />
             <ButtonGroup
               onPressFollowing={handlePressFollowing}

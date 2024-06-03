@@ -47,6 +47,9 @@ const common = StyleSheet.create({
   rGap15: {
     rowGap: 15,
   },
+  rGap20: {
+    rowGap: 20,
+  },
   rGap30: {
     rowGap: 30,
   },
@@ -115,6 +118,9 @@ const common = StyleSheet.create({
   },
   pb15: {
     paddingBottom: 15,
+  },
+  pb20: {
+    paddingBottom: 20,
   },
   pt10: {
     paddingTop: 10,

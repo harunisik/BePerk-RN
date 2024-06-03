@@ -3,7 +3,6 @@ import Button from '../../components/common/buttons/Button';
 import PostDove from '../doves/PostDove';
 import {useNavigation} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import AddStack from './AddStack';
 import NewStory from './NewStory';
@@ -14,6 +13,7 @@ import {
   launchImageLibrary,
   launchMediaLibrary,
 } from '../../utils/MediaUtil';
+import {PictureIcon} from '../../components/common/Icons';
 
 export const ImageVideoSelectionModal = ({visible, onDismiss, navigateTo}) => {
   const navigation = useNavigation();
@@ -69,15 +69,13 @@ export const ImageVideoSelectionModal = ({visible, onDismiss, navigateTo}) => {
       <Button
         title="Photo Library"
         onPress={handlePressImage}
-        iconComponent={
-          <AntDesign name="picture" size={26} color="dodgerblue" />
-        }
+        icon={<AntDesign name="picture" size={26} color="white" />}
       />
 
       <Button
         title="Camera"
         onPress={handlePressVideo}
-        iconComponent={<AntDesign name="camera" size={26} color="dodgerblue" />}
+        icon={<AntDesign name="camera" size={26} color="white" />}
       />
     </BottomModal>
   );
@@ -130,22 +128,19 @@ export const AddDoveModal = ({visible, onDismiss}) => {
       <Button
         title="Discussion"
         onPress={handlePressDiscussion}
-        iconComponent={
-          <AntDesign name="picture" size={26} color="dodgerblue" />
-        }
+        icon={<PictureIcon color="white" />}
       />
 
       <Button
         title="Testimony"
         onPress={handlePressTestimony}
         icon="account-multiple"
-        iconColor="orange"
       />
 
       <Button
         title="Prayer"
         onPress={handlePressPrayer}
-        iconComponent={<MaterialIcons name="work" size={26} color="purple" />}
+        icon={<MaterialIcons name="work" size={26} color="white" />}
       />
     </BottomModal>
   );
@@ -173,9 +168,7 @@ const AddModal = ({visible, onDismiss}) => {
         <Button
           title="Post"
           onPress={() => handlePostPress(NewPost.name)}
-          iconComponent={
-            <SimpleLineIcons name="picture" size={26} color="dodgerblue" />
-          }
+          icon={<PictureIcon color="white" />}
         />
         <Button
           title="Story"

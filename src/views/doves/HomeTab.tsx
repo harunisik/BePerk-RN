@@ -67,18 +67,20 @@ const HomeTab = () => {
   );
 
   return (
-    <InfiniteFlatList
-      data={data}
-      renderItem={({item}) => <DovesItem item={item} />}
-      fetchNextPage={fetchNextPage}
-      isFetching={isFetching}
-      refetch={refetch}
-      remove={remove}
-      ItemSeparatorComponent={ItemSeparatorComponent}
-      {...(beperkDove !== undefined && {
-        ListHeaderComponent: <ListHeaderItem item={beperkDove[0]} />,
-      })}
-    />
+    <View style={{flex: 1}}>
+      <InfiniteFlatList
+        data={data}
+        renderItem={({item}) => <DovesItem item={item} />}
+        fetchNextPage={fetchNextPage}
+        isFetching={isFetching}
+        refetch={refetch}
+        remove={remove}
+        ItemSeparatorComponent={ItemSeparatorComponent}
+        {...(beperkDove !== undefined && {
+          ListHeaderComponent: <ListHeaderItem item={beperkDove[0]} />,
+        })}
+      />
+    </View>
   );
 };
 

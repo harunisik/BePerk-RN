@@ -75,7 +75,6 @@ const ItemModal = ({
             title="Delete"
             onPress={() => setModalVisible(true)}
             icon="delete"
-            iconColor="red"
           />
           <Popup
             visible={modalVisible}
@@ -86,7 +85,7 @@ const ItemModal = ({
           />
         </>
       ) : (
-        <View>
+        <>
           <Button
             onPress={() => Alert.alert('under construction')}
             icon="bell-off-outline"
@@ -95,7 +94,7 @@ const ItemModal = ({
           <Button
             onPress={() => Alert.alert('under construction')}
             title="Report"
-            iconComponent={
+            icon={
               <MaterialIcons
                 name="report-gmailerrorred"
                 size={26}
@@ -103,7 +102,7 @@ const ItemModal = ({
               />
             }
           />
-        </View>
+        </>
       )}
     </BottomModal>
   );
