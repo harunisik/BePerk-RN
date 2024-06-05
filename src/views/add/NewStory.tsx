@@ -24,7 +24,13 @@ export const NewStoryScreenOptions = ({navigation}) => {
 
 const ButtonGroup = ({onPressPost, onPressMessage}) => {
   return (
-    <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+    <View
+      style={{
+        flexDirection: 'row',
+        justifyContent: 'center',
+        columnGap: 10,
+      }}
+      disableTheme>
       <Button title="Post story" icon="account" onPress={onPressPost} />
       <Button title="Message" icon="share" onPress={onPressMessage} />
     </View>

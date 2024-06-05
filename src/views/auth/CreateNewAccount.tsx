@@ -1,9 +1,4 @@
-import {
-  View as RNView,
-  TouchableOpacity,
-  SafeAreaView,
-  Image,
-} from 'react-native';
+import {SafeAreaView, Image, StyleSheet} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {useNavigation} from '@react-navigation/native';
 import {useState} from 'react';
@@ -22,6 +17,7 @@ import {SettingsListItem1} from '../profile/settings/Settings';
 import {CloseIcon} from '../../components/common/Icons';
 import {useColors} from '../../hooks/customHooks';
 import TextInput from '../../components/common/TextInput';
+import Button from '../../components/common/buttons/Button';
 
 const {flex1, aiCenter, rGap30, bold} = common;
 
@@ -137,15 +133,15 @@ const CreateNewAccount = () => {
   return (
     <>
       <LinearGradient
-        colors={['dodgerblue', backgroundColor]}
+        colors={['#0AAEEF', backgroundColor]}
         style={{height: '30%'}}>
         <SafeAreaView>
-          <RNView style={[aiCenter, {paddingTop: 40}]}>
+          <View style={[aiCenter, {paddingTop: 40}]} disableTheme>
             <Image
               style={{width: 80, height: 80}}
               source={require('../../assets/beperk_logo.png')}
             />
-          </RNView>
+          </View>
         </SafeAreaView>
       </LinearGradient>
       <View style={[flex1, aiCenter, rGap30]}>
@@ -187,19 +183,17 @@ const CreateNewAccount = () => {
           />
           <HR />
         </View>
-        <TouchableOpacity
-          style={[
-            {
-              backgroundColor: 'dodgerblue',
-              padding: 15,
-              width: '55%',
-              borderRadius: 20,
-            },
-            aiCenter,
-          ]}
-          onPress={handlePressRegister}>
-          <Text>Register</Text>
-        </TouchableOpacity>
+        <Button
+          title="Register"
+          onPress={handlePressRegister}
+          style={{
+            paddingHorizontal: 70,
+            paddingVertical: 12,
+            borderColor: 'white',
+            borderWidth: StyleSheet.hairlineWidth,
+          }}
+          labelStyle={{fontSize: 20, fontWeight: '500'}}
+        />
         <View
           style={[
             {
@@ -216,7 +210,7 @@ const CreateNewAccount = () => {
         <Text>
           Go to{' '}
           <Text
-            style={{color: 'dodgerblue', textDecorationLine: 'underline'}}
+            style={{color: '#0AAEEF', textDecorationLine: 'underline'}}
             onPress={() => {
               if (authResult) {
                 dispatch({type: AuthActionType.SIGN_OUT});

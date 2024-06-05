@@ -92,7 +92,7 @@ const HeaderTitle = () => {
         label="For You"
         containerStyle={{
           borderRadius: 20,
-          backgroundColor: selected[0] ? 'dodgerblue' : 'transparent',
+          backgroundColor: selected[0] ? '#0AAEEF' : 'transparent',
           paddingVertical: 5,
           paddingHorizontal: 10,
         }}
@@ -106,7 +106,7 @@ const HeaderTitle = () => {
         label="Following"
         containerStyle={{
           borderRadius: 20,
-          backgroundColor: selected[1] ? 'dodgerblue' : 'transparent',
+          backgroundColor: selected[1] ? '#0AAEEF' : 'transparent',
           paddingVertical: 5,
           paddingHorizontal: 10,
         }}

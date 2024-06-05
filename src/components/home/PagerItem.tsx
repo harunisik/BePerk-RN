@@ -7,7 +7,6 @@ import DotsButton from '../common/buttons/DotsButton';
 import AccountCard from '../common/AccountCard';
 import Text from '../common/Text';
 import {View} from 'react-native';
-// imports View from '../common/View';
 
 const PagerItem = ({item, paused = true}) => {
   return (
@@ -33,9 +32,6 @@ const PagerItem = ({item, paused = true}) => {
           <AccountCard
             userId={item.user_id}
             username={item.fullname}
-            // photo={item.cover}
-            // color="white"
-            // labelColor="white"
             size={30}
             vertical
           />

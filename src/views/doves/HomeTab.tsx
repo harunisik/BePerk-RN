@@ -12,38 +12,41 @@ import Text from '../../components/common/Text';
 import View from '../../components/common/View';
 import HR from '../../components/common/HR';
 
-const {jcSpaceBetween, aiCenter, row, rGap10, pv20, p15, bold, white} = common;
+const {jcSpaceBetween, aiCenter, row, rGap10, pv20, pv15, ph15, bold, white} =
+  common;
 
 const ListHeaderItem = ({item}) => {
   return (
-    <View style={[p15]}>
-      <View style={[styles.itemContainer, rGap10]}>
-        <View style={{backgroundColor: 'dodgerblue'}}>
-          <Text style={[bold, white]}>BePerk's Dove of the Day:</Text>
+    <View style={[pv15]}>
+      <View style={ph15}>
+        <View style={[styles.itemContainer, rGap10]}>
+          <View style={{backgroundColor: '#0AAEEF'}}>
+            <Text style={[bold, white]}>BePerk's Dove of the Day:</Text>
+          </View>
+          <View style={{backgroundColor: '#0AAEEF'}}>
+            <Text style={white}>{item.caption}</Text>
+          </View>
+          <View
+            style={[
+              aiCenter,
+              row,
+              jcSpaceBetween,
+              {backgroundColor: '#0AAEEF'},
+            ]}>
+            <DovesItemOptions
+              item={item}
+              color="white"
+              backgroundColor="#0AAEEF"
+            />
+            <Image
+              style={{width: 40, height: 40}}
+              source={require('../../assets/beperk_logo.png')}
+            />
+          </View>
         </View>
-        <View style={{backgroundColor: 'dodgerblue'}}>
-          <Text style={white}>{item.caption}</Text>
+        <View style={[pv20]}>
+          <Text style={[bold]}>Friend's Activity</Text>
         </View>
-        <View
-          style={[
-            aiCenter,
-            row,
-            jcSpaceBetween,
-            {backgroundColor: 'dodgerblue'},
-          ]}>
-          <DovesItemOptions
-            item={item}
-            color="white"
-            backgroundColor="dodgerblue"
-          />
-          <Image
-            style={{width: 40, height: 40}}
-            source={require('../../assets/beperk_logo.png')}
-          />
-        </View>
-      </View>
-      <View style={[pv20]}>
-        <Text style={[bold]}>Friend's Activity</Text>
       </View>
       <HR />
     </View>
@@ -86,7 +89,7 @@ const HomeTab = () => {
 
 const styles = StyleSheet.create({
   itemContainer: {
-    backgroundColor: 'dodgerblue',
+    backgroundColor: '#0AAEEF',
     borderRadius: 20,
     padding: 15,
   },

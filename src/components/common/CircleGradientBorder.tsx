@@ -1,7 +1,7 @@
 import {useState} from 'react';
-import {LayoutChangeEvent, View} from 'react-native';
+import {LayoutChangeEvent} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-// import View from './View';
+import View from './View';
 
 const BORDER_WIDTH = 1.5;
 

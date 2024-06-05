@@ -7,9 +7,8 @@ import {useStore} from '../../containers/StoreContainer';
 import Profile from '../../views/profile/Profile';
 import FastImage from 'react-native-fast-image';
 import Text from './Text';
-// import View from './View';
+import View from './View';
 import {AccountIcon} from './Icons';
-import {View} from 'react-native';
 
 const {row, aiCenter, rGap5, bold} = common;
 
@@ -87,9 +86,9 @@ const AccountCard = ({
       onPress={handlePress}>
       <View
         style={{
-          // backgroundColor: 'transparent',
           alignItems: 'center',
-        }}>
+        }}
+        disableTheme>
         <CircleGradientBorder disabled={!bordered}>
           {_photo ? (
             <FastImage
@@ -105,7 +104,7 @@ const AccountCard = ({
           )}
         </CircleGradientBorder>
       </View>
-      <View style={{alignItems: 'center'}}>
+      <View style={{alignItems: 'center'}} disableTheme>
         {displayUsername && _username && (
           <Text style={bold} numberOfLines={1}>
             {_username}

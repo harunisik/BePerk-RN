@@ -93,7 +93,7 @@ const common = StyleSheet.create({
     color: 'gray',
   },
   blue: {
-    color: 'dodgerblue',
+    color: '#0AAEEF',
   },
   p1: {
     padding: 1,

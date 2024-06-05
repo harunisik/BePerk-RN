@@ -38,8 +38,7 @@ const UserItem = ({item, onPressFollow}) => {
         <Pressable
           style={{
             marginLeft: 'auto',
-            backgroundColor:
-              item.i_following === 0 ? 'dodgerblue' : 'lightgray',
+            backgroundColor: item.i_following === 0 ? '#0AAEEF' : 'lightgray',
             borderRadius: 20,
             paddingVertical: 5,
             paddingHorizontal: 20,

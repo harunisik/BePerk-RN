@@ -118,8 +118,8 @@ const MessageItem = ({item, onDelete}) => {
               <View
                 style={{
                   borderWidth: 1,
-                  borderColor: 'dodgerblue',
-                  backgroundColor: 'dodgerblue',
+                  borderColor: '#0AAEEF',
+                  backgroundColor: '#0AAEEF',
                   width: 20,
                   height: 20,
                   borderRadius: 10,

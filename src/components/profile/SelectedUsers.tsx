@@ -17,7 +17,7 @@ const SelectedUsers = ({data}) => {
               radius6,
               ph10,
               pv5,
-              {backgroundColor: 'dodgerblue'},
+              {backgroundColor: '#0AAEEF'},
             ]}>
             <Text>{item.fullname}</Text>
           </View>

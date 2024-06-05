@@ -1,4 +1,4 @@
-import {TouchableWithoutFeedback} from 'react-native';
+import {Pressable} from 'react-native';
 import common from '../../styles/sharedStyles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useState} from 'react';
@@ -21,7 +21,7 @@ const UserItem = ({
   };
 
   return (
-    <TouchableWithoutFeedback onPress={handlePress}>
+    <Pressable onPress={handlePress}>
       <View style={[row, jcSpaceBetween, aiCenter]}>
         <AccountCard
           userId={item.id}
@@ -32,12 +32,12 @@ const UserItem = ({
         {selectable && (
           <MaterialCommunityIcons
             name={selected ? 'check-circle' : 'circle-outline'}
-            color={selected ? 'dodgerblue' : 'gray'}
+            color={selected ? '#0AAEEF' : 'gray'}
             size={22}
           />
         )}
       </View>
-    </TouchableWithoutFeedback>
+    </Pressable>
   );
 };
 

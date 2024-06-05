@@ -1,4 +1,4 @@
-import {TouchableOpacity, Animated, StyleSheet} from 'react-native';
+import {Animated, Pressable} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {dateDiff} from '../../utils/DateUtil';
 import {useState} from 'react';
@@ -8,13 +8,22 @@ import FlatList from '../common/FlatList';
 import AccountCard from '../common/AccountCard';
 import Text from '../common/Text';
 import View from '../common/View';
+import {DeleteIcon} from '../common/Icons';
+import {colors} from '../../hooks/customHooks';
 
 const RenderRightActions = ({item, onPress}) => {
   return (
-    <Animated.View style={[styles.deleteButton]}>
-      <TouchableOpacity onPress={() => onPress(item)}>
-        <Text style={styles.deleteButtonText}>Delete</Text>
-      </TouchableOpacity>
+    <Animated.View>
+      <Pressable
+        onPress={() => onPress(item)}
+        style={{
+          backgroundColor: colors.red,
+          justifyContent: 'center',
+          height: '100%',
+          paddingHorizontal: 10,
+        }}>
+        <DeleteIcon />
+      </Pressable>
     </Animated.View>
   );
 };
@@ -73,13 +82,13 @@ const CommentItem = ({item, isChild = false, onDelete, onPressReply}) => {
                 </View>
               </View>
               {!isChild && item.childList?.length > 0 && (
-                <TouchableOpacity onPress={handleViewReply}>
+                <Pressable onPress={handleViewReply}>
                   <Text style={[gray, mb15]}>
                     {showReplies
                       ? 'Hide replies'
                       : `View ${item.childList.length} replies`}
                   </Text>
-                </TouchableOpacity>
+                </Pressable>
               )}
             </View>
             <View>
@@ -110,19 +119,5 @@ const CommentItem = ({item, isChild = false, onDelete, onPressReply}) => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  deleteButton: {
-    backgroundColor: '#b60000',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    height: '100%',
-  },
-  deleteButtonText: {
-    color: '#fcfcfc',
-    fontWeight: 'bold',
-    padding: 3,
-  },
-});
 
 export default CommentItem;

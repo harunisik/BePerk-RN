@@ -1,4 +1,4 @@
-import {View as RNView, Pressable} from 'react-native';
+import {Pressable} from 'react-native';
 import common from '../../styles/sharedStyles';
 import Modal from './Modal';
 import Text from './Text';
@@ -35,12 +35,14 @@ const Popup = ({
             backgroundColor:
               theme === 'dark' ? 'rgb(40, 40, 40)' : backgroundColor,
           }}>
-          <RNView style={{alignItems: 'center', padding: 20, rowGap: 5}}>
+          <View
+            style={{alignItems: 'center', padding: 20, rowGap: 5}}
+            disableTheme>
             <Text style={[bold]}>{header}</Text>
             <Text>{message}</Text>
-          </RNView>
+          </View>
           <HR />
-          <RNView style={{width: '100%'}}>
+          <View style={{width: '100%'}} disableTheme>
             <Pressable
               style={{
                 paddingVertical: 15,
@@ -56,9 +58,9 @@ const Popup = ({
                 alignItems: 'center',
               }}
               onPress={onPressCancel}>
-              <Text style={{color: 'dodgerblue'}}>{cancelButtonText}</Text>
+              <Text style={{color: '#0AAEEF'}}>{cancelButtonText}</Text>
             </Pressable>
-          </RNView>
+          </View>
         </View>
       </View>
     </Modal>

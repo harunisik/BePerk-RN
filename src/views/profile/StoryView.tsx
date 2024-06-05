@@ -58,7 +58,7 @@ const ProgressBarSet = ({length, currentIndex, progress}) => {
                 borderRadius: 10,
                 backgroundColor: 'lightgray',
               }}
-              color="dodgerblue"
+              color="#0AAEEF"
               progress={
                 index === currentIndex
                   ? progress
@@ -96,7 +96,7 @@ const Header = ({item}) => {
 };
 const FooterIcon = ({
   icon,
-  color = 'dodgerblue',
+  color = '#0AAEEF',
   IconComponent = MaterialIcons,
   onPress,
   disabled = false,
@@ -159,7 +159,7 @@ const Footer2 = ({onShare, onLike, onSendMessage, liked, onFocus}) => {
           />
           <FooterIcon
             icon="send"
-            color={message ? 'dodgerblue' : 'gray'}
+            color={message ? '#0AAEEF' : 'gray'}
             onPress={handleSendMessage}
             disabled={!message}
           />

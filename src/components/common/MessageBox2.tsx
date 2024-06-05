@@ -10,9 +10,8 @@ import Emoji from './Emoji';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 import {launchMediaLibrary} from '../../utils/MediaUtil';
 import {PERMISSIONS} from 'react-native-permissions';
-// import View from './View';
 import {CameraIcon, PictureIcon, ShareIcon} from './Icons';
-import {View} from 'react-native';
+import View from './View';
 
 const {row, jcSpaceBetween, p10, aiCenter} = common;
 
@@ -65,15 +64,17 @@ const MessageBox2 = ({onPressSend}) => {
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       keyboardVerticalOffset={tabBarHeight}>
-      <View style={[p10, styles.shadowProp, {rowGap: 10}]}>
-        <View style={[row, jcSpaceBetween]}>
+      <View style={[p10, styles.shadowProp, {rowGap: 10}]} disableTheme>
+        <View style={[row, jcSpaceBetween]} disableTheme>
           {['😌', '🤣', '❤️', '😍', '😱', '✝️', '🙏', '🔥', '😥'].map(
             (item, index) => {
               return <Emoji emoji={item} onPress={setMessage} key={index} />;
             },
           )}
         </View>
-        <View style={[row, jcSpaceBetween, aiCenter, {columnGap: 20}]}>
+        <View
+          style={[row, jcSpaceBetween, aiCenter, {columnGap: 20}]}
+          disableTheme>
           <CameraIcon
             onPress={() => handlePressMediaButton(PERMISSIONS.IOS.CAMERA)}
           />

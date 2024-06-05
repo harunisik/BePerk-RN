@@ -121,6 +121,7 @@ const ButtonGroup = ({
   userId,
 }) => {
   const navigation = useNavigation();
+  const {theme2} = useColors();
 
   return (
     <View style={[aiCenter, row, jcCenter, cGap10]}>
@@ -138,7 +139,7 @@ const ButtonGroup = ({
         />
       )}
       <Button
-        title="Messages"
+        title="Message"
         onPress={() => {
           isAuthUser
             ? navigation.navigate(Messages.name)
@@ -149,6 +150,7 @@ const ButtonGroup = ({
               });
         }}
         style={{paddingHorizontal: 45, paddingVertical: 7}}
+        theme={theme2}
       />
     </View>
   );

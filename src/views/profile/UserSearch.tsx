@@ -46,7 +46,7 @@ export const NewStoryHeaderRight = ({formData, selectedUsers, onPress}) => {
   };
 
   return (
-    <Text style={{color: 'dodgerblue'}} onPress={handlePressPost}>
+    <Text style={{color: '#0AAEEF'}} onPress={handlePressPost}>
       Post
     </Text>
   );
@@ -68,7 +68,7 @@ export const NewPostHeaderRight = ({selectedUsers}) => {
   };
 
   return (
-    <Text style={{color: 'dodgerblue'}} onPress={handlePressTag}>
+    <Text style={{color: '#0AAEEF'}} onPress={handlePressTag}>
       Tag
     </Text>
   );
@@ -103,7 +103,7 @@ export const MessagesHeaderRight = ({selectedUsers}) => {
   };
 
   return (
-    <Text style={{color: 'dodgerblue'}} onPress={handlePressChat}>
+    <Text style={{color: '#0AAEEF'}} onPress={handlePressChat}>
       Chat
     </Text>
   );
@@ -141,7 +141,7 @@ export const ChatShareHeaderRight = ({
   };
 
   return (
-    <Text style={{color: 'dodgerblue'}} onPress={handlePressSent}>
+    <Text style={{color: '#0AAEEF'}} onPress={handlePressSent}>
       Sent
     </Text>
   );
@@ -163,7 +163,7 @@ export const UserSearchScreenOptions = ({navigation, route}) => {
     }),
     headerShown: true,
     headerLeft: () => <CloseIcon onPress={() => navigation.goBack()} />,
-    headerRight: () => <Text style={{color: 'dodgerblue'}}>Sent</Text>,
+    headerRight: () => <Text style={{color: '#0AAEEF'}}>Sent</Text>,
   };
 };
 

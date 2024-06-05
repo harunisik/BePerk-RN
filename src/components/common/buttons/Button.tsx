@@ -1,9 +1,9 @@
-import {Pressable, ViewStyle} from 'react-native';
+import {Pressable, TextStyle, ViewStyle} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import common from '../../../styles/sharedStyles';
 import {ReactElement, isValidElement} from 'react';
 import Text from '../Text';
-import {useColors} from '../../../hooks/customHooks';
+import {Theme, useColors} from '../../../hooks/customHooks';
 
 const {aiCenter, cGap15, row, p10} = common;
 
@@ -12,10 +12,20 @@ interface ButtonProps {
   icon?: string | ReactElement;
   onPress?: () => void;
   style?: ViewStyle;
+  labelStyle?: TextStyle;
+  theme?: Theme;
 }
 
-const Button = ({title, icon, onPress = () => {}, style}: ButtonProps) => {
-  const {color2: color, backgroundColor2: backgroundColor} = useColors();
+const Button = ({
+  title,
+  icon,
+  onPress = () => {},
+  style,
+  labelStyle,
+  theme,
+}: ButtonProps) => {
+  const {theme1} = useColors();
+  const _theme = theme ?? theme1;
 
   return (
     <Pressable
@@ -25,7 +35,7 @@ const Button = ({title, icon, onPress = () => {}, style}: ButtonProps) => {
         cGap15,
         p10,
         {
-          backgroundColor: backgroundColor,
+          backgroundColor: _theme.backgroundColor,
           borderRadius: 20,
           justifyContent: 'center',
         },
@@ -35,11 +45,11 @@ const Button = ({title, icon, onPress = () => {}, style}: ButtonProps) => {
       {isValidElement(icon) ? (
         icon
       ) : typeof icon === 'string' ? (
-        <MaterialCommunityIcons name={icon} size={26} color={color} />
+        <MaterialCommunityIcons name={icon} size={26} color={_theme.color} />
       ) : (
         ''
       )}
-      <Text style={{color}}>{title}</Text>
+      <Text style={[{color: _theme.color}, labelStyle]}>{title}</Text>
     </Pressable>
   );
 };

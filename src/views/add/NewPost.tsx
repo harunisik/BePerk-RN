@@ -24,7 +24,7 @@ import TextInput from '../../components/common/TextInput';
 
 const PostButton = ({onPress}) => {
   return (
-    <Text onPress={onPress} style={{color: 'dodgerblue'}}>
+    <Text onPress={onPress} style={{color: '#0AAEEF'}}>
       Post
     </Text>
   );

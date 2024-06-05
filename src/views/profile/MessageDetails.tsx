@@ -182,12 +182,12 @@ const MessageDetailsItem = ({item}) => {
         ) : item.type === 7 ? ( // text message
           <View
             style={{
-              backgroundColor: 'dodgerblue',
+              backgroundColor: '#0AAEEF',
               borderRadius: 10,
               paddingVertical: 5,
               paddingHorizontal: 10,
             }}>
-            <Text>{item.media}</Text>
+            <Text style={{color: 'white'}}>{item.media}</Text>
           </View>
         ) : item.type === 8 ? ( // dm image
           <Pressable onPress={handlePressMedia}>

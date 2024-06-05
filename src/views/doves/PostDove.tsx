@@ -11,7 +11,7 @@ import {CloseIcon} from '../../components/common/Icons';
 
 const PostButton = ({onPress}) => {
   return (
-    <Text onPress={onPress} style={{color: 'dodgerblue'}}>
+    <Text onPress={onPress} style={{color: '#0AAEEF'}}>
       Post
     </Text>
   );

@@ -14,7 +14,7 @@ enum DoveType {
 }
 
 const DoveTypes = {
-  [DoveType.Dove]: {label: 'Dove', color: 'dodgerblue'},
+  [DoveType.Dove]: {label: 'Dove', color: '#0AAEEF'},
   [DoveType.Testimony]: {label: 'Testimony', color: 'chocolate'},
   [DoveType.Prayer]: {label: 'Prayer request', color: 'darkorchid'},
 };

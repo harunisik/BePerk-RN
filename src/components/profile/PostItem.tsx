@@ -1,4 +1,4 @@
-import {StyleSheet, TouchableWithoutFeedback} from 'react-native';
+import {Pressable, StyleSheet} from 'react-native';
 import common from '../../styles/sharedStyles';
 import FastImage from 'react-native-fast-image';
 import View from '../common/View';
@@ -23,7 +23,7 @@ const PostItem = ({
   videoHeight = VIDEO_HEIGHT,
 }: PostItemProps) => {
   return (
-    <TouchableWithoutFeedback onPress={onPress}>
+    <Pressable onPress={onPress}>
       <View style={[p1]}>
         <FastImage
           style={{height: item.type === 1 ? imageHeight : videoHeight}}
@@ -33,7 +33,7 @@ const PostItem = ({
         />
         {item.type === 0 && <VideoIcon style={styles.videoIcon} size={20} />}
       </View>
-    </TouchableWithoutFeedback>
+    </Pressable>
   );
 };
 

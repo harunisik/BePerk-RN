@@ -63,7 +63,7 @@ const GooglePlaces = () => {
             <MaterialCommunityIcons
               name="map-marker"
               size={26}
-              color="dodgerblue"
+              color="#0AAEEF"
             />
             <Text style={{flex: 1}} numberOfLines={1}>
               {description}

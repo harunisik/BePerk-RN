@@ -62,7 +62,7 @@ export const BookmarkIcon = ({
   let _color = color ?? themeColor;
 
   if (!color && !isOutlined) {
-    _color = 'dodgerblue';
+    _color = '#0AAEEF';
   }
 
   return (
@@ -85,7 +85,7 @@ export const HeartIcon = ({
   let _color = color ?? themeColor;
 
   if (!color && !isOutlined) {
-    _color = 'dodgerblue';
+    _color = '#0AAEEF';
   }
 
   return (
@@ -221,6 +221,19 @@ export const CopyIcon = ({size = 26, color, ...rest}: IconProps) => {
   return (
     <MaterialCommunityIcons
       name="content-copy"
+      size={size}
+      color={color ?? themeColor}
+      {...rest}
+    />
+  );
+};
+
+export const DeleteIcon = ({size = 26, color, ...rest}: IconProps) => {
+  const {color: themeColor} = useColors();
+
+  return (
+    <MaterialCommunityIcons
+      name="delete"
       size={size}
       color={color ?? themeColor}
       {...rest}

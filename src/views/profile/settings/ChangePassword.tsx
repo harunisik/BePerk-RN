@@ -10,6 +10,7 @@ import View from '../../../components/common/View';
 import HR from '../../../components/common/HR';
 import {SettingsListItem1} from './Settings';
 import TextInput from '../../../components/common/TextInput';
+import Button from '../../../components/common/buttons/Button';
 
 const {gray, aiCenter, rGap30} = common;
 
@@ -104,19 +105,11 @@ const ChangePassword = () => {
         />
         <HR />
       </View>
-      <TouchableOpacity
-        style={[
-          {
-            backgroundColor: 'dodgerblue',
-            padding: 15,
-            width: '75%',
-            borderRadius: 20,
-          },
-          aiCenter,
-        ]}
-        onPress={handlePressSave}>
-        <Text>Save</Text>
-      </TouchableOpacity>
+      <Button
+        title="Save"
+        onPress={handlePressSave}
+        style={{paddingHorizontal: 70}}
+      />
     </View>
   );
 };

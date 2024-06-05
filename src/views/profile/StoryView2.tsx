@@ -9,6 +9,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   Animated,
+  Pressable,
 } from 'react-native';
 import PagerView from 'react-native-pager-view';
 import {useNavigation, useRoute} from '@react-navigation/native';
@@ -96,7 +97,7 @@ const Header = ({item}) => {
 };
 const FooterIcon = ({
   icon,
-  color = 'dodgerblue',
+  color = '#0AAEEF',
   IconComponent = MaterialIcons,
   onPress,
   disabled = false,
@@ -161,7 +162,7 @@ const Footer2 = ({onShare, onLike, onSendMessage, liked, onFocus}) => {
           />
           <FooterIcon
             icon="send"
-            color={message ? 'dodgerblue' : 'gray'}
+            color={message ? '#0AAEEF' : 'gray'}
             onPress={handleSendMessage}
             disabled={!message}
           />
@@ -430,7 +431,7 @@ const StoryView2 = () => {
                       source={{uri: item.filename}}
                       resizeMode="contain"
                       style={[flex1, jcCenter]}>
-                      <TouchableWithoutFeedback
+                      <Pressable
                         style={flex1}
                         onPress={handlePress}
                         onLongPress={handleLongPress}
@@ -461,7 +462,7 @@ const StoryView2 = () => {
                             />
                           )}
                         </View>
-                      </TouchableWithoutFeedback>
+                      </Pressable>
                       <Popup
                         visible={modalVisible}
                         header="Delete this story?"

@@ -71,7 +71,7 @@ const UserInfo = ({data, isAuthUser, userId}) => {
           }}>
           <Text>{data?.comment}</Text>
           <Text
-            style={{color: 'dodgerblue'}}
+            style={{color: '#0AAEEF'}}
             onPress={() =>
               navigation.navigate(WebView.name, {uri: data?.webSite})
             }>

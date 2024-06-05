@@ -1,9 +1,4 @@
-import {
-  View as RNView,
-  TouchableOpacity,
-  SafeAreaView,
-  Image,
-} from 'react-native';
+import {SafeAreaView, Image, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useState} from 'react';
 import {showMessage} from 'react-native-flash-message';
@@ -18,6 +13,7 @@ import HR from '../../components/common/HR';
 import TextInput from '../../components/common/TextInput';
 import View from '../../components/common/View';
 import {useColors} from '../../hooks/customHooks';
+import Button from '../../components/common/buttons/Button';
 
 const {row, gray, flex1, aiCenter, rGap30} = common;
 
@@ -53,15 +49,15 @@ const Signin = () => {
   return (
     <>
       <LinearGradient
-        colors={['dodgerblue', backgroundColor]}
+        colors={['#0AAEEF', backgroundColor]}
         style={{height: '30%'}}>
         <SafeAreaView>
-          <RNView style={[aiCenter, {paddingTop: 40}]}>
+          <View style={[aiCenter, {paddingTop: 40}]} disableTheme>
             <Image
               style={{width: 80, height: 80}}
               source={require('../../assets/beperk_logo.png')}
             />
-          </RNView>
+          </View>
         </SafeAreaView>
       </LinearGradient>
       <View style={[flex1, aiCenter, rGap30]}>
@@ -84,39 +80,33 @@ const Signin = () => {
           />
           <HR />
         </View>
-        <TouchableOpacity
-          style={[
-            {
-              backgroundColor: 'dodgerblue',
-              padding: 15,
-              width: '55%',
-              borderRadius: 20,
-            },
-            aiCenter,
-          ]}
-          onPress={handlePressLogin}>
-          <Text>Log In</Text>
-        </TouchableOpacity>
+        <Button
+          title="Log In"
+          onPress={handlePressLogin}
+          style={{
+            paddingHorizontal: 70,
+            paddingVertical: 12,
+            borderColor: 'white',
+            borderWidth: StyleSheet.hairlineWidth,
+          }}
+          labelStyle={{fontSize: 20, fontWeight: '500'}}
+        />
         <Text>Or</Text>
         <View style={row}>
-          <MaterialCommunityIcons name="apple" size={50} color="dodgerblue" />
-          <MaterialCommunityIcons
-            name="facebook"
-            size={50}
-            color="dodgerblue"
-          />
-          <MaterialCommunityIcons name="twitter" size={50} color="dodgerblue" />
+          <MaterialCommunityIcons name="apple" size={50} color="#0AAEEF" />
+          <MaterialCommunityIcons name="facebook" size={50} color="#0AAEEF" />
+          <MaterialCommunityIcons name="twitter" size={50} color="#0AAEEF" />
         </View>
         <Text>
           Do not have account?{' '}
           <Text
-            style={{color: 'dodgerblue', textDecorationLine: 'underline'}}
+            style={{color: '#0AAEEF', textDecorationLine: 'underline'}}
             onPress={() => navigation.navigate(CreateNewAccount.name)}>
             Registration
           </Text>
         </Text>
         <Text
-          style={{color: 'dodgerblue', textDecorationLine: 'underline'}}
+          style={{color: '#0AAEEF', textDecorationLine: 'underline'}}
           onPress={() => navigation.navigate(ForgotPassword.name)}>
           Forgot password?
         </Text>

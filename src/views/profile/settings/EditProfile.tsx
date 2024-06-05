@@ -30,7 +30,7 @@ const pageTitle = 'Edit profile';
 
 const DoneButton = ({onPress}) => {
   return (
-    <Text onPress={onPress} style={{color: 'dodgerblue'}}>
+    <Text onPress={onPress} style={{color: '#0AAEEF'}}>
       Post
     </Text>
   );
@@ -180,7 +180,7 @@ const EditProfile = () => {
             size={70}
           />
           <Text
-            style={{color: 'dodgerblue'}}
+            style={{color: '#0AAEEF'}}
             onPress={() => setModalVisible(true)}>
             Change profile photo
           </Text>
