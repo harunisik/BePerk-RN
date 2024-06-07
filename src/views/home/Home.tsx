@@ -57,7 +57,16 @@ const HeaderRight = () => {
       />
       <Pressable onPress={() => navigation.navigate(Messages.name)}>
         <EnvelopeIcon color={colors.blue} />
-        {badgeCount > 0 && <Badge value={badgeCount} />}
+        {badgeCount > 0 && (
+          <Badge
+            value={badgeCount}
+            style={{
+              position: 'absolute',
+              top: -3,
+              right: -3,
+            }}
+          />
+        )}
       </Pressable>
     </View>
   );

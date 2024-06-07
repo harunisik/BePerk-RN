@@ -18,14 +18,12 @@ import {
   launchImageLibrary,
   launchMediaLibrary,
 } from '../../../utils/MediaUtil';
-import {PERMISSIONS} from 'react-native-permissions';
 import AccountCard from '../../../components/common/AccountCard';
 import Text from '../../../components/common/Text';
 import View from '../../../components/common/View';
 import HR from '../../../components/common/HR';
 import {SettingsListItem1} from './Settings';
 import TextInput from '../../../components/common/TextInput';
-import {useColors} from '../../../hooks/customHooks';
 
 const {row, flex1, flex3, aiCenter, jcSpaceBetween, p15, gray, mb15, cGap10} =
   common;

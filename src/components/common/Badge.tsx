@@ -1,19 +1,28 @@
 import React from 'react';
 import Text from './Text';
 import View from './View';
+import {ViewProps as RNViewProps} from 'react-native';
+import {Theme} from '../../hooks/customHooks';
 
-const Badge = ({value}) => {
+type ViewProps = RNViewProps & {value: number; theme?: Theme};
+
+const Badge = ({value, style, theme}: ViewProps) => {
   return (
     <View
-      style={{
-        backgroundColor: 'red',
-        position: 'absolute',
-        top: -3,
-        right: -3,
-        borderRadius: 20,
-        padding: 3,
-      }}>
-      <Text style={{fontSize: 11, color: 'white'}}>{value}</Text>
+      style={[
+        {
+          backgroundColor: theme ? theme.backgroundColor : 'red',
+          borderRadius: 20,
+          width: 15,
+          height: 15,
+          alignItems: 'center',
+          justifyContent: 'center',
+        },
+        style,
+      ]}>
+      <Text size={11} color="white">
+        {value}
+      </Text>
     </View>
   );
 };

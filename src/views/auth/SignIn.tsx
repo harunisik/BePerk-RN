@@ -61,7 +61,7 @@ const Signin = () => {
         </SafeAreaView>
       </LinearGradient>
       <View style={[flex1, aiCenter, rGap30]}>
-        <View style={{width: '75%'}}>
+        <View style={{width: '75%', rowGap: 5}}>
           <Text style={gray}>Username</Text>
           <TextInput
             placeholder="Tap to enter username"

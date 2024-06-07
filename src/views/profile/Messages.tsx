@@ -12,19 +12,11 @@ import AccountCard from '../../components/common/AccountCard';
 import Text from '../../components/common/Text';
 import View from '../../components/common/View';
 import {FileIcon, VerifiedIcon} from '../../components/common/Icons';
+import {useColors} from '../../hooks/customHooks';
+import Badge from '../../components/common/Badge';
+import {printJSON} from '../../utils/TestUtil';
 
-const {
-  row,
-  jcSpaceBetween,
-  cGap10,
-  cGap3,
-  aiCenter,
-  bold,
-  gray,
-  p10,
-  rGap3,
-  flex1,
-} = common;
+const {row, cGap3, aiCenter, bold, p10, rGap3, flex1} = common;
 
 export const MessagesScreenOptions = ({navigation}) => {
   return {
@@ -58,6 +50,7 @@ const MessageItem = ({item, onDelete}) => {
       authResult: {id: authUserId},
     },
   } = useStore();
+  const {theme1} = useColors();
 
   const title = item.to_users
     .filter(user => authUserId !== user.id)
@@ -72,64 +65,60 @@ const MessageItem = ({item, onDelete}) => {
       chatId: item.id,
     });
   };
-
+  console.log(printJSON(item));
   return (
     <Swipeable
       renderRightActions={() => (
         <RenderRightActions item={item} onPress={onDelete} />
       )}>
       <Pressable onPress={handlePress}>
-        <View style={[row, jcSpaceBetween, aiCenter]}>
-          <View style={[flex1, row, cGap10, aiCenter]}>
-            <AccountCard
-              userId={item.user_id}
-              username={item.username}
-              photo={item.photo}
-              displayUsername={false}
-              size={16}
-              usePush
-            />
-            <View style={[flex1, rGap3]}>
-              <View style={[row, cGap3, {width: '90%'}]}>
-                <Text style={[bold]} numberOfLines={1}>
-                  {title}
-                </Text>
+        <View style={[row, aiCenter]}>
+          <AccountCard
+            // userId={item.user_id}
+            username={item.username}
+            photo={
+              !isMultiple
+                ? item.photo
+                : item.to_users.find(
+                    item1 => item1.id === item.last_message_user_id,
+                  )?.photo
+            }
+            displayUsername={false}
+            size={16}
+            usePush
+          />
+          <View style={[rGap3, flex1]}>
+            <View style={[row, cGap3]}>
+              <Text style={[bold, flex1]} numberOfLines={1}>
+                {title}
                 {!isMultiple && item.isVerified === 1 && <VerifiedIcon />}
-              </View>
-              <Text style={[gray]}>
-                {item.last_message_type === 0 || item.last_message_type === 1
-                  ? 'Post'
-                  : item.last_message_type === 2
-                    ? 'Story'
-                    : item.last_message_type === 3
-                      ? 'Dove'
-                      : item.last_message_type === 6
-                        ? 'Profile'
-                        : item.last_message_type === 8
-                          ? 'Image'
-                          : item.last_message_type === 7
-                            ? item.last_message
-                            : item.last_message_type}
               </Text>
             </View>
+            <Text color="gray" size={15}>
+              {item.last_message_type === 0 || item.last_message_type === 1
+                ? 'Post'
+                : item.last_message_type === 2
+                  ? 'Story'
+                  : item.last_message_type === 3
+                    ? 'Dove'
+                    : item.last_message_type === 6
+                      ? 'Profile'
+                      : item.last_message_type === 8
+                        ? 'Image'
+                        : item.last_message_type === 7
+                          ? item.last_message
+                          : item.last_message_type}
+            </Text>
           </View>
-          <View>
-            {item.not_read > 0 && (
-              <View
-                style={{
-                  borderWidth: 1,
-                  borderColor: '#0AAEEF',
-                  backgroundColor: '#0AAEEF',
-                  width: 20,
-                  height: 20,
-                  borderRadius: 10,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                <Text>{item.not_read}</Text>
-              </View>
-            )}
-          </View>
+          {item.not_read > 0 && (
+            <View
+              style={{
+                width: 30,
+                alignItems: 'flex-end',
+              }}>
+              <Badge value={item.not_read} theme={theme1} />
+            </View>
+          )}
         </View>
       </Pressable>
     </Swipeable>
@@ -137,8 +126,10 @@ const MessageItem = ({item, onDelete}) => {
 };
 
 const Messages = () => {
-  const {data, refetch, isFetching} = useQuery(chatListOpen, null, data => {
-    return {chats: data.chats?.sort((a, b) => b.date - a.date)};
+  const {data, refetch, isFetching} = useQuery(chatListOpen, null, {
+    select: data => {
+      return {chats: data.chats?.sort((a, b) => b.date - a.date)};
+    },
   });
 
   const chatDeleteApi = useMutation(chatDelete);

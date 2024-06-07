@@ -40,8 +40,8 @@ interface PostDetailItemProps {
   uploadTime: number;
   commentsCount: number;
   isViewable?: boolean;
-  height: number;
   width: number;
+  height: number;
 }
 
 const PostDetailItem = ({
@@ -58,8 +58,8 @@ const PostDetailItem = ({
   uploadTime,
   commentsCount,
   isViewable = false,
-  height,
   width,
+  height,
 }: PostDetailItemProps) => {
   const {width: windowWidth} = useWindowDimensions();
 

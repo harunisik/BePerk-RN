@@ -56,10 +56,10 @@ const SearchTabGroup = ({searchText}) => {
 
 const Search = () => {
   const [searchText, setSearchText] = useState('');
-  const {theme} = useColors();
+  const {theme2} = useColors();
 
   return (
-    <View style={[p15, flex1, {rowGap: 15}]}>
+    <View style={[p15, flex1, {rowGap: 5}]}>
       <TextInput
         placeholder="Search"
         onChangeText={setSearchText}
@@ -68,6 +68,7 @@ const Search = () => {
           borderRadius: 20,
           paddingHorizontal: 15,
         }}
+        theme={theme2}
       />
 
       <SearchTabGroup searchText={searchText} />

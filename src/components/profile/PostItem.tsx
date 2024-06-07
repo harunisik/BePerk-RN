@@ -31,7 +31,9 @@ const PostItem = ({
             uri: item.type === 1 ? item.filename : item.cover,
           }}
         />
-        {item.type === 0 && <VideoIcon style={styles.videoIcon} size={20} />}
+        {item.type === 0 && (
+          <VideoIcon style={styles.videoIcon} size={20} color="white" />
+        )}
       </View>
     </Pressable>
   );

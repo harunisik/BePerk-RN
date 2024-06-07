@@ -1,5 +1,6 @@
 import {useRoute} from '@react-navigation/native';
 import PostDetailItem from '../../components/profile/PostDetailItem';
+import View from '../../components/common/View';
 
 const PostDetailItemView = () => {
   const route = useRoute();
@@ -17,24 +18,30 @@ const PostDetailItemView = () => {
       filename,
       caption,
       uploadTime,
+      width,
+      height,
     },
   } = route;
 
   return (
-    <PostDetailItem
-      id={id}
-      type={type}
-      userId={userId}
-      username={username}
-      fullname={fullname}
-      caption={caption}
-      bookmark={bookmark}
-      filename={filename}
-      liked={liked}
-      likesCount={likesCount}
-      commentsCount={commentsCount}
-      uploadTime={uploadTime}
-    />
+    <View style={{flex: 1}}>
+      <PostDetailItem
+        id={id}
+        type={type}
+        userId={userId}
+        username={username}
+        fullname={fullname}
+        caption={caption}
+        bookmark={bookmark}
+        filename={filename}
+        liked={liked}
+        likesCount={likesCount}
+        commentsCount={commentsCount}
+        uploadTime={uploadTime}
+        width={width}
+        height={height}
+      />
+    </View>
   );
 };
 

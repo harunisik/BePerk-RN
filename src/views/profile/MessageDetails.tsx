@@ -106,6 +106,8 @@ const MessageDetailsItem = ({item}) => {
       filename: item.media.filename,
       caption: item.media.caption,
       uploadTime: item.media.upload_time,
+      width: item.media.width,
+      height: item.media.height,
     });
   };
 
@@ -116,7 +118,6 @@ const MessageDetailsItem = ({item}) => {
         style={{
           flexDirection: 'row',
           alignSelf,
-          // columnGap: 10,
         }}>
         {!isAuthUser && (
           <AccountCard
@@ -129,9 +130,34 @@ const MessageDetailsItem = ({item}) => {
           />
         )}
 
-        {item.type === 2 ? ( // story
+        {item.type === 0 || item.type === 1 ? ( // post
+          <Pressable onPress={handlePressPost}>
+            <View
+              style={{
+                rowGap: 10,
+                alignItems: isAuthUser ? 'flex-end' : 'flex-start',
+              }}>
+              <Text>{`@${item.media.fullname} post`}</Text>
+              <FastImage
+                style={{
+                  width: IMAGE_WIDTH,
+                  height: IMAGE_HEIGHT,
+                  borderRadius: 10,
+                  borderWidth: 1,
+                  borderColor: 'lightgray',
+                }}
+                source={{
+                  uri: item.type === 1 ? item.media.filename : item.media.cover,
+                }}
+              />
+            </View>
+          </Pressable>
+        ) : item.type === 2 ? ( // story
           <Pressable onPress={handlePressStory}>
-            <View style={{rowGap: 10}}>
+            <View
+              style={{
+                rowGap: 10,
+              }}>
               <Text>{`@${item.media.fullname} story`}</Text>
               <FastImage
                 style={{
@@ -154,7 +180,7 @@ const MessageDetailsItem = ({item}) => {
               styles.shadowProp,
               styles.card,
               {
-                width: '80%',
+                width: '75%',
                 backgroundColor: theme2.backgroundColor,
               },
             ]}>
@@ -168,8 +194,8 @@ const MessageDetailsItem = ({item}) => {
                 styles.card,
                 {
                   flexDirection: 'row',
-                  columnGap: 5,
                   paddingHorizontal: 10,
+                  backgroundColor: theme2.backgroundColor,
                 },
               ]}>
               <AccountCard
@@ -180,9 +206,11 @@ const MessageDetailsItem = ({item}) => {
                 usePush
                 size={18}
               />
-              <View>
+              <View disableTheme>
                 <Text>{item.media.username}</Text>
-                <Text style={{color: 'gray'}}>{item.media.fullname}</Text>
+                <Text color="gray" size={15}>
+                  {item.media.fullname}
+                </Text>
               </View>
             </View>
           </Pressable>
@@ -196,7 +224,9 @@ const MessageDetailsItem = ({item}) => {
               paddingVertical: 5,
               paddingHorizontal: 10,
             }}>
-            <Text style={{color: 'white'}}>{item.media}</Text>
+            <Text color={isAuthUser ? theme1.color : theme2.color}>
+              {item.media}
+            </Text>
           </View>
         ) : item.type === 8 ? ( // dm image
           <Pressable onPress={handlePressMedia}>
@@ -212,23 +242,9 @@ const MessageDetailsItem = ({item}) => {
             />
           </Pressable>
         ) : (
-          <Pressable onPress={handlePressPost}>
-            <View style={{rowGap: 10, alignItems: 'flex-end'}}>
-              <Text>{`@${item.media.fullname} post`}</Text>
-              <FastImage
-                style={{
-                  width: IMAGE_WIDTH,
-                  height: IMAGE_HEIGHT,
-                  borderRadius: 10,
-                  borderWidth: 1,
-                  borderColor: 'lightgray',
-                }}
-                source={{
-                  uri: item.type === 1 ? item.media.filename : item.media.cover,
-                }}
-              />
-            </View>
-          </Pressable>
+          <View>
+            <Text>{'Unknow message:' + item.type}</Text>
+          </View>
         )}
       </View>
     </View>

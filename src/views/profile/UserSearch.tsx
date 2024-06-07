@@ -173,7 +173,7 @@ const UserSearch = () => {
   const [searchResult, setSearchResult] = useState([]);
   const [selectedUsers, setSelectedUsers] = useState([]);
 
-  const {theme} = useColors();
+  const {theme2} = useColors();
   const navigation = useNavigation();
   const route = useRoute();
   const {
@@ -237,6 +237,7 @@ const UserSearch = () => {
           borderRadius: 20,
           paddingHorizontal: 15,
         }}
+        theme={theme2}
       />
 
       {selectedUsers?.length > 0 && <SelectedUsers data={selectedUsers} />}

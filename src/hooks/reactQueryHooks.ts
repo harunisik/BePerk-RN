@@ -30,13 +30,14 @@ import {
   chatShare,
   getChat,
 } from '../services/ChatService';
-import {getMy24, postMy24Like} from '../services/My24Service';
+import {getMy24, postMy24, postMy24Like} from '../services/My24Service';
 
 const queryMap = {
   [postBookmarks.name]: [],
   [deletePost.name]: [getUserFeed.name, getUserExploring.name, getMy24.name],
   [postUserLike.name]: [],
   [postMy24Like.name]: [getMy24.name],
+  [postMy24.name]: [getMy24.name],
   [postComment.name]: [getUserComments.name],
   [deleteComment.name]: [getUserComments.name],
   [addPerk.name]: [getUserFeed.name, getUserExploring.name],

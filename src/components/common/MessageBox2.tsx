@@ -3,8 +3,11 @@ import common from '../../styles/sharedStyles';
 import {useEffect, useState} from 'react';
 import Emoji from './Emoji';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
-import {launchMediaLibrary} from '../../utils/MediaUtil';
-import {PERMISSIONS} from 'react-native-permissions';
+import {
+  launchCamera,
+  launchImageLibrary,
+  launchMediaLibrary,
+} from '../../utils/MediaUtil';
 import {CameraIcon, PictureIcon, ShareIcon} from './Icons';
 import View from './View';
 import TextInput from './TextInput';
@@ -31,25 +34,24 @@ const MessageBox2 = ({onPressSend}) => {
     }
   };
 
-  const handlePressMediaButton = permission => {
-    launchMediaLibrary(
-      permission,
-      data => {
-        if (data.assets?.length && data.assets.length > 0) {
-          setAsset(
-            data.assets.map(({type, ...rest}) => {
-              return {
-                ...rest,
-                type,
-                mediaType: type.startsWith('image') ? 'photo' : 'video',
-              };
-            }),
-          );
-        }
-      },
-      {mediaType: 'photo'},
-    );
+  const mediaCallback = data => {
+    if (data.assets?.length && data.assets.length > 0) {
+      setAsset(
+        data.assets.map(({type, ...rest}) => {
+          return {
+            ...rest,
+            type,
+            mediaType: type.startsWith('image') ? 'photo' : 'video',
+          };
+        }),
+      );
+    }
   };
+
+  const processPhoto = () =>
+    launchImageLibrary(mediaCallback, {mediaType: 'photo'});
+
+  const processCamera = () => launchCamera(mediaCallback, {mediaType: 'photo'});
 
   useEffect(() => {
     if (asset) {
@@ -78,7 +80,7 @@ const MessageBox2 = ({onPressSend}) => {
         </View>
         <View style={[row, jcSpaceBetween, aiCenter, {columnGap: 20}]}>
           <CameraIcon
-            onPress={() => handlePressMediaButton(PERMISSIONS.IOS.CAMERA)}
+            onPress={() => launchMediaLibrary(processCamera, 'camera')}
           />
           <TextInput
             placeholder="Message..."
@@ -92,9 +94,7 @@ const MessageBox2 = ({onPressSend}) => {
             <ShareIcon onPress={handlePress} disabled={!message} />
           ) : (
             <PictureIcon
-              onPress={() =>
-                handlePressMediaButton(PERMISSIONS.IOS.PHOTO_LIBRARY)
-              }
+              onPress={() => launchMediaLibrary(processPhoto, 'image')}
             />
           )}
         </View>
