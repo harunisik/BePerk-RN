@@ -16,6 +16,7 @@ interface LikeButtonProps {
   color?: string;
   backgroundColor?: string;
   vertical?: boolean;
+  iconSize?: number;
 }
 
 const LikeButtton = ({
@@ -24,8 +25,8 @@ const LikeButtton = ({
   likesCount,
   type,
   color,
-  backgroundColor,
   vertical = false,
+  iconSize,
 }: LikeButtonProps) => {
   const [likedState, setLikedState] = useState(liked);
   const [likesCountState, setLikesCountState] = useState(likesCount);
@@ -49,18 +50,15 @@ const LikeButtton = ({
 
   return (
     <View
-      style={[
-        aiCenter,
-        {backgroundColor: 'transparent'},
-        // backgroundColor && {backgroundColor},
-        ...(vertical ? [rGap5] : [row, cGap3]),
-      ]}>
+      style={[aiCenter, ...(vertical ? [rGap5] : [row, cGap3])]}
+      disableTheme>
       <HeartIcon
         onPress={handlePress}
         isOutlined={likedState === 0}
         color={color}
+        size={iconSize}
       />
-      <Text style={{...(color && {color})}}>{likesCountState}</Text>
+      <Text color={color}>{likesCountState}</Text>
     </View>
   );
 };

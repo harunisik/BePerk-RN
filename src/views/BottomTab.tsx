@@ -11,6 +11,7 @@ import AddStack from './add/AddStack';
 import Text from '../components/common/Text';
 import View from '../components/common/View';
 import {useColors} from '../hooks/customHooks';
+import {SafeAreaView} from 'react-native';
 
 const routeIcons = {
   [HomeStack.name]: 'home',
@@ -39,7 +40,7 @@ const BottomTabScreenOptions = ({route}) => {
 
       return (
         <View style={{alignItems: 'center'}}>
-          <MaterialCommunityIcons name={iconName} size={26} color={color} />
+          <MaterialCommunityIcons name={iconName} size={30} color={color} />
           {route.name !== AddStack.name && (
             <Text style={{color}}>{tabBarLabels[route.name]}</Text>
           )}
@@ -49,6 +50,7 @@ const BottomTabScreenOptions = ({route}) => {
     tabBarShowLabel: false,
     tabBarStyle: {
       backgroundColor,
+      // minHeight: 90,
       //   display:
       //     getFocusedRouteNameFromRoute(route) === StoryView.name ? 'none' : 'flex',
     },
@@ -68,7 +70,10 @@ const BottomTab = () => {
 
   return (
     <>
-      <Tab.Navigator screenOptions={BottomTabScreenOptions}>
+      <Tab.Navigator
+        screenOptions={BottomTabScreenOptions}
+        // screenOptions={{tabBarStyle:{alignContent:'center'},}}
+      >
         <Tab.Screen name={HomeStack.name} component={HomeStack} />
         <Tab.Screen name={FeaturedStack.name} component={FeaturedStack} />
         <Tab.Screen

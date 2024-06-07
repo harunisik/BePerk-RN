@@ -8,9 +8,10 @@ interface ShareButtonProps {
   id: number;
   type: number;
   color?: string;
+  iconSize?: number;
 }
 
-const ShareButton = ({id, type, color}: ShareButtonProps) => {
+const ShareButton = ({id, type, color, iconSize}: ShareButtonProps) => {
   const navigation = useNavigation();
 
   return (
@@ -22,6 +23,7 @@ const ShareButton = ({id, type, color}: ShareButtonProps) => {
           headerRightProps: {itemId: id, type},
         })
       }
+      size={iconSize}
     />
   );
 };

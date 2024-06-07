@@ -4,7 +4,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import {IconProps as IconPropsRN} from 'react-native-vector-icons/Icon';
-import {useColors} from '../../hooks/customHooks';
+import {colors, useColors} from '../../hooks/customHooks';
 
 type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
 
@@ -26,14 +26,18 @@ export const ShareIcon = ({size = 26, disabled, color, ...rest}: IconProps) => {
   );
 };
 
-export const AccountIcon = ({size = 26, color, ...rest}: IconProps) => {
-  const {color: themeColor} = useColors();
+export const AccountIcon = ({size = 26, style, ...rest}: IconProps) => {
+  const {color, theme1, theme2} = useColors();
 
   return (
     <MaterialCommunityIcons
       name="account"
       size={size}
-      color={color ?? themeColor}
+      color={theme2.color}
+      style={[
+        // {backgroundColor: theme2.backgroundColor, borderRadius: 20},
+        style,
+      ]}
       {...rest}
     />
   );
@@ -295,16 +299,11 @@ export const ArrowIcon = ({size = 26, color, ...rest}: IconProps) => {
   );
 };
 
-export const VerifiedIcon = ({size = 26, color, ...rest}: IconProps) => {
-  const {color: themeColor} = useColors();
+export const VerifiedIcon = ({size = 16, color, ...rest}: IconProps) => {
+  // const {color: themeColor} = useColors();
 
   return (
-    <MaterialIcons
-      name="verified"
-      size={size}
-      color={color ?? themeColor}
-      {...rest}
-    />
+    <MaterialIcons name="verified" size={size} color={colors.blue} {...rest} />
   );
 };
 

@@ -4,6 +4,7 @@ import AccountCard from '../common/AccountCard';
 import Text from '../common/Text';
 import View from '../common/View';
 import {PictureIcon} from '../common/Icons';
+import {printJSON} from '../../utils/TestUtil';
 
 enum HistoryItemType {
   Video,
@@ -37,7 +38,8 @@ const HistoryTypes = {
 const ActivityItem = ({item}) => {
   const {flex1, row, cGap10, gray, jcSpaceBetween, aiCenter, shrink1} = common;
 
-  const {user_id, fullname, history_type, type, date_time} = item;
+  const {user_id, fullname, history_type, type, date_time, isVerified, photo} =
+    item;
   const historyType = HistoryTypes[history_type];
   const historyTypeStr = historyType ? historyType.label : '';
   const historyItemTypeStr = HistoryItemType[type] ? HistoryItemType[type] : '';
@@ -45,10 +47,16 @@ const ActivityItem = ({item}) => {
   return (
     <View style={[row, cGap10, jcSpaceBetween]}>
       <View style={[flex1, row, aiCenter, {columnGap: 5}]}>
-        <AccountCard size={15} userId={user_id} username={fullname} />
+        <AccountCard
+          size={15}
+          userId={user_id}
+          username={fullname}
+          isVerified={isVerified === 1}
+          photo={photo}
+        />
         <Text style={shrink1}>
-          <Text>{`${historyTypeStr} ${historyItemTypeStr}. `}</Text>
-          <Text style={[gray]}>{dateDiff(date_time * 1000)}</Text>
+          <Text color="gray">{`${historyTypeStr} ${historyItemTypeStr}. `}</Text>
+          <Text color="gray">{dateDiff(date_time * 1000)}</Text>
         </Text>
       </View>
       {item.media?.type === 1 && <PictureIcon />}

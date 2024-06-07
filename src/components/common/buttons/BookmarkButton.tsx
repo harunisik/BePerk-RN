@@ -7,9 +7,17 @@ interface BookmarkButtonProps {
   id: number;
   type: number;
   isSaved: number;
+  iconSize?: number;
+  color?: string;
 }
 
-const BookmarkButton = ({id, type, isSaved}: BookmarkButtonProps) => {
+const BookmarkButton = ({
+  id,
+  type,
+  isSaved,
+  iconSize,
+  color,
+}: BookmarkButtonProps) => {
   const [bookmark, setBookmark] = useState(isSaved);
   const postBookmarks = useMutation(userPostBookmarks);
 
@@ -31,7 +39,14 @@ const BookmarkButton = ({id, type, isSaved}: BookmarkButtonProps) => {
     setBookmark(isSaved);
   }, [isSaved]);
 
-  return <BookmarkIcon onPress={handlePress} isOutlined={bookmark === 0} />;
+  return (
+    <BookmarkIcon
+      onPress={handlePress}
+      isOutlined={bookmark === 0}
+      size={iconSize}
+      color={color}
+    />
+  );
 };
 
 export default BookmarkButton;

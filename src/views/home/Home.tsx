@@ -21,7 +21,7 @@ import {
   EnvelopeIcon,
   SearchIcon,
 } from '../../components/common/Icons';
-import {useColors} from '../../hooks/customHooks';
+import {colors, useColors} from '../../hooks/customHooks';
 
 const {row, cGap15} = common;
 
@@ -29,9 +29,15 @@ const HeaderLeft = () => {
   const navigation = useNavigation();
 
   return (
-    <View style={[row, cGap15]}>
-      <SearchIcon onPress={() => navigation.navigate(Search.name)} />
-      <EarthIcon onPress={() => navigation.navigate(Explore.name)} />
+    <View style={[row, cGap15]} disableTheme>
+      <SearchIcon
+        onPress={() => navigation.navigate(Search.name)}
+        color={colors.blue}
+      />
+      <EarthIcon
+        onPress={() => navigation.navigate(Explore.name)}
+        color={colors.blue}
+      />
     </View>
   );
 };
@@ -44,25 +50,31 @@ const HeaderRight = () => {
   } = route;
 
   return (
-    <View style={[row, cGap15]}>
-      <BellIcon onPress={() => navigation.navigate(Activity.name)} />
+    <View style={[row, cGap15]} disableTheme>
+      <BellIcon
+        onPress={() => navigation.navigate(Activity.name)}
+        color={colors.blue}
+      />
       <Pressable onPress={() => navigation.navigate(Messages.name)}>
-        <EnvelopeIcon />
+        <EnvelopeIcon color={colors.blue} />
         {badgeCount > 0 && <Badge value={badgeCount} />}
       </Pressable>
     </View>
   );
 };
 
-const HeaderTitleButton = ({onPress, label, containerStyle}) => {
+const HeaderTitleButton = ({onPress, label, labelStyle, containerStyle}) => {
   return (
     <Pressable style={containerStyle}>
-      <Text onPress={onPress}>{label}</Text>
+      <Text style={[{fontWeight: '500'}, labelStyle]} onPress={onPress}>
+        {label}
+      </Text>
     </Pressable>
   );
 };
 
 const HeaderTitle = () => {
+  const {color, backgroundColor} = useColors();
   const navigation = useNavigation();
   const [selected, setSelected] = useState([true, false]);
 
@@ -72,6 +84,7 @@ const HeaderTitle = () => {
 
   return (
     <View
+      disableTheme={selected[0]}
       style={[
         {
           flexDirection: 'row',
@@ -90,6 +103,7 @@ const HeaderTitle = () => {
       ]}>
       <HeaderTitleButton
         label="For You"
+        labelStyle={{color: selected[0] ? 'white' : color}}
         containerStyle={{
           borderRadius: 20,
           backgroundColor: selected[0] ? '#0AAEEF' : 'transparent',
@@ -98,12 +112,16 @@ const HeaderTitle = () => {
         }}
         onPress={() => {
           handlePress(0);
-          navigation.setOptions({headerTransparent: true});
+          navigation.setOptions({
+            headerTransparent: true,
+            headerStyle: {backgroundColor: 'transparent'},
+          });
           navigation.navigate(ForYouTab.name);
         }}
       />
       <HeaderTitleButton
         label="Following"
+        labelStyle={{color: selected[0] ? 'white' : color}}
         containerStyle={{
           borderRadius: 20,
           backgroundColor: selected[1] ? '#0AAEEF' : 'transparent',
@@ -112,7 +130,10 @@ const HeaderTitle = () => {
         }}
         onPress={() => {
           handlePress(1);
-          navigation.setOptions({headerTransparent: false});
+          navigation.setOptions({
+            headerTransparent: false,
+            headerStyle: {backgroundColor},
+          });
           navigation.navigate(FollowingTab.name);
         }}
       />
@@ -133,7 +154,7 @@ export const HomeScreenOptions = () => {
 const Tab = createMaterialTopTabNavigator();
 
 const Home = () => {
-  const {color, backgroundColor} = useColors();
+  const {color} = useColors();
   const navigation = useNavigation();
   const {data} = useQuery(badgeCount);
 
@@ -144,13 +165,18 @@ const Home = () => {
     }
   }, [data]);
 
+  useEffect(() => {
+    navigation.setOptions({
+      headerStyle: {backgroundColor: 'transparent'},
+    });
+  }, []);
+
   return (
     <Tab.Navigator
       screenOptions={{
         lazy: true,
         tabBarLabelStyle: {textTransform: 'none', fontWeight: 'bold', color},
         tabBarStyle: {
-          backgroundColor,
           display: 'none',
         },
       }}>

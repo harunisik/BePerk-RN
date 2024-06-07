@@ -19,6 +19,7 @@ interface CommentButtonProps {
   color?: string;
   backgroundColor?: string;
   vertical?: boolean;
+  iconSize?: number;
 }
 
 const CommentButton = ({
@@ -31,19 +32,15 @@ const CommentButton = ({
   uploadTime,
   commentsCount,
   color,
-  backgroundColor,
   vertical = false,
+  iconSize,
 }: CommentButtonProps) => {
   const navigation = useNavigation();
 
   return (
     <View
-      style={[
-        aiCenter,
-        {backgroundColor: 'transparent'},
-        // backgroundColor && {backgroundColor},
-        ...(vertical ? [rGap5] : [row, cGap3]),
-      ]}>
+      style={[aiCenter, ...(vertical ? [rGap5] : [row, cGap3])]}
+      disableTheme>
       <CommentIcon
         color={color}
         onPress={() =>
@@ -57,8 +54,9 @@ const CommentButton = ({
             uploadTime,
           })
         }
+        size={iconSize}
       />
-      <Text style={{...(color && {color})}}>{commentsCount}</Text>
+      <Text color={color}>{commentsCount}</Text>
     </View>
   );
 };

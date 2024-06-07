@@ -2,16 +2,19 @@ import {useState} from 'react';
 import {LayoutChangeEvent} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import View from './View';
+import {useColors} from '../../hooks/customHooks';
 
 const BORDER_WIDTH = 1.5;
 
 const InnerView = ({borderRadius, children}) => {
+  const {backgroundColor, theme2} = useColors();
+
   return (
     <View
       style={{
         borderRadius,
-        // backgroundColor: 'lightgray',
-        // borderColor: 'white',
+        backgroundColor: theme2.backgroundColor,
+        borderColor: 'backgroundColor',
         borderWidth: BORDER_WIDTH,
       }}>
       {children}
@@ -20,12 +23,14 @@ const InnerView = ({borderRadius, children}) => {
 };
 
 const OuterView = ({onLayout, borderRadius, children}) => {
+  const {theme2} = useColors();
+
   return (
     <View
       onLayout={onLayout}
       style={{
         borderRadius,
-        borderColor: 'lightgray',
+        borderColor: theme2.backgroundColor,
         borderWidth: BORDER_WIDTH,
       }}>
       {children}

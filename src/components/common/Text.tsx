@@ -1,12 +1,18 @@
-import {Text as RNText, TextProps} from 'react-native';
+import {Text as RNText, TextProps as RNTextProps} from 'react-native';
 import {useColors} from '../../hooks/customHooks';
 
-const Text = ({style, ...rest}: TextProps) => {
-  const {color} = useColors();
+type TextProps = RNTextProps & {color?: string; size?: number};
+
+const Text = ({style, color, size, ...rest}: TextProps) => {
+  const {color: themeColor} = useColors();
+  const _color = color ?? themeColor;
 
   return (
     <RNText
-      style={[{fontFamily: 'Karla-Regular', fontSize: 17, color}, style]}
+      style={[
+        {fontFamily: 'Karla-Regular', fontSize: size ?? 17, color: _color},
+        style,
+      ]}
       {...rest}
     />
   );

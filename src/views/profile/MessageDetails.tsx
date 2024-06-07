@@ -21,6 +21,8 @@ import Text from '../../components/common/Text';
 import View from '../../components/common/View';
 import {ArrowBackIcon, ArrowIcon} from '../../components/common/Icons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useColors} from '../../hooks/customHooks';
+import {printJSON} from '../../utils/TestUtil';
 
 const {flex1, row, aiCenter, bold, cGap5, p10} = common;
 
@@ -53,13 +55,17 @@ export const IMAGE_HEIGHT = 150;
 export const IMAGE_WIDTH = 120;
 
 const MessageDetailsItem = ({item}) => {
+  const {} = item;
+
   const navigation = useNavigation();
   const {
     store: {
-      authResult: {id},
+      authResult: {id: authUserId},
     },
   } = useStore();
-  const isAuthUser = item.user_id === id;
+  const {theme1, theme2} = useColors();
+
+  const isAuthUser = item.user_id === authUserId;
   const alignSelf = isAuthUser ? 'flex-end' : 'flex-start';
 
   const handlePressProfile = () => {
@@ -110,7 +116,7 @@ const MessageDetailsItem = ({item}) => {
         style={{
           flexDirection: 'row',
           alignSelf,
-          columnGap: 10,
+          // columnGap: 10,
         }}>
         {!isAuthUser && (
           <AccountCard
@@ -148,10 +154,11 @@ const MessageDetailsItem = ({item}) => {
               styles.shadowProp,
               styles.card,
               {
-                width: '90%',
+                width: '80%',
+                backgroundColor: theme2.backgroundColor,
               },
             ]}>
-            <DovesItem item={item.media} />
+            <DovesItem item={item.media} theme={theme2} />
           </View>
         ) : item.type === 6 ? ( // profile
           <Pressable onPress={handlePressProfile}>
@@ -182,7 +189,9 @@ const MessageDetailsItem = ({item}) => {
         ) : item.type === 7 ? ( // text message
           <View
             style={{
-              backgroundColor: '#0AAEEF',
+              backgroundColor: isAuthUser
+                ? theme1.backgroundColor
+                : theme2.backgroundColor,
               borderRadius: 10,
               paddingVertical: 5,
               paddingHorizontal: 10,

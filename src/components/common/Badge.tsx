@@ -11,9 +11,9 @@ const Badge = ({value}) => {
         top: -3,
         right: -3,
         borderRadius: 20,
-        padding: 2,
+        padding: 3,
       }}>
-      <Text style={{fontSize: 12}}>{value}</Text>
+      <Text style={{fontSize: 11, color: 'white'}}>{value}</Text>
     </View>
   );
 };

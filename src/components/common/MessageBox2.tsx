@@ -1,9 +1,4 @@
-import {
-  StyleSheet,
-  TextInput,
-  KeyboardAvoidingView,
-  Platform,
-} from 'react-native';
+import {StyleSheet, KeyboardAvoidingView, Platform} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {useEffect, useState} from 'react';
 import Emoji from './Emoji';
@@ -12,6 +7,7 @@ import {launchMediaLibrary} from '../../utils/MediaUtil';
 import {PERMISSIONS} from 'react-native-permissions';
 import {CameraIcon, PictureIcon, ShareIcon} from './Icons';
 import View from './View';
+import TextInput from './TextInput';
 
 const {row, jcSpaceBetween, p10, aiCenter} = common;
 
@@ -63,18 +59,23 @@ const MessageBox2 = ({onPressSend}) => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={tabBarHeight}>
-      <View style={[p10, styles.shadowProp, {rowGap: 10}]} disableTheme>
-        <View style={[row, jcSpaceBetween]} disableTheme>
+      keyboardVerticalOffset={tabBarHeight + 10}>
+      <View style={[p10, styles.shadowProp, {rowGap: 10}]}>
+        <View style={[row, jcSpaceBetween]}>
           {['😌', '🤣', '❤️', '😍', '😱', '✝️', '🙏', '🔥', '😥'].map(
             (item, index) => {
-              return <Emoji emoji={item} onPress={setMessage} key={index} />;
+              return (
+                <Emoji
+                  emoji={item}
+                  onPress={setMessage}
+                  key={index}
+                  size={22}
+                />
+              );
             },
           )}
         </View>
-        <View
-          style={[row, jcSpaceBetween, aiCenter, {columnGap: 20}]}
-          disableTheme>
+        <View style={[row, jcSpaceBetween, aiCenter, {columnGap: 20}]}>
           <CameraIcon
             onPress={() => handlePressMediaButton(PERMISSIONS.IOS.CAMERA)}
           />
@@ -82,13 +83,8 @@ const MessageBox2 = ({onPressSend}) => {
             placeholder="Message..."
             onChangeText={handleChangeText}
             value={message}
-            style={{
-              backgroundColor: 'lightgray',
-              borderRadius: 20,
-              padding: 10,
-              flex: 1,
-            }}
             onSubmitEditing={handlePress}
+            style={{borderRadius: 20, flex: 1}}
           />
           {message ? (
             <ShareIcon onPress={handlePress} disabled={!message} />
@@ -111,7 +107,6 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 0, height: -1},
     shadowOpacity: 0.2,
     shadowRadius: 5,
-    backgroundColor: 'rgb(40, 40, 40)',
   },
 });
 

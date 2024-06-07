@@ -113,9 +113,18 @@ interface DotsButtonProps {
   type: number;
   userId: number;
   username: string;
+  iconSize?: number;
+  color?: string;
 }
 
-const DotsButton = ({id, type, userId, username}: DotsButtonProps) => {
+const DotsButton = ({
+  id,
+  type,
+  userId,
+  username,
+  iconSize,
+  color,
+}: DotsButtonProps) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
@@ -124,6 +133,8 @@ const DotsButton = ({id, type, userId, username}: DotsButtonProps) => {
         onPress={() => {
           setModalVisible(true);
         }}
+        size={iconSize}
+        color={color}
       />
       <ItemModal
         id={id}

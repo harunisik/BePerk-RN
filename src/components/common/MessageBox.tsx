@@ -40,7 +40,14 @@ const MessageBox = ({initialText, onClearText, onPress}) => {
         <View style={[row, jcSpaceBetween]}>
           {['😌', '🤣', '❤️', '😍', '😱', '✝️', '🙏', '🔥', '😥'].map(
             (item, index) => {
-              return <Emoji emoji={item} onPress={setMessage} key={index} />;
+              return (
+                <Emoji
+                  emoji={item}
+                  onPress={setMessage}
+                  key={index}
+                  size={22}
+                />
+              );
             },
           )}
         </View>
@@ -55,14 +62,11 @@ const MessageBox = ({initialText, onClearText, onPress}) => {
               }
             }}
             value={message}
-            style={{
-              backgroundColor: 'lightgray',
-              borderRadius: 20,
-              padding: 10,
-              flex: 1,
-            }}
             onSubmitEditing={handlePress}
-            autoFocus
+            style={{
+              flex: 1,
+              borderRadius: 20,
+            }}
           />
           <View
             style={{

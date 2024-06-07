@@ -234,12 +234,7 @@ const UserSearch = () => {
         onChangeText={setSearchText}
         value={searchText}
         style={{
-          backgroundColor:
-            theme === 'dark'
-              ? 'rgba(255, 255, 255, 0.1)'
-              : 'rgba(211, 211, 211, 0.5)',
           borderRadius: 20,
-          padding: 15,
         }}
       />
 

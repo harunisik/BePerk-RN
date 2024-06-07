@@ -10,12 +10,14 @@ interface DovesItemOptionsProps {
   item: any;
   color?: string;
   backgroundColor?: string;
+  iconSize?: number;
 }
 
 const DovesItemOptions = ({
   item,
   color,
   backgroundColor,
+  iconSize,
 }: DovesItemOptionsProps) => {
   return (
     <View style={[cGap15, row, aiCenter, backgroundColor && {backgroundColor}]}>
@@ -26,6 +28,7 @@ const DovesItemOptions = ({
         type={item.type}
         color={color}
         backgroundColor={backgroundColor}
+        iconSize={iconSize}
       />
       <CommentButton
         id={item.id}
@@ -38,8 +41,14 @@ const DovesItemOptions = ({
         uploadTime={item.upload_time}
         color={color}
         backgroundColor={backgroundColor}
+        iconSize={iconSize}
       />
-      <ShareButton id={item.id} type={item.type} color={color} />
+      <ShareButton
+        id={item.id}
+        type={item.type}
+        color={color}
+        iconSize={iconSize}
+      />
     </View>
   );
 };

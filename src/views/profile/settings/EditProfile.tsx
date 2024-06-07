@@ -13,7 +13,11 @@ import {showMessage} from 'react-native-flash-message';
 import BottomModal from '../../../components/common/BottomModal';
 import Button from '../../../components/common/buttons/Button';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {launchMediaLibrary} from '../../../utils/MediaUtil';
+import {
+  launchCamera,
+  launchImageLibrary,
+  launchMediaLibrary,
+} from '../../../utils/MediaUtil';
 import {PERMISSIONS} from 'react-native-permissions';
 import AccountCard from '../../../components/common/AccountCard';
 import Text from '../../../components/common/Text';
@@ -123,15 +127,33 @@ const EditProfile = () => {
     );
   };
 
-  const handlePressMedia = permission => {
-    launchMediaLibrary(permission, data => {
-      setModalVisible(false);
+  const processPhoto = () =>
+    launchImageLibrary(data => {
+      if (data.assets?.length && data.assets.length > 0) {
+        const asset = data.assets[0];
+        console.log(asset);
+        setAsset(asset);
+        setPhoto(asset.uri);
+      }
+    });
+
+  const processCamera = () =>
+    launchCamera(data => {
       if (data.assets?.length && data.assets.length > 0) {
         const asset = data.assets[0];
         setAsset(asset);
         setPhoto(asset.uri);
       }
     });
+
+  const handlePressPhoto = () => {
+    setModalVisible(false);
+    launchMediaLibrary(processPhoto, 'image');
+  };
+
+  const handlePressCamera = () => {
+    setModalVisible(false);
+    launchMediaLibrary(processCamera, 'camera');
   };
 
   useEffect(() => {
@@ -166,19 +188,12 @@ const EditProfile = () => {
     asset,
   ]);
 
-  const {theme, backgroundColor} = useColors();
-
   return (
     <>
       <View style={[p15, {flex: 1}]}>
         {showIndicator && <ActivityIndicator />}
-        <View style={[aiCenter, mb15]}>
-          <AccountCard
-            userId={id}
-            photo={photo}
-            displayUsername={false}
-            size={70}
-          />
+        <View style={[aiCenter, mb15, {rowGap: 10}]}>
+          <AccountCard photo={photo} displayUsername={false} size={70} />
           <Text
             style={{color: '#0AAEEF'}}
             onPress={() => setModalVisible(true)}>
@@ -250,12 +265,12 @@ const EditProfile = () => {
         onDismiss={() => setModalVisible(false)}>
         <Button
           title="Photo Library"
-          onPress={() => handlePressMedia(PERMISSIONS.IOS.PHOTO_LIBRARY)}
+          onPress={handlePressPhoto}
           icon={<AntDesign name="picture" size={26} color="white" />}
         />
         <Button
           title="Camera"
-          onPress={() => handlePressMedia(PERMISSIONS.IOS.CAMERA)}
+          onPress={handlePressCamera}
           icon={<AntDesign name="camera" size={26} color="white" />}
         />
       </BottomModal>

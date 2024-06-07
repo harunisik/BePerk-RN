@@ -5,7 +5,9 @@ import DotsButton from '../common/buttons/DotsButton';
 import AccountCard from '../common/AccountCard';
 import Text from '../common/Text';
 import View from '../common/View';
-import {VerifiedIcon} from '../common/Icons';
+import {useColors} from '../../hooks/customHooks';
+
+const {jcSpaceBetween, aiCenter, row, rGap15, pr15, pl15, radius6} = common;
 
 enum DoveType {
   Dove,
@@ -19,62 +21,59 @@ const DoveTypes = {
   [DoveType.Prayer]: {label: 'Prayer request', color: 'darkorchid'},
 };
 
-const DovesItem = ({item, displayUsername = true}) => {
+const DovesItem = ({item, theme}) => {
   const {
-    flex1,
-    jcSpaceBetween,
-    aiCenter,
-    jcCenter,
-    row,
-    cGap10,
-    rGap15,
-    gray,
-    bold,
-    p5,
-    pr15,
-    pl15,
-    radius6,
-  } = common;
+    id,
+    type,
+    fullname,
+    username,
+    user_id,
+    upload_time,
+    isVerified,
+    subtype,
+    caption,
+    photo,
+  } = item;
+  const {backgroundColor} = useColors();
+  const _backgroundColor = theme ? theme.backgroundColor : backgroundColor;
 
   return (
-    <View style={[rGap15, pr15, pl15]}>
-      <View style={[aiCenter, row, jcSpaceBetween]}>
-        <View style={[row, cGap10, flex1]}>
-          <AccountCard
-            size={15}
-            userId={item.user_id}
-            displayUsername={false}
-          />
-          <View style={[jcCenter, flex1]}>
-            {displayUsername && (
-              <View style={[cGap10, row, aiCenter]}>
-                <Text style={[bold, flex1]} numberOfLines={1}>
-                  {item.fullname ?? item.username}
-                </Text>
-                {item.isVerified === 1 && <VerifiedIcon />}
-              </View>
-            )}
-            <Text style={[gray]}>{dateDiff(item.upload_time * 1000)}</Text>
-          </View>
-        </View>
+    <View style={[rGap15, pr15, pl15]} backgroundColor={_backgroundColor}>
+      <View
+        style={[aiCenter, row, jcSpaceBetween]}
+        backgroundColor={_backgroundColor}>
+        <AccountCard
+          username={fullname ?? username}
+          size={15}
+          userId={user_id}
+          subtitle={dateDiff(upload_time * 1000)}
+          isVerified={isVerified === 1}
+          photo={photo}
+        />
         <View
           style={[
             radius6,
-            p5,
-            {backgroundColor: DoveTypes[item.subtype].color},
+            {
+              backgroundColor: DoveTypes[subtype].color,
+              paddingHorizontal: 10,
+              paddingVertical: 3,
+            },
           ]}>
-          <Text>{DoveTypes[item.subtype].label}</Text>
+          <Text color="white" size={15}>
+            {DoveTypes[subtype].label}
+          </Text>
         </View>
       </View>
-      <Text>{item.caption}</Text>
-      <View style={[aiCenter, row, jcSpaceBetween]}>
-        <DovesItemOptions item={item} />
-        <DotsButton
-          id={item.id}
-          type={item.type}
-          userId={item.user_id}
-          username={item.username}
+      <Text>{caption}</Text>
+      <View
+        style={[aiCenter, row, jcSpaceBetween]}
+        backgroundColor={_backgroundColor}>
+        <DovesItemOptions
+          item={item}
+          iconSize={22}
+          backgroundColor={_backgroundColor}
         />
+        <DotsButton id={id} type={type} userId={user_id} username={username} />
       </View>
     </View>
   );

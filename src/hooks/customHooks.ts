@@ -33,6 +33,7 @@ export const colors = {
     },
   },
   red: '#b60000',
+  blue: '#0AAEEF',
 };
 
 export function useColors() {
