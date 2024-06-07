@@ -235,6 +235,7 @@ const UserSearch = () => {
         value={searchText}
         style={{
           borderRadius: 20,
+          paddingHorizontal: 15,
         }}
       />
 

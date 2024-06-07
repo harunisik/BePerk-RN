@@ -18,8 +18,8 @@ import Button from '../../components/common/buttons/Button';
 const {row, gray, flex1, aiCenter, rGap30} = common;
 
 const Signin = () => {
-  const [username, setUsername] = useState('harun-local');
-  const [password, setPassword] = useState('123');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const {backgroundColor} = useColors();
 
@@ -61,22 +61,25 @@ const Signin = () => {
         </SafeAreaView>
       </LinearGradient>
       <View style={[flex1, aiCenter, rGap30]}>
-        <View style={{width: '75%', rowGap: 10}}>
+        <View style={{width: '75%'}}>
           <Text style={gray}>Username</Text>
           <TextInput
             placeholder="Tap to enter username"
             onChangeText={setUsername}
             value={username}
+            autoCapitalize="none"
+            style={{paddingLeft: 0}}
           />
           <HR />
         </View>
-        <View style={{width: '75%', rowGap: 10}}>
+        <View style={{width: '75%'}}>
           <Text style={gray}>Password</Text>
           <TextInput
             placeholder="Tap to enter password"
             onChangeText={setPassword}
             value={password}
             secureTextEntry
+            style={{paddingLeft: 0}}
           />
           <HR />
         </View>

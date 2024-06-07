@@ -1,21 +1,19 @@
-import {
-  StyleSheet,
-  TextInput,
-  KeyboardAvoidingView,
-  Platform,
-} from 'react-native';
+import {StyleSheet, KeyboardAvoidingView, Platform} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {useEffect, useState} from 'react';
 import Emoji from './Emoji';
 import AccountCard from './AccountCard';
 import View from './View';
 import {ShareIcon} from './Icons';
+import TextInput from './TextInput';
+import {useColors} from '../../hooks/customHooks';
 
-const {row, jcSpaceBetween, p10, aiCenter} = common;
+const {row, jcSpaceBetween, aiCenter} = common;
 
 const MessageBox = ({initialText, onClearText, onPress}) => {
   const [message, setMessage] = useState(initialText);
   const [height, setHeight] = useState();
+  const {theme2} = useColors();
 
   const handlePress = () => {
     onPress(message);
@@ -66,7 +64,9 @@ const MessageBox = ({initialText, onClearText, onPress}) => {
             style={{
               flex: 1,
               borderRadius: 20,
+              paddingHorizontal: 15,
             }}
+            theme={theme2}
           />
           <View
             style={{

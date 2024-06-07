@@ -145,41 +145,45 @@ const CreateNewAccount = () => {
         </SafeAreaView>
       </LinearGradient>
       <View style={[flex1, aiCenter, rGap30]}>
-        <View style={{width: '75%', rowGap: 10}}>
+        <View style={{width: '75%'}}>
           <Text>Username</Text>
           <TextInput
             placeholder="Tap to enter username"
             onChangeText={setUsername}
             value={username}
+            style={{paddingLeft: 0}}
           />
           <HR />
         </View>
-        <View style={{width: '75%', rowGap: 10}}>
+        <View style={{width: '75%'}}>
           <Text>E-mail</Text>
           <TextInput
             placeholder="Tap to enter e-mail"
             onChangeText={setEmail}
             value={email}
+            style={{paddingLeft: 0}}
           />
           <HR />
         </View>
-        <View style={{width: '75%', rowGap: 10}}>
+        <View style={{width: '75%'}}>
           <Text>Password</Text>
           <TextInput
             placeholder="Tap to enter password"
             onChangeText={setPassword}
             value={password}
             secureTextEntry
+            style={{paddingLeft: 0}}
           />
           <HR />
         </View>
-        <View style={{width: '75%', rowGap: 10}}>
+        <View style={{width: '75%'}}>
           <Text>Confirm new password</Text>
           <TextInput
             placeholder="Tap to confirm password"
             onChangeText={setConfirmPassword}
             value={confirmPassword}
             secureTextEntry
+            style={{paddingLeft: 0}}
           />
           <HR />
         </View>
@@ -198,7 +202,6 @@ const CreateNewAccount = () => {
           style={[
             {
               width: '60%',
-              paddingBottom: 10,
             },
           ]}>
           <Text>

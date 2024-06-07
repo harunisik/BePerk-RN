@@ -1,19 +1,25 @@
-import {TextInput as RNTextInput, TextInputProps} from 'react-native';
-import {useColors} from '../../hooks/customHooks';
+import {
+  TextInput as RNTextInput,
+  TextInputProps as RNTextInputProps,
+} from 'react-native';
+import {Theme, useColors} from '../../hooks/customHooks';
 
-const TextInput = ({style, ...rest}: TextInputProps) => {
-  const {theme2} = useColors();
+type TextInputProps = RNTextInputProps & {
+  theme?: Theme;
+};
+
+const TextInput = ({style, theme, ...rest}: TextInputProps) => {
+  const {color, backgroundColor} = useColors();
 
   return (
     <RNTextInput
       style={[
         {
-          color: theme2.color,
-          backgroundColor: theme2.backgroundColor,
+          color: theme ? theme.color : color,
+          backgroundColor: theme ? theme.backgroundColor : backgroundColor,
           fontFamily: 'Karla',
           fontSize: 17,
-          paddingVertical: 10,
-          paddingHorizontal: 15,
+          padding: 15,
         },
         style,
       ]}

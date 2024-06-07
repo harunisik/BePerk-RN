@@ -206,7 +206,7 @@ const EditProfile = () => {
             placeholder="Tap to enter name"
             onChangeText={setFullname}
             value={fullname}
-            style={[flex3, {padding: 15}]}
+            style={[flex3]}
           />
         </View>
         <HR />
@@ -216,7 +216,7 @@ const EditProfile = () => {
             placeholder="Tap to enter username"
             onChangeText={setUsername}
             value={username}
-            style={[flex3, {padding: 15}]}
+            style={[flex3]}
           />
         </View>
         <HR />
@@ -226,7 +226,7 @@ const EditProfile = () => {
             placeholder="Tap to enter bio"
             onChangeText={setComment}
             value={comment}
-            style={[flex3, {padding: 15}]}
+            style={[flex3]}
             multiline
           />
         </View>
@@ -237,7 +237,7 @@ const EditProfile = () => {
             placeholder="Tap to enter website"
             onChangeText={setWebSite}
             value={webSite}
-            style={[flex3, {padding: 15}]}
+            style={[flex3]}
           />
         </View>
         <HR style={[{marginBottom: 40}]} />

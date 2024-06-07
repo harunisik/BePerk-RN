@@ -39,6 +39,6 @@ export const colors = {
 export function useColors() {
   const scheme = useColorScheme();
 
-  return scheme === 'dark' ? colors.dark : colors.default;
-  // return colors.dark;
+  // return scheme === 'dark' ? colors.dark : colors.default;
+  return colors.dark;
 }

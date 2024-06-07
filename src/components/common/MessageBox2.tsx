@@ -8,13 +8,14 @@ import {PERMISSIONS} from 'react-native-permissions';
 import {CameraIcon, PictureIcon, ShareIcon} from './Icons';
 import View from './View';
 import TextInput from './TextInput';
+import {useColors} from '../../hooks/customHooks';
 
 const {row, jcSpaceBetween, p10, aiCenter} = common;
 
 const MessageBox2 = ({onPressSend}) => {
   const [message, setMessage] = useState('');
   const [asset, setAsset] = useState();
-
+  const {theme2} = useColors();
   const tabBarHeight = useBottomTabBarHeight();
 
   const handlePress = () => {
@@ -84,7 +85,8 @@ const MessageBox2 = ({onPressSend}) => {
             onChangeText={handleChangeText}
             value={message}
             onSubmitEditing={handlePress}
-            style={{borderRadius: 20, flex: 1}}
+            style={{flex: 1, borderRadius: 20, paddingHorizontal: 15}}
+            theme={theme2}
           />
           {message ? (
             <ShareIcon onPress={handlePress} disabled={!message} />

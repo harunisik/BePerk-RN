@@ -73,12 +73,13 @@ const ForgotPassword = () => {
         </SafeAreaView>
       </LinearGradient>
       <View style={[flex1, aiCenter, rGap30]}>
-        <View style={{width: '75%', rowGap: 10}}>
+        <View style={{width: '75%'}}>
           <Text>E-mail</Text>
           <TextInput
             placeholder="Tap to enter e-mail"
             onChangeText={setEmail}
             value={email}
+            style={{paddingLeft: 0}}
           />
           <HR />
         </View>
