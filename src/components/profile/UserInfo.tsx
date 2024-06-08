@@ -6,6 +6,7 @@ import WebView from '../common/WebView';
 import AccountCard from '../common/AccountCard';
 import Text from '../common/Text';
 import View from '../common/View';
+import {colors} from '../../hooks/customHooks';
 
 const {aiCenter, row, jcCenter, bold, blue, cGap50} = common;
 
@@ -62,23 +63,23 @@ const UserInfo = ({data, isAuthUser, userId}) => {
           <Text>Following</Text>
         </View>
       </View>
-      {(data?.comment || data?.webSite) && (
-        <View
-          style={{
-            alignSelf: 'flex-start',
-            paddingHorizontal: 15,
-            rowGap: 10,
-          }}>
-          <Text>{data?.comment}</Text>
+      <View
+        style={{
+          alignSelf: 'flex-start',
+          paddingHorizontal: 10,
+          rowGap: 10,
+        }}>
+        {data?.comment && <Text>{data?.comment}</Text>}
+        {data?.webSite && (
           <Text
-            style={{color: '#0AAEEF'}}
+            color={colors.blue}
             onPress={() =>
               navigation.navigate(WebView.name, {uri: data?.webSite})
             }>
             {data?.webSite}
           </Text>
-        </View>
-      )}
+        )}
+      </View>
     </View>
   );
 };

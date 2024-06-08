@@ -60,7 +60,7 @@ const MessageDetailsItem = ({item}) => {
   const navigation = useNavigation();
   const {
     store: {
-      authResult: {id: authUserId},
+      userInfo: {userId: authUserId},
     },
   } = useStore();
   const {theme1, theme2} = useColors();

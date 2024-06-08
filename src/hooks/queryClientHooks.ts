@@ -4,7 +4,6 @@ import {useStore} from '../containers/StoreContainer';
 import {AuthActionType} from '../containers/AuthAction';
 import {signIn} from '../services/AuthService';
 import {chatListOpen, getChat} from '../services/ChatService';
-import {badgeCount} from '../services/UserService';
 
 // MUTATION requests
 
@@ -20,8 +19,11 @@ export function useSignIn(data) {
         queryKey: [signIn.name],
         queryFn: () => signIn(data),
       })
-      .then(result => {
-        dispatch({type: AuthActionType.SIGN_IN, authResult: result});
+      .then(({id, username, photo, token}) => {
+        dispatch({
+          type: AuthActionType.SIGN_IN,
+          userInfo: {userId: id, username, photo, token},
+        });
       })
       .catch(({message}) => showMessage({message, type: 'danger'}));
   };

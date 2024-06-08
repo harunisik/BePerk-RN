@@ -26,13 +26,13 @@ const MainStack = () => {
         // Retrieve the credentials
         const credentials = await Keychain.getGenericPassword();
         if (credentials) {
-          const authResult = JSON.parse(credentials.password);
+          const userInfo = JSON.parse(credentials.password);
 
-          oneSignalTokenApi.mutate(authResult.token, {
+          oneSignalTokenApi.mutate(userInfo.token, {
             onSuccess: () => {
               dispatch({
                 type: AuthActionType.SIGN_IN,
-                authResult,
+                userInfo: userInfo,
               });
             },
           });
@@ -52,7 +52,7 @@ const MainStack = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
-        {!store.authResult ? (
+        {!store.userInfo ? (
           <>
             <Stack.Screen name={SignIn.name} component={SignIn} />
             <Stack.Screen

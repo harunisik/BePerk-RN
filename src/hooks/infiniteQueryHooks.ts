@@ -63,7 +63,7 @@ export function useGetUserExploring(
   limit: number = 25,
 ) {
   const {data, fetchNextPage, isFetching, refetch, remove} = useInfiniteQuery({
-    queryKey: [getUserExploring.name, filter],
+    queryKey: [getUserExploring.name, filter, subtype],
     queryFn: ({pageParam = 0}) => {
       return getUserExploring(filter, subtype, limit, limit * pageParam);
     },

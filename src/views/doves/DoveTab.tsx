@@ -1,4 +1,3 @@
-import {StyleSheet} from 'react-native';
 import DovesItem from '../../components/doves/DovesItem';
 import PostDove from './PostDove';
 import ItemSeperator from '../../components/common/ItemSpearator';
@@ -66,13 +65,5 @@ const DoveTab = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    backgroundColor: '#DDDDDD',
-    padding: 10,
-    marginBottom: 20,
-  },
-});
 
 export default DoveTab;

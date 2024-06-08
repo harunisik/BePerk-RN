@@ -52,8 +52,8 @@ const AccountCard = ({
 
   const {
     store: {
-      authResult: {
-        id: authUserId,
+      userInfo: {
+        userId: authUserId,
         username: authUsername,
         photo: authUserPhoto,
       },

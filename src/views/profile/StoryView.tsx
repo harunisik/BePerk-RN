@@ -188,7 +188,7 @@ const StoryView = () => {
   } = route;
   const {
     store: {
-      authResult: {id: userId},
+      userInfo: {userId},
     },
   } = useStore();
 

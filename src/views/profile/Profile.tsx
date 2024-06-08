@@ -193,7 +193,9 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    setFollowing(data?.i_following);
+    if (data) {
+      setFollowing(data.i_following);
+    }
   }, [data]);
 
   return (
@@ -201,7 +203,11 @@ const Profile = () => {
       <Tabs.Container
         lazy
         renderHeader={() => (
-          <View style={{rowGap: 20, marginBottom: 15}}>
+          <View
+            style={{
+              rowGap: 20,
+              padding: 10,
+            }}>
             <UserInfo data={data} isAuthUser={isAuthUser} userId={userId} />
             <ButtonGroup
               onPressFollowing={handlePressFollowing}
@@ -304,13 +310,5 @@ const Profile = () => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    backgroundColor: '#DDDDDD',
-    padding: 10,
-    margin: 10,
-  },
-});
 
 export default Profile;

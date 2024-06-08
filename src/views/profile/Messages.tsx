@@ -47,7 +47,7 @@ const MessageItem = ({item, onDelete}) => {
   const navigation = useNavigation();
   const {
     store: {
-      authResult: {id: authUserId},
+      userInfo: {userId: authUserId},
     },
   } = useStore();
   const {theme1} = useColors();
@@ -65,7 +65,7 @@ const MessageItem = ({item, onDelete}) => {
       chatId: item.id,
     });
   };
-  console.log(printJSON(item));
+
   return (
     <Swipeable
       renderRightActions={() => (
@@ -79,9 +79,8 @@ const MessageItem = ({item, onDelete}) => {
             photo={
               !isMultiple
                 ? item.photo
-                : item.to_users.find(
-                    item1 => item1.id === item.last_message_user_id,
-                  )?.photo
+                : item.to_users.find(({id}) => id === item.last_message_user_id)
+                    ?.photo
             }
             displayUsername={false}
             size={16}

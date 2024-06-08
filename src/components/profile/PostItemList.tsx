@@ -2,6 +2,7 @@ import {MasonryFlashList} from '@shopify/flash-list';
 import PostItem, {IMAGE_HEIGHT} from './PostItem';
 import {Tabs} from 'react-native-collapsible-tab-view';
 import ListEmptyComponent from '../common/ListEmptyComponent';
+import FlatList from '../common/FlatList';
 
 const COL_NUM = 3;
 

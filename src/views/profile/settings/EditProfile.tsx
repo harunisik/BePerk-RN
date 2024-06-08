@@ -1,4 +1,4 @@
-import {Switch, ActivityIndicator} from 'react-native';
+import {Switch, ActivityIndicator, ScrollView} from 'react-native';
 import common from '../../../styles/sharedStyles';
 import {useNavigation} from '@react-navigation/native';
 import {useMutation, useQuery} from '../../../hooks/reactQueryHooks';
@@ -24,6 +24,8 @@ import View from '../../../components/common/View';
 import HR from '../../../components/common/HR';
 import {SettingsListItem1} from './Settings';
 import TextInput from '../../../components/common/TextInput';
+import {AuthActionType} from '../../../containers/AuthAction';
+import {useColors} from '../../../hooks/customHooks';
 
 const {row, flex1, flex3, aiCenter, jcSpaceBetween, p15, gray, mb15, cGap10} =
   common;
@@ -73,13 +75,15 @@ const EditProfile = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const {
+    dispatch,
     store: {
-      authResult: {id},
+      userInfo: {userId},
     },
   } = useStore();
   const navigation = useNavigation();
+  const {backgroundColor} = useColors();
 
-  const {data} = useQuery(getUserProfile, {id});
+  const {data} = useQuery(getUserProfile, {id: userId});
   const postProfileApi = useMutation(postProfile);
   const postSettingsApi = useMutation(postSettings);
 
@@ -90,7 +94,7 @@ const EditProfile = () => {
     form.append('fullname', fullname);
     form.append('username', username);
     form.append('comment', comment);
-    form.append('website', webSite);
+    form.append('webSite', webSite);
 
     if (asset) {
       form.append('photo', {
@@ -101,9 +105,13 @@ const EditProfile = () => {
     }
 
     postProfileApi.mutate(form, {
-      onSuccess: () => {
-        navigation.goBack();
+      onSuccess: data => {
+        dispatch({
+          type: AuthActionType.UPDATE_USER_INFO,
+          userInfo: {username, photo: data.photo},
+        });
         showMessage({message: 'Profile updated'});
+        navigation.goBack();
       },
     });
 
@@ -129,7 +137,6 @@ const EditProfile = () => {
     launchImageLibrary(data => {
       if (data.assets?.length && data.assets.length > 0) {
         const asset = data.assets[0];
-        console.log(asset);
         setAsset(asset);
         setPhoto(asset.uri);
       }
@@ -188,76 +195,78 @@ const EditProfile = () => {
 
   return (
     <>
-      <View style={[p15, {flex: 1}]}>
-        {showIndicator && <ActivityIndicator />}
-        <View style={[aiCenter, mb15, {rowGap: 10}]}>
-          <AccountCard photo={photo} displayUsername={false} size={70} />
-          <Text
-            style={{color: '#0AAEEF'}}
-            onPress={() => setModalVisible(true)}>
-            Change profile photo
-          </Text>
-        </View>
-        <View style={[row, aiCenter]}>
-          <Text style={[gray, flex1]}>Name</Text>
-          <TextInput
-            placeholder="Tap to enter name"
-            onChangeText={setFullname}
-            value={fullname}
-            style={[flex3]}
-          />
-        </View>
-        <HR />
-        <View style={[row, aiCenter]}>
-          <Text style={[gray, flex1]}>Username</Text>
-          <TextInput
-            placeholder="Tap to enter username"
-            onChangeText={setUsername}
-            value={username}
-            style={[flex3]}
-          />
-        </View>
-        <HR />
-        <View style={[row, aiCenter]}>
-          <Text style={[gray, flex1]}>Bio</Text>
-          <TextInput
-            placeholder="Tap to enter bio"
-            onChangeText={setComment}
-            value={comment}
-            style={[flex3]}
-            multiline
-          />
-        </View>
-        <HR />
-        <View style={[row, aiCenter]}>
-          <Text style={[gray, flex1]}>Website</Text>
-          <TextInput
-            placeholder="Tap to enter website"
-            onChangeText={setWebSite}
-            value={webSite}
-            style={[flex3]}
-          />
-        </View>
-        <HR style={[{marginBottom: 40}]} />
-        <View style={[row, jcSpaceBetween, aiCenter, mb15]}>
-          <Text>Hide followers</Text>
-          <View style={[row, aiCenter, cGap10]}>
-            <Text>{data?.hide_followers_emoji}</Text>
-            <Switch onValueChange={setHideFollowers} value={hideFollowers} />
+      <ScrollView style={{backgroundColor}}>
+        <View style={[p15, {flex: 1, rowGap: 8}]}>
+          {showIndicator && <ActivityIndicator />}
+          <View style={[aiCenter, {rowGap: 10, marginBottom: 10}]}>
+            <AccountCard photo={photo} displayUsername={false} size={50} />
+            <Text
+              style={{color: '#0AAEEF'}}
+              onPress={() => setModalVisible(true)}>
+              Change profile photo
+            </Text>
+          </View>
+          <View style={[row, aiCenter]}>
+            <Text style={[gray, flex1]}>Name</Text>
+            <TextInput
+              placeholder="Tap to enter name"
+              onChangeText={setFullname}
+              value={fullname}
+              style={[flex3]}
+            />
+          </View>
+          <HR />
+          <View style={[row, aiCenter]}>
+            <Text style={[gray, flex1]}>Username</Text>
+            <TextInput
+              placeholder="Tap to enter username"
+              onChangeText={setUsername}
+              value={username}
+              style={[flex3]}
+            />
+          </View>
+          <HR />
+          <View style={[row, aiCenter]}>
+            <Text style={[gray, flex1]}>Bio</Text>
+            <TextInput
+              placeholder="Tap to enter bio"
+              onChangeText={setComment}
+              value={comment}
+              style={[flex3]}
+              multiline
+            />
+          </View>
+          <HR />
+          <View style={[row, aiCenter]}>
+            <Text style={[gray, flex1]}>Website</Text>
+            <TextInput
+              placeholder="Tap to enter website"
+              onChangeText={setWebSite}
+              value={webSite}
+              style={[flex3]}
+            />
+          </View>
+          <HR style={[{marginBottom: 30}]} />
+          <View style={[row, jcSpaceBetween, aiCenter, mb15]}>
+            <Text>Hide followers</Text>
+            <View style={[row, aiCenter, cGap10]}>
+              <Text>{data?.hide_followers_emoji}</Text>
+              <Switch onValueChange={setHideFollowers} value={hideFollowers} />
+            </View>
+          </View>
+          <View style={[row, jcSpaceBetween, aiCenter, mb15]}>
+            <Text>Hide followings</Text>
+            <View style={[row, aiCenter, cGap10]}>
+              <Text>{data?.hide_following_emoji}</Text>
+              <Switch onValueChange={setHideFollowing} value={hideFollowing} />
+            </View>
+          </View>
+          <View style={[row, jcSpaceBetween, aiCenter, mb15]}>
+            <Text>Private account</Text>
+            <Switch onValueChange={setPrivateAccount} value={privateAccount} />
           </View>
         </View>
-        <View style={[row, jcSpaceBetween, aiCenter, mb15]}>
-          <Text>Hide followings</Text>
-          <View style={[row, aiCenter, cGap10]}>
-            <Text>{data?.hide_following_emoji}</Text>
-            <Switch onValueChange={setHideFollowing} value={hideFollowing} />
-          </View>
-        </View>
-        <View style={[row, jcSpaceBetween, aiCenter, mb15]}>
-          <Text>Private account</Text>
-          <Switch onValueChange={setPrivateAccount} value={privateAccount} />
-        </View>
-      </View>
+      </ScrollView>
       <BottomModal
         visible={modalVisible}
         onDismiss={() => setModalVisible(false)}>

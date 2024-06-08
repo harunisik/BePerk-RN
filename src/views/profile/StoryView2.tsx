@@ -194,7 +194,7 @@ const StoryView2 = () => {
   } = route;
   const {
     store: {
-      authResult: {id: userId},
+      userInfo: {userId},
     },
   } = useStore();
 

@@ -64,7 +64,7 @@ const BottomTab = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const {
     store: {
-      authResult: {id, username},
+      userInfo: {userId, username},
     },
   } = useStore();
 
@@ -90,7 +90,7 @@ const BottomTab = () => {
         <Tab.Screen
           name={ProfileStack.name}
           component={ProfileStack}
-          initialParams={{userId: id, username, headerBackVisible: false}}
+          initialParams={{userId, username, headerBackVisible: false}}
         />
       </Tab.Navigator>
       <AddModal

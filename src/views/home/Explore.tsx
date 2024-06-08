@@ -14,7 +14,7 @@ const Explore = () => {
   };
 
   return (
-    <View>
+    <View style={{flex: 1}}>
       <PostItemList
         data={data}
         fetchNextPage={fetchNextPage}

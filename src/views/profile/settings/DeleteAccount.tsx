@@ -26,7 +26,7 @@ const DeleteAccount = () => {
   const navigation = useNavigation();
   const {
     store: {
-      authResult: {id},
+      userInfo: {userId},
     },
     dispatch,
   } = useStore();
@@ -35,7 +35,7 @@ const DeleteAccount = () => {
   const handleModalDelete = () => {
     deleteUser.mutate(
       {
-        id,
+        id: userId,
       },
       {
         onSuccess: () => {

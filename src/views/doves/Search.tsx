@@ -34,6 +34,7 @@ const renderTabBar = props => {
     />
   );
 };
+
 const SearchTabGroup = ({searchText}) => {
   const layout = useWindowDimensions();
   const [index, setIndex] = useState(0);

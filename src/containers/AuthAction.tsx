@@ -1,10 +1,11 @@
 export enum AuthActionType {
   SIGN_IN = 'signin',
   SIGN_OUT = 'signout',
+  UPDATE_USER_INFO = 'updateUserInfo',
 }
 
-export interface AuthResult {
-  id: number;
+export interface UserInfo {
+  userId: number;
   token: string;
   username: string;
   photo: string;
@@ -12,7 +13,7 @@ export interface AuthResult {
 
 interface AuthAction {
   type: AuthActionType;
-  authResult: AuthResult;
+  userInfo: Partial<UserInfo>;
 }
 
 export default AuthAction;

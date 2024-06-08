@@ -34,7 +34,7 @@ const ProfileStack = () => {
   } = route;
   const {
     store: {
-      authResult: {id},
+      userInfo: {userId: authUserId},
     },
   } = useStore();
 
@@ -54,7 +54,7 @@ const ProfileStack = () => {
           userId,
           username,
           headerBackVisible,
-          isAuthUser: userId === id,
+          isAuthUser: userId === authUserId,
         }}
       />
       <Stack.Screen name={Settings.name} component={Settings} />

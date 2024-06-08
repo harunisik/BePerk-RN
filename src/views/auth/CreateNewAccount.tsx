@@ -54,7 +54,7 @@ const CreateNewAccount = () => {
   const navigation = useNavigation();
   const {
     dispatch,
-    store: {authResult},
+    store: {userInfo},
   } = useStore();
   const createUser = useMutation(userCreateUser);
 
@@ -100,14 +100,14 @@ const CreateNewAccount = () => {
       {
         onSuccess: ({user_id, token}) => {
           showMessage({message: 'Account created'});
-          if (authResult) {
+          if (userInfo) {
             dispatch({
               type: AuthActionType.SIGN_OUT,
             });
           } else {
             dispatch({
               type: AuthActionType.SIGN_IN,
-              authResult: {id: user_id, token, username, photo: ''},
+              userInfo: {id: user_id, token, username, photo: ''},
             });
             // if (navigation.canGoBack()) {
             //   navigation.goBack();
@@ -215,7 +215,7 @@ const CreateNewAccount = () => {
           <Text
             style={{color: '#0AAEEF', textDecorationLine: 'underline'}}
             onPress={() => {
-              if (authResult) {
+              if (userInfo) {
                 dispatch({type: AuthActionType.SIGN_OUT});
               } else {
                 navigation.navigate(Signin.name);

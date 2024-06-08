@@ -55,7 +55,7 @@ const StoriesTab = () => {
   const navigation = useNavigation();
   const {
     store: {
-      authResult: {id: userId},
+      userInfo: {userId},
     },
   } = useStore();
   const {data, refetch, isFetching} = useQuery(getMy24);

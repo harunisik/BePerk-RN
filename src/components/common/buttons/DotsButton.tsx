@@ -33,7 +33,7 @@ const ItemModal = ({
 
   const {
     store: {
-      authResult: {id: idParam, username: usernameParam},
+      userInfo: {userId: authUserId, username: authUsername},
     },
   } = useStore();
 
@@ -69,7 +69,7 @@ const ItemModal = ({
         title="Copy Link"
         icon="content-copy"
       />
-      {idParam === userId || usernameParam === username ? (
+      {authUserId === userId || authUsername === username ? (
         <>
           <Button
             title="Delete"

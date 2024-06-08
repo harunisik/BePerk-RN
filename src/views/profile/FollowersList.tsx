@@ -22,7 +22,7 @@ const {pl15, pr15, row, aiCenter} = common;
 const UserItem = ({item, onPressFollow}) => {
   const {
     store: {
-      authResult: {id},
+      userInfo: {userId},
     },
   } = useStore();
 
@@ -34,7 +34,7 @@ const UserItem = ({item, onPressFollow}) => {
         photo={item.photo}
         usePush
       />
-      {item.user_id !== id && (
+      {item.user_id !== userId && (
         <Pressable
           style={{
             marginLeft: 'auto',
