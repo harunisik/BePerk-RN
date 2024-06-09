@@ -8,7 +8,8 @@ export interface UserInfo {
   userId: number;
   token: string;
   username: string;
-  photo: string;
+  photo?: string;
+  theme?: string;
 }
 
 interface AuthAction {

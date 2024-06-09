@@ -1,4 +1,4 @@
-import {useColorScheme} from 'react-native';
+import {useStore} from '../containers/StoreContainer';
 
 export interface Theme {
   color: string;
@@ -37,8 +37,9 @@ export const colors = {
 };
 
 export function useColors() {
-  const scheme = useColorScheme();
+  // const scheme = useColorScheme();
+  const {store} = useStore();
 
-  return scheme === 'dark' ? colors.dark : colors.default;
+  return store.userInfo?.theme === 'dark' ? colors.dark : colors.default;
   // return colors.dark;
 }

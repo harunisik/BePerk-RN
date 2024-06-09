@@ -76,7 +76,7 @@ const ChangePassword = () => {
   return (
     <View style={[aiCenter, rGap30, {paddingVertical: 30, flex: 1}]}>
       <View style={{width: '75%'}}>
-        <Text style={gray}>Old password</Text>
+        <Text>Old password</Text>
         <TextInput
           placeholder="Tap to enter old password"
           onChangeText={setOldPassword}
@@ -87,7 +87,7 @@ const ChangePassword = () => {
         <HR />
       </View>
       <View style={{width: '75%'}}>
-        <Text style={gray}>New password</Text>
+        <Text>New password</Text>
         <TextInput
           placeholder="Tap to enter new password"
           onChangeText={setNewPassword}
@@ -98,7 +98,7 @@ const ChangePassword = () => {
         <HR />
       </View>
       <View style={{width: '75%'}}>
-        <Text style={gray}>Confirm new password</Text>
+        <Text>Confirm new password</Text>
         <TextInput
           placeholder="Tap to enter confirm password"
           onChangeText={setConfirmNewPassword}

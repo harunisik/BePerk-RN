@@ -8,7 +8,7 @@ import {useState} from 'react';
 import Search from './Search';
 import Activity from './Activity';
 import View from '../../components/common/View';
-import {useColors} from '../../hooks/customHooks';
+import {colors, useColors} from '../../hooks/customHooks';
 import {BellIcon, PlusIcon, SearchIcon} from '../../components/common/Icons';
 
 const {row, cGap15} = common;
@@ -52,8 +52,15 @@ const Doves = () => {
     <Tab.Navigator
       screenOptions={{
         lazy: true,
-        tabBarLabelStyle: {textTransform: 'none', fontWeight: 'bold', color},
+        tabBarLabelStyle: {
+          textTransform: 'none',
+          fontWeight: '600',
+          fontSize: 17,
+          color,
+        },
         tabBarStyle: {backgroundColor},
+        tabBarIndicatorStyle: {backgroundColor: colors.blue},
+        tabBarItemStyle: {paddingHorizontal: 0},
       }}>
       <Tab.Screen
         name={HomeTab.name}

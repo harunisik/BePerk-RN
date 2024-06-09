@@ -12,6 +12,7 @@ import {oneSignalToken} from '../services/AuthService';
 import {useMutation} from '../hooks/reactQueryHooks';
 import {AuthActionType} from '../containers/AuthAction';
 import ForgotPassword from './auth/ForgotPassword';
+import {printJSON} from '../utils/TestUtil';
 
 const Stack = createNativeStackNavigator();
 
@@ -32,7 +33,7 @@ const MainStack = () => {
             onSuccess: () => {
               dispatch({
                 type: AuthActionType.SIGN_IN,
-                userInfo: userInfo,
+                userInfo,
               });
             },
           });

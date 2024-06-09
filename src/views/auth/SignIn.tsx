@@ -18,8 +18,8 @@ import Button from '../../components/common/buttons/Button';
 const {row, gray, flex1, aiCenter, rGap30} = common;
 
 const Signin = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('harun-local');
+  const [password, setPassword] = useState('123');
 
   const {backgroundColor} = useColors();
 

@@ -107,7 +107,9 @@ export const ProfileScreenOptions = ({route, navigation}) => {
         {headerBackVisible && (
           <ArrowBackIcon onPress={() => navigation.goBack()} />
         )}
-        <Text style={[bold]}>{username}</Text>
+        <Text style={[bold]} size={22}>
+          {username}
+        </Text>
       </View>
     ),
     headerRight: HeaderRight,

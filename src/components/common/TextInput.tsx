@@ -9,7 +9,7 @@ type TextInputProps = RNTextInputProps & {
 };
 
 const TextInput = ({style, theme, ...rest}: TextInputProps) => {
-  const {color, backgroundColor} = useColors();
+  const {color, backgroundColor, theme: appTheme} = useColors();
 
   return (
     <RNTextInput
@@ -21,8 +21,12 @@ const TextInput = ({style, theme, ...rest}: TextInputProps) => {
           fontSize: 17,
           padding: 10,
         },
+
         style,
       ]}
+      placeholderTextColor={
+        appTheme === 'dark' ? 'rgb(90, 90, 90)' : 'lightgray'
+      }
       {...rest}
     />
   );

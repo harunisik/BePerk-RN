@@ -10,8 +10,13 @@ import AddModal from './add/AddModal';
 import AddStack from './add/AddStack';
 import Text from '../components/common/Text';
 import View from '../components/common/View';
-import {useColors} from '../hooks/customHooks';
-import {SafeAreaView} from 'react-native';
+import {colors, useColors} from '../hooks/customHooks';
+import {SafeAreaView, StyleSheet} from 'react-native';
+import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
+import ForYouTab from './home/ForYouTab';
+import Home from './home/Home';
+import FeaturedItemDetails from './featured/FeaturedItemDetails';
+import MessageDetails from './profile/MessageDetails';
 
 const routeIcons = {
   [HomeStack.name]: 'home',
@@ -30,8 +35,9 @@ const tabBarLabels = {
 };
 
 const BottomTabScreenOptions = ({route}) => {
-  const {backgroundColor} = useColors();
-
+  const {theme} = useColors();
+  const routeName = getFocusedRouteNameFromRoute(route) ?? '';
+  console.log(routeName);
   return {
     lazy: true,
     headerShown: false,
@@ -39,22 +45,49 @@ const BottomTabScreenOptions = ({route}) => {
       const iconName = routeIcons[route.name] ?? 'minus';
 
       return (
-        <View style={{alignItems: 'center'}}>
-          <MaterialCommunityIcons name={iconName} size={30} color={color} />
+        <View
+          disableTheme
+          style={{
+            alignItems: 'center',
+          }}>
+          {route.name === AddStack.name ? (
+            <View
+              style={{
+                backgroundColor: colors.blue,
+                borderRadius: 20,
+                padding: 3,
+              }}>
+              <MaterialCommunityIcons name={iconName} size={30} color="white" />
+            </View>
+          ) : (
+            <MaterialCommunityIcons name={iconName} size={30} color={color} />
+          )}
           {route.name !== AddStack.name && (
-            <Text style={{color}}>{tabBarLabels[route.name]}</Text>
+            <Text color={color} size={15}>
+              {tabBarLabels[route.name]}
+            </Text>
           )}
         </View>
       );
     },
     tabBarShowLabel: false,
     tabBarStyle: {
-      backgroundColor,
-      // minHeight: 90,
+      backgroundColor:
+        theme === 'dark' ? 'rgb(15, 15, 15)' : 'rgb(245, 245, 245)',
+      borderTopWidth: StyleSheet.hairlineWidth,
+      borderTopColor: 'rgb(100, 100, 100)',
+      paddingTop: 5,
+      ...(![Home.name, FeaturedItemDetails.name, MessageDetails.name].includes(
+        routeName,
+      )
+        ? {opacity: 0.8, position: 'absolute'}
+        : {}),
       //   display:
       //     getFocusedRouteNameFromRoute(route) === StoryView.name ? 'none' : 'flex',
+      // https://stackoverflow.com/questions/51352081/react-navigation-how-to-hide-tabbar-from-inside-stack-navigation
     },
-    // https://stackoverflow.com/questions/51352081/react-navigation-how-to-hide-tabbar-from-inside-stack-navigation
+    tabBarActiveTintColor: colors.blue,
+    ...(theme !== 'dark' && {tabBarInactiveTintColor: 'gray'}),
   };
 };
 
@@ -70,10 +103,7 @@ const BottomTab = () => {
 
   return (
     <>
-      <Tab.Navigator
-        screenOptions={BottomTabScreenOptions}
-        // screenOptions={{tabBarStyle:{alignContent:'center'},}}
-      >
+      <Tab.Navigator screenOptions={BottomTabScreenOptions}>
         <Tab.Screen name={HomeStack.name} component={HomeStack} />
         <Tab.Screen name={FeaturedStack.name} component={FeaturedStack} />
         <Tab.Screen

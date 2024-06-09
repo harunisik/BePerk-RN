@@ -83,7 +83,7 @@ const MessageItem = ({item, onDelete}) => {
                     ?.photo
             }
             displayUsername={false}
-            size={16}
+            size={26}
             usePush
           />
           <View style={[rGap3, flex1]}>
