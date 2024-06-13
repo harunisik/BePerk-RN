@@ -18,6 +18,7 @@ import {
   getUserExploring,
   getUserFeed,
   getUserFollowing,
+  getUserPerks,
   getUserProfile,
   postBookmarks,
   postComment,
@@ -36,7 +37,12 @@ import {getMy24, postMy24, postMy24Like} from '../services/My24Service';
 const queryMap = {
   // [postProfile.name]: [getUserProfile.name],
   [postBookmarks.name]: [],
-  [deletePost.name]: [getUserFeed.name, getUserExploring.name, getMy24.name],
+  [deletePost.name]: [
+    getUserFeed.name,
+    getUserExploring.name,
+    getMy24.name,
+    getUserPerks.name,
+  ],
   [postUserLike.name]: [],
   [postMy24Like.name]: [getMy24.name],
   [postMy24.name]: [getMy24.name],

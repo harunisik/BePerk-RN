@@ -18,7 +18,7 @@ const TextInput = ({style, theme, ...rest}: TextInputProps) => {
           color: theme ? theme.color : color,
           backgroundColor: theme ? theme.backgroundColor : backgroundColor,
           fontFamily: 'Karla',
-          fontSize: 17,
+          fontSize: 16,
           padding: 10,
         },
 

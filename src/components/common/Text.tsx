@@ -10,7 +10,7 @@ const Text = ({style, color, size, ...rest}: TextProps) => {
   return (
     <RNText
       style={[
-        {fontFamily: 'Karla-Regular', fontSize: size ?? 17, color: _color},
+        {fontFamily: 'Karla-Regular', fontSize: size ?? 16, color: _color},
         style,
       ]}
       {...rest}

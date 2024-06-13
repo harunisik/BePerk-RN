@@ -6,7 +6,7 @@ import Text from '../Text';
 import View from '../View';
 import {HeartIcon} from '../Icons';
 
-const {cGap3, row, aiCenter, rGap5} = common;
+const {cGap1, cGap2, cGap3, row, aiCenter, rGap5} = common;
 
 interface LikeButtonProps {
   id: number;
@@ -17,6 +17,7 @@ interface LikeButtonProps {
   backgroundColor?: string;
   vertical?: boolean;
   iconSize?: number;
+  labelSize?: number;
 }
 
 const LikeButtton = ({
@@ -27,6 +28,7 @@ const LikeButtton = ({
   color,
   vertical = false,
   iconSize,
+  labelSize,
 }: LikeButtonProps) => {
   const [likedState, setLikedState] = useState(liked);
   const [likesCountState, setLikesCountState] = useState(likesCount);
@@ -58,7 +60,9 @@ const LikeButtton = ({
         color={color}
         size={iconSize}
       />
-      <Text color={color}>{likesCountState}</Text>
+      <Text color={color} size={labelSize}>
+        {likesCountState}
+      </Text>
     </View>
   );
 };

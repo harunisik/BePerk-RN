@@ -37,9 +37,10 @@ const ListHeaderItem = ({item}) => {
               item={item}
               color="white"
               backgroundColor="#0AAEEF"
+              iconSize={22}
             />
             <Image
-              style={{width: 40, height: 40}}
+              style={{width: 30, height: 30}}
               source={require('../../assets/beperk_logo.png')}
             />
           </View>

@@ -25,16 +25,12 @@ const UserInfo = ({data, isAuthUser, userId}) => {
 
       <View style={[aiCenter, row, jcCenter, cGap50]}>
         <View style={[aiCenter]}>
-          <Text size={18} style={[bold, blue]}>
-            {data?.posts}
-          </Text>
+          <Text style={[bold, blue]}>{data?.posts}</Text>
           <Text>Posts</Text>
         </View>
         <View style={[aiCenter]}>
           {!isAuthUser && data?.hide_followers === 1 ? (
-            <Text size={18} style={[bold, blue]}>
-              {data?.hide_followers_emoji}
-            </Text>
+            <Text style={[bold, blue]}>{data?.hide_followers_emoji}</Text>
           ) : (
             <Pressable
               onPress={() =>
@@ -44,18 +40,14 @@ const UserInfo = ({data, isAuthUser, userId}) => {
                   isAuthUser,
                 })
               }>
-              <Text size={18} style={[bold, blue]}>
-                {data?.followers}
-              </Text>
+              <Text style={[bold, blue]}>{data?.followers}</Text>
             </Pressable>
           )}
           <Text>Followers</Text>
         </View>
         <View style={[aiCenter]}>
           {!isAuthUser && data?.hide_followers === 1 ? (
-            <Text size={18} style={[bold, blue]}>
-              {data?.hide_following_emoji}
-            </Text>
+            <Text style={[bold, blue]}>{data?.hide_following_emoji}</Text>
           ) : (
             <Pressable
               onPress={() =>
@@ -65,9 +57,7 @@ const UserInfo = ({data, isAuthUser, userId}) => {
                   isAuthUser,
                 })
               }>
-              <Text size={18} style={[bold, blue]}>
-                {data?.following}
-              </Text>
+              <Text style={[bold, blue]}>{data?.following}</Text>
             </Pressable>
           )}
           <Text>Following</Text>
@@ -76,13 +66,12 @@ const UserInfo = ({data, isAuthUser, userId}) => {
       <View
         style={{
           alignSelf: 'flex-start',
-          paddingHorizontal: 5,
+          paddingHorizontal: 10,
           rowGap: 10,
         }}>
-        {data?.comment && <Text size={18}>{data?.comment}</Text>}
+        {data?.comment && <Text>{data?.comment}</Text>}
         {data?.webSite && (
           <Text
-            size={18}
             color={colors.blue}
             onPress={() =>
               navigation.navigate(WebView.name, {uri: data?.webSite})

@@ -2,6 +2,9 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import Fontisto from 'react-native-vector-icons/Fontisto';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import {IconProps as IconPropsRN} from 'react-native-vector-icons/Icon';
 import {colors, useColors} from '../../hooks/customHooks';
@@ -107,7 +110,7 @@ export const CommentIcon = ({size = 26, color, ...rest}: IconProps) => {
 
   return (
     <MaterialCommunityIcons
-      name="comment-processing-outline"
+      name="comment-outline"
       size={size}
       color={color ?? themeColor}
       {...rest}
@@ -374,6 +377,21 @@ export const EarthIcon = ({size = 26, color, ...rest}: IconProps) => {
 
   return (
     <Ionicons name="earth" size={size} color={color ?? themeColor} {...rest} />
+  );
+};
+
+// FontAwesome
+
+export const CommentIcon2 = ({size = 26, color, ...rest}: IconProps) => {
+  const {color: themeColor} = useColors();
+
+  return (
+    <Fontisto
+      name="comment"
+      size={size}
+      color={color ?? themeColor}
+      {...rest}
+    />
   );
 };
 

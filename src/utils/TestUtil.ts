@@ -5,7 +5,3 @@ export const printData = (start: number, end: number) => {
   }
   console.log(output + ']');
 };
-
-export const printJSON = (data: string) => {
-  console.log(JSON.stringify(data, null, 2));
-};

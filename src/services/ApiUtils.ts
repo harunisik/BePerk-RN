@@ -1,11 +1,8 @@
-import {printJSON} from '../utils/TestUtil';
-
 export function handleResponse(response: any) {
   return response.data;
 }
 
 export function handleError(error: any) {
-  // printJSON(error);
   if (error.response?.data?.error) {
     throw new Error(error.response.data.error);
   }

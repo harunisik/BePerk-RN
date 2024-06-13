@@ -1,4 +1,4 @@
-import {useNavigation, useRoute} from '@react-navigation/native';
+import {useIsFocused, useNavigation, useRoute} from '@react-navigation/native';
 import {Pressable, StyleSheet} from 'react-native';
 import {formatDate} from '../../utils/DateUtil';
 import common from '../../styles/sharedStyles';
@@ -22,7 +22,6 @@ import View from '../../components/common/View';
 import {ArrowBackIcon, ArrowIcon} from '../../components/common/Icons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useColors} from '../../hooks/customHooks';
-import {printJSON} from '../../utils/TestUtil';
 
 const {flex1, row, aiCenter, bold, cGap5, p10} = common;
 
@@ -251,13 +250,17 @@ const MessageDetailsItem = ({item}) => {
   );
 };
 
-const MessageDetails = () => {
+const MessageDetails = ({navigation}) => {
   const [data, setData] = useState([]);
   const [isSending, setIsSending] = useState(false);
   const route = useRoute();
+  const navigation2 = useNavigation();
+
   const {
     params: {chatId: chatIdParam, userId},
   } = route;
+
+  useIsFocused();
 
   const [chatId, setChatId] = useState(chatIdParam);
 

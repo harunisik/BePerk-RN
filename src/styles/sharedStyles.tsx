@@ -53,6 +53,12 @@ const common = StyleSheet.create({
   rGap30: {
     rowGap: 30,
   },
+  cGap1: {
+    columnGap: 1,
+  },
+  cGap2: {
+    columnGap: 2,
+  },
   cGap3: {
     columnGap: 3,
   },

@@ -14,7 +14,6 @@ import View from '../../components/common/View';
 import {FileIcon, VerifiedIcon} from '../../components/common/Icons';
 import {useColors} from '../../hooks/customHooks';
 import Badge from '../../components/common/Badge';
-import {printJSON} from '../../utils/TestUtil';
 
 const {row, cGap3, aiCenter, bold, p10, rGap3, flex1} = common;
 

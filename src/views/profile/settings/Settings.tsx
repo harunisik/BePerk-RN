@@ -25,7 +25,6 @@ import {useQuery} from '../../../hooks/reactQueryHooks';
 import {getUserSettings} from '../../../services/UserService';
 import Text from '../../../components/common/Text';
 import {ArrowIcon} from '../../../components/common/Icons';
-import {useColors} from '../../../hooks/customHooks';
 import View from '../../../components/common/View';
 
 const {gray, p15, row, jcSpaceBetween, aiCenter} = common;

@@ -7,7 +7,7 @@ const HR = ({style, ...rest}: ViewProps) => {
       style={[
         {
           borderBottomWidth: StyleSheet.hairlineWidth,
-          borderBottomColor: 'gray',
+          borderBottomColor: 'rgb(50,50,50)',
         },
         style,
       ]}

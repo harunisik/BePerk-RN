@@ -70,10 +70,19 @@ const DovesItem = ({item, theme}) => {
         backgroundColor={_backgroundColor}>
         <DovesItemOptions
           item={item}
-          iconSize={22}
+          iconSize={16}
+          labelSize={14}
           backgroundColor={_backgroundColor}
+          color="gray"
         />
-        <DotsButton id={id} type={type} userId={user_id} username={username} />
+        <DotsButton
+          id={id}
+          type={type}
+          userId={user_id}
+          username={username}
+          iconSize={20}
+          color="gray"
+        />
       </View>
     </View>
   );

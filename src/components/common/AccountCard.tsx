@@ -116,7 +116,7 @@ const AccountCard = ({
       </View>
       <View style={{alignItems: 'center'}} disableTheme>
         {displayUsername && _username && (
-          <View disableTheme style={{rowGap: 3}}>
+          <View disableTheme>
             <View style={[row, {columnGap: 5}]} disableTheme>
               <Text style={[bold, labelStyle]} numberOfLines={1}>
                 {_username}

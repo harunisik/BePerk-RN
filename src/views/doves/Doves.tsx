@@ -55,7 +55,7 @@ const Doves = () => {
         tabBarLabelStyle: {
           textTransform: 'none',
           fontWeight: '600',
-          fontSize: 17,
+          fontSize: 15,
           color,
         },
         tabBarStyle: {backgroundColor},

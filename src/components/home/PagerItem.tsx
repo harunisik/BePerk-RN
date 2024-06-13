@@ -58,15 +58,15 @@ const PagerItem = ({item, paused = true}) => {
           />
           <Text style={{color: 'white'}}>{caption}</Text>
         </View>
-        <View style={{rowGap: 20}}>
+        <View style={{rowGap: 20, alignItems: 'center'}}>
           <LikeButtton
             id={id}
             liked={liked}
             likesCount={likes_count}
             type={type}
             vertical
-            iconSize={40}
             color="white"
+            iconSize={30}
           />
           <CommentButton
             id={id}
@@ -78,24 +78,24 @@ const PagerItem = ({item, paused = true}) => {
             commentsCount={comments_count}
             uploadTime={upload_time}
             vertical
-            iconSize={40}
             color="white"
+            iconSize={30}
           />
           <BookmarkButton
             id={id}
             type={type}
             isSaved={bookmark}
-            iconSize={40}
             color="white"
+            iconSize={30}
           />
-          <ShareButton id={id} type={type} iconSize={40} color="white" />
+          <ShareButton id={id} type={type} iconSize={30} color="white" />
           <DotsButton
             id={id}
             type={type}
             userId={user_id}
             username={username}
-            iconSize={40}
             color="white"
+            iconSize={30}
           />
         </View>
       </View>

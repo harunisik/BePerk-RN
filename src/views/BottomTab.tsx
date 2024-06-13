@@ -11,12 +11,12 @@ import AddStack from './add/AddStack';
 import Text from '../components/common/Text';
 import View from '../components/common/View';
 import {colors, useColors} from '../hooks/customHooks';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
+import {opacity} from 'react-native-reanimated/lib/typescript/reanimated2/Colors';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
-import ForYouTab from './home/ForYouTab';
-import Home from './home/Home';
-import FeaturedItemDetails from './featured/FeaturedItemDetails';
 import MessageDetails from './profile/MessageDetails';
+import FeaturedItemDetails from './featured/FeaturedItemDetails';
+import Home from './home/Home';
 
 const routeIcons = {
   [HomeStack.name]: 'home',
@@ -36,8 +36,8 @@ const tabBarLabels = {
 
 const BottomTabScreenOptions = ({route}) => {
   const {theme} = useColors();
-  const routeName = getFocusedRouteNameFromRoute(route) ?? '';
-  console.log(routeName);
+  const routeName = getFocusedRouteNameFromRoute(route);
+
   return {
     lazy: true,
     headerShown: false,
@@ -57,10 +57,10 @@ const BottomTabScreenOptions = ({route}) => {
                 borderRadius: 20,
                 padding: 3,
               }}>
-              <MaterialCommunityIcons name={iconName} size={30} color="white" />
+              <MaterialCommunityIcons name={iconName} size={26} color="white" />
             </View>
           ) : (
-            <MaterialCommunityIcons name={iconName} size={30} color={color} />
+            <MaterialCommunityIcons name={iconName} size={26} color={color} />
           )}
           {route.name !== AddStack.name && (
             <Text color={color} size={15}>
@@ -77,11 +77,11 @@ const BottomTabScreenOptions = ({route}) => {
       borderTopWidth: StyleSheet.hairlineWidth,
       borderTopColor: 'rgb(100, 100, 100)',
       paddingTop: 5,
-      ...(![Home.name, FeaturedItemDetails.name, MessageDetails.name].includes(
-        routeName,
-      )
-        ? {opacity: 0.8, position: 'absolute'}
-        : {}),
+      // ...(![Home.name, FeaturedItemDetails.name, MessageDetails.name].includes(
+      //   routeName,
+      // )
+      //   ? {position: 'absolute', opacity: 0.85}
+      //   : {}),
       //   display:
       //     getFocusedRouteNameFromRoute(route) === StoryView.name ? 'none' : 'flex',
       // https://stackoverflow.com/questions/51352081/react-navigation-how-to-hide-tabbar-from-inside-stack-navigation
@@ -100,6 +100,7 @@ const BottomTab = () => {
       userInfo: {userId, username},
     },
   } = useStore();
+  const {theme} = useColors();
 
   return (
     <>

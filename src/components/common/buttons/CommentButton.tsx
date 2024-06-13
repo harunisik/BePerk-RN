@@ -3,7 +3,7 @@ import Comment from '../../../views/doves/Comment';
 import {useNavigation} from '@react-navigation/native';
 import Text from '../Text';
 import View from '../View';
-import {CommentIcon} from '../Icons';
+import {CommentIcon, CommentIcon2} from '../Icons';
 
 const {cGap3, row, aiCenter, rGap5} = common;
 
@@ -20,6 +20,7 @@ interface CommentButtonProps {
   backgroundColor?: string;
   vertical?: boolean;
   iconSize?: number;
+  labelSize?: number;
 }
 
 const CommentButton = ({
@@ -34,6 +35,7 @@ const CommentButton = ({
   color,
   vertical = false,
   iconSize,
+  labelSize,
 }: CommentButtonProps) => {
   const navigation = useNavigation();
 
@@ -56,7 +58,9 @@ const CommentButton = ({
         }
         size={iconSize}
       />
-      <Text color={color}>{commentsCount}</Text>
+      <Text color={color} size={labelSize}>
+        {commentsCount}
+      </Text>
     </View>
   );
 };

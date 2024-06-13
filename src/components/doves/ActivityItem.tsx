@@ -4,7 +4,6 @@ import AccountCard from '../common/AccountCard';
 import Text from '../common/Text';
 import View from '../common/View';
 import {PictureIcon} from '../common/Icons';
-import {printJSON} from '../../utils/TestUtil';
 
 enum HistoryItemType {
   Video,
