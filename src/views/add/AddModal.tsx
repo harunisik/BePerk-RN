@@ -7,16 +7,19 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import AddStack from './AddStack';
 import NewStory from './NewStory';
 import NewPost from './NewPost';
-import BottomModal from '../../components/common/BottomModal';
 import {
   launchCamera,
   launchImageLibrary,
   launchMediaLibrary,
 } from '../../utils/MediaUtil';
 import {PictureIcon} from '../../components/common/Icons';
+import BottomSheetModal from '../../components/common/BottomSheetModal';
+import {colors, useColors} from '../../hooks/customHooks';
+import View from '../../components/common/View';
 
 export const ImageVideoSelectionModal = ({visible, onDismiss, navigateTo}) => {
   const navigation = useNavigation();
+  const {theme, color} = useColors();
 
   const processPhoto = () =>
     launchImageLibrary(data => {
@@ -65,24 +68,41 @@ export const ImageVideoSelectionModal = ({visible, onDismiss, navigateTo}) => {
   };
 
   return (
-    <BottomModal visible={visible} onDismiss={onDismiss}>
-      <Button
-        title="Photo Library"
-        onPress={handlePressImage}
-        icon={<AntDesign name="picture" size={26} color="white" />}
-      />
+    <BottomSheetModal
+      visible={visible}
+      onDismiss={onDismiss}
+      snapPoints={['20%']}>
+      <View style={{rowGap: 10, width: '85%'}} disableTheme>
+        <Button
+          title="Photo Library"
+          onPress={handlePressImage}
+          icon={<AntDesign name="picture" size={26} color={colors.blue} />}
+          iconColor={colors.blue}
+          theme={{
+            color,
+            backgroundColor:
+              theme === 'dark' ? 'rgb(50, 50, 50)' : 'rgb(245, 240, 240)',
+          }}
+        />
 
-      <Button
-        title="Camera"
-        onPress={handlePressVideo}
-        icon={<AntDesign name="camera" size={26} color="white" />}
-      />
-    </BottomModal>
+        <Button
+          title="Camera"
+          onPress={handlePressVideo}
+          icon={<AntDesign name="camera" size={26} color={colors.blue} />}
+          theme={{
+            color,
+            backgroundColor:
+              theme === 'dark' ? 'rgb(50, 50, 50)' : 'rgb(245, 240, 240)',
+          }}
+        />
+      </View>
+    </BottomSheetModal>
   );
 };
 
 export const AddDoveModal = ({visible, onDismiss}) => {
   const navigation = useNavigation();
+  const {theme, color} = useColors();
 
   const handlePressDiscussion = () => {
     onDismiss();
@@ -124,25 +144,44 @@ export const AddDoveModal = ({visible, onDismiss}) => {
   };
 
   return (
-    <BottomModal visible={visible} onDismiss={onDismiss}>
-      <Button
-        title="Discussion"
-        onPress={handlePressDiscussion}
-        icon={<PictureIcon color="white" />}
-      />
-
-      <Button
-        title="Testimony"
-        onPress={handlePressTestimony}
-        icon="account-multiple"
-      />
-
-      <Button
-        title="Prayer"
-        onPress={handlePressPrayer}
-        icon={<MaterialIcons name="work" size={26} color="white" />}
-      />
-    </BottomModal>
+    <BottomSheetModal
+      visible={visible}
+      onDismiss={onDismiss}
+      snapPoints={['27%']}>
+      <View style={{rowGap: 10, width: '85%'}} disableTheme>
+        <Button
+          title="Discussion"
+          onPress={handlePressDiscussion}
+          icon={<PictureIcon color={colors.blue} />}
+          theme={{
+            color,
+            backgroundColor:
+              theme === 'dark' ? 'rgb(50, 50, 50)' : 'rgb(245, 240, 240)',
+          }}
+        />
+        <Button
+          title="Testimony"
+          onPress={handlePressTestimony}
+          icon="account-multiple"
+          iconColor={colors.blue}
+          theme={{
+            color,
+            backgroundColor:
+              theme === 'dark' ? 'rgb(50, 50, 50)' : 'rgb(245, 240, 240)',
+          }}
+        />
+        <Button
+          title="Prayer"
+          onPress={handlePressPrayer}
+          icon={<MaterialIcons name="work" size={26} color={colors.blue} />}
+          theme={{
+            color,
+            backgroundColor:
+              theme === 'dark' ? 'rgb(50, 50, 50)' : 'rgb(245, 240, 240)',
+          }}
+        />
+      </View>
+    </BottomSheetModal>
   );
 };
 
@@ -150,6 +189,7 @@ const AddModal = ({visible, onDismiss}) => {
   const [doveModalVisible, setDoveModalVisible] = useState(false);
   const [imageVideoModalVisible, setImageVideoModalVisible] = useState(false);
   const [navigateTo, setNavigateTo] = useState('');
+  const {theme, color} = useColors();
 
   const handleDovePress = () => {
     onDismiss();
@@ -164,19 +204,45 @@ const AddModal = ({visible, onDismiss}) => {
 
   return (
     <>
-      <BottomModal visible={visible} onDismiss={onDismiss}>
-        <Button
-          title="Post"
-          onPress={() => handlePostPress(NewPost.name)}
-          icon={<PictureIcon color="white" />}
-        />
-        <Button
-          title="Story"
-          onPress={() => handlePostPress(NewStory.name)}
-          icon="account-multiple"
-        />
-        <Button title="Dove" icon="bird" onPress={handleDovePress} />
-      </BottomModal>
+      <BottomSheetModal
+        visible={visible}
+        onDismiss={onDismiss}
+        snapPoints={['27%']}>
+        <View style={{rowGap: 10, width: '85%'}} disableTheme>
+          <Button
+            title="Post"
+            onPress={() => handlePostPress(NewPost.name)}
+            icon={<PictureIcon color={colors.blue} />}
+            theme={{
+              color,
+              backgroundColor:
+                theme === 'dark' ? 'rgb(50, 50, 50)' : 'rgb(245, 240, 240)',
+            }}
+          />
+          <Button
+            title="Story"
+            onPress={() => handlePostPress(NewStory.name)}
+            icon="account-multiple"
+            iconColor={colors.blue}
+            theme={{
+              color,
+              backgroundColor:
+                theme === 'dark' ? 'rgb(50, 50, 50)' : 'rgb(245, 240, 240)',
+            }}
+          />
+          <Button
+            title="Dove"
+            icon="bird"
+            iconColor={colors.blue}
+            onPress={handleDovePress}
+            theme={{
+              color,
+              backgroundColor:
+                theme === 'dark' ? 'rgb(50, 50, 50)' : 'rgb(245, 240, 240)',
+            }}
+          />
+        </View>
+      </BottomSheetModal>
       <AddDoveModal
         visible={doveModalVisible}
         onDismiss={() => setDoveModalVisible(false)}

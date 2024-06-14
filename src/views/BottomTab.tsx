@@ -12,11 +12,6 @@ import Text from '../components/common/Text';
 import View from '../components/common/View';
 import {colors, useColors} from '../hooks/customHooks';
 import {StyleSheet} from 'react-native';
-import {opacity} from 'react-native-reanimated/lib/typescript/reanimated2/Colors';
-import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
-import MessageDetails from './profile/MessageDetails';
-import FeaturedItemDetails from './featured/FeaturedItemDetails';
-import Home from './home/Home';
 
 const routeIcons = {
   [HomeStack.name]: 'home',
@@ -36,7 +31,7 @@ const tabBarLabels = {
 
 const BottomTabScreenOptions = ({route}) => {
   const {theme} = useColors();
-  const routeName = getFocusedRouteNameFromRoute(route);
+  // const routeName = getFocusedRouteNameFromRoute(route);
 
   return {
     lazy: true,
@@ -100,7 +95,6 @@ const BottomTab = () => {
       userInfo: {userId, username},
     },
   } = useStore();
-  const {theme} = useColors();
 
   return (
     <>

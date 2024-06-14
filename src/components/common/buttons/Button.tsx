@@ -5,7 +5,7 @@ import {ReactElement, isValidElement} from 'react';
 import Text from '../Text';
 import {Theme, useColors} from '../../../hooks/customHooks';
 
-const {aiCenter, cGap15, row, p10} = common;
+const {aiCenter, cGap10, row, p10} = common;
 
 interface ButtonProps {
   title: string;
@@ -14,6 +14,7 @@ interface ButtonProps {
   style?: ViewStyle;
   labelStyle?: TextStyle;
   theme?: Theme;
+  iconColor?: string;
 }
 
 const Button = ({
@@ -23,6 +24,7 @@ const Button = ({
   style,
   labelStyle,
   theme,
+  iconColor,
 }: ButtonProps) => {
   const {theme1} = useColors();
   const _theme = theme ?? theme1;
@@ -32,7 +34,7 @@ const Button = ({
       style={[
         row,
         aiCenter,
-        cGap15,
+        cGap10,
         p10,
         {
           backgroundColor: _theme.backgroundColor,
@@ -45,7 +47,11 @@ const Button = ({
       {isValidElement(icon) ? (
         icon
       ) : typeof icon === 'string' ? (
-        <MaterialCommunityIcons name={icon} size={26} color={_theme.color} />
+        <MaterialCommunityIcons
+          name={icon}
+          size={26}
+          color={iconColor ?? _theme.color}
+        />
       ) : (
         ''
       )}

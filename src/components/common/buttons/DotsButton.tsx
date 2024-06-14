@@ -7,10 +7,11 @@ import {deletePost as userDeletePost} from '../../../services/UserService';
 import {useMutation} from '../../../hooks/reactQueryHooks';
 import {useStore} from '../../../containers/StoreContainer';
 import Button from './Button';
-import BottomModal from '../BottomModal';
 import Popup from '../Popup';
-import View from '../View';
 import {DotsIcon} from '../Icons';
+import BottomSheetModal from '../BottomSheetModal';
+import {colors, useColors} from '../../../hooks/customHooks';
+import View from '../View';
 
 interface ItemModalProps {
   id: number;
@@ -30,7 +31,7 @@ const ItemModal = ({
   onDismiss,
 }: ItemModalProps) => {
   const [modalVisible, setModalVisible] = useState(false);
-
+  const {theme, color} = useColors();
   const {
     store: {
       userInfo: {userId: authUserId, username: authUsername},
@@ -63,48 +64,76 @@ const ItemModal = ({
     );
 
   return (
-    <BottomModal visible={visible} onDismiss={onDismiss}>
-      <Button
-        onPress={handlePressCopyLink}
-        title="Copy Link"
-        icon="content-copy"
-      />
-      {authUserId === userId || authUsername === username ? (
-        <>
-          <Button
-            title="Delete"
-            onPress={() => setModalVisible(true)}
-            icon="delete"
-          />
-          <Popup
-            visible={modalVisible}
-            header="Delete this post?"
-            message="Once you delete it's gone!"
-            onPressOk={handlePressDelete}
-            onPressCancel={() => setModalVisible(false)}
-          />
-        </>
-      ) : (
-        <>
-          <Button
-            onPress={() => Alert.alert('under construction')}
-            icon="bell-off-outline"
-            title="Turn off Post Notifications"
-          />
-          <Button
-            onPress={() => Alert.alert('under construction')}
-            title="Report"
-            icon={
-              <MaterialIcons
-                name="report-gmailerrorred"
-                size={26}
-                color="red"
-              />
-            }
-          />
-        </>
-      )}
-    </BottomModal>
+    <BottomSheetModal
+      visible={visible}
+      onDismiss={onDismiss}
+      snapPoints={['27%']}>
+      <View style={{rowGap: 10, width: '85%'}} disableTheme>
+        <Button
+          onPress={handlePressCopyLink}
+          title="Copy Link"
+          icon="content-copy"
+          iconColor={colors.blue}
+          theme={{
+            color,
+            backgroundColor:
+              theme === 'dark' ? 'rgb(50, 50, 50)' : 'rgb(245, 240, 240)',
+          }}
+        />
+        {authUserId === userId || authUsername === username ? (
+          <>
+            <Button
+              title="Delete"
+              onPress={() => setModalVisible(true)}
+              icon="delete"
+              iconColor="red"
+              theme={{
+                color,
+                backgroundColor:
+                  theme === 'dark' ? 'rgb(50, 50, 50)' : 'rgb(245, 240, 240)',
+              }}
+            />
+            <Popup
+              visible={modalVisible}
+              header="Delete this post?"
+              message="Once you delete it's gone!"
+              onPressOk={handlePressDelete}
+              onPressCancel={() => setModalVisible(false)}
+            />
+          </>
+        ) : (
+          <>
+            <Button
+              onPress={() => Alert.alert('under construction')}
+              title="Turn off Post Notifications"
+              icon="bell-off-outline"
+              iconColor={colors.blue}
+              theme={{
+                color,
+                backgroundColor:
+                  theme === 'dark' ? 'rgb(50, 50, 50)' : 'rgb(245, 240, 240)',
+              }}
+            />
+            <Button
+              onPress={() => Alert.alert('under construction')}
+              title="Report"
+              icon={
+                <MaterialIcons
+                  name="report-gmailerrorred"
+                  size={26}
+                  color="red"
+                />
+              }
+              theme={{
+                color,
+                backgroundColor:
+                  theme === 'dark' ? 'rgb(50, 50, 50)' : 'rgb(245, 240, 240)',
+              }}
+            />
+          </>
+        )}
+      </View>
+    </BottomSheetModal>
   );
 };
 

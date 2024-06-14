@@ -9,6 +9,7 @@ import axios from 'axios';
 import {Platform} from 'react-native';
 import {PaperProvider} from 'react-native-paper';
 import {FullWindowOverlay} from 'react-native-screens';
+import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 
 const queryClient = new QueryClient();
 
@@ -64,7 +65,9 @@ function App(): React.JSX.Element {
       <StoreContainer>
         <GestureHandlerRootView style={flex1}>
           <PaperProvider>
-            <MainStack />
+            <BottomSheetModalProvider>
+              <MainStack />
+            </BottomSheetModalProvider>
             {Platform.OS === 'ios' && (
               <FullWindowOverlay>
                 <FlashMessage />

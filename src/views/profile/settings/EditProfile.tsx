@@ -10,7 +10,6 @@ import {
 import {useStore} from '../../../containers/StoreContainer';
 import {useEffect, useState} from 'react';
 import {showMessage} from 'react-native-flash-message';
-import BottomModal from '../../../components/common/BottomModal';
 import Button from '../../../components/common/buttons/Button';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {
@@ -25,7 +24,8 @@ import HR from '../../../components/common/HR';
 import {SettingsListItem1} from './Settings';
 import TextInput from '../../../components/common/TextInput';
 import {AuthActionType} from '../../../containers/AuthAction';
-import {useColors} from '../../../hooks/customHooks';
+import {colors, useColors} from '../../../hooks/customHooks';
+import BottomSheetModal from '../../../components/common/BottomSheetModal';
 
 const {row, flex1, flex3, aiCenter, jcSpaceBetween, p15, gray, mb15, cGap10} =
   common;
@@ -81,7 +81,7 @@ const EditProfile = () => {
     },
   } = useStore();
   const navigation = useNavigation();
-  const {backgroundColor} = useColors();
+  const {theme, color, backgroundColor} = useColors();
 
   const {data} = useQuery(getUserProfile, {id: userId});
   const postProfileApi = useMutation(postProfile);
@@ -267,20 +267,33 @@ const EditProfile = () => {
           </View>
         </View>
       </ScrollView>
-      <BottomModal
+      <BottomSheetModal
         visible={modalVisible}
-        onDismiss={() => setModalVisible(false)}>
-        <Button
-          title="Photo Library"
-          onPress={handlePressPhoto}
-          icon={<AntDesign name="picture" size={26} color="white" />}
-        />
-        <Button
-          title="Camera"
-          onPress={handlePressCamera}
-          icon={<AntDesign name="camera" size={26} color="white" />}
-        />
-      </BottomModal>
+        onDismiss={() => setModalVisible(false)}
+        snapPoints={['20%']}>
+        <View style={{rowGap: 10, width: '85%'}} disableTheme>
+          <Button
+            title="Photo Library"
+            onPress={handlePressPhoto}
+            icon={<AntDesign name="picture" size={26} color={colors.blue} />}
+            theme={{
+              color,
+              backgroundColor:
+                theme === 'dark' ? 'rgb(50, 50, 50)' : 'rgb(245, 240, 240)',
+            }}
+          />
+          <Button
+            title="Camera"
+            onPress={handlePressCamera}
+            icon={<AntDesign name="camera" size={26} color={colors.blue} />}
+            theme={{
+              color,
+              backgroundColor:
+                theme === 'dark' ? 'rgb(50, 50, 50)' : 'rgb(245, 240, 240)',
+            }}
+          />
+        </View>
+      </BottomSheetModal>
     </>
   );
 };
