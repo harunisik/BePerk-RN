@@ -1,7 +1,7 @@
 import {dateDiff} from '../../utils/DateUtil';
 import common from '../../styles/sharedStyles';
 import DovesItemOptions from './DovesItemOptions';
-import DotsButton from '../common/buttons/DotsButton';
+import PostItemSettings from '../common/buttons/PostItemSettings';
 import AccountCard from '../common/AccountCard';
 import Text from '../common/Text';
 import View from '../common/View';
@@ -33,6 +33,7 @@ const DovesItem = ({item, theme}) => {
     subtype,
     caption,
     photo,
+    subscribed,
   } = item;
   const {backgroundColor} = useColors();
   const _backgroundColor = theme ? theme.backgroundColor : backgroundColor;
@@ -75,11 +76,12 @@ const DovesItem = ({item, theme}) => {
           backgroundColor={_backgroundColor}
           color="gray"
         />
-        <DotsButton
+        <PostItemSettings
           id={id}
           type={type}
           userId={user_id}
           username={username}
+          subscribed={subscribed}
           iconSize={20}
           color="gray"
         />

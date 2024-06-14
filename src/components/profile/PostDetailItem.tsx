@@ -4,7 +4,7 @@ import LikeButtton from '../common/buttons/LikeButton';
 import CommentButton from '../common/buttons/CommentButton';
 import {dateDiff} from '../../utils/DateUtil';
 import BookmarkButton from '../common/buttons/BookmarkButton';
-import DotsButton from '../common/buttons/DotsButton';
+import PostItemSettings from '../common/buttons/PostItemSettings';
 import ShareButton from '../common/buttons/ShareButton';
 import Video from '../common/Video';
 import AccountCard from '../common/AccountCard';
@@ -42,6 +42,7 @@ interface PostDetailItemProps {
   isViewable?: boolean;
   width: number;
   height: number;
+  subscribed: number;
 }
 
 const PostDetailItem = ({
@@ -60,6 +61,7 @@ const PostDetailItem = ({
   isViewable = false,
   width,
   height,
+  subscribed,
 }: PostDetailItemProps) => {
   const {width: windowWidth} = useWindowDimensions();
 
@@ -70,7 +72,13 @@ const PostDetailItem = ({
 
         <View style={[row, cGap10]}>
           <BookmarkButton id={id} type={type} isSaved={bookmark} />
-          <DotsButton id={id} type={type} userId={userId} username={username} />
+          <PostItemSettings
+            id={id}
+            type={type}
+            userId={userId}
+            username={username}
+            subscribed={subscribed}
+          />
         </View>
       </View>
 

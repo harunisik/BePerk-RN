@@ -68,12 +68,12 @@ function App(): React.JSX.Element {
             <BottomSheetModalProvider>
               <MainStack />
             </BottomSheetModalProvider>
-            {Platform.OS === 'ios' && (
-              <FullWindowOverlay>
-                <FlashMessage />
-              </FullWindowOverlay>
-            )}
           </PaperProvider>
+          {Platform.OS === 'ios' && (
+            <FullWindowOverlay>
+              <FlashMessage />
+            </FullWindowOverlay>
+          )}
           <FlashMessage position="top" />
         </GestureHandlerRootView>
       </StoreContainer>

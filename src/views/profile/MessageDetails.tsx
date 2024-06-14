@@ -250,11 +250,10 @@ const MessageDetailsItem = ({item}) => {
   );
 };
 
-const MessageDetails = ({navigation}) => {
+const MessageDetails = () => {
   const [data, setData] = useState([]);
   const [isSending, setIsSending] = useState(false);
   const route = useRoute();
-  const navigation2 = useNavigation();
 
   const {
     params: {chatId: chatIdParam, userId},
@@ -310,7 +309,8 @@ const MessageDetails = ({navigation}) => {
     if (chatId) {
       getChatApi().then(({messages}) => {
         setData(
-          messages.map(({id, date, type, media, user_id, name}, index, arr) => {
+          messages.map((message, index, arr) => {
+            const {id, date, type, media, user_id, name} = message;
             const dateStr = formatDate(date * 1000);
             const prevDateStr =
               index <= arr.length - 2
@@ -323,6 +323,7 @@ const MessageDetails = ({navigation}) => {
               media,
               user_id,
               name,
+              subscribed: 0,
             };
           }),
         );

@@ -17,12 +17,12 @@ import {
   getUserComments,
   getUserExploring,
   getUserFeed,
+  getUserFollowers,
   getUserFollowing,
   getUserPerks,
   getUserProfile,
   postBookmarks,
   postComment,
-  postProfile,
   postUserLike,
 } from '../services/UserService';
 import {
@@ -35,7 +35,6 @@ import {
 import {getMy24, postMy24, postMy24Like} from '../services/My24Service';
 
 const queryMap = {
-  // [postProfile.name]: [getUserProfile.name],
   [postBookmarks.name]: [],
   [deletePost.name]: [
     getUserFeed.name,
@@ -52,8 +51,16 @@ const queryMap = {
   [chatShare.name]: [],
   [chatSend.name]: [getChat.name, chatListOpen.name],
   [chatDelete.name]: [chatListOpen.name],
-  [addFollowing.name]: [getUserFollowing.name, getUserProfile.name],
-  [deleteFollowing.name]: [getUserFollowing.name, getUserProfile.name],
+  [addFollowing.name]: [
+    getUserFollowing.name,
+    getUserFollowers.name,
+    getUserProfile.name,
+  ],
+  [deleteFollowing.name]: [
+    getUserFollowers.name,
+    getUserFollowing.name,
+    getUserProfile.name,
+  ],
 };
 
 // getUserHistory

@@ -1,9 +1,9 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Alert} from 'react-native';
 import {showMessage} from 'react-native-flash-message';
 import Clipboard from '@react-native-clipboard/clipboard';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {deletePost as userDeletePost} from '../../../services/UserService';
+import {postNotify, deletePost} from '../../../services/UserService';
 import {useMutation} from '../../../hooks/reactQueryHooks';
 import {useStore} from '../../../containers/StoreContainer';
 import Button from './Button';
@@ -17,6 +17,7 @@ interface ItemModalProps {
   id: number;
   type: number;
   userId: number;
+  subscribed: number;
   username: string;
   visible: boolean;
   onDismiss: () => void;
@@ -27,9 +28,11 @@ const ItemModal = ({
   type,
   userId,
   username,
+  subscribed,
   visible,
   onDismiss,
 }: ItemModalProps) => {
+  const [_subscribed, setSubscribed] = useState(subscribed);
   const [modalVisible, setModalVisible] = useState(false);
   const {theme, color} = useColors();
   const {
@@ -37,8 +40,10 @@ const ItemModal = ({
       userInfo: {userId: authUserId, username: authUsername},
     },
   } = useStore();
+  const isAuthUser = authUserId === userId || authUsername === username;
 
-  const deletePost = useMutation(userDeletePost);
+  const deletePostApi = useMutation(deletePost);
+  const postNotifyApi = useMutation(postNotify);
 
   const handlePressCopyLink = () => {
     onDismiss();
@@ -51,7 +56,7 @@ const ItemModal = ({
   };
 
   const handlePressDelete = () =>
-    deletePost.mutate(
+    deletePostApi.mutate(
       {
         items: JSON.stringify([{id: id, type: type}]),
       },
@@ -63,11 +68,30 @@ const ItemModal = ({
       },
     );
 
+  const handlePressPostNotify = () =>
+    postNotifyApi.mutate(
+      {
+        id: userId,
+        subscribed: _subscribed === 0 ? 1 : 0,
+      },
+      {
+        onSuccess: () => {
+          onDismiss();
+          setSubscribed(_subscribed === 0 ? 1 : 0);
+          // showMessage({message: 'Post deleted'});
+        },
+      },
+    );
+
+  useEffect(() => {
+    setSubscribed(subscribed);
+  }, [subscribed]);
+
   return (
     <BottomSheetModal
       visible={visible}
       onDismiss={onDismiss}
-      snapPoints={['27%']}>
+      snapPoints={isAuthUser ? ['20%'] : ['27%']}>
       <View style={{rowGap: 10, width: '85%'}} disableTheme>
         <Button
           onPress={handlePressCopyLink}
@@ -80,7 +104,7 @@ const ItemModal = ({
               theme === 'dark' ? 'rgb(50, 50, 50)' : 'rgb(245, 240, 240)',
           }}
         />
-        {authUserId === userId || authUsername === username ? (
+        {isAuthUser ? (
           <>
             <Button
               title="Delete"
@@ -104,9 +128,13 @@ const ItemModal = ({
         ) : (
           <>
             <Button
-              onPress={() => Alert.alert('under construction')}
-              title="Turn off Post Notifications"
-              icon="bell-off-outline"
+              onPress={handlePressPostNotify}
+              title={
+                _subscribed === 0
+                  ? 'Turn on Post Notifications'
+                  : 'Turn off Post Notifications'
+              }
+              icon={_subscribed === 0 ? 'bell-outline' : 'bell-off-outline'}
               iconColor={colors.blue}
               theme={{
                 color,
@@ -137,23 +165,25 @@ const ItemModal = ({
   );
 };
 
-interface DotsButtonProps {
+interface PostItemSettingsProps {
   id: number;
   type: number;
   userId: number;
   username: string;
+  subscribed: number;
   iconSize?: number;
   color?: string;
 }
 
-const DotsButton = ({
+const PostItemSettings = ({
   id,
   type,
   userId,
   username,
+  subscribed,
   iconSize,
   color,
-}: DotsButtonProps) => {
+}: PostItemSettingsProps) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
@@ -170,6 +200,7 @@ const DotsButton = ({
         type={type}
         userId={userId}
         username={username}
+        subscribed={subscribed}
         visible={modalVisible}
         onDismiss={() => setModalVisible(false)}
       />
@@ -177,4 +208,4 @@ const DotsButton = ({
   );
 };
 
-export default DotsButton;
+export default PostItemSettings;

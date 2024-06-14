@@ -3,7 +3,7 @@ import LikeButtton from '../common/buttons/LikeButton';
 import CommentButton from '../common/buttons/CommentButton';
 import BookmarkButton from '../common/buttons/BookmarkButton';
 import ShareButton from '../common/buttons/ShareButton';
-import DotsButton from '../common/buttons/DotsButton';
+import PostItemSettings from '../common/buttons/PostItemSettings';
 import AccountCard from '../common/AccountCard';
 import Text from '../common/Text';
 import {View} from 'react-native';
@@ -24,8 +24,9 @@ const PagerItem = ({item, paused = true}) => {
     bookmark,
     photo,
     isVerified,
+    subscribed,
   } = item;
-
+  console.log(username, subscribed);
   return (
     <View>
       <Video uri={filename} paused={paused} />
@@ -58,7 +59,7 @@ const PagerItem = ({item, paused = true}) => {
           />
           <Text style={{color: 'white'}}>{caption}</Text>
         </View>
-        <View style={{rowGap: 20, alignItems: 'center'}}>
+        <View style={{rowGap: 25, alignItems: 'center'}}>
           <LikeButtton
             id={id}
             liked={liked}
@@ -89,11 +90,12 @@ const PagerItem = ({item, paused = true}) => {
             iconSize={30}
           />
           <ShareButton id={id} type={type} iconSize={30} color="white" />
-          <DotsButton
+          <PostItemSettings
             id={id}
             type={type}
             userId={user_id}
             username={username}
+            subscribed={subscribed}
             color="white"
             iconSize={30}
           />

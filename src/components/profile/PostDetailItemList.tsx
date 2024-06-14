@@ -32,6 +32,7 @@ const PostDetailItemList = ({
           isViewable={index === viewableItem}
           width={item.width}
           height={item.height}
+          subscribed={item.subscribed}
         />
       )}
       fetchNextPage={fetchNextPage}

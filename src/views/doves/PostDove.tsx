@@ -1,4 +1,4 @@
-import {ActivityIndicator, StyleSheet, Switch, TextInput} from 'react-native';
+import {ActivityIndicator, StyleSheet, Switch} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {useEffect, useState} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
@@ -8,6 +8,10 @@ import {addPerk as userAddPerk} from '../../services/UserService';
 import Text from '../../components/common/Text';
 import View from '../../components/common/View';
 import {CloseIcon} from '../../components/common/Icons';
+import TextInput from '../../components/common/TextInput';
+import {useColors} from '../../hooks/customHooks';
+
+const {p15, row, rGap15, jcSpaceBetween, aiCenter} = common;
 
 const PostButton = ({onPress}) => {
   return (
@@ -33,8 +37,8 @@ const PostDove = () => {
   const [isAnonymous, setIsAnonymous] = useState(false);
   const toggleSwitch = () => setIsAnonymous(previousState => !previousState);
   const navigation = useNavigation();
+  const {theme1, theme2} = useColors();
   const route = useRoute();
-  const {p15, row, rGap15, jcSpaceBetween, aiCenter} = common;
   const {
     params: {inputTextPlaceHolder, subtype},
   } = route;
@@ -73,7 +77,7 @@ const PostDove = () => {
   }, [navigation, caption, isAnonymous]);
 
   return (
-    <View style={[p15, rGap15]}>
+    <View style={[p15, rGap15, {flex: 1}]}>
       {showIndicator && <ActivityIndicator />}
       <TextInput
         placeholder={inputTextPlaceHolder}
@@ -82,6 +86,7 @@ const PostDove = () => {
         style={[styles.textInput, styles.shadowProp]}
         multiline
         numberOfLines={20}
+        theme={theme2}
       />
       <View style={[row, jcSpaceBetween, aiCenter]}>
         <Text>Anonymous</Text>

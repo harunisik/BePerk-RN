@@ -20,6 +20,7 @@ const PostDetailItemView = () => {
       uploadTime,
       width,
       height,
+      subscribed,
     },
   } = route;
 
@@ -40,6 +41,7 @@ const PostDetailItemView = () => {
         uploadTime={uploadTime}
         width={width}
         height={height}
+        subscribed={subscribed}
       />
     </View>
   );

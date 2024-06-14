@@ -100,7 +100,13 @@ export function useGetUserPhotoVideo(id: number, limit: number = 25) {
       staleTime: Infinity,
     });
 
-  const newData = useMemo(() => data?.pages.flat(), [data]);
+  const newData = useMemo(
+    () =>
+      data?.pages.flat().map(item => {
+        return {...item, user_id: id};
+      }),
+    [data],
+  );
 
   return {
     data: newData,

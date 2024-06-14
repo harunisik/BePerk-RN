@@ -1,4 +1,4 @@
-import {Pressable, StyleSheet, TextInput} from 'react-native';
+import {Pressable, StyleSheet} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {
   addFollowing,
@@ -16,6 +16,9 @@ import {useStore} from '../../containers/StoreContainer';
 import AccountCard from '../../components/common/AccountCard';
 import Text from '../../components/common/Text';
 import View from '../../components/common/View';
+import {colors, useColors} from '../../hooks/customHooks';
+import TextInput from '../../components/common/TextInput';
+import Button from '../../components/common/buttons/Button';
 
 const {pl15, pr15, row, aiCenter} = common;
 
@@ -25,7 +28,7 @@ const UserItem = ({item, onPressFollow}) => {
       userInfo: {userId},
     },
   } = useStore();
-
+  const {theme} = useColors();
   return (
     <View style={[row, aiCenter]}>
       <AccountCard
@@ -35,23 +38,28 @@ const UserItem = ({item, onPressFollow}) => {
         usePush
       />
       {item.user_id !== userId && (
-        <Pressable
+        <Button
+          title={
+            item.i_following === 1
+              ? 'Following'
+              : item.i_following === 2
+                ? 'Requested'
+                : 'Follow'
+          }
+          onPress={onPressFollow}
           style={{
             marginLeft: 'auto',
-            backgroundColor: item.i_following === 0 ? '#0AAEEF' : 'lightgray',
+            backgroundColor:
+              item.i_following === 0
+                ? colors.blue
+                : theme === 'dark'
+                  ? 'rgb(40, 40, 40)'
+                  : 'lightgray',
             borderRadius: 20,
             paddingVertical: 5,
             paddingHorizontal: 20,
           }}
-          onPress={onPressFollow}>
-          {item.i_following === 1 ? (
-            <Text>Following</Text>
-          ) : item.i_following === 2 ? (
-            <Text>Requested</Text>
-          ) : (
-            <Text>Follow</Text>
-          )}
-        </Pressable>
+        />
       )}
     </View>
   );
@@ -63,6 +71,7 @@ const FollowersList = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState();
 
+  const {theme2} = useColors();
   const navigation = useNavigation();
   const route = useRoute();
   const {
@@ -128,12 +137,17 @@ const FollowersList = () => {
   }, [navigation]);
 
   return (
-    <View style={[pl15, pr15]}>
+    <View style={{padding: 15, rowGap: 10, flex: 1}}>
       <TextInput
         placeholder="Search"
         onChangeText={setSearchText}
         value={searchText}
-        style={styles.textInput}
+        style={{
+          // flex: 1,
+          borderRadius: 20,
+          paddingHorizontal: 15,
+        }}
+        theme={theme2}
       />
 
       {searchText ? (
@@ -171,15 +185,5 @@ const FollowersList = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  textInput: {
-    height: 40,
-    marginTop: 12,
-    marginBottom: 12,
-    borderWidth: 1,
-    padding: 10,
-  },
-});
 
 export default FollowersList;

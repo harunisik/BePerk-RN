@@ -62,7 +62,7 @@ export const getUserExploring = (
 ) => {
   const url =
     `/user/exploring?filter=${filter}&limit=${limit}&offset=${offset}` +
-    (subtype ? `&subtype=${subtype}` : '');
+    (subtype !== null ? `&subtype=${subtype}` : '');
   return axios.get(url).then(handleResponse).catch(handleError);
 };
 
@@ -197,6 +197,20 @@ export const uploadPhoto = formData => {
 export const uploadVideo = formData => {
   return axios
     .postForm('/user/upload_video', formData)
+    .then(handleResponse)
+    .catch(handleError);
+};
+
+export const postNotify = notify => {
+  return axios
+    .post('/user/postNotify', {...notify})
+    .then(handleResponse)
+    .catch(handleError);
+};
+
+export const sendReport = report => {
+  return axios
+    .post('/user/sendReport', {...report})
     .then(handleResponse)
     .catch(handleError);
 };

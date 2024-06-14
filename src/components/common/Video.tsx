@@ -12,7 +12,7 @@ interface VideoProps extends ReactVideoProps {
   paused?: boolean;
 }
 
-const Video = ({uri, paused = true, ...rest}: VideoProps) => {
+const Video = ({uri, paused = false, ...rest}: VideoProps) => {
   const [videoPaused, setVideoPaused] = useState(paused);
   const [width, setWidth] = useState<number>(0);
 
@@ -39,7 +39,7 @@ const Video = ({uri, paused = true, ...rest}: VideoProps) => {
         // controls
         {...rest}
       />
-      {videoPaused && <PlayIcon size={width / 3} style={absolute} />}
+      {videoPaused && <PlayIcon size={width / 4} style={absolute} />}
     </Pressable>
   );
 };

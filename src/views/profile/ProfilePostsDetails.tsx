@@ -5,11 +5,11 @@ import {useGetUserPhotoVideo} from '../../hooks/infiniteQueryHooks';
 const ProfilePostsDetails = () => {
   const route = useRoute();
   const {
-    params: {userId: id, index},
+    params: {userId, index},
   } = route;
 
   const {data, fetchNextPage, isFetching, refetch, remove} =
-    useGetUserPhotoVideo(id, 35);
+    useGetUserPhotoVideo(userId, 35);
 
   return (
     <PostDetailItemList
