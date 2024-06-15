@@ -214,3 +214,10 @@ export const sendReport = report => {
     .then(handleResponse)
     .catch(handleError);
 };
+
+export const shadowBan = ban => {
+  return axios
+    .post('/user/ban', {...ban})
+    .then(handleResponse)
+    .catch(handleError);
+};

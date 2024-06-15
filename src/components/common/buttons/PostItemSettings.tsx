@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {Alert, Pressable} from 'react-native';
+import {Pressable} from 'react-native';
 import {showMessage} from 'react-native-flash-message';
 import Clipboard from '@react-native-clipboard/clipboard';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -7,6 +7,7 @@ import {
   postNotify,
   deletePost,
   sendReport,
+  shadowBan,
 } from '../../../services/UserService';
 import {useMutation} from '../../../hooks/reactQueryHooks';
 import {useStore} from '../../../containers/StoreContainer';
@@ -112,6 +113,94 @@ const ReportModal = ({visible, onDismiss, username, id, type}) => {
   );
 };
 
+const DeleteButton = ({onDismiss, id, type}) => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const {theme, color} = useColors();
+
+  const deletePostApi = useMutation(deletePost);
+
+  const handlePressDelete = () =>
+    deletePostApi.mutate(
+      {
+        items: JSON.stringify([{id: id, type: type}]),
+      },
+      {
+        onSuccess: () => {
+          onDismiss();
+          showMessage({message: 'Post deleted'});
+        },
+      },
+    );
+
+  return (
+    <>
+      <Button
+        title="Delete"
+        onPress={() => setModalVisible(true)}
+        icon="delete"
+        iconColor="red"
+        theme={{
+          color,
+          backgroundColor:
+            theme === 'dark' ? 'rgb(50, 50, 50)' : 'rgb(245, 240, 240)',
+        }}
+      />
+      <Popup
+        visible={modalVisible}
+        header="Delete this post?"
+        message="Once you delete it's gone!"
+        onPressOk={handlePressDelete}
+        onPressCancel={() => setModalVisible(false)}
+      />
+    </>
+  );
+};
+
+export const ShadowBanButton = ({onSuccess, userId, banned = false}) => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const {theme, color} = useColors();
+
+  const shadowBanApi = useMutation(shadowBan);
+
+  const handlePressBan = () =>
+    shadowBanApi.mutate(
+      {
+        duration: banned ? 0 : 2592000,
+        user_id: userId,
+      },
+      {
+        onSuccess: () => {
+          setModalVisible(false);
+          onSuccess();
+          showMessage({message: 'User banned'});
+        },
+      },
+    );
+
+  return (
+    <>
+      <Button
+        title={banned ? 'Shadow Unban' : 'Shadow Ban'}
+        onPress={() => setModalVisible(true)}
+        icon="block-helper"
+        iconColor="red"
+        theme={{
+          color,
+          backgroundColor:
+            theme === 'dark' ? 'rgb(50, 50, 50)' : 'rgb(245, 240, 240)',
+        }}
+      />
+      <Popup
+        visible={modalVisible}
+        header={`Are you sure would like to ${banned ? 'unban' : 'ban'} this user?`}
+        message=""
+        onPressOk={handlePressBan}
+        onPressCancel={() => setModalVisible(false)}
+      />
+    </>
+  );
+};
+
 interface ItemModalProps {
   id: number;
   type: number;
@@ -131,8 +220,8 @@ const ItemModal = ({
   visible,
   onDismiss,
 }: ItemModalProps) => {
-  const [_subscribed, setSubscribed] = useState(subscribed);
-  const [modalVisible, setModalVisible] = useState(false);
+  const [banned, setBanned] = useState(false); // optimistic update
+  const [_subscribed, setSubscribed] = useState(subscribed); // optimistic update
   const [reportModalVisible, setReportModalVisible] = useState(false);
 
   const {theme, color} = useColors();
@@ -142,8 +231,8 @@ const ItemModal = ({
     },
   } = useStore();
   const isAuthUser = authUserId === userId || authUsername === username;
+  const isBeperk = authUserId === 2565;
 
-  const deletePostApi = useMutation(deletePost);
   const postNotifyApi = useMutation(postNotify);
 
   const handlePressCopyLink = () => {
@@ -155,19 +244,6 @@ const ItemModal = ({
       Clipboard.setString(`beperk://dove?id=${id}`);
     }
   };
-
-  const handlePressDelete = () =>
-    deletePostApi.mutate(
-      {
-        items: JSON.stringify([{id: id, type: type}]),
-      },
-      {
-        onSuccess: () => {
-          onDismiss();
-          showMessage({message: 'Post deleted'});
-        },
-      },
-    );
 
   const handlePressPostNotify = () =>
     postNotifyApi.mutate(
@@ -198,7 +274,7 @@ const ItemModal = ({
       <BottomSheetModal
         visible={visible}
         onDismiss={onDismiss}
-        snapPoints={isAuthUser ? ['20%'] : ['27%']}>
+        snapPoints={isAuthUser ? ['20%'] : isBeperk ? ['40%'] : ['27%']}>
         <View style={{rowGap: 10, width: '85%'}} disableTheme>
           <Button
             onPress={handlePressCopyLink}
@@ -212,26 +288,7 @@ const ItemModal = ({
             }}
           />
           {isAuthUser ? (
-            <>
-              <Button
-                title="Delete"
-                onPress={() => setModalVisible(true)}
-                icon="delete"
-                iconColor="red"
-                theme={{
-                  color,
-                  backgroundColor:
-                    theme === 'dark' ? 'rgb(50, 50, 50)' : 'rgb(245, 240, 240)',
-                }}
-              />
-              <Popup
-                visible={modalVisible}
-                header="Delete this post?"
-                message="Once you delete it's gone!"
-                onPressOk={handlePressDelete}
-                onPressCancel={() => setModalVisible(false)}
-              />
-            </>
+            <DeleteButton onDismiss={onDismiss} id={id} type={type} />
           ) : (
             <>
               <Button
@@ -265,6 +322,19 @@ const ItemModal = ({
                     theme === 'dark' ? 'rgb(50, 50, 50)' : 'rgb(245, 240, 240)',
                 }}
               />
+              {isBeperk && (
+                <>
+                  <DeleteButton onDismiss={onDismiss} id={id} type={type} />
+                  <ShadowBanButton
+                    onSuccess={() => {
+                      onDismiss();
+                      setBanned(!banned);
+                    }}
+                    userId={userId}
+                    banned={banned}
+                  />
+                </>
+              )}
             </>
           )}
         </View>

@@ -9,16 +9,30 @@ import Button from '../common/buttons/Button';
 import BottomSheetModal from '../common/BottomSheetModal';
 import {colors, useColors} from '../../hooks/customHooks';
 import View from '../common/View';
+import {ShadowBanButton} from '../common/buttons/PostItemSettings';
+import {useStore} from '../../containers/StoreContainer';
+import {useEffect, useState} from 'react';
 
-const UserProfileModal = ({userId, visible, onDismiss}) => {
+const UserProfileModal = ({userId, visible, onDismiss, bannedUntil}) => {
+  const [banned, setBanned] = useState(bannedUntil !== 0); // optimistic update
   const navigation = useNavigation();
   const {theme, color} = useColors();
+  const {
+    store: {
+      userInfo: {userId: authUserId},
+    },
+  } = useStore();
+  const isBeperk = authUserId === 2565;
+
+  useEffect(() => {
+    setBanned(bannedUntil !== 0);
+  }, [bannedUntil]);
 
   return (
     <BottomSheetModal
       visible={visible}
       onDismiss={onDismiss}
-      snapPoints={['34%']}>
+      snapPoints={isBeperk ? ['42%'] : ['26%']}>
       <View style={{rowGap: 10, width: '85%'}} disableTheme>
         <Button
           title="Copy Link"
@@ -65,17 +79,28 @@ const UserProfileModal = ({userId, visible, onDismiss}) => {
               theme === 'dark' ? 'rgb(50, 50, 50)' : 'rgb(245, 240, 240)',
           }}
         />
-
-        <Button
-          title="Block"
-          onPress={() => Alert.alert('under construction')}
-          icon={<MaterialIcons name="block" size={26} color="red" />}
-          theme={{
-            color,
-            backgroundColor:
-              theme === 'dark' ? 'rgb(50, 50, 50)' : 'rgb(245, 240, 240)',
-          }}
-        />
+        {isBeperk && (
+          <>
+            <Button
+              title="Block"
+              onPress={() => Alert.alert('under construction')}
+              icon={<MaterialIcons name="block" size={26} color="red" />}
+              theme={{
+                color,
+                backgroundColor:
+                  theme === 'dark' ? 'rgb(50, 50, 50)' : 'rgb(245, 240, 240)',
+              }}
+            />
+            <ShadowBanButton
+              onSuccess={() => {
+                setBanned(!banned);
+                onDismiss();
+              }}
+              userId={userId}
+              banned={banned}
+            />
+          </>
+        )}
       </View>
     </BottomSheetModal>
   );

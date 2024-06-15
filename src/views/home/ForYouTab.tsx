@@ -15,7 +15,7 @@ const ForYouTab = () => {
   const [page, setPage] = useState(0);
 
   const {data, fetchNextPage, isFetching} = useInfiniteQuery({
-    queryKey: ['getVideoFeed'],
+    queryKey: [getVideoFeed.name],
     queryFn: ({pageParam = 0}) => {
       const limit = 25;
       return getVideoFeed(1, limit, limit * pageParam);

@@ -49,7 +49,7 @@ const Button = ({
       ) : typeof icon === 'string' ? (
         <MaterialCommunityIcons
           name={icon}
-          size={26}
+          size={24}
           color={iconColor ?? _theme.color}
         />
       ) : (

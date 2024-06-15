@@ -35,6 +35,7 @@ const DovesItem = ({item, theme}) => {
     photo,
     subscribed,
   } = item;
+
   const {backgroundColor} = useColors();
   const _backgroundColor = theme ? theme.backgroundColor : backgroundColor;
 

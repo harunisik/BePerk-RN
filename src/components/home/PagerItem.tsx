@@ -26,7 +26,7 @@ const PagerItem = ({item, paused = true}) => {
     isVerified,
     subscribed,
   } = item;
-  console.log(username, subscribed);
+
   return (
     <View>
       <Video uri={filename} paused={paused} />
