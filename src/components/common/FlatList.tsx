@@ -4,10 +4,7 @@ import {useCallback} from 'react';
 import ListEmptyComponent from './ListEmptyComponent';
 
 const FlatList = ({data, renderItem, ...rest}: FlatListProps<any>) => {
-  const ItemSeparatorComponent = useCallback(
-    () => <ItemSeperator medium />,
-    [],
-  );
+  const ItemSeparatorComponent = useCallback(() => <ItemSeperator />, []);
 
   return (
     <RNFlatList
