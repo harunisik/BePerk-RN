@@ -221,3 +221,10 @@ export const shadowBan = ban => {
     .then(handleResponse)
     .catch(handleError);
 };
+
+export const block = block => {
+  return axios
+    .post('/user/block', {...block})
+    .then(handleResponse)
+    .catch(handleError);
+};

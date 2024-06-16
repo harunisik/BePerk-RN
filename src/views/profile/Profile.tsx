@@ -46,7 +46,7 @@ const HeaderRight = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const {
-    params: {userId, isAuthUser, bannedUntil},
+    params: {userId, isAuthUser, bannedUntil, blocked},
   } = route;
 
   const onShare = async () => {
@@ -88,6 +88,7 @@ const HeaderRight = () => {
             userId={userId}
             visible={modalVisible}
             bannedUntil={bannedUntil}
+            blocked={blocked}
             onDismiss={() => setModalVisible(false)}
           />
         </>
@@ -199,7 +200,10 @@ const Profile = () => {
   useEffect(() => {
     if (data) {
       setFollowing(data.i_following);
-      navigation.setParams({bannedUntil: data.bannedUntil});
+      navigation.setParams({
+        bannedUntil: data.bannedUntil,
+        blocked: data.blocked,
+      });
     }
   }, [data]);
 

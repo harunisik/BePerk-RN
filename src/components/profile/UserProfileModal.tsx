@@ -9,11 +9,21 @@ import Button from '../common/buttons/Button';
 import BottomSheetModal from '../common/BottomSheetModal';
 import {colors, useColors} from '../../hooks/customHooks';
 import View from '../common/View';
-import {ShadowBanButton} from '../common/buttons/PostItemSettings';
+import {
+  BlockUserButton,
+  ShadowBanButton,
+} from '../common/buttons/PostItemSettings';
 import {useStore} from '../../containers/StoreContainer';
 import {useEffect, useState} from 'react';
 
-const UserProfileModal = ({userId, visible, onDismiss, bannedUntil}) => {
+const UserProfileModal = ({
+  userId,
+  visible,
+  onDismiss,
+  bannedUntil,
+  blocked,
+}) => {
+  const [_blocked, setBlocked] = useState(blocked === 1); // optimistic update
   const [banned, setBanned] = useState(bannedUntil !== 0); // optimistic update
   const navigation = useNavigation();
   const {theme, color} = useColors();
@@ -26,7 +36,8 @@ const UserProfileModal = ({userId, visible, onDismiss, bannedUntil}) => {
 
   useEffect(() => {
     setBanned(bannedUntil !== 0);
-  }, [bannedUntil]);
+    setBlocked(blocked === 1);
+  }, [bannedUntil, blocked]);
 
   return (
     <BottomSheetModal
@@ -81,15 +92,13 @@ const UserProfileModal = ({userId, visible, onDismiss, bannedUntil}) => {
         />
         {isBeperk && (
           <>
-            <Button
-              title="Block"
-              onPress={() => Alert.alert('under construction')}
-              icon={<MaterialIcons name="block" size={26} color="red" />}
-              theme={{
-                color,
-                backgroundColor:
-                  theme === 'dark' ? 'rgb(50, 50, 50)' : 'rgb(245, 240, 240)',
+            <BlockUserButton
+              onSuccess={() => {
+                setBlocked(!_blocked);
+                onDismiss();
               }}
+              userId={userId}
+              blocked={_blocked}
             />
             <ShadowBanButton
               onSuccess={() => {

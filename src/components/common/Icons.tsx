@@ -15,7 +15,7 @@ type IconProps = Optional<IconPropsRN, 'name'> & {isOutlined?: boolean};
 
 // MaterialCommunityIcons
 
-export const ShareIcon = ({size = 26, disabled, color, ...rest}: IconProps) => {
+export const ShareIcon = ({size = 24, disabled, color, ...rest}: IconProps) => {
   const {color: themeColor} = useColors();
 
   return (
@@ -29,7 +29,7 @@ export const ShareIcon = ({size = 26, disabled, color, ...rest}: IconProps) => {
   );
 };
 
-export const AccountIcon = ({size = 26, style, ...rest}: IconProps) => {
+export const AccountIcon = ({size = 24, style, ...rest}: IconProps) => {
   const {color, theme1, theme2} = useColors();
 
   return (
@@ -46,7 +46,7 @@ export const AccountIcon = ({size = 26, style, ...rest}: IconProps) => {
   );
 };
 
-export const CloseIcon = ({size = 26, color, ...rest}: IconProps) => {
+export const CloseIcon = ({size = 24, color, ...rest}: IconProps) => {
   const {color: themeColor} = useColors();
 
   return (
@@ -60,7 +60,7 @@ export const CloseIcon = ({size = 26, color, ...rest}: IconProps) => {
 };
 
 export const BookmarkIcon = ({
-  size = 26,
+  size = 24,
   color,
   isOutlined = false,
   ...rest
@@ -83,7 +83,7 @@ export const BookmarkIcon = ({
 };
 
 export const HeartIcon = ({
-  size = 26,
+  size = 24,
   color,
   isOutlined = false,
   ...rest
@@ -105,7 +105,7 @@ export const HeartIcon = ({
   );
 };
 
-export const CommentIcon = ({size = 26, color, ...rest}: IconProps) => {
+export const CommentIcon = ({size = 24, color, ...rest}: IconProps) => {
   const {color: themeColor} = useColors();
 
   return (
@@ -118,7 +118,7 @@ export const CommentIcon = ({size = 26, color, ...rest}: IconProps) => {
   );
 };
 
-export const DotsIcon = ({size = 26, color, ...rest}: IconProps) => {
+export const DotsIcon = ({size = 24, color, ...rest}: IconProps) => {
   const {color: themeColor} = useColors();
 
   return (
@@ -131,7 +131,7 @@ export const DotsIcon = ({size = 26, color, ...rest}: IconProps) => {
   );
 };
 
-export const PlusIcon = ({size = 26, color, ...rest}: IconProps) => {
+export const PlusIcon = ({size = 24, color, ...rest}: IconProps) => {
   const {color: themeColor} = useColors();
 
   return (
@@ -144,7 +144,7 @@ export const PlusIcon = ({size = 26, color, ...rest}: IconProps) => {
   );
 };
 
-export const BellIcon = ({size = 26, color, ...rest}: IconProps) => {
+export const BellIcon = ({size = 24, color, ...rest}: IconProps) => {
   const {color: themeColor} = useColors();
 
   return (
@@ -157,7 +157,7 @@ export const BellIcon = ({size = 26, color, ...rest}: IconProps) => {
   );
 };
 
-export const FileIcon = ({size = 26, color, ...rest}: IconProps) => {
+export const FileIcon = ({size = 24, color, ...rest}: IconProps) => {
   const {color: themeColor} = useColors();
 
   return (
@@ -170,7 +170,7 @@ export const FileIcon = ({size = 26, color, ...rest}: IconProps) => {
   );
 };
 
-export const ShareVariantIcon = ({size = 26, color, ...rest}: IconProps) => {
+export const ShareVariantIcon = ({size = 24, color, ...rest}: IconProps) => {
   const {color: themeColor} = useColors();
 
   return (
@@ -183,7 +183,7 @@ export const ShareVariantIcon = ({size = 26, color, ...rest}: IconProps) => {
   );
 };
 
-export const CogIcon = ({size = 26, color, ...rest}: IconProps) => {
+export const CogIcon = ({size = 24, color, ...rest}: IconProps) => {
   const {color: themeColor} = useColors();
 
   return (
@@ -196,7 +196,7 @@ export const CogIcon = ({size = 26, color, ...rest}: IconProps) => {
   );
 };
 
-export const HomeIcon = ({size = 26, color, ...rest}: IconProps) => {
+export const HomeIcon = ({size = 24, color, ...rest}: IconProps) => {
   const {color: themeColor} = useColors();
 
   return (
@@ -209,7 +209,7 @@ export const HomeIcon = ({size = 26, color, ...rest}: IconProps) => {
   );
 };
 
-export const BirdIcon = ({size = 26, color, ...rest}: IconProps) => {
+export const BirdIcon = ({size = 24, color, ...rest}: IconProps) => {
   const {color: themeColor} = useColors();
 
   return (
@@ -222,7 +222,7 @@ export const BirdIcon = ({size = 26, color, ...rest}: IconProps) => {
   );
 };
 
-export const CopyIcon = ({size = 26, color, ...rest}: IconProps) => {
+export const CopyIcon = ({size = 24, color, ...rest}: IconProps) => {
   const {color: themeColor} = useColors();
 
   return (
@@ -235,7 +235,7 @@ export const CopyIcon = ({size = 26, color, ...rest}: IconProps) => {
   );
 };
 
-export const DeleteIcon = ({size = 26, color, ...rest}: IconProps) => {
+export const DeleteIcon = ({size = 24, color, ...rest}: IconProps) => {
   const {color: themeColor} = useColors();
 
   return (
@@ -250,7 +250,7 @@ export const DeleteIcon = ({size = 26, color, ...rest}: IconProps) => {
 
 // AntDesign
 
-export const PictureIcon = ({size = 26, color, ...rest}: IconProps) => {
+export const PictureIcon = ({size = 24, color, ...rest}: IconProps) => {
   const {color: themeColor} = useColors();
 
   return (
@@ -263,7 +263,7 @@ export const PictureIcon = ({size = 26, color, ...rest}: IconProps) => {
   );
 };
 
-export const CameraIcon = ({size = 26, color, ...rest}: IconProps) => {
+export const CameraIcon = ({size = 24, color, ...rest}: IconProps) => {
   const {color: themeColor} = useColors();
 
   return (
@@ -278,7 +278,7 @@ export const CameraIcon = ({size = 26, color, ...rest}: IconProps) => {
 
 // MaterialIcons
 
-export const PlayIcon = ({size = 26, ...rest}: IconProps) => {
+export const PlayIcon = ({size = 24, ...rest}: IconProps) => {
   return (
     <MaterialIcons
       name="play-arrow"
@@ -289,7 +289,7 @@ export const PlayIcon = ({size = 26, ...rest}: IconProps) => {
   );
 };
 
-export const ArrowIcon = ({size = 26, color, ...rest}: IconProps) => {
+export const ArrowIcon = ({size = 24, color, ...rest}: IconProps) => {
   const {color: themeColor} = useColors();
 
   return (
@@ -310,7 +310,7 @@ export const VerifiedIcon = ({size = 16, color, ...rest}: IconProps) => {
   );
 };
 
-export const VideoIcon = ({size = 26, color, ...rest}: IconProps) => {
+export const VideoIcon = ({size = 24, color, ...rest}: IconProps) => {
   const {color: themeColor} = useColors();
 
   return (
@@ -323,7 +323,7 @@ export const VideoIcon = ({size = 26, color, ...rest}: IconProps) => {
   );
 };
 
-export const LocationIcon = ({size = 26, color, ...rest}: IconProps) => {
+export const LocationIcon = ({size = 24, color, ...rest}: IconProps) => {
   const {color: themeColor} = useColors();
 
   return (
@@ -336,7 +336,7 @@ export const LocationIcon = ({size = 26, color, ...rest}: IconProps) => {
   );
 };
 
-export const ArrowBackIcon = ({size = 26, color, ...rest}: IconProps) => {
+export const ArrowBackIcon = ({size = 24, color, ...rest}: IconProps) => {
   const {color: themeColor} = useColors();
 
   return (
@@ -349,7 +349,7 @@ export const ArrowBackIcon = ({size = 26, color, ...rest}: IconProps) => {
   );
 };
 
-export const SearchIcon = ({size = 26, color, ...rest}: IconProps) => {
+export const SearchIcon = ({size = 24, color, ...rest}: IconProps) => {
   const {color: themeColor} = useColors();
 
   return (
@@ -364,7 +364,7 @@ export const SearchIcon = ({size = 26, color, ...rest}: IconProps) => {
 
 // Ionicons
 
-export const TimerIcon = ({size = 26, color, ...rest}: IconProps) => {
+export const TimerIcon = ({size = 24, color, ...rest}: IconProps) => {
   const {color: themeColor} = useColors();
 
   return (
@@ -372,7 +372,7 @@ export const TimerIcon = ({size = 26, color, ...rest}: IconProps) => {
   );
 };
 
-export const EarthIcon = ({size = 26, color, ...rest}: IconProps) => {
+export const EarthIcon = ({size = 24, color, ...rest}: IconProps) => {
   const {color: themeColor} = useColors();
 
   return (
@@ -382,7 +382,7 @@ export const EarthIcon = ({size = 26, color, ...rest}: IconProps) => {
 
 // FontAwesome
 
-export const CommentIcon2 = ({size = 26, color, ...rest}: IconProps) => {
+export const CommentIcon2 = ({size = 24, color, ...rest}: IconProps) => {
   const {color: themeColor} = useColors();
 
   return (
@@ -397,7 +397,7 @@ export const CommentIcon2 = ({size = 26, color, ...rest}: IconProps) => {
 
 // FontAwesome6
 
-export const EnvelopeIcon = ({size = 26, color, ...rest}: IconProps) => {
+export const EnvelopeIcon = ({size = 24, color, ...rest}: IconProps) => {
   const {color: themeColor} = useColors();
 
   return (

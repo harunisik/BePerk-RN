@@ -8,6 +8,7 @@ import {
   deletePost,
   sendReport,
   shadowBan,
+  block,
 } from '../../../services/UserService';
 import {useMutation} from '../../../hooks/reactQueryHooks';
 import {useStore} from '../../../containers/StoreContainer';
@@ -172,7 +173,7 @@ export const ShadowBanButton = ({onSuccess, userId, banned = false}) => {
         onSuccess: () => {
           setModalVisible(false);
           onSuccess();
-          showMessage({message: 'User banned'});
+          showMessage({message: `User ${banned ? 'unbanned' : 'banned'}`});
         },
       },
     );
@@ -201,6 +202,50 @@ export const ShadowBanButton = ({onSuccess, userId, banned = false}) => {
   );
 };
 
+export const BlockUserButton = ({onSuccess, userId, blocked = false}) => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const {theme, color} = useColors();
+
+  const blockApi = useMutation(block);
+
+  const handlePressBlock = () =>
+    blockApi.mutate(
+      {
+        id: userId,
+        state: blocked ? 0 : 1,
+      },
+      {
+        onSuccess: () => {
+          setModalVisible(false);
+          onSuccess();
+          showMessage({message: `User ${blocked ? 'unblocked' : 'blocked'}`});
+        },
+      },
+    );
+
+  return (
+    <>
+      <Button
+        title={blocked ? 'Unblock' : 'Block'}
+        onPress={() => setModalVisible(true)}
+        icon={<MaterialIcons name="block" size={26} color="red" />}
+        theme={{
+          color,
+          backgroundColor:
+            theme === 'dark' ? 'rgb(50, 50, 50)' : 'rgb(245, 240, 240)',
+        }}
+      />
+      <Popup
+        visible={modalVisible}
+        header={`Are you sure would like to ${blocked ? 'unblock' : 'block'} this user?`}
+        message=""
+        onPressOk={handlePressBlock}
+        onPressCancel={() => setModalVisible(false)}
+      />
+    </>
+  );
+};
+
 interface ItemModalProps {
   id: number;
   type: number;
@@ -220,6 +265,7 @@ const ItemModal = ({
   visible,
   onDismiss,
 }: ItemModalProps) => {
+  const [blocked, setBlocked] = useState(false); // optimistic update
   const [banned, setBanned] = useState(false); // optimistic update
   const [_subscribed, setSubscribed] = useState(subscribed); // optimistic update
   const [reportModalVisible, setReportModalVisible] = useState(false);
@@ -255,7 +301,9 @@ const ItemModal = ({
         onSuccess: () => {
           onDismiss();
           setSubscribed(_subscribed === 0 ? 1 : 0);
-          // showMessage({message: 'Post deleted'});
+          showMessage({
+            message: `Notifications turned ${_subscribed ? 'off' : 'on'}`,
+          });
         },
       },
     );
@@ -274,7 +322,7 @@ const ItemModal = ({
       <BottomSheetModal
         visible={visible}
         onDismiss={onDismiss}
-        snapPoints={isAuthUser ? ['20%'] : isBeperk ? ['40%'] : ['27%']}>
+        snapPoints={isAuthUser ? ['20%'] : isBeperk ? ['47%'] : ['27%']}>
         <View style={{rowGap: 10, width: '85%'}} disableTheme>
           <Button
             onPress={handlePressCopyLink}
@@ -332,6 +380,14 @@ const ItemModal = ({
                     }}
                     userId={userId}
                     banned={banned}
+                  />
+                  <BlockUserButton
+                    onSuccess={() => {
+                      onDismiss();
+                      setBlocked(!blocked);
+                    }}
+                    userId={userId}
+                    blocked={blocked}
                   />
                 </>
               )}
