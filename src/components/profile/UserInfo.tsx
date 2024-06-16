@@ -19,6 +19,7 @@ const UserInfo = ({data, isAuthUser, userId}) => {
         userId={userId}
         username={data?.username}
         photo={data?.photo}
+        isVerified={data?.isVerified === 1}
         vertical
         size={60}
       />

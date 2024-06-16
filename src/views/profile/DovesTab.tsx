@@ -18,7 +18,7 @@ const DovesTab = ({userId, onRefresh}) => {
   });
 
   const ItemSeparatorComponent = useCallback(
-    () => <ItemSeperator lineVisible large />,
+    () => <ItemSeperator lineVisible size="large" />,
     [],
   );
 

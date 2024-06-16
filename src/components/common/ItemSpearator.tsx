@@ -2,17 +2,21 @@ import {StyleSheet} from 'react-native';
 import View from './View';
 import HR from './HR';
 
+interface ItemSeperatorProps {
+  lineVisible?: boolean;
+  size?: 'small' | 'medium' | 'large';
+}
+
 const ItemSeperator = ({
   lineVisible = false,
-  medium = false,
-  large = false,
-}) => {
+  size = 'small',
+}: ItemSeperatorProps) => {
   return (
     <View
       style={[
-        large
+        size === 'large'
           ? styles.spaceLarge
-          : medium
+          : size === 'medium'
             ? styles.spaceMedium
             : styles.spaceSmall,
       ]}>
@@ -23,16 +27,13 @@ const ItemSeperator = ({
 
 const styles = StyleSheet.create({
   spaceSmall: {
-    paddingBottom: 5,
-    paddingTop: 5,
+    paddingVertical: 5,
   },
   spaceMedium: {
-    paddingBottom: 10,
-    paddingTop: 10,
+    paddingVertical: 10,
   },
   spaceLarge: {
-    paddingBottom: 15,
-    paddingTop: 15,
+    paddingVertical: 15,
   },
 });
 

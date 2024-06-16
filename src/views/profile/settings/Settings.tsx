@@ -2,7 +2,6 @@ import {useCallback, useMemo} from 'react';
 import {Pressable, SectionList} from 'react-native';
 import {EditProfileListItem} from './EditProfile';
 import {ChangePasswordListItem} from './ChangePassword';
-import {InviteListItem} from './Invite';
 import {CreateNewAccountListItem} from '../../auth/CreateNewAccount';
 import {RequestVerificationListItem} from './ReuqestVerification';
 import {DeleteAccountListItem} from './DeleteAccount';
@@ -26,6 +25,7 @@ import {getUserSettings} from '../../../services/UserService';
 import Text from '../../../components/common/Text';
 import {ArrowIcon} from '../../../components/common/Icons';
 import View from '../../../components/common/View';
+import InviteListItem from './Invite';
 
 const {gray, p15, row, jcSpaceBetween, aiCenter} = common;
 
@@ -79,11 +79,11 @@ const Settings = () => {
   );
 
   const ItemSeparatorComponent = useCallback(
-    () => <ItemSeperator medium />,
+    () => <ItemSeperator size="medium" />,
     [],
   );
   const SectionSeparatorComponent = useCallback(
-    () => <ItemSeperator large />,
+    () => <ItemSeperator size="large" />,
     [],
   );
 

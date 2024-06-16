@@ -13,8 +13,8 @@ const Badge = ({value, style, theme}: ViewProps) => {
         {
           backgroundColor: theme ? theme.backgroundColor : 'red',
           borderRadius: 20,
-          width: 15,
-          height: 15,
+          width: 18,
+          height: 18,
           alignItems: 'center',
           justifyContent: 'center',
         },

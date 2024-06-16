@@ -36,7 +36,7 @@ export const AccountIcon = ({size = 24, style, ...rest}: IconProps) => {
     <MaterialCommunityIcons
       name="account"
       size={size}
-      color={theme2.color}
+      color={'white'}
       style={[
         // {backgroundColor: theme2.backgroundColor, borderRadius: 20},
         style,

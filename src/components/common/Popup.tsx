@@ -4,7 +4,7 @@ import Modal from './Modal';
 import Text from './Text';
 import View from './View';
 import HR from './HR';
-import {useColors} from '../../hooks/customHooks';
+import {colors, useColors} from '../../hooks/customHooks';
 
 const {bold} = common;
 
@@ -38,10 +38,12 @@ const Popup = ({
           <View
             style={{alignItems: 'center', padding: 20, rowGap: 5}}
             disableTheme>
-            <Text style={[bold]}>{header}</Text>
+            <Text style={[bold]} size={17}>
+              {header}
+            </Text>
             <Text>{message}</Text>
           </View>
-          <HR />
+          <HR color="gray" />
           <View style={{width: '100%'}} disableTheme>
             <Pressable
               style={{
@@ -49,16 +51,20 @@ const Popup = ({
                 alignItems: 'center',
               }}
               onPress={onPressOk}>
-              <Text style={{color: 'red'}}>{okButtonText}</Text>
+              <Text color={colors.blue} size={17}>
+                {okButtonText}
+              </Text>
             </Pressable>
-            <HR />
+            <HR color="gray" />
             <Pressable
               style={{
                 paddingVertical: 15,
                 alignItems: 'center',
               }}
               onPress={onPressCancel}>
-              <Text style={{color: '#0AAEEF'}}>{cancelButtonText}</Text>
+              <Text color="red" size={17}>
+                {cancelButtonText}
+              </Text>
             </Pressable>
           </View>
         </View>

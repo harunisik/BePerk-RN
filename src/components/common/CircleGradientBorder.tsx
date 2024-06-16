@@ -14,7 +14,7 @@ const InnerView = ({borderRadius, children}) => {
       style={{
         borderRadius,
         backgroundColor: theme2.backgroundColor,
-        borderColor: 'backgroundColor',
+        borderColor: backgroundColor,
         borderWidth: BORDER_WIDTH,
       }}>
       {children}

@@ -11,14 +11,14 @@ import View from '../../components/common/View';
 import {colors, useColors} from '../../hooks/customHooks';
 import {BellIcon, PlusIcon, SearchIcon} from '../../components/common/Icons';
 
-const {row, cGap15} = common;
+const {row, cGap10} = common;
 
 const HeaderRight = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const navigation = useNavigation();
 
   return (
-    <View style={[row, cGap15]}>
+    <View style={[row, cGap10]}>
       <PlusIcon
         onPress={() => {
           setModalVisible(true);

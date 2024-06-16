@@ -12,7 +12,12 @@ const FollowingTab = () => {
     <Tab.Navigator
       screenOptions={{
         lazy: true,
-        tabBarLabelStyle: {textTransform: 'none', fontWeight: 'bold', color},
+        tabBarLabelStyle: {
+          textTransform: 'none',
+          fontWeight: '600',
+          fontSize: 15,
+          color,
+        },
         tabBarStyle: {backgroundColor},
       }}>
       <Tab.Screen

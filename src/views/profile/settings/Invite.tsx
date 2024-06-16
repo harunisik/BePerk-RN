@@ -1,28 +1,29 @@
-import common from '../../../styles/sharedStyles';
-import Text from '../../../components/common/Text';
-import View from '../../../components/common/View';
+import {Alert, Share} from 'react-native';
 import {SettingsListItem1} from './Settings';
-import {useNavigation} from '@react-navigation/native';
 
-const {flex1, aiCenter, jcCenter} = common;
+const InviteListItem = () => {
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message: `Download BePerk app it's great.
+        `,
+        url: 'https://itunes.apple.com/app/id1370790950',
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error: any) {
+      Alert.alert(error.message);
+    }
+  };
 
-export const InviteListItem = () => {
-  const navigation = useNavigation();
-
-  return (
-    <SettingsListItem1
-      onPress={() => navigation.navigate(Invite.name)}
-      title="Invite"
-    />
-  );
+  return <SettingsListItem1 onPress={onShare} title="Invite" />;
 };
 
-const Invite = () => {
-  return (
-    <View style={[flex1, aiCenter, jcCenter]}>
-      <Text>Invite is under construction!</Text>
-    </View>
-  );
-};
-
-export default Invite;
+export default InviteListItem;

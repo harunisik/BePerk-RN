@@ -1,13 +1,17 @@
-import {StyleSheet, ViewProps} from 'react-native';
+import {StyleSheet, ViewProps as RNViewProps} from 'react-native';
 import View from './View';
 
-const HR = ({style, ...rest}: ViewProps) => {
+type ViewProps = RNViewProps & {color?: string};
+
+const HR = ({style, color, ...rest}: ViewProps) => {
+  const _color = color ?? 'rgb(50,50,50)';
+
   return (
     <View
       style={[
         {
           borderBottomWidth: StyleSheet.hairlineWidth,
-          borderBottomColor: 'rgb(50,50,50)',
+          borderBottomColor: _color,
         },
         style,
       ]}

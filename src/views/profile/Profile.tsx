@@ -15,9 +15,8 @@ import {
 import PostsTab from './PostsTab';
 import StoriesTab from './StoriesTab';
 import DovesTab from './DovesTab';
-import {Alert, RefreshControl, Share, StyleSheet} from 'react-native';
+import {Alert, RefreshControl, Share} from 'react-native';
 import common from '../../styles/sharedStyles';
-import {TouchableOpacity} from 'react-native';
 import EditProfile from './settings/EditProfile';
 import Messages from './Messages';
 import Settings from './settings/Settings';
@@ -39,7 +38,7 @@ import {
 import {useColors} from '../../hooks/customHooks';
 import Button from '../../components/common/buttons/Button';
 
-const {bold, aiCenter, row, jcSpaceAround, cGap10, cGap15, jcCenter} = common;
+const {bold, aiCenter, row, jcSpaceAround, cGap10, jcCenter} = common;
 
 const HeaderRight = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -53,7 +52,7 @@ const HeaderRight = () => {
     try {
       const result = await Share.share({
         message:
-          'You should join BePerk! It is the best christian social media plaform...',
+          'You should join BePerk! It is the best christian social media plaform.',
         url: 'https://itunes.apple.com/app/id1370790950',
       });
       if (result.action === Share.sharedAction) {
@@ -73,7 +72,7 @@ const HeaderRight = () => {
   return (
     <View>
       {isAuthUser ? (
-        <View style={[aiCenter, row, jcSpaceAround, cGap15]}>
+        <View style={[aiCenter, row, jcSpaceAround, cGap10]}>
           <ShareVariantIcon onPress={onShare} />
           <BookmarkIcon
             isOutlined

@@ -14,6 +14,7 @@ import View from '../../components/common/View';
 import {FileIcon, VerifiedIcon} from '../../components/common/Icons';
 import {useColors} from '../../hooks/customHooks';
 import Badge from '../../components/common/Badge';
+import {dateDiff} from '../../utils/DateUtil';
 
 const {row, cGap3, aiCenter, bold, p10, rGap3, flex1} = common;
 
@@ -43,6 +44,17 @@ const RenderRightActions = ({item, onPress}) => {
 };
 
 const MessageItem = ({item, onDelete}) => {
+  const {
+    id,
+    to_users,
+    username,
+    photo,
+    last_message_user_id,
+    last_message_type,
+    last_message,
+    not_read,
+  } = item;
+
   const navigation = useNavigation();
   const {
     store: {
@@ -51,17 +63,20 @@ const MessageItem = ({item, onDelete}) => {
   } = useStore();
   const {theme1} = useColors();
 
-  const title = item.to_users
+  const title = to_users
     .filter(user => authUserId !== user.id)
     .map(user => user.name)
     .join(', ');
-  const isMultiple = item.to_users.length > 2;
+  const isMultiple = to_users.length > 2;
+  const isVerified = to_users.find(
+    ({id}) => id === last_message_user_id,
+  )?.isVerified;
 
   const handlePress = () => {
     navigation.navigate(MessageDetails.name, {
       title,
       isMultiple,
-      chatId: item.id,
+      chatId: id,
     });
   };
 
@@ -71,15 +86,14 @@ const MessageItem = ({item, onDelete}) => {
         <RenderRightActions item={item} onPress={onDelete} />
       )}>
       <Pressable onPress={handlePress}>
-        <View style={[row, aiCenter]}>
+        <View style={[row, aiCenter, {paddingVertical: 3}]}>
           <AccountCard
             // userId={item.user_id}
-            username={item.username}
+            username={username}
             photo={
               !isMultiple
-                ? item.photo
-                : item.to_users.find(({id}) => id === item.last_message_user_id)
-                    ?.photo
+                ? photo
+                : to_users.find(({id}) => id === last_message_user_id)?.photo
             }
             displayUsername={false}
             size={26}
@@ -89,32 +103,32 @@ const MessageItem = ({item, onDelete}) => {
             <View style={[row, cGap3]}>
               <Text style={[bold, flex1]} numberOfLines={1}>
                 {title}
-                {!isMultiple && item.isVerified === 1 && <VerifiedIcon />}
+                {!isMultiple && isVerified === 1 && <VerifiedIcon />}
               </Text>
             </View>
-            <Text color="gray" size={15}>
-              {item.last_message_type === 0 || item.last_message_type === 1
+            <Text color="gray" size={15} numberOfLines={1}>
+              {last_message_type === 0 || last_message_type === 1
                 ? 'Post'
-                : item.last_message_type === 2
+                : last_message_type === 2
                   ? 'Story'
-                  : item.last_message_type === 3
+                  : last_message_type === 3
                     ? 'Dove'
-                    : item.last_message_type === 6
+                    : last_message_type === 6
                       ? 'Profile'
-                      : item.last_message_type === 8
+                      : last_message_type === 8
                         ? 'Image'
-                        : item.last_message_type === 7
-                          ? item.last_message
-                          : item.last_message_type}
+                        : last_message_type === 7
+                          ? last_message
+                          : last_message_type}
             </Text>
           </View>
-          {item.not_read > 0 && (
+          {not_read > 0 && (
             <View
               style={{
                 width: 30,
                 alignItems: 'flex-end',
               }}>
-              <Badge value={item.not_read} theme={theme1} />
+              <Badge value={not_read} theme={theme1} />
             </View>
           )}
         </View>
@@ -146,6 +160,7 @@ const Messages = () => {
         onRefresh={refetch}
         refreshing={isFetching}
         contentContainerStyle={p10}
+        // separatorSize="medium"
       />
     </View>
   );

@@ -66,7 +66,7 @@ const HomeTab = () => {
   );
 
   const ItemSeparatorComponent = useCallback(
-    () => <ItemSeperator lineVisible large />,
+    () => <ItemSeperator lineVisible size="large" />,
     [],
   );
 

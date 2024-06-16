@@ -46,7 +46,7 @@ const DoveTab = () => {
     useGetUserExploring(2, subtype, 35);
 
   const ItemSeparatorComponent = useCallback(
-    () => <ItemSeperator lineVisible large />,
+    () => <ItemSeperator lineVisible size="large" />,
     [],
   );
 
