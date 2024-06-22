@@ -1,9 +1,9 @@
-import {Image, StyleSheet} from 'react-native';
+import {Image, StyleSheet, useWindowDimensions} from 'react-native';
 import common from '../../styles/sharedStyles';
 import DovesItem from '../../components/doves/DovesItem';
 import DovesItemOptions from '../../components/doves/DovesItemOptions';
 import ItemSeperator from '../../components/common/ItemSpearator';
-import {useCallback} from 'react';
+import {useCallback, useState} from 'react';
 import {useQuery} from '../../hooks/reactQueryHooks';
 import {getUserPerks} from '../../services/UserService';
 import {useGetUserFeed} from '../../hooks/infiniteQueryHooks';
@@ -11,9 +11,37 @@ import InfiniteFlatList from '../../components/common/InfiniteFlatList';
 import Text from '../../components/common/Text';
 import View from '../../components/common/View';
 import HR from '../../components/common/HR';
+import {Facebook} from 'react-content-loader/native';
+import {useColors} from '../../hooks/customHooks';
 
 const {jcSpaceBetween, aiCenter, row, rGap10, pv20, pv15, ph15, bold, white} =
   common;
+
+export const Loader = () => {
+  const [height, setHeight] = useState(100);
+  const {height: windowHeight} = useWindowDimensions();
+  const {theme} = useColors();
+
+  return (
+    <View style={{paddingHorizontal: 10, paddingVertical: 20}}>
+      {Array.from({length: windowHeight / height}, (_, v) => v).map(j => {
+        return (
+          <Facebook
+            speed={1}
+            onLayout={() => setHeight(height)}
+            key={j}
+            backgroundColor={
+              theme === 'dark' ? 'rgb(40, 40, 40)' : 'rgb(240, 240, 240)'
+            }
+            foregroundColor={
+              theme === 'dark' ? 'rgb(50, 50, 50)' : 'rgb(250, 250, 250)'
+            }
+          />
+        );
+      })}
+    </View>
+  );
+};
 
 const ListHeaderItem = ({item}) => {
   return (
@@ -60,7 +88,7 @@ const HomeTab = () => {
     limit: 1,
     offset: 0,
   });
-  const {data, fetchNextPage, isFetching, refetch, remove} = useGetUserFeed(
+  const {data, isFetching, fetchNextPage, refetch, remove} = useGetUserFeed(
     2,
     35,
   );
@@ -83,6 +111,7 @@ const HomeTab = () => {
         {...(beperkDove !== undefined && {
           ListHeaderComponent: <ListHeaderItem item={beperkDove[0]} />,
         })}
+        ListEmptyComponent={<Loader />}
       />
     </View>
   );

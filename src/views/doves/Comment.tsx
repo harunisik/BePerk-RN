@@ -11,25 +11,32 @@ import {
   postComment as userPostComment,
 } from '../../services/UserService';
 import View from '../../components/common/View';
+import {useColors} from '../../hooks/customHooks';
+
+const {flex1} = common;
 
 export const CommentScreenOptions = () => {
+  const {theme} = useColors();
+
   return {
     presentation: 'formSheet',
-    headerStyle: {backgroundColor: 'lightgray'},
+    headerStyle: {
+      backgroundColor:
+        theme === 'dark' ? 'rgb(15, 15, 15)' : 'rgb(245, 245, 245)',
+    },
   };
 };
 
 const Comment = () => {
+  const {backgroundColor} = useColors();
   const route = useRoute();
   const {
     params: {id, type, fullname, username, userId, caption, uploadTime},
   } = route;
   const [selectedComment, setSelectedComment] = useState('');
   const [selectedCommentId, setSelectedCommentId] = useState(id);
-  const {flex1} = common;
 
   const {data, refetch, isFetching} = useQuery(getUserComments, {id, type});
-
   const postComment = useMutation(userPostComment);
   const deleteComment = useMutation(userDeleteComment);
 
@@ -44,7 +51,7 @@ const Comment = () => {
   };
 
   return (
-    <SafeAreaView style={flex1}>
+    <SafeAreaView style={[flex1, {backgroundColor}]}>
       <View style={flex1}>
         <CommentList
           data={data}

@@ -1,3 +1,4 @@
+import {useEffect, useState} from 'react';
 import {useStore} from '../containers/StoreContainer';
 
 export interface Theme {
@@ -42,4 +43,16 @@ export function useColors() {
 
   return store.userInfo?.theme === 'dark' ? colors.dark : colors.default;
   // return colors.dark;
+}
+
+export function useDelay(delay: number = 500) {
+  const [isLoading, setIsloading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsloading(false);
+    }, delay);
+  }, []);
+
+  return {isLoading};
 }

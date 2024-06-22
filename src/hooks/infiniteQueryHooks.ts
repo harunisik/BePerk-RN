@@ -12,7 +12,7 @@ import {useMemo} from 'react';
 // QUERY requests
 
 export function useGetFeaturedFeed() {
-  const {data, fetchNextPage, isFetching, refetch, remove} = useInfiniteQuery({
+  const {data, isFetching, fetchNextPage, refetch, remove} = useInfiniteQuery({
     queryKey: [getFeaturedFeed.name],
     queryFn: ({pageParam = 0}) => {
       const limit = 25;
@@ -28,15 +28,15 @@ export function useGetFeaturedFeed() {
 
   return {
     data: newData,
-    fetchNextPage,
     isFetching,
+    fetchNextPage,
     refetch,
     remove,
   };
 }
 
 export function useGetUserFeed(filter: number, limit: number = 25) {
-  const {data, fetchNextPage, isFetching, refetch, remove} = useInfiniteQuery({
+  const {data, isFetching, fetchNextPage, refetch, remove} = useInfiniteQuery({
     queryKey: [getUserFeed.name, filter],
     queryFn: ({pageParam = 0}) => {
       return getUserFeed(filter, limit, limit * pageParam);
@@ -50,8 +50,8 @@ export function useGetUserFeed(filter: number, limit: number = 25) {
 
   return {
     data: newData,
-    fetchNextPage,
     isFetching,
+    fetchNextPage,
     refetch,
     remove,
   };
@@ -88,7 +88,7 @@ export function useGetUserExploring(
 }
 
 export function useGetUserPhotoVideo(id: number, limit: number = 25) {
-  const {data, fetchNextPage, isFetching, refetch, remove, hasNextPage} =
+  const {data, isFetching, hasNextPage, fetchNextPage, refetch, remove} =
     useInfiniteQuery({
       queryKey: [getUserPhotoVideo.name, id],
       queryFn: ({pageParam = 0}) => {
@@ -110,10 +110,10 @@ export function useGetUserPhotoVideo(id: number, limit: number = 25) {
 
   return {
     data: newData,
-    fetchNextPage,
     isFetching,
+    hasNextPage,
+    fetchNextPage,
     refetch,
     remove,
-    hasNextPage,
   };
 }

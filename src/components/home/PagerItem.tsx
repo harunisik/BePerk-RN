@@ -8,7 +8,7 @@ import AccountCard from '../common/AccountCard';
 import Text from '../common/Text';
 import {View} from 'react-native';
 
-const PagerItem = ({item, paused = true}) => {
+const PagerItem = ({item, paused}) => {
   const {
     filename,
     user_id,

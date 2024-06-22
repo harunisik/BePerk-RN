@@ -137,7 +137,7 @@ const NewStory = () => {
               height: 200,
               marginTop: '50%',
             }}>
-            <Video uri={asset.uri} />
+            <Video uri={asset.uri} paused />
           </View>
           <View
             style={{

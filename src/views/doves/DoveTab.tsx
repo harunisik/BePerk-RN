@@ -9,6 +9,7 @@ import View from '../../components/common/View';
 import HR from '../../components/common/HR';
 import {FileIcon} from '../../components/common/Icons';
 import Button from '../../components/common/buttons/Button';
+import {Loader} from './HomeTab';
 
 const ListHeaderComponent = () => {
   const navigation = useNavigation();
@@ -61,6 +62,7 @@ const DoveTab = () => {
         remove={remove}
         ListHeaderComponent={ListHeaderComponent}
         ItemSeparatorComponent={ItemSeparatorComponent}
+        ListEmptyComponent={<Loader />}
       />
     </View>
   );

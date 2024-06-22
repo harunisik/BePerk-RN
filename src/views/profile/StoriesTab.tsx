@@ -7,7 +7,9 @@ import {VIDEO_HEIGHT} from '../../components/profile/PostItem';
 
 const StoriesTab = ({userId, onRefresh}) => {
   const navigation = useNavigation();
-  const {data, refetch, isFetching} = useQuery(getMy24, {id: userId});
+  const {data, isFetching, refetch} = useQuery(getMy24, {
+    id: userId,
+  });
 
   const handlePressItem = index => {
     navigation.navigate(StoryView.name, {data: data.my24, index, userId});

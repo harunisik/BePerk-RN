@@ -183,7 +183,7 @@ const NewPost = () => {
               width: 100,
               height: 100,
             }}>
-            <Video uri={asset.uri} />
+            <Video uri={asset.uri} paused />
           </View>
         )}
 

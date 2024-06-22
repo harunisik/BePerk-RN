@@ -5,7 +5,7 @@ import ProfilePostsDetails from './ProfilePostsDetails';
 
 const PostsTab = ({userId, onRefresh}) => {
   const navigation = useNavigation();
-  const {data, fetchNextPage, isFetching, refetch, remove, hasNextPage} =
+  const {data, isFetching, hasNextPage, fetchNextPage, refetch, remove} =
     useGetUserPhotoVideo(userId, 35);
 
   const handlePressItem = index => {

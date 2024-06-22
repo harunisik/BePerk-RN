@@ -93,7 +93,7 @@ const EditProfile = () => {
     const form = new FormData();
     form.append('fullname', fullname);
     form.append('username', username);
-    form.append('comment', comment);
+    form.append('comment', comment.replaceAll(/[\n]+/g, '\n'));
     form.append('webSite', webSite);
 
     if (asset) {
@@ -232,7 +232,7 @@ const EditProfile = () => {
               placeholder="Tap to enter bio"
               onChangeText={setComment}
               value={comment}
-              style={[flex3]}
+              style={[flex3, {maxHeight: 100}]}
               multiline
             />
           </View>

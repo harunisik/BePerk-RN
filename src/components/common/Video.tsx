@@ -7,26 +7,26 @@ import {PlayIcon} from './Icons';
 
 const {absolute, jcCenter, aiCenter} = common;
 
-interface VideoProps extends ReactVideoProps {
+type VideoProps = ReactVideoProps & {
   uri: string;
   paused?: boolean;
-}
+};
 
 const Video = ({uri, paused = false, ...rest}: VideoProps) => {
-  const [videoPaused, setVideoPaused] = useState(paused);
+  const [_paused, setPaused] = useState(paused);
   const [width, setWidth] = useState<number>(0);
 
   useFocusEffect(
     useCallback(() => {
-      setVideoPaused(paused);
-      return () => setVideoPaused(true);
+      setPaused(paused);
+      return () => setPaused(true);
     }, [paused]),
   );
 
   return (
     <Pressable
       style={[aiCenter, jcCenter]}
-      onPress={() => setVideoPaused(!videoPaused)}
+      onPress={() => setPaused(!_paused)}
       onLayout={event => setWidth(event.nativeEvent.layout.width)}>
       <RNVideo
         source={{uri}}
@@ -35,11 +35,21 @@ const Video = ({uri, paused = false, ...rest}: VideoProps) => {
           height: '100%',
         }}
         // resizeMode="stretch"
-        paused={videoPaused}
+        paused={_paused}
         // controls
+        repeat
+        // onProgress={({currentTime, playableDuration, seekableDuration}) =>
+        //   console.log(currentTime, playableDuration, seekableDuration)
+        // }
+        onBuffer={({isBuffering}) => {
+          // console.log(isBuffering);
+        }}
+        onLoad={({currentTime, duration}) => {
+          // console.log(currentTime, duration);
+        }}
         {...rest}
       />
-      {videoPaused && <PlayIcon size={width / 4} style={absolute} />}
+      {_paused && <PlayIcon size={width / 4} style={absolute} />}
     </Pressable>
   );
 };

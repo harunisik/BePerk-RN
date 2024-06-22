@@ -1,12 +1,12 @@
 import {useNavigation} from '@react-navigation/native';
 import FeaturedItemDetails from './FeaturedItemDetails';
 import {useGetFeaturedFeed} from '../../hooks/infiniteQueryHooks';
-import PostItemList from '../../components/profile/PostItemList';
 import {AddDoveModal} from '../add/AddModal';
 import common from '../../styles/sharedStyles';
 import {useState} from 'react';
 import View from '../../components/common/View';
 import {PlusIcon} from '../../components/common/Icons';
+import PostItemList from '../../components/profile/PostItemList';
 
 const {row, cGap15} = common;
 
@@ -37,7 +37,7 @@ export const FeaturedScreenOptions = () => {
 const Featured = () => {
   const navigation = useNavigation();
 
-  const {data, fetchNextPage, isFetching, refetch, remove} =
+  const {data, isFetching, fetchNextPage, refetch, remove} =
     useGetFeaturedFeed();
 
   const handlePressItem = index => {

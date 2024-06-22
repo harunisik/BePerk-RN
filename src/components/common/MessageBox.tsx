@@ -12,7 +12,6 @@ const {row, jcSpaceBetween, aiCenter} = common;
 
 const MessageBox = ({initialText, onClearText, onPress}) => {
   const [message, setMessage] = useState(initialText);
-  const [height, setHeight] = useState();
   const {theme2} = useColors();
 
   const handlePress = () => {
@@ -27,14 +26,12 @@ const MessageBox = ({initialText, onClearText, onPress}) => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={height}>
+      keyboardVerticalOffset={115}>
       <View
-        style={[styles.shadowProp, {rowGap: 10, padding: 15}]}
-        onLayout={({
-          nativeEvent: {
-            layout: {height},
-          },
-        }) => setHeight(height)}>
+        style={[
+          styles.shadowProp,
+          {rowGap: 10, paddingHorizontal: 15, paddingTop: 5},
+        ]}>
         <View style={[row, jcSpaceBetween]}>
           {['😌', '🤣', '❤️', '😍', '😱', '✝️', '🙏', '🔥', '😥'].map(
             (item, index) => {
@@ -84,10 +81,12 @@ const MessageBox = ({initialText, onClearText, onPress}) => {
 
 const styles = StyleSheet.create({
   shadowProp: {
-    shadowColor: '#171717',
-    shadowOffset: {width: 0, height: -4},
-    shadowOpacity: 0.2,
-    shadowRadius: 10,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: 'gray',
+    // shadowColor: '#171717',
+    // shadowOffset: {width: 0, height: -3},
+    // shadowOpacity: 0.1,
+    // shadowRadius: 10,
   },
 });
 
