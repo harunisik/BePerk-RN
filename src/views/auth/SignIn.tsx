@@ -80,6 +80,7 @@ const Signin = () => {
             value={password}
             secureTextEntry
             style={{paddingLeft: 0}}
+            onSubmitEditing={handlePressLogin}
           />
           <HR />
         </View>

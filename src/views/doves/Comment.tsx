@@ -1,9 +1,9 @@
 import {SafeAreaView} from 'react-native';
 import common from '../../styles/sharedStyles';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import MessageBox from '../../components/common/MessageBox';
 import CommentList from '../../components/doves/CommentList';
-import {useRoute} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {useQuery, useMutation} from '../../hooks/reactQueryHooks';
 import {
   getUserComments,
@@ -15,20 +15,23 @@ import {useColors} from '../../hooks/customHooks';
 
 const {flex1} = common;
 
-export const CommentScreenOptions = () => {
-  const {theme} = useColors();
+export const CommentScreenOptions = ({route}) => {
+  const {
+    params: {theme},
+  } = route;
 
   return {
     presentation: 'formSheet',
     headerStyle: {
       backgroundColor:
-        theme === 'dark' ? 'rgb(15, 15, 15)' : 'rgb(245, 245, 245)',
+        theme === 'dark' ? 'rgb(20, 20, 20)' : 'rgb(245, 245, 245)',
     },
   };
 };
 
 const Comment = () => {
-  const {backgroundColor} = useColors();
+  const {backgroundColor, theme} = useColors();
+  const navigation = useNavigation();
   const route = useRoute();
   const {
     params: {id, type, fullname, username, userId, caption, uploadTime},
@@ -49,6 +52,10 @@ const Comment = () => {
     setSelectedComment('');
     setSelectedCommentId(id);
   };
+
+  useEffect(() => {
+    navigation.setParams({theme});
+  }, [theme]);
 
   return (
     <SafeAreaView style={[flex1, {backgroundColor}]}>

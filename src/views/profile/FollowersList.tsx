@@ -1,4 +1,3 @@
-import {Pressable, StyleSheet} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {
   addFollowing,
@@ -14,13 +13,12 @@ import Popup from '../../components/common/Popup';
 import {showMessage} from 'react-native-flash-message';
 import {useStore} from '../../containers/StoreContainer';
 import AccountCard from '../../components/common/AccountCard';
-import Text from '../../components/common/Text';
 import View from '../../components/common/View';
 import {colors, useColors} from '../../hooks/customHooks';
 import TextInput from '../../components/common/TextInput';
 import Button from '../../components/common/buttons/Button';
 
-const {pl15, pr15, row, aiCenter} = common;
+const {row, aiCenter} = common;
 
 const UserItem = ({item, onPressFollow}) => {
   const {

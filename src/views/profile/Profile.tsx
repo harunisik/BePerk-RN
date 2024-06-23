@@ -1,6 +1,6 @@
 import UserInfo from '../../components/profile/UserInfo';
-import {useEffect, useState} from 'react';
-import {useNavigation, useRoute} from '@react-navigation/native';
+import {useEffect, useRef, useState} from 'react';
+import {useIsFocused, useNavigation, useRoute} from '@react-navigation/native';
 import {useQuery, useMutation} from '../../hooks/reactQueryHooks';
 import {
   deleteFollowing,
@@ -8,6 +8,7 @@ import {
   getUserProfile,
 } from '../../services/UserService';
 import {
+  ContainerRef,
   MaterialTabBar,
   MaterialTabItem,
   Tabs,
@@ -206,9 +207,18 @@ const Profile = () => {
     }
   }, [data]);
 
+  const ref = useRef();
+  useEffect(() => {
+    navigation.getParent().addListener('tabPress', e => {
+      // refetch();
+      // ref.current?.setIndex(0);
+    });
+  }, [navigation]);
+
   return (
     <>
       <Tabs.Container
+        ref={ref}
         lazy
         renderHeader={() => (
           <View
