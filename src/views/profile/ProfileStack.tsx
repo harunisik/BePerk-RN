@@ -24,6 +24,7 @@ import WebView, {WebViewScreenOptions} from '../../components/common/WebView';
 import MediaView, {MediaViewScreenOptions} from './MediaView';
 import PostDetailItemView from './PostDetailsItemView';
 import {useColors} from '../../hooks/customHooks';
+import AddStack from '../add/AddStack';
 
 const Stack = createNativeStackNavigator();
 
@@ -155,6 +156,14 @@ const ProfileStack = () => {
         name={PostDetailItemView.name}
         component={PostDetailItemView}
         options={{title: 'Post'}}
+      />
+      <Stack.Screen
+        name={AddStack.name}
+        component={AddStack}
+        options={{
+          animation: 'slide_from_bottom',
+          headerShown: false,
+        }}
       />
     </Stack.Navigator>
   );

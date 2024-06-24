@@ -49,7 +49,7 @@ const queryMap = {
   [postMy24.name]: [getMy24.name],
   [postComment.name]: [getUserComments.name],
   [deleteComment.name]: [getUserComments.name],
-  [addPerk.name]: [getUserFeed.name, getUserExploring.name],
+  [addPerk.name]: [getUserFeed.name, getUserExploring.name, getUserPerks.name],
   [chatShare.name]: [],
   [chatSend.name]: [getChat.name, chatListOpen.name],
   [chatDelete.name]: [chatListOpen.name],

@@ -1,4 +1,4 @@
-import {Switch, ActivityIndicator} from 'react-native';
+import {Switch, ActivityIndicator, Pressable, Keyboard} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import FastImage from 'react-native-fast-image';
 import {SegmentedButtons} from 'react-native-paper';
@@ -19,8 +19,10 @@ import {
   CloseIcon,
   LocationIcon,
   TimerIcon,
+  VideoIcon,
 } from '../../components/common/Icons';
 import TextInput from '../../components/common/TextInput';
+import {colors} from '../../hooks/customHooks';
 
 const PostButton = ({onPress}) => {
   return (
@@ -42,6 +44,7 @@ const NewPost = () => {
   const [showIndicator, setShowIndicator] = useState(false);
   const [caption, setCaption] = useState('');
   const [showTimer, setShowTimer] = useState(false);
+  const [forYouPage, setForYouPage] = useState(false);
   const [comments, setComments] = useState('public');
   const [likes, setLikes] = useState('public');
   const [views, setViews] = useState('public');
@@ -80,6 +83,7 @@ const NewPost = () => {
     attachedUsers,
     location,
     showTimer,
+    forYouPage,
     comments,
     likes,
     views,
@@ -87,11 +91,12 @@ const NewPost = () => {
 
   const handlePressPost = async () => {
     setShowIndicator(true);
+    Keyboard.dismiss();
 
     const form = new FormData();
     form.append('height', asset.height);
     form.append('width', asset.width);
-    form.append('caption', caption);
+    form.append('caption', caption.replaceAll(/[\n]+/g, '\n'));
     form.append(
       'attached_users',
       attachedUsers?.length > 0
@@ -107,6 +112,9 @@ const NewPost = () => {
     form.append('location_address', location ? location.location_address : '');
     form.append('expiration_timer', '0');
     form.append('show_timer', toNumber(showTimer));
+    if (asset.mediaType === 'video') {
+      form.append('forYouPage', toNumber(forYouPage));
+    }
     form.append('comments', comments === 'public' ? 1 : 0);
     form.append('comments_private', comments === 'private' ? 1 : 0);
     form.append('likes', likes === 'public' ? 1 : 0);
@@ -193,7 +201,9 @@ const NewPost = () => {
           onChangeText={setCaption}
           style={{
             flex: 1,
+            maxHeight: 100,
           }}
+          multiline
         />
       </View>
       <View
@@ -202,19 +212,21 @@ const NewPost = () => {
           columnGap: 10,
           alignItems: 'center',
         }}>
-        <AccountIcon />
+        <AccountIcon color={colors.blue} />
         <Text
           style={{flex: 1}}
           onPress={handlePressTagPeople}
           numberOfLines={1}>
           {attachedUsers?.length > 0
             ? attachedUsers.map(({fullname}) => `@${fullname}`).join(', ')
-            : 'Tag people'}
+            : 'Tap people'}
         </Text>
         {attachedUsers?.length > 0 && (
           <CloseIcon
             onPress={() => setAttachedUsers([])}
             style={{marginLeft: 'auto'}}
+            size={18}
+            color="gray"
           />
         )}
       </View>
@@ -225,7 +237,7 @@ const NewPost = () => {
           columnGap: 10,
           alignItems: 'center',
         }}>
-        <LocationIcon />
+        <LocationIcon color={colors.blue} />
         <Text
           style={{flex: 1}}
           onPress={() => navigation.navigate(GooglePlaces.name)}
@@ -236,14 +248,15 @@ const NewPost = () => {
           <CloseIcon
             onPress={() => setLocation(undefined)}
             style={{marginLeft: 'auto'}}
+            size={18}
+            color="gray"
           />
         )}
       </View>
       <HR />
-      <View
+      {/* <View
         style={{
           flexDirection: 'row',
-          paddingBottom: 15,
           justifyContent: 'space-between',
         }}>
         <View
@@ -256,7 +269,41 @@ const NewPost = () => {
           <Text>Show timer</Text>
           <Switch value={showTimer} onValueChange={setShowTimer} />
         </View>
-      </View>
+        <View
+          style={{flexDirection: 'row', alignItems: 'center', columnGap: 10}}>
+          <Text>For You</Text>
+          <Switch value={forYouPage} onValueChange={setForYouPage} />
+        </View>
+      </View> 
+      <HR /> */}
+      {asset.mediaType === 'video' && (
+        <>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                columnGap: 10,
+              }}>
+              <VideoIcon color={colors.blue} />
+              <Text>For You Page</Text>
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                columnGap: 10,
+              }}>
+              <Switch value={forYouPage} onValueChange={setForYouPage} />
+            </View>
+          </View>
+          <HR />
+        </>
+      )}
       <View style={{rowGap: 10}}>
         <Text style={{fontWeight: 'bold'}}>Comments</Text>
         <SegmentedButtons

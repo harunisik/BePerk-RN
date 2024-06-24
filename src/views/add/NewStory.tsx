@@ -18,7 +18,10 @@ export const NewStoryScreenOptions = ({navigation}) => {
   return {
     title: '',
     headerTransparent: true,
-    headerLeft: () => <CloseIcon onPress={() => navigation.goBack()} />,
+    headerStyle: {backgroundColor: 'transparent'},
+    headerLeft: () => (
+      <CloseIcon onPress={() => navigation.goBack()} color="white" />
+    ),
   };
 };
 

@@ -29,18 +29,12 @@ export const ShareIcon = ({size = 24, disabled, color, ...rest}: IconProps) => {
   );
 };
 
-export const AccountIcon = ({size = 24, style, ...rest}: IconProps) => {
-  const {color, theme1, theme2} = useColors();
-
+export const AccountIcon = ({size = 24, color, ...rest}: IconProps) => {
   return (
     <MaterialCommunityIcons
       name="account"
       size={size}
-      color={'white'}
-      style={[
-        // {backgroundColor: theme2.backgroundColor, borderRadius: 20},
-        style,
-      ]}
+      color={color ?? 'white'}
       {...rest}
     />
   );

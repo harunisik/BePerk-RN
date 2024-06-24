@@ -5,7 +5,6 @@ import {useColors, useDelay} from '../../hooks/customHooks';
 import {useWindowDimensions} from 'react-native';
 import ContentLoader, {Rect} from 'react-content-loader/native';
 import {Fragment} from 'react';
-import ListEmptyComponent from '../common/ListEmptyComponent';
 
 const COL_NUM = 3;
 
@@ -114,7 +113,6 @@ const PostItemList = ({
           numColumns={COL_NUM}
           estimatedItemSize={IMAGE_HEIGHT}
           contentContainerStyle={{paddingBottom: 10}}
-          ListEmptyComponent={ListEmptyComponent}
           {...rest}
         />
       )}

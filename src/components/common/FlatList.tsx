@@ -4,7 +4,6 @@ import {
 } from 'react-native';
 import ItemSeperator from './ItemSpearator';
 import {useCallback} from 'react';
-import ListEmptyComponent from './ListEmptyComponent';
 
 type FlatListProps<T> = RNFlatListProps<T> & {
   separatorSize?: 'medium' | 'large';
@@ -27,7 +26,6 @@ const FlatList = ({
       renderItem={renderItem}
       keyExtractor={item => item.id}
       ItemSeparatorComponent={ItemSeparatorComponent}
-      ListEmptyComponent={ListEmptyComponent}
       viewabilityConfig={{viewAreaCoveragePercentThreshold: 100}}
       {...rest}
     />
