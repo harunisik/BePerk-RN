@@ -6,6 +6,7 @@ import NewStory, {NewStoryScreenOptions} from './NewStory';
 import PostDove, {PostDoveScreenOptions} from '../doves/PostDove';
 import GooglePlaces, {GooglePlacesScreenOptions} from './GooglePlaces';
 import {useColors} from '../../hooks/customHooks';
+import NewMedia, {NewMediaScreenOptions} from './NewMedia';
 
 const Stack = createNativeStackNavigator();
 
@@ -49,6 +50,11 @@ const AddStack = () => {
         name={PostDove.name}
         component={PostDove}
         options={PostDoveScreenOptions}
+      />
+      <Stack.Screen
+        name={NewMedia.name}
+        component={NewMedia}
+        options={NewMediaScreenOptions}
       />
     </Stack.Navigator>
   );

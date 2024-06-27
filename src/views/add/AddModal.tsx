@@ -16,6 +16,7 @@ import {PictureIcon} from '../../components/common/Icons';
 import BottomSheetModal from '../../components/common/BottomSheetModal';
 import {colors, useColors} from '../../hooks/customHooks';
 import View from '../../components/common/View';
+import NewMedia from './NewMedia';
 
 export const ImageVideoSelectionModal = ({visible, onDismiss, navigateTo}) => {
   const navigation = useNavigation();
@@ -190,6 +191,7 @@ const AddModal = ({visible, onDismiss}) => {
   const [imageVideoModalVisible, setImageVideoModalVisible] = useState(false);
   const [navigateTo, setNavigateTo] = useState('');
   const {theme, color} = useColors();
+  const navigation = useNavigation();
 
   const handleDovePress = () => {
     onDismiss();
@@ -198,8 +200,11 @@ const AddModal = ({visible, onDismiss}) => {
 
   const handlePostPress = (navigateTo: string) => {
     onDismiss();
-    setNavigateTo(navigateTo);
-    setImageVideoModalVisible(true);
+    // setNavigateTo(navigateTo);
+    // setImageVideoModalVisible(true);
+    navigation.navigate(AddStack.name, {
+      screen: NewMedia.name,
+    });
   };
 
   return (
