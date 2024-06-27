@@ -21,7 +21,7 @@ const ListEmptyComponent = () => {
   return (
     <View style={{paddingVertical: 10}}>
       <Button
-        title="Post your first dove"
+        title="Post a dove"
         onPress={() => setModalVisible(true)}
         icon={<FileIcon size={18} />}
         style={{alignSelf: 'center'}}

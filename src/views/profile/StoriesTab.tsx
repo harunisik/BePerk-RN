@@ -19,7 +19,7 @@ const ListEmptyComponent = () => {
   return (
     <View style={{paddingVertical: 20}}>
       <Button
-        title="Post your first story"
+        title="Post a story"
         onPress={() => setModalVisible(true)}
         icon={<VideoIcon size={18} />}
         style={{alignSelf: 'center'}}

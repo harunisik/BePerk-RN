@@ -4,7 +4,7 @@ import CommentButton from '../common/buttons/CommentButton';
 import ShareButton from '../common/buttons/ShareButton';
 import View from '../common/View';
 
-const {aiCenter, row, cGap15} = common;
+const {aiCenter, row} = common;
 
 interface DovesItemOptionsProps {
   item: any;
@@ -22,7 +22,13 @@ const DovesItemOptions = ({
   labelSize,
 }: DovesItemOptionsProps) => {
   return (
-    <View style={[cGap15, row, aiCenter, backgroundColor && {backgroundColor}]}>
+    <View
+      style={[
+        row,
+        aiCenter,
+        backgroundColor && {backgroundColor},
+        {columnGap: 12},
+      ]}>
       <LikeButtton
         id={item.id}
         liked={item.liked}

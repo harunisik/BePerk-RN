@@ -65,7 +65,7 @@ const ListHeaderItem = ({item}) => {
               item={item}
               color="white"
               backgroundColor="#0AAEEF"
-              iconSize={22}
+              iconSize={20}
             />
             <Image
               style={{width: 30, height: 30}}
