@@ -38,7 +38,7 @@ import {
 import {useColors} from '../../hooks/customHooks';
 import Button from '../../components/common/buttons/Button';
 
-const {bold, aiCenter, row, jcSpaceAround, cGap10, jcCenter} = common;
+const {bold, aiCenter, row, jcSpaceAround, cGap10, cGap15, jcCenter} = common;
 
 const HeaderRight = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -72,7 +72,7 @@ const HeaderRight = () => {
   return (
     <View>
       {isAuthUser ? (
-        <View style={[aiCenter, row, jcSpaceAround, cGap10]}>
+        <View style={[aiCenter, row, jcSpaceAround, cGap15]}>
           <ShareVariantIcon onPress={onShare} />
           <BookmarkIcon
             isOutlined
@@ -171,6 +171,7 @@ const Profile = () => {
   const {
     params: {userId, isAuthUser},
   } = route;
+  const isBeperk = userId === 2565;
 
   const {data, refetch, isFetching} = useQuery(getUserProfile, {id: userId});
   const addFollowingApi = useMutation(addFollowing);
@@ -182,6 +183,10 @@ const Profile = () => {
     (data?.i_following === 0 || data?.i_following === 2);
 
   const handlePressFollowing = () => {
+    if (isBeperk) {
+      return;
+    }
+
     if (following === 0) {
       addFollowingApi.mutate({id: userId});
     } else {

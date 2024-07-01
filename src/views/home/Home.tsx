@@ -23,13 +23,13 @@ import {
 } from '../../components/common/Icons';
 import {colors, useColors} from '../../hooks/customHooks';
 
-const {row, cGap10} = common;
+const {row, cGap15} = common;
 
 const HeaderLeft = () => {
   const navigation = useNavigation();
 
   return (
-    <View style={[row, cGap10]} disableTheme>
+    <View style={[row, cGap15]} disableTheme>
       <SearchIcon
         onPress={() => navigation.navigate(Search.name)}
         color={colors.blue}
@@ -50,7 +50,7 @@ const HeaderRight = () => {
   } = route;
 
   return (
-    <View style={[row, cGap10]} disableTheme>
+    <View style={[row, cGap15]} disableTheme>
       <BellIcon
         onPress={() => navigation.navigate(Activity.name)}
         color={colors.blue}

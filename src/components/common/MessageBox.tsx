@@ -1,4 +1,9 @@
-import {StyleSheet, KeyboardAvoidingView, Platform} from 'react-native';
+import {
+  StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
+  Keyboard,
+} from 'react-native';
 import common from '../../styles/sharedStyles';
 import {useEffect, useState} from 'react';
 import Emoji from './Emoji';
@@ -17,6 +22,7 @@ const MessageBox = ({initialText, onClearText, onPress}) => {
   const handlePress = () => {
     onPress(message);
     setMessage('');
+    Keyboard.dismiss();
   };
 
   useEffect(() => {

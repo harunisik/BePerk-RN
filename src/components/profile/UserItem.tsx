@@ -28,6 +28,7 @@ const UserItem = ({
           username={item.fullname}
           photo={item.photo}
           disableNavigation={disableNavigation}
+          isVerified={item.isVerified === 1}
         />
         {selectable && (
           <MaterialCommunityIcons

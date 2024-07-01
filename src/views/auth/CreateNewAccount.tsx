@@ -107,7 +107,7 @@ const CreateNewAccount = () => {
           } else {
             dispatch({
               type: AuthActionType.SIGN_IN,
-              userInfo: {id: user_id, token, username, photo: ''},
+              userInfo: {userId: user_id, token, username, photo: ''},
             });
             // if (navigation.canGoBack()) {
             //   navigation.goBack();

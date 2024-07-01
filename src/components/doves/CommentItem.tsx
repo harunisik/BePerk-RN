@@ -56,7 +56,7 @@ const CommentItem = ({item, isChild = false, onDelete, onPressReply}) => {
         renderRightActions={() => (
           <RenderRightActions item={item} onPress={onDelete} />
         )}>
-        <View style={[row, cGap10, {alignItems: 'flex-start'}]}>
+        <View style={[row, {alignItems: 'flex-start'}]}>
           <AccountCard
             size={15}
             userId={item.user_id}
@@ -75,7 +75,7 @@ const CommentItem = ({item, isChild = false, onDelete, onPressReply}) => {
                   <Text
                     style={[gray]}
                     onPress={() => {
-                      onPressReply(`@${item.username}`, item.id);
+                      onPressReply(`@${item.username} `, item.id);
                     }}>
                     Reply
                   </Text>

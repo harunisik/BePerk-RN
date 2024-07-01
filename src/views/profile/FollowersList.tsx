@@ -27,6 +27,8 @@ const UserItem = ({item, onPressFollow}) => {
     },
   } = useStore();
   const {theme} = useColors();
+  const isBeperk = item.user_id === 2565;
+
   return (
     <View style={[row, aiCenter]}>
       <AccountCard
@@ -35,7 +37,7 @@ const UserItem = ({item, onPressFollow}) => {
         photo={item.photo}
         usePush
       />
-      {item.user_id !== userId && (
+      {item.user_id !== userId && !isBeperk && (
         <Button
           title={
             item.i_following === 1
