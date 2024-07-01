@@ -6,29 +6,27 @@ import PostItemList from '../../components/profile/PostItemList';
 import {VIDEO_HEIGHT} from '../../components/profile/PostItem';
 import Button from '../../components/common/buttons/Button';
 import {VideoIcon} from '../../components/common/Icons';
-import {ImageVideoSelectionModal} from '../add/AddModal';
-import NewStory from '../add/NewStory';
-import {useState} from 'react';
 import View from '../../components/common/View';
 import {useColors} from '../../hooks/customHooks';
+import AddStack from '../add/AddStack';
+import NewMedia from '../add/NewMedia';
 
 const ListEmptyComponent = () => {
-  const [modalVisible, setModalVisible] = useState(false);
   const {color, backgroundColor} = useColors();
+  const navigation = useNavigation();
 
   return (
     <View style={{paddingVertical: 20}}>
       <Button
         title="Post a story"
-        onPress={() => setModalVisible(true)}
+        onPress={() =>
+          navigation.navigate(AddStack.name, {
+            screen: NewMedia.name,
+          })
+        }
         icon={<VideoIcon size={18} />}
         style={{alignSelf: 'center'}}
         theme={{color, backgroundColor}}
-      />
-      <ImageVideoSelectionModal
-        visible={modalVisible}
-        onDismiss={() => setModalVisible(false)}
-        navigateTo={NewStory.name}
       />
     </View>
   );

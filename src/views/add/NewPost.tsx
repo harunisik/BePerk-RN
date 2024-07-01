@@ -53,9 +53,8 @@ const NewPost = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const {
-    params: {assets, selectedUsers, location_address, lat, lon},
+    params: {asset, selectedUsers, location_address, lat, lon},
   } = route;
-  const asset = assets[0];
 
   const uploadPhotoApi = useMutation(uploadPhoto);
   const uploadVideoApi = useMutation(uploadVideo);

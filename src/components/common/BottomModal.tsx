@@ -1,4 +1,3 @@
-import React from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
 import Modal from './Modal';
 import {useColors} from '../../hooks/customHooks';

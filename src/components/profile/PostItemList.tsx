@@ -9,7 +9,7 @@ import {Fragment} from 'react';
 const COL_NUM = 3;
 
 export const Loader = () => {
-  const {theme, theme2} = useColors();
+  const {theme} = useColors();
   const {width} = useWindowDimensions();
   const colNum = COL_NUM;
   const rowNum = 3;

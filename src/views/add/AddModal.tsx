@@ -3,103 +3,14 @@ import Button from '../../components/common/buttons/Button';
 import PostDove from '../doves/PostDove';
 import {useNavigation} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import AddStack from './AddStack';
 import NewStory from './NewStory';
 import NewPost from './NewPost';
-import {
-  launchCamera,
-  launchImageLibrary,
-  launchMediaLibrary,
-} from '../../utils/MediaUtil';
 import {PictureIcon} from '../../components/common/Icons';
 import BottomSheetModal from '../../components/common/BottomSheetModal';
 import {colors, useColors} from '../../hooks/customHooks';
 import View from '../../components/common/View';
 import NewMedia from './NewMedia';
-
-export const ImageVideoSelectionModal = ({visible, onDismiss, navigateTo}) => {
-  const navigation = useNavigation();
-  const {theme, color} = useColors();
-
-  const processPhoto = () =>
-    launchImageLibrary(data => {
-      if (data.assets?.length && data.assets.length > 0) {
-        navigation.navigate(AddStack.name, {
-          screen: navigateTo,
-          params: {
-            assets: data.assets.map(({type, ...rest}) => {
-              return {
-                ...rest,
-                type,
-                mediaType: type.startsWith('image') ? 'photo' : 'video',
-              };
-            }),
-          },
-        });
-      }
-    });
-
-  const processCamera = () =>
-    launchCamera(data => {
-      if (data.assets?.length && data.assets.length > 0) {
-        navigation.navigate(AddStack.name, {
-          screen: navigateTo,
-          params: {
-            assets: data.assets.map(({type, ...rest}) => {
-              return {
-                ...rest,
-                type,
-                mediaType: type.startsWith('image') ? 'photo' : 'video',
-              };
-            }),
-          },
-        });
-      }
-    });
-
-  const handlePressImage = () => {
-    onDismiss();
-    launchMediaLibrary(processPhoto, 'image');
-  };
-
-  const handlePressVideo = () => {
-    onDismiss();
-    launchMediaLibrary(processCamera, 'camera');
-  };
-
-  return (
-    <BottomSheetModal
-      visible={visible}
-      onDismiss={onDismiss}
-      snapPoints={['20%']}>
-      <View style={{rowGap: 10, width: '85%'}} disableTheme>
-        <Button
-          title="Photo Library"
-          onPress={handlePressImage}
-          icon={<AntDesign name="picture" size={26} color={colors.blue} />}
-          iconColor={colors.blue}
-          theme={{
-            color,
-            backgroundColor:
-              theme === 'dark' ? 'rgb(50, 50, 50)' : 'rgb(245, 240, 240)',
-          }}
-        />
-
-        <Button
-          title="Camera"
-          onPress={handlePressVideo}
-          icon={<AntDesign name="camera" size={26} color={colors.blue} />}
-          theme={{
-            color,
-            backgroundColor:
-              theme === 'dark' ? 'rgb(50, 50, 50)' : 'rgb(245, 240, 240)',
-          }}
-        />
-      </View>
-    </BottomSheetModal>
-  );
-};
 
 export const AddDoveModal = ({visible, onDismiss}) => {
   const navigation = useNavigation();
@@ -188,8 +99,6 @@ export const AddDoveModal = ({visible, onDismiss}) => {
 
 const AddModal = ({visible, onDismiss}) => {
   const [doveModalVisible, setDoveModalVisible] = useState(false);
-  const [imageVideoModalVisible, setImageVideoModalVisible] = useState(false);
-  const [navigateTo, setNavigateTo] = useState('');
   const {theme, color} = useColors();
   const navigation = useNavigation();
 
@@ -198,10 +107,8 @@ const AddModal = ({visible, onDismiss}) => {
     setDoveModalVisible(true);
   };
 
-  const handlePostPress = (navigateTo: string) => {
+  const handlePostPress = () => {
     onDismiss();
-    // setNavigateTo(navigateTo);
-    // setImageVideoModalVisible(true);
     navigation.navigate(AddStack.name, {
       screen: NewMedia.name,
     });
@@ -212,23 +119,12 @@ const AddModal = ({visible, onDismiss}) => {
       <BottomSheetModal
         visible={visible}
         onDismiss={onDismiss}
-        snapPoints={['27%']}>
+        snapPoints={['19%']}>
         <View style={{rowGap: 10, width: '85%'}} disableTheme>
           <Button
-            title="Post"
-            onPress={() => handlePostPress(NewPost.name)}
+            title="Post / Story"
+            onPress={handlePostPress}
             icon={<PictureIcon color={colors.blue} />}
-            theme={{
-              color,
-              backgroundColor:
-                theme === 'dark' ? 'rgb(50, 50, 50)' : 'rgb(245, 240, 240)',
-            }}
-          />
-          <Button
-            title="Story"
-            onPress={() => handlePostPress(NewStory.name)}
-            icon="account-multiple"
-            iconColor={colors.blue}
             theme={{
               color,
               backgroundColor:
@@ -251,11 +147,6 @@ const AddModal = ({visible, onDismiss}) => {
       <AddDoveModal
         visible={doveModalVisible}
         onDismiss={() => setDoveModalVisible(false)}
-      />
-      <ImageVideoSelectionModal
-        visible={imageVideoModalVisible}
-        onDismiss={() => setImageVideoModalVisible(false)}
-        navigateTo={navigateTo}
       />
     </>
   );

@@ -11,6 +11,7 @@ import {createThumbnail} from 'react-native-create-thumbnail';
 import {useState} from 'react';
 import View from '../../components/common/View';
 import {CloseIcon} from '../../components/common/Icons';
+import {Asset} from './NewMedia';
 
 const {flex1} = common;
 
@@ -45,9 +46,8 @@ const NewStory = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const {
-    params: {assets},
+    params: {asset},
   } = route;
-  const asset = assets[0];
 
   const postMy24 = useMutation(userPostMy24);
 

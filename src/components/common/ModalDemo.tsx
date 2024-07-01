@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Alert, Modal, StyleSheet, Pressable} from 'react-native';
 import Text from './Text';
 import View from './View';

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Modal as RNModal, Pressable, GestureResponderEvent} from 'react-native';
 import common from '../../styles/sharedStyles';
 

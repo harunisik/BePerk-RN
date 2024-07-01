@@ -1,5 +1,5 @@
+import {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import React, {useEffect, useState} from 'react';
 import {Alert, Modal, StyleSheet, Pressable} from 'react-native';
 import Text from './Text';
 import View from './View';
