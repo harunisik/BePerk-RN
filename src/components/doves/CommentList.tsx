@@ -4,6 +4,8 @@ import {useMemo} from 'react';
 import common from '../../styles/sharedStyles';
 import FlatList from '../common/FlatList';
 
+const {ph15, pv15} = common;
+
 const findTopParent = (searchId, dataList) => {
   const parent = dataList.find(({id}) => id === searchId);
   if (parent.comment_id === 0) {
@@ -45,7 +47,6 @@ const CommentList = ({
   isHeaderVisible = false,
 }) => {
   const result = useMemo(() => transformCommentList(data?.comment), [data]);
-  const {ph15, pv15} = common;
 
   return (
     <FlatList

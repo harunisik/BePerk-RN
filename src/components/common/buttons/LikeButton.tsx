@@ -5,6 +5,7 @@ import {postUserLike} from '../../../services/UserService';
 import Text from '../Text';
 import View from '../View';
 import {HeartIcon} from '../Icons';
+import {ViewStyle} from 'react-native';
 
 const {cGap1, cGap2, cGap3, row, aiCenter, rGap5} = common;
 
@@ -18,6 +19,7 @@ interface LikeButtonProps {
   vertical?: boolean;
   iconSize?: number;
   labelSize?: number;
+  style?: ViewStyle;
 }
 
 const LikeButtton = ({
@@ -29,6 +31,7 @@ const LikeButtton = ({
   vertical = false,
   iconSize,
   labelSize,
+  style,
 }: LikeButtonProps) => {
   const [likedState, setLikedState] = useState(liked);
   const [likesCountState, setLikesCountState] = useState(likesCount);
@@ -52,7 +55,7 @@ const LikeButtton = ({
 
   return (
     <View
-      style={[aiCenter, ...(vertical ? [rGap5] : [row, cGap3])]}
+      style={[aiCenter, ...(vertical ? [rGap5] : [row, cGap3]), style]}
       disableTheme>
       <HeartIcon
         onPress={handlePress}

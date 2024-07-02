@@ -11,6 +11,11 @@ import View from '../common/View';
 import {DeleteIcon} from '../common/Icons';
 import {colors} from '../../hooks/customHooks';
 
+const TEXT_SIZE = 14;
+
+const {row, rGap3, cGap5, cGap10, bold, jcSpaceBetween, flex1, pr10, pl30} =
+  common;
+
 const RenderRightActions = ({item, onPress}) => {
   return (
     <Animated.View>
@@ -30,21 +35,20 @@ const RenderRightActions = ({item, onPress}) => {
 
 const CommentItem = ({item, isChild = false, onDelete, onPressReply}) => {
   const {
-    row,
-    rGap5,
-    rGap15,
-    cGap5,
-    cGap10,
-    bold,
-    gray,
-    jcSpaceBetween,
-    flex1,
-    pr10,
-    pl30,
-    mb15,
-  } = common;
+    comment,
+    user_id,
+    fullname,
+    date,
+    username,
+    id,
+    liked,
+    likes_count,
+    childList,
+  } = item;
 
   const [showReplies, setShowReplies] = useState(false);
+  const firstWord = comment.split(' ')[0];
+  const commentStr = comment.substr(comment.indexOf(' '), comment.length);
 
   const handleViewReply = () => {
     setShowReplies(showReplies ? false : true);
@@ -56,55 +60,75 @@ const CommentItem = ({item, isChild = false, onDelete, onPressReply}) => {
         renderRightActions={() => (
           <RenderRightActions item={item} onPress={onDelete} />
         )}>
-        <View style={[row, {alignItems: 'flex-start'}]}>
+        <View style={[row, {alignItems: 'flex-start', paddingVertical: 7}]}>
           <AccountCard
-            size={15}
-            userId={item.user_id}
+            userId={user_id}
             displayUsername={false}
             goBack
+            size={20}
           />
           <View style={[row, jcSpaceBetween, flex1, cGap10]}>
-            <View style={[rGap15, flex1]}>
-              <View style={[rGap5]}>
-                <Text style={pr10}>
-                  <Text style={bold}>{item.fullname + ' '}</Text>
-                  <Text>{item.comment}</Text>
-                </Text>
-                <View style={[row, cGap5]}>
-                  <Text style={[gray]}>{dateDiff(item.date * 1000)}</Text>
-                  <Text
-                    style={[gray]}
-                    onPress={() => {
-                      onPressReply(`@${item.username} `, item.id);
-                    }}>
-                    Reply
+            <View style={[flex1]}>
+              <View style={[rGap3]}>
+                <Text size={TEXT_SIZE} style={pr10}>
+                  <Text size={TEXT_SIZE} style={bold}>
+                    {fullname + ' '}
                   </Text>
+                  <Text size={TEXT_SIZE} color="gray">
+                    {dateDiff(date * 1000)}
+                  </Text>
+                </Text>
+                <View style={[row, cGap5, {justifyContent: 'space-between'}]}>
+                  <View style={[flex1, rGap3]}>
+                    <Text size={TEXT_SIZE}>
+                      {isChild && (
+                        <Text size={TEXT_SIZE} color={colors.blue}>
+                          {firstWord}
+                        </Text>
+                      )}
+                      {!isChild ? comment : commentStr}
+                    </Text>
+                    <Text
+                      size={TEXT_SIZE}
+                      color="gray"
+                      onPress={() => {
+                        onPressReply(`@${username} `, id);
+                      }}>
+                      Reply
+                    </Text>
+                  </View>
+                  <LikeButtton
+                    id={id}
+                    liked={liked}
+                    likesCount={likes_count}
+                    type={4}
+                    iconSize={18}
+                    vertical
+                    labelSize={TEXT_SIZE}
+                  />
                 </View>
               </View>
-              {!isChild && item.childList?.length > 0 && (
-                <Pressable onPress={handleViewReply}>
-                  <Text style={[gray, mb15]}>
+              {!isChild && childList?.length > 0 && (
+                <Pressable
+                  onPress={handleViewReply}
+                  style={{paddingTop: 20, paddingBottom: 10}}>
+                  <Text size={TEXT_SIZE} color="gray">
+                    <Text size={TEXT_SIZE} color="gray">
+                      ------{' '}
+                    </Text>
                     {showReplies
-                      ? 'Hide replies'
-                      : `View ${item.childList.length} replies`}
+                      ? ' Hide replies'
+                      : ` View ${childList.length} replies`}
                   </Text>
                 </Pressable>
               )}
-            </View>
-            <View>
-              <LikeButtton
-                id={item.id}
-                liked={item.liked}
-                likesCount={item.likes_count}
-                type={4}
-              />
             </View>
           </View>
         </View>
       </Swipeable>
       {showReplies && (
         <FlatList
-          data={item.childList}
+          data={childList}
           renderItem={({item: item2}) => (
             <CommentItem
               item={item2}
@@ -113,7 +137,7 @@ const CommentItem = ({item, isChild = false, onDelete, onPressReply}) => {
               onDelete={onDelete}
             />
           )}
-          style={pl30}
+          style={[pl30]}
         />
       )}
     </>

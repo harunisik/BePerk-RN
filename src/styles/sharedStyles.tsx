@@ -170,6 +170,9 @@ const common = StyleSheet.create({
   ph20: {
     paddingHorizontal: 20,
   },
+  ph5: {
+    paddingHorizontal: 5,
+  },
   ph15: {
     paddingHorizontal: 15,
   },
