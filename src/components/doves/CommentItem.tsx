@@ -11,7 +11,7 @@ import View from '../common/View';
 import {DeleteIcon} from '../common/Icons';
 import {colors} from '../../hooks/customHooks';
 
-const TEXT_SIZE = 14;
+export const TEXT_SIZE = 14;
 
 const {row, rGap3, cGap5, cGap10, bold, jcSpaceBetween, flex1, pr10, pl30} =
   common;
@@ -108,20 +108,6 @@ const CommentItem = ({item, isChild = false, onDelete, onPressReply}) => {
                   />
                 </View>
               </View>
-              {!isChild && childList?.length > 0 && (
-                <Pressable
-                  onPress={handleViewReply}
-                  style={{paddingTop: 20, paddingBottom: 10}}>
-                  <Text size={TEXT_SIZE} color="gray">
-                    <Text size={TEXT_SIZE} color="gray">
-                      ------{' '}
-                    </Text>
-                    {showReplies
-                      ? ' Hide replies'
-                      : ` View ${childList.length} replies`}
-                  </Text>
-                </Pressable>
-              )}
             </View>
           </View>
         </View>
@@ -137,8 +123,22 @@ const CommentItem = ({item, isChild = false, onDelete, onPressReply}) => {
               onDelete={onDelete}
             />
           )}
-          style={[pl30]}
+          style={{paddingLeft: 40}}
         />
+      )}
+      {!isChild && childList?.length > 0 && (
+        <Pressable
+          onPress={handleViewReply}
+          style={{paddingVertical: 10, paddingLeft: 45}}>
+          <Text size={TEXT_SIZE} color="gray">
+            <Text size={TEXT_SIZE} color="gray">
+              ------{' '}
+            </Text>
+            {showReplies
+              ? ' Hide replies'
+              : ` View ${childList.length} replies`}
+          </Text>
+        </Pressable>
       )}
     </>
   );

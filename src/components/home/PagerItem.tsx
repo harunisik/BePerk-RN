@@ -11,6 +11,7 @@ import {View} from 'react-native';
 const PagerItem = ({item, paused}) => {
   const {
     filename,
+    cover,
     user_id,
     fullname,
     username,
@@ -29,7 +30,13 @@ const PagerItem = ({item, paused}) => {
 
   return (
     <View>
-      <Video uri={filename} paused={paused} />
+      <Video
+        poster={cover}
+        posterResizeMode="cover"
+        uri={paused ? cover : filename}
+        // paused={paused}
+      />
+
       <View
         style={{
           position: 'absolute',

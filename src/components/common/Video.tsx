@@ -1,7 +1,7 @@
 import {ActivityIndicator, Pressable} from 'react-native';
-import RNVideo, {ReactVideoProps} from 'react-native-video';
+import RNVideo, {ReactVideoProps, VideoRef} from 'react-native-video';
 import common from '../../styles/sharedStyles';
-import {useCallback, useState} from 'react';
+import {ElementRef, useCallback, useEffect, useRef, useState} from 'react';
 import {useFocusEffect} from '@react-navigation/native';
 import {PlayIcon} from './Icons';
 import Text from './Text';

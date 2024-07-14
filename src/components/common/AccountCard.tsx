@@ -90,7 +90,7 @@ const AccountCard = ({
 
   return (
     <Pressable
-      style={[...(vertical ? [rGap10] : [row, aiCenter, {columnGap: 10}])]}
+      style={[...(vertical ? [rGap10] : [row, aiCenter, {columnGap: 7}])]}
       onPress={handlePress}>
       <View
         style={{

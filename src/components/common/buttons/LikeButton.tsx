@@ -7,7 +7,7 @@ import View from '../View';
 import {HeartIcon} from '../Icons';
 import {ViewStyle} from 'react-native';
 
-const {cGap1, cGap2, cGap3, row, aiCenter, rGap5} = common;
+const {cGap3, row, aiCenter, rGap3} = common;
 
 interface LikeButtonProps {
   id: number;
@@ -55,7 +55,7 @@ const LikeButtton = ({
 
   return (
     <View
-      style={[aiCenter, ...(vertical ? [rGap5] : [row, cGap3]), style]}
+      style={[aiCenter, ...(vertical ? [rGap3] : [row, cGap3]), style]}
       disableTheme>
       <HeartIcon
         onPress={handlePress}

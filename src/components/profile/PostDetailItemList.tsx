@@ -25,6 +25,7 @@ const PostDetailItemList = ({
           caption={item.caption}
           bookmark={item.bookmark}
           filename={item.filename}
+          cover={item.cover}
           liked={item.liked}
           likesCount={item.likes_count}
           commentsCount={item.comments_count}

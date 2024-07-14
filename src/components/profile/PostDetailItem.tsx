@@ -36,6 +36,7 @@ interface PostDetailItemProps {
   liked: number;
   likesCount: number;
   filename: string;
+  cover: string;
   caption: string;
   uploadTime: number;
   commentsCount: number;
@@ -55,6 +56,7 @@ const PostDetailItem = ({
   liked,
   likesCount,
   filename,
+  cover,
   caption,
   uploadTime,
   commentsCount,
@@ -94,7 +96,11 @@ const PostDetailItem = ({
             width: windowWidth,
             aspectRatio: height ? width / height : 1,
           }}>
-          <Video uri={filename} paused={!isViewable} />
+          <Video
+            poster={cover}
+            posterResizeMode="cover"
+            uri={!isViewable ? cover : filename}
+          />
         </View>
       )}
 
